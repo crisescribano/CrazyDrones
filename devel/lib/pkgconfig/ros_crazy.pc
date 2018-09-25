@@ -1,0 +1,8 @@
+prefix=/home/diego/CrazyDrones/devel
+
+Name: ros_crazy
+Description: Description of ros_crazy
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/diego/CrazyDrones/devel/lib 
+Requires: 
