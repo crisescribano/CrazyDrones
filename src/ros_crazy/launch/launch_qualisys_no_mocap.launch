@@ -1,0 +1,38 @@
+<launch>
+    <arg name="model_in" default="default" />
+    <!-- FOR EACH DRONE -->
+    <arg name="uri" default="radio://0/80/2M/E7E7E7E711"/>
+    <include file="$(find crazyflie_driver)/launch/crazyflie_server.launch"></include>
+    <!-- For each DRONE -->
+    <group ns="crazyflie">
+        <node pkg="crazyflie_driver" type="crazyflie_add" name="crazyflie_add" output="screen">
+            <param name="uri" value="$(arg uri)"/>
+            <param name="tf_prefix" value="crazyflie"/>
+            <param name="enable_logging_imu" value="False"/> 
+            <param name="enable_logging_temperature" value="False"/>
+            <param name="enable_logging_magnetic_field" value="False"/>
+            <param name="enable_logging_pressure" value="False"/>
+            <param name="enable_logging_battery" value="False"/>
+            <param name="enable_logging_packets" value="False"/>
+            <param name="stateEstimation" value="True"/>
+            <param name="kalmanEstimation" value="True"/>
+           <rosparam>
+                genericLogTopics: ["stateRead"]
+                genericLogTopicFrequencies: [50]
+                genericLogTopic_stateRead_Variables: ["stateEstimate.x", "stateEstimate.y", "stateEstimate.z"]
+           </rosparam>
+        </node>
+        <node name="send_mocap_external_positioning" pkg="single_crazyflie_control" type="send_NO_mocap.py" output="screen">
+            <param name="topic" value="$(arg model_in)/odom"/>
+        </node>
+        <node name="lee_estado_cf" pkg="single_crazyflie_control" type="lee_estado_cf.py" output="screen">
+        </node>
+    </group>
+    <!-- Defining the arguments -->
+    <arg name="model" value="$(arg model_in)"/>
+    <node pkg="rqt_graph" type="rqt_graph" name="rqt_graph1"/>
+    <param name="robot_description" command="$(find xacro)/xacro.py $(find crazyflie_description)/urdf/crazyflie.urdf.xacro"/>
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find crazyflie_demo)/launch/crazyflie_pos_multi.rviz" required="true"/>
+    <node pkg="rqt_plot" type="rqt_plot" name="rqt_plot1" args="/crazyflie/stateRead/values[0] /crazyflie/stateRead/values[1] /crazyflie/stateRead/values[2]"/>
+</launch>
+
