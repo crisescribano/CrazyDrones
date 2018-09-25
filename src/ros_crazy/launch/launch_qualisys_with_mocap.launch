@@ -14,13 +14,12 @@
             <param name="enable_logging_pressure" value="False"/>
             <param name="enable_logging_battery" value="False"/>
             <param name="enable_logging_packets" value="False"/>
-            <param name="stateEstimation" value="True"/>
-            <param name="kalmanEstimation" value="True"/>
-           <rosparam>
-                genericLogTopics: ["stateRead"]
-                genericLogTopicFrequencies: [50]
+            <rosparam>
+                genericLogTopics: ["stateRead", "kalmanRead"]
+                genericLogTopicFrequencies: [50, 50]
                 genericLogTopic_stateRead_Variables: ["stateEstimate.x", "stateEstimate.y", "stateEstimate.z"]
-           </rosparam>
+                genericLogTopic_kalmanRead_Variables: ["kalman.stateX", "kalman.stateY", "kalman.stateZ"]
+            </rosparam>
         </node>
         <node name="send_mocap_external_positioning" pkg="single_crazyflie_control" type="send_NO_mocap.py" output="screen">
             <param name="topic" value="$(arg model_in)/odom"/>
@@ -36,6 +35,6 @@
     <node pkg="rqt_graph" type="rqt_graph" name="rqt_graph1"/>
     <param name="robot_description" command="$(find xacro)/xacro.py $(find crazyflie_description)/urdf/crazyflie.urdf.xacro"/>
     <node name="rviz" pkg="rviz" type="rviz" args="-d $(find crazyflie_demo)/launch/crazyflie_pos_multi.rviz" required="true"/>
-    <node pkg="rqt_plot" type="rqt_plot" name="rqt_plot1" args="/crazyflie/stateRead/values[0] /crazyflie/stateRead/values[1] /crazyflie/stateRead/values[2]"/>
+     <node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_state" args="/crazyflie/stateRead/values[0] /crazyflie/stateRead/values[1] /crazyflie/stateRead/values[2] /crazyflie/kalmanRead/values[0] /crazyflie/kalmanRead/values[1] /crazyflie/kalmanRead/values[2]"/>
 </launch>
 

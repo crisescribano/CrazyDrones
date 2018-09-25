@@ -1,0 +1,8 @@
+prefix=/home/diego/CrazyDrones/install
+
+Name: crazyflie_cpp
+Description: Description of crazyflie_cpp
+Version: 0.0.1
+Cflags: -I/home/diego/CrazyDrones/install/include
+Libs: -L/home/diego/CrazyDrones/install/lib -lcrazyflie_cpp
+Requires: 
