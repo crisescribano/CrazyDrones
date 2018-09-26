@@ -1,28 +1,28 @@
 
 "use strict";
 
-let UpdateParams = require('./UpdateParams.js')
-let GoTo = require('./GoTo.js')
-let StartTrajectory = require('./StartTrajectory.js')
-let Takeoff = require('./Takeoff.js')
 let RemoveCrazyflie = require('./RemoveCrazyflie.js')
 let sendPacket = require('./sendPacket.js')
-let SetGroupMask = require('./SetGroupMask.js')
-let UploadTrajectory = require('./UploadTrajectory.js')
-let Land = require('./Land.js')
-let AddCrazyflie = require('./AddCrazyflie.js')
+let StartTrajectory = require('./StartTrajectory.js')
+let UpdateParams = require('./UpdateParams.js')
 let Stop = require('./Stop.js')
+let Land = require('./Land.js')
+let UploadTrajectory = require('./UploadTrajectory.js')
+let AddCrazyflie = require('./AddCrazyflie.js')
+let SetGroupMask = require('./SetGroupMask.js')
+let Takeoff = require('./Takeoff.js')
+let GoTo = require('./GoTo.js')
 
 module.exports = {
-  UpdateParams: UpdateParams,
-  GoTo: GoTo,
-  StartTrajectory: StartTrajectory,
-  Takeoff: Takeoff,
   RemoveCrazyflie: RemoveCrazyflie,
   sendPacket: sendPacket,
-  SetGroupMask: SetGroupMask,
-  UploadTrajectory: UploadTrajectory,
-  Land: Land,
-  AddCrazyflie: AddCrazyflie,
+  StartTrajectory: StartTrajectory,
+  UpdateParams: UpdateParams,
   Stop: Stop,
+  Land: Land,
+  UploadTrajectory: UploadTrajectory,
+  AddCrazyflie: AddCrazyflie,
+  SetGroupMask: SetGroupMask,
+  Takeoff: Takeoff,
+  GoTo: GoTo,
 };

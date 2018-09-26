@@ -1,0 +1,8 @@
+prefix=/home/cristinaescribano/CrazyDrones/devel
+
+Name: qualisys
+Description: Description of qualisys
+Version: 0.0.1
+Cflags: -I/home/cristinaescribano/CrazyDrones/devel/include -I/usr/include -I/usr/include/eigen3
+Libs: -L/home/cristinaescribano/CrazyDrones/devel/lib -lyaml-cpp
+Requires: message_runtime geometry_msgs tf

@@ -6,8 +6,7 @@ from geometry_msgs.msg import PointStamped
 from crazyflie_driver.srv import UpdateParams
 
 def resetKalman():
-    rospy.wait_for_service('update_params')
-    update_params = rospy.ServiceProxy('update_params', UpdateParams)
+    
     
     rospy.set_param("kalman/resetEstimation", 1)
     update_params(["kalman/resetEstimation"])
@@ -20,7 +19,7 @@ if __name__ == '__main__':
     global pub
 
     rospy.init_node('send_mocap_external_positioning', anonymous=True)
-    topic = rospy.get_param("~topic")
+    #topic = rospy.get_param("~topic")
     
     rospy.loginfo("CREATED NODE: end_mocap_external_positioning")
 
@@ -52,8 +51,8 @@ if __name__ == '__main__':
     while not rospy.is_shutdown():
         msg.header.frame_id = ""
         msg.header.seq += 1
-        msg.point.x = 0.5
+        msg.point.x = 0.9
         msg.point.y = 0.5
-        msg.point.z = 0.0
+        msg.point.z = 0
         pub.publish(msg)
         rate.sleep()

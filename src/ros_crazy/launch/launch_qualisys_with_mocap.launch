@@ -21,10 +21,10 @@
                 genericLogTopic_kalmanRead_Variables: ["kalman.stateX", "kalman.stateY", "kalman.stateZ"]
             </rosparam>
         </node>
-        <node name="send_mocap_external_positioning" pkg="single_crazyflie_control" type="send_NO_mocap.py" output="screen">
+        <node name="send_mocap_external_positioning" pkg="ros_crazy" type="send_mocap_external_positioning.py" output="screen">
             <param name="topic" value="$(arg model_in)/odom"/>
         </node>
-        <node name="lee_estado_cf" pkg="single_crazyflie_control" type="lee_estado_cf.py" output="screen">
+        <node name="lee_estado_cf" pkg="ros_crazy" type="lee_estado_cf.py" output="screen">
         </node>
     </group>
     <!-- Defining the arguments -->

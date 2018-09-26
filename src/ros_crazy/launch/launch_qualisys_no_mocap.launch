@@ -23,10 +23,11 @@
                 genericLogTopic_kalmanRead_Variables: ["kalman.stateX", "kalman.stateY", "kalman.stateZ"]
            </rosparam>
         </node>
-        <node name="send_mocap_external_positioning" pkg="single_crazyflie_control" type="send_NO_mocap.py"/>
-        <node name="lee_estado_cf" pkg="single_crazyflie_control" type="lee_estado_cf.py" output="screen"/>
+        <node name="send_mocap_external_positioning" pkg="ros_crazy" type="send_NO_mocap.py"/>
+        <node name="lee_estado_cf" pkg="ros_crazy" type="lee_estado_cf.py" output="screen"/>
     </group>
     <!-- Defining the arguments -->
+    <node pkg="rqt_graph" type="rqt_graph" name="rqt_graph1"/>
     <node pkg="rqt_plot" type="rqt_plot" name="rqt_plot_state" args="/crazyflie/stateRead/values[0] /crazyflie/stateRead/values[1] /crazyflie/stateRead/values[2] /crazyflie/kalmanRead/values[0] /crazyflie/kalmanRead/values[1] /crazyflie/kalmanRead/values[2]"/>
 </launch>
 

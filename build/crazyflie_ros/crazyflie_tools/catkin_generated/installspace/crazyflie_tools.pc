@@ -1,8 +1,8 @@
-prefix=/home/diego/CrazyDrones/install
+prefix=/home/cristinaescribano/CrazyDrones/install
 
 Name: crazyflie_tools
 Description: Description of crazyflie_tools
 Version: 0.0.1
 Cflags: 
-Libs: -L/home/diego/CrazyDrones/install/lib 
+Libs: -L/home/cristinaescribano/CrazyDrones/install/lib 
 Requires: crazyflie_cpp

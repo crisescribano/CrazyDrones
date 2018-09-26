@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/console.dir/src/console.cpp.o"
-  "/home/diego/CrazyDrones/devel/lib/crazyflie_tools/console.pdb"
-  "/home/diego/CrazyDrones/devel/lib/crazyflie_tools/console"
+  "/home/cristinaescribano/CrazyDrones/devel/lib/crazyflie_tools/console.pdb"
+  "/home/cristinaescribano/CrazyDrones/devel/lib/crazyflie_tools/console"
 )
 
 # Per-language clean rules from dependency scanning.

@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/diego/CrazyDrones/src
+CMAKE_SOURCE_DIR = /home/cristinaescribano/CrazyDrones/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/diego/CrazyDrones/build
+CMAKE_BINARY_DIR = /home/cristinaescribano/CrazyDrones/build
 
 # Include any dependencies generated for this target.
 include crazyflie_ros/crazyflie_tools/CMakeFiles/listLogVariables.dir/depend.make
@@ -58,17 +58,17 @@ include crazyflie_ros/crazyflie_tools/CMakeFiles/listLogVariables.dir/progress.m
 include crazyflie_ros/crazyflie_tools/CMakeFiles/listLogVariables.dir/flags.make
 
 crazyflie_ros/crazyflie_tools/CMakeFiles/listLogVariables.dir/src/listLogVariables.cpp.o: crazyflie_ros/crazyflie_tools/CMakeFiles/listLogVariables.dir/flags.make
-crazyflie_ros/crazyflie_tools/CMakeFiles/listLogVariables.dir/src/listLogVariables.cpp.o: /home/diego/CrazyDrones/src/crazyflie_ros/crazyflie_tools/src/listLogVariables.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/diego/CrazyDrones/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object crazyflie_ros/crazyflie_tools/CMakeFiles/listLogVariables.dir/src/listLogVariables.cpp.o"
-	cd /home/diego/CrazyDrones/build/crazyflie_ros/crazyflie_tools && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/listLogVariables.dir/src/listLogVariables.cpp.o -c /home/diego/CrazyDrones/src/crazyflie_ros/crazyflie_tools/src/listLogVariables.cpp
+crazyflie_ros/crazyflie_tools/CMakeFiles/listLogVariables.dir/src/listLogVariables.cpp.o: /home/cristinaescribano/CrazyDrones/src/crazyflie_ros/crazyflie_tools/src/listLogVariables.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cristinaescribano/CrazyDrones/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object crazyflie_ros/crazyflie_tools/CMakeFiles/listLogVariables.dir/src/listLogVariables.cpp.o"
+	cd /home/cristinaescribano/CrazyDrones/build/crazyflie_ros/crazyflie_tools && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/listLogVariables.dir/src/listLogVariables.cpp.o -c /home/cristinaescribano/CrazyDrones/src/crazyflie_ros/crazyflie_tools/src/listLogVariables.cpp
 
 crazyflie_ros/crazyflie_tools/CMakeFiles/listLogVariables.dir/src/listLogVariables.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/listLogVariables.dir/src/listLogVariables.cpp.i"
-	cd /home/diego/CrazyDrones/build/crazyflie_ros/crazyflie_tools && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/diego/CrazyDrones/src/crazyflie_ros/crazyflie_tools/src/listLogVariables.cpp > CMakeFiles/listLogVariables.dir/src/listLogVariables.cpp.i
+	cd /home/cristinaescribano/CrazyDrones/build/crazyflie_ros/crazyflie_tools && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/cristinaescribano/CrazyDrones/src/crazyflie_ros/crazyflie_tools/src/listLogVariables.cpp > CMakeFiles/listLogVariables.dir/src/listLogVariables.cpp.i
 
 crazyflie_ros/crazyflie_tools/CMakeFiles/listLogVariables.dir/src/listLogVariables.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/listLogVariables.dir/src/listLogVariables.cpp.s"
-	cd /home/diego/CrazyDrones/build/crazyflie_ros/crazyflie_tools && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/diego/CrazyDrones/src/crazyflie_ros/crazyflie_tools/src/listLogVariables.cpp -o CMakeFiles/listLogVariables.dir/src/listLogVariables.cpp.s
+	cd /home/cristinaescribano/CrazyDrones/build/crazyflie_ros/crazyflie_tools && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/cristinaescribano/CrazyDrones/src/crazyflie_ros/crazyflie_tools/src/listLogVariables.cpp -o CMakeFiles/listLogVariables.dir/src/listLogVariables.cpp.s
 
 crazyflie_ros/crazyflie_tools/CMakeFiles/listLogVariables.dir/src/listLogVariables.cpp.o.requires:
 
@@ -88,17 +88,17 @@ listLogVariables_OBJECTS = \
 # External object files for target listLogVariables
 listLogVariables_EXTERNAL_OBJECTS =
 
-/home/diego/CrazyDrones/devel/lib/crazyflie_tools/listLogVariables: crazyflie_ros/crazyflie_tools/CMakeFiles/listLogVariables.dir/src/listLogVariables.cpp.o
-/home/diego/CrazyDrones/devel/lib/crazyflie_tools/listLogVariables: crazyflie_ros/crazyflie_tools/CMakeFiles/listLogVariables.dir/build.make
-/home/diego/CrazyDrones/devel/lib/crazyflie_tools/listLogVariables: /home/diego/CrazyDrones/devel/lib/libcrazyflie_cpp.so
-/home/diego/CrazyDrones/devel/lib/crazyflie_tools/listLogVariables: /usr/lib/x86_64-linux-gnu/libboost_program_options.so
-/home/diego/CrazyDrones/devel/lib/crazyflie_tools/listLogVariables: /usr/lib/x86_64-linux-gnu/libusb-1.0.so
-/home/diego/CrazyDrones/devel/lib/crazyflie_tools/listLogVariables: crazyflie_ros/crazyflie_tools/CMakeFiles/listLogVariables.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/diego/CrazyDrones/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable /home/diego/CrazyDrones/devel/lib/crazyflie_tools/listLogVariables"
-	cd /home/diego/CrazyDrones/build/crazyflie_ros/crazyflie_tools && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/listLogVariables.dir/link.txt --verbose=$(VERBOSE)
+/home/cristinaescribano/CrazyDrones/devel/lib/crazyflie_tools/listLogVariables: crazyflie_ros/crazyflie_tools/CMakeFiles/listLogVariables.dir/src/listLogVariables.cpp.o
+/home/cristinaescribano/CrazyDrones/devel/lib/crazyflie_tools/listLogVariables: crazyflie_ros/crazyflie_tools/CMakeFiles/listLogVariables.dir/build.make
+/home/cristinaescribano/CrazyDrones/devel/lib/crazyflie_tools/listLogVariables: /home/cristinaescribano/CrazyDrones/devel/lib/libcrazyflie_cpp.so
+/home/cristinaescribano/CrazyDrones/devel/lib/crazyflie_tools/listLogVariables: /usr/lib/x86_64-linux-gnu/libboost_program_options.so
+/home/cristinaescribano/CrazyDrones/devel/lib/crazyflie_tools/listLogVariables: /usr/lib/x86_64-linux-gnu/libusb-1.0.so
+/home/cristinaescribano/CrazyDrones/devel/lib/crazyflie_tools/listLogVariables: crazyflie_ros/crazyflie_tools/CMakeFiles/listLogVariables.dir/link.txt
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/cristinaescribano/CrazyDrones/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable /home/cristinaescribano/CrazyDrones/devel/lib/crazyflie_tools/listLogVariables"
+	cd /home/cristinaescribano/CrazyDrones/build/crazyflie_ros/crazyflie_tools && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/listLogVariables.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
-crazyflie_ros/crazyflie_tools/CMakeFiles/listLogVariables.dir/build: /home/diego/CrazyDrones/devel/lib/crazyflie_tools/listLogVariables
+crazyflie_ros/crazyflie_tools/CMakeFiles/listLogVariables.dir/build: /home/cristinaescribano/CrazyDrones/devel/lib/crazyflie_tools/listLogVariables
 
 .PHONY : crazyflie_ros/crazyflie_tools/CMakeFiles/listLogVariables.dir/build
 
@@ -107,10 +107,10 @@ crazyflie_ros/crazyflie_tools/CMakeFiles/listLogVariables.dir/requires: crazyfli
 .PHONY : crazyflie_ros/crazyflie_tools/CMakeFiles/listLogVariables.dir/requires
 
 crazyflie_ros/crazyflie_tools/CMakeFiles/listLogVariables.dir/clean:
-	cd /home/diego/CrazyDrones/build/crazyflie_ros/crazyflie_tools && $(CMAKE_COMMAND) -P CMakeFiles/listLogVariables.dir/cmake_clean.cmake
+	cd /home/cristinaescribano/CrazyDrones/build/crazyflie_ros/crazyflie_tools && $(CMAKE_COMMAND) -P CMakeFiles/listLogVariables.dir/cmake_clean.cmake
 .PHONY : crazyflie_ros/crazyflie_tools/CMakeFiles/listLogVariables.dir/clean
 
 crazyflie_ros/crazyflie_tools/CMakeFiles/listLogVariables.dir/depend:
-	cd /home/diego/CrazyDrones/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/diego/CrazyDrones/src /home/diego/CrazyDrones/src/crazyflie_ros/crazyflie_tools /home/diego/CrazyDrones/build /home/diego/CrazyDrones/build/crazyflie_ros/crazyflie_tools /home/diego/CrazyDrones/build/crazyflie_ros/crazyflie_tools/CMakeFiles/listLogVariables.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/cristinaescribano/CrazyDrones/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/cristinaescribano/CrazyDrones/src /home/cristinaescribano/CrazyDrones/src/crazyflie_ros/crazyflie_tools /home/cristinaescribano/CrazyDrones/build /home/cristinaescribano/CrazyDrones/build/crazyflie_ros/crazyflie_tools /home/cristinaescribano/CrazyDrones/build/crazyflie_ros/crazyflie_tools/CMakeFiles/listLogVariables.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : crazyflie_ros/crazyflie_tools/CMakeFiles/listLogVariables.dir/depend
 

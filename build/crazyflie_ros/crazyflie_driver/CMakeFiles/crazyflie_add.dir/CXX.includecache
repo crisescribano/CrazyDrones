@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/diego/CrazyDrones/devel/include/crazyflie_driver/AddCrazyflie.h
+/home/cristinaescribano/CrazyDrones/devel/include/crazyflie_driver/AddCrazyflie.h
 ros/service_traits.h
 -
 crazyflie_driver/AddCrazyflieRequest.h
@@ -14,7 +14,7 @@ crazyflie_driver/AddCrazyflieRequest.h
 crazyflie_driver/AddCrazyflieResponse.h
 -
 
-/home/diego/CrazyDrones/devel/include/crazyflie_driver/AddCrazyflieRequest.h
+/home/cristinaescribano/CrazyDrones/devel/include/crazyflie_driver/AddCrazyflieRequest.h
 string
 -
 vector
@@ -32,7 +32,7 @@ ros/message_operations.h
 crazyflie_driver/LogBlock.h
 -
 
-/home/diego/CrazyDrones/devel/include/crazyflie_driver/AddCrazyflieResponse.h
+/home/cristinaescribano/CrazyDrones/devel/include/crazyflie_driver/AddCrazyflieResponse.h
 string
 -
 vector
@@ -48,7 +48,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/diego/CrazyDrones/devel/include/crazyflie_driver/LogBlock.h
+/home/cristinaescribano/CrazyDrones/devel/include/crazyflie_driver/LogBlock.h
 string
 -
 vector
@@ -64,13 +64,13 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/diego/CrazyDrones/src/crazyflie_ros/crazyflie_driver/src/crazyflie_add.cpp
+/home/cristinaescribano/CrazyDrones/src/crazyflie_ros/crazyflie_driver/src/crazyflie_add.cpp
 ros/ros.h
-/home/diego/CrazyDrones/src/crazyflie_ros/crazyflie_driver/src/ros/ros.h
+/home/cristinaescribano/CrazyDrones/src/crazyflie_ros/crazyflie_driver/src/ros/ros.h
 crazyflie_driver/AddCrazyflie.h
-/home/diego/CrazyDrones/src/crazyflie_ros/crazyflie_driver/src/crazyflie_driver/AddCrazyflie.h
+/home/cristinaescribano/CrazyDrones/src/crazyflie_ros/crazyflie_driver/src/crazyflie_driver/AddCrazyflie.h
 crazyflie_driver/LogBlock.h
-/home/diego/CrazyDrones/src/crazyflie_ros/crazyflie_driver/src/crazyflie_driver/LogBlock.h
+/home/cristinaescribano/CrazyDrones/src/crazyflie_ros/crazyflie_driver/src/crazyflie_driver/LogBlock.h
 
 /opt/ros/kinetic/include/ros/advertise_options.h
 ros/forwards.h

@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/diego/CrazyDrones/src
+CMAKE_SOURCE_DIR = /home/cristinaescribano/CrazyDrones/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/diego/CrazyDrones/build
+CMAKE_BINARY_DIR = /home/cristinaescribano/CrazyDrones/build
 
 # Include any dependencies generated for this target.
 include crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_server.dir/depend.make
@@ -58,17 +58,17 @@ include crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_server.dir/progress.
 include crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_server.dir/flags.make
 
 crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_server.dir/src/crazyflie_server.cpp.o: crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_server.dir/flags.make
-crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_server.dir/src/crazyflie_server.cpp.o: /home/diego/CrazyDrones/src/crazyflie_ros/crazyflie_driver/src/crazyflie_server.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/diego/CrazyDrones/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_server.dir/src/crazyflie_server.cpp.o"
-	cd /home/diego/CrazyDrones/build/crazyflie_ros/crazyflie_driver && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/crazyflie_server.dir/src/crazyflie_server.cpp.o -c /home/diego/CrazyDrones/src/crazyflie_ros/crazyflie_driver/src/crazyflie_server.cpp
+crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_server.dir/src/crazyflie_server.cpp.o: /home/cristinaescribano/CrazyDrones/src/crazyflie_ros/crazyflie_driver/src/crazyflie_server.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/cristinaescribano/CrazyDrones/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_server.dir/src/crazyflie_server.cpp.o"
+	cd /home/cristinaescribano/CrazyDrones/build/crazyflie_ros/crazyflie_driver && /usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/crazyflie_server.dir/src/crazyflie_server.cpp.o -c /home/cristinaescribano/CrazyDrones/src/crazyflie_ros/crazyflie_driver/src/crazyflie_server.cpp
 
 crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_server.dir/src/crazyflie_server.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/crazyflie_server.dir/src/crazyflie_server.cpp.i"
-	cd /home/diego/CrazyDrones/build/crazyflie_ros/crazyflie_driver && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/diego/CrazyDrones/src/crazyflie_ros/crazyflie_driver/src/crazyflie_server.cpp > CMakeFiles/crazyflie_server.dir/src/crazyflie_server.cpp.i
+	cd /home/cristinaescribano/CrazyDrones/build/crazyflie_ros/crazyflie_driver && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/cristinaescribano/CrazyDrones/src/crazyflie_ros/crazyflie_driver/src/crazyflie_server.cpp > CMakeFiles/crazyflie_server.dir/src/crazyflie_server.cpp.i
 
 crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_server.dir/src/crazyflie_server.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/crazyflie_server.dir/src/crazyflie_server.cpp.s"
-	cd /home/diego/CrazyDrones/build/crazyflie_ros/crazyflie_driver && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/diego/CrazyDrones/src/crazyflie_ros/crazyflie_driver/src/crazyflie_server.cpp -o CMakeFiles/crazyflie_server.dir/src/crazyflie_server.cpp.s
+	cd /home/cristinaescribano/CrazyDrones/build/crazyflie_ros/crazyflie_driver && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/cristinaescribano/CrazyDrones/src/crazyflie_ros/crazyflie_driver/src/crazyflie_server.cpp -o CMakeFiles/crazyflie_server.dir/src/crazyflie_server.cpp.s
 
 crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_server.dir/src/crazyflie_server.cpp.o.requires:
 
@@ -88,40 +88,40 @@ crazyflie_server_OBJECTS = \
 # External object files for target crazyflie_server
 crazyflie_server_EXTERNAL_OBJECTS =
 
-/home/diego/CrazyDrones/devel/lib/crazyflie_driver/crazyflie_server: crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_server.dir/src/crazyflie_server.cpp.o
-/home/diego/CrazyDrones/devel/lib/crazyflie_driver/crazyflie_server: crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_server.dir/build.make
-/home/diego/CrazyDrones/devel/lib/crazyflie_driver/crazyflie_server: /opt/ros/kinetic/lib/libtf.so
-/home/diego/CrazyDrones/devel/lib/crazyflie_driver/crazyflie_server: /opt/ros/kinetic/lib/libtf2_ros.so
-/home/diego/CrazyDrones/devel/lib/crazyflie_driver/crazyflie_server: /opt/ros/kinetic/lib/libactionlib.so
-/home/diego/CrazyDrones/devel/lib/crazyflie_driver/crazyflie_server: /opt/ros/kinetic/lib/libmessage_filters.so
-/home/diego/CrazyDrones/devel/lib/crazyflie_driver/crazyflie_server: /opt/ros/kinetic/lib/libroscpp.so
-/home/diego/CrazyDrones/devel/lib/crazyflie_driver/crazyflie_server: /usr/lib/x86_64-linux-gnu/libboost_filesystem.so
-/home/diego/CrazyDrones/devel/lib/crazyflie_driver/crazyflie_server: /usr/lib/x86_64-linux-gnu/libboost_signals.so
-/home/diego/CrazyDrones/devel/lib/crazyflie_driver/crazyflie_server: /opt/ros/kinetic/lib/libxmlrpcpp.so
-/home/diego/CrazyDrones/devel/lib/crazyflie_driver/crazyflie_server: /opt/ros/kinetic/lib/libtf2.so
-/home/diego/CrazyDrones/devel/lib/crazyflie_driver/crazyflie_server: /opt/ros/kinetic/lib/libroscpp_serialization.so
-/home/diego/CrazyDrones/devel/lib/crazyflie_driver/crazyflie_server: /opt/ros/kinetic/lib/librosconsole.so
-/home/diego/CrazyDrones/devel/lib/crazyflie_driver/crazyflie_server: /opt/ros/kinetic/lib/librosconsole_log4cxx.so
-/home/diego/CrazyDrones/devel/lib/crazyflie_driver/crazyflie_server: /opt/ros/kinetic/lib/librosconsole_backend_interface.so
-/home/diego/CrazyDrones/devel/lib/crazyflie_driver/crazyflie_server: /usr/lib/x86_64-linux-gnu/liblog4cxx.so
-/home/diego/CrazyDrones/devel/lib/crazyflie_driver/crazyflie_server: /usr/lib/x86_64-linux-gnu/libboost_regex.so
-/home/diego/CrazyDrones/devel/lib/crazyflie_driver/crazyflie_server: /opt/ros/kinetic/lib/librostime.so
-/home/diego/CrazyDrones/devel/lib/crazyflie_driver/crazyflie_server: /opt/ros/kinetic/lib/libcpp_common.so
-/home/diego/CrazyDrones/devel/lib/crazyflie_driver/crazyflie_server: /usr/lib/x86_64-linux-gnu/libboost_system.so
-/home/diego/CrazyDrones/devel/lib/crazyflie_driver/crazyflie_server: /usr/lib/x86_64-linux-gnu/libboost_thread.so
-/home/diego/CrazyDrones/devel/lib/crazyflie_driver/crazyflie_server: /usr/lib/x86_64-linux-gnu/libboost_chrono.so
-/home/diego/CrazyDrones/devel/lib/crazyflie_driver/crazyflie_server: /usr/lib/x86_64-linux-gnu/libboost_date_time.so
-/home/diego/CrazyDrones/devel/lib/crazyflie_driver/crazyflie_server: /usr/lib/x86_64-linux-gnu/libboost_atomic.so
-/home/diego/CrazyDrones/devel/lib/crazyflie_driver/crazyflie_server: /usr/lib/x86_64-linux-gnu/libpthread.so
-/home/diego/CrazyDrones/devel/lib/crazyflie_driver/crazyflie_server: /usr/lib/x86_64-linux-gnu/libconsole_bridge.so
-/home/diego/CrazyDrones/devel/lib/crazyflie_driver/crazyflie_server: /home/diego/CrazyDrones/devel/lib/libcrazyflie_cpp.so
-/home/diego/CrazyDrones/devel/lib/crazyflie_driver/crazyflie_server: /usr/lib/x86_64-linux-gnu/libusb-1.0.so
-/home/diego/CrazyDrones/devel/lib/crazyflie_driver/crazyflie_server: crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_server.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/diego/CrazyDrones/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable /home/diego/CrazyDrones/devel/lib/crazyflie_driver/crazyflie_server"
-	cd /home/diego/CrazyDrones/build/crazyflie_ros/crazyflie_driver && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/crazyflie_server.dir/link.txt --verbose=$(VERBOSE)
+/home/cristinaescribano/CrazyDrones/devel/lib/crazyflie_driver/crazyflie_server: crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_server.dir/src/crazyflie_server.cpp.o
+/home/cristinaescribano/CrazyDrones/devel/lib/crazyflie_driver/crazyflie_server: crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_server.dir/build.make
+/home/cristinaescribano/CrazyDrones/devel/lib/crazyflie_driver/crazyflie_server: /opt/ros/kinetic/lib/libtf.so
+/home/cristinaescribano/CrazyDrones/devel/lib/crazyflie_driver/crazyflie_server: /opt/ros/kinetic/lib/libtf2_ros.so
+/home/cristinaescribano/CrazyDrones/devel/lib/crazyflie_driver/crazyflie_server: /opt/ros/kinetic/lib/libactionlib.so
+/home/cristinaescribano/CrazyDrones/devel/lib/crazyflie_driver/crazyflie_server: /opt/ros/kinetic/lib/libmessage_filters.so
+/home/cristinaescribano/CrazyDrones/devel/lib/crazyflie_driver/crazyflie_server: /opt/ros/kinetic/lib/libroscpp.so
+/home/cristinaescribano/CrazyDrones/devel/lib/crazyflie_driver/crazyflie_server: /usr/lib/x86_64-linux-gnu/libboost_filesystem.so
+/home/cristinaescribano/CrazyDrones/devel/lib/crazyflie_driver/crazyflie_server: /usr/lib/x86_64-linux-gnu/libboost_signals.so
+/home/cristinaescribano/CrazyDrones/devel/lib/crazyflie_driver/crazyflie_server: /opt/ros/kinetic/lib/libxmlrpcpp.so
+/home/cristinaescribano/CrazyDrones/devel/lib/crazyflie_driver/crazyflie_server: /opt/ros/kinetic/lib/libtf2.so
+/home/cristinaescribano/CrazyDrones/devel/lib/crazyflie_driver/crazyflie_server: /opt/ros/kinetic/lib/libroscpp_serialization.so
+/home/cristinaescribano/CrazyDrones/devel/lib/crazyflie_driver/crazyflie_server: /opt/ros/kinetic/lib/librosconsole.so
+/home/cristinaescribano/CrazyDrones/devel/lib/crazyflie_driver/crazyflie_server: /opt/ros/kinetic/lib/librosconsole_log4cxx.so
+/home/cristinaescribano/CrazyDrones/devel/lib/crazyflie_driver/crazyflie_server: /opt/ros/kinetic/lib/librosconsole_backend_interface.so
+/home/cristinaescribano/CrazyDrones/devel/lib/crazyflie_driver/crazyflie_server: /usr/lib/x86_64-linux-gnu/liblog4cxx.so
+/home/cristinaescribano/CrazyDrones/devel/lib/crazyflie_driver/crazyflie_server: /usr/lib/x86_64-linux-gnu/libboost_regex.so
+/home/cristinaescribano/CrazyDrones/devel/lib/crazyflie_driver/crazyflie_server: /opt/ros/kinetic/lib/librostime.so
+/home/cristinaescribano/CrazyDrones/devel/lib/crazyflie_driver/crazyflie_server: /opt/ros/kinetic/lib/libcpp_common.so
+/home/cristinaescribano/CrazyDrones/devel/lib/crazyflie_driver/crazyflie_server: /usr/lib/x86_64-linux-gnu/libboost_system.so
+/home/cristinaescribano/CrazyDrones/devel/lib/crazyflie_driver/crazyflie_server: /usr/lib/x86_64-linux-gnu/libboost_thread.so
+/home/cristinaescribano/CrazyDrones/devel/lib/crazyflie_driver/crazyflie_server: /usr/lib/x86_64-linux-gnu/libboost_chrono.so
+/home/cristinaescribano/CrazyDrones/devel/lib/crazyflie_driver/crazyflie_server: /usr/lib/x86_64-linux-gnu/libboost_date_time.so
+/home/cristinaescribano/CrazyDrones/devel/lib/crazyflie_driver/crazyflie_server: /usr/lib/x86_64-linux-gnu/libboost_atomic.so
+/home/cristinaescribano/CrazyDrones/devel/lib/crazyflie_driver/crazyflie_server: /usr/lib/x86_64-linux-gnu/libpthread.so
+/home/cristinaescribano/CrazyDrones/devel/lib/crazyflie_driver/crazyflie_server: /usr/lib/x86_64-linux-gnu/libconsole_bridge.so
+/home/cristinaescribano/CrazyDrones/devel/lib/crazyflie_driver/crazyflie_server: /home/cristinaescribano/CrazyDrones/devel/lib/libcrazyflie_cpp.so
+/home/cristinaescribano/CrazyDrones/devel/lib/crazyflie_driver/crazyflie_server: /usr/lib/x86_64-linux-gnu/libusb-1.0.so
+/home/cristinaescribano/CrazyDrones/devel/lib/crazyflie_driver/crazyflie_server: crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_server.dir/link.txt
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/cristinaescribano/CrazyDrones/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable /home/cristinaescribano/CrazyDrones/devel/lib/crazyflie_driver/crazyflie_server"
+	cd /home/cristinaescribano/CrazyDrones/build/crazyflie_ros/crazyflie_driver && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/crazyflie_server.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
-crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_server.dir/build: /home/diego/CrazyDrones/devel/lib/crazyflie_driver/crazyflie_server
+crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_server.dir/build: /home/cristinaescribano/CrazyDrones/devel/lib/crazyflie_driver/crazyflie_server
 
 .PHONY : crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_server.dir/build
 
@@ -130,10 +130,10 @@ crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_server.dir/requires: crazyfl
 .PHONY : crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_server.dir/requires
 
 crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_server.dir/clean:
-	cd /home/diego/CrazyDrones/build/crazyflie_ros/crazyflie_driver && $(CMAKE_COMMAND) -P CMakeFiles/crazyflie_server.dir/cmake_clean.cmake
+	cd /home/cristinaescribano/CrazyDrones/build/crazyflie_ros/crazyflie_driver && $(CMAKE_COMMAND) -P CMakeFiles/crazyflie_server.dir/cmake_clean.cmake
 .PHONY : crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_server.dir/clean
 
 crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_server.dir/depend:
-	cd /home/diego/CrazyDrones/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/diego/CrazyDrones/src /home/diego/CrazyDrones/src/crazyflie_ros/crazyflie_driver /home/diego/CrazyDrones/build /home/diego/CrazyDrones/build/crazyflie_ros/crazyflie_driver /home/diego/CrazyDrones/build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_server.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/cristinaescribano/CrazyDrones/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/cristinaescribano/CrazyDrones/src /home/cristinaescribano/CrazyDrones/src/crazyflie_ros/crazyflie_driver /home/cristinaescribano/CrazyDrones/build /home/cristinaescribano/CrazyDrones/build/crazyflie_ros/crazyflie_driver /home/cristinaescribano/CrazyDrones/build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_server.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_server.dir/depend
 

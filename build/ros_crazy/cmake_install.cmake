@@ -1,8 +1,8 @@
-# Install script for directory: /home/diego/CrazyDrones/src/ros_crazy
+# Install script for directory: /home/cristinaescribano/CrazyDrones/src/ros_crazy
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/diego/CrazyDrones/install")
+  set(CMAKE_INSTALL_PREFIX "/home/cristinaescribano/CrazyDrones/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -33,17 +33,17 @@ if(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/diego/CrazyDrones/build/ros_crazy/catkin_generated/installspace/ros_crazy.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/cristinaescribano/CrazyDrones/build/ros_crazy/catkin_generated/installspace/ros_crazy.pc")
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/ros_crazy/cmake" TYPE FILE FILES
-    "/home/diego/CrazyDrones/build/ros_crazy/catkin_generated/installspace/ros_crazyConfig.cmake"
-    "/home/diego/CrazyDrones/build/ros_crazy/catkin_generated/installspace/ros_crazyConfig-version.cmake"
+    "/home/cristinaescribano/CrazyDrones/build/ros_crazy/catkin_generated/installspace/ros_crazyConfig.cmake"
+    "/home/cristinaescribano/CrazyDrones/build/ros_crazy/catkin_generated/installspace/ros_crazyConfig-version.cmake"
     )
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/ros_crazy" TYPE FILE FILES "/home/diego/CrazyDrones/src/ros_crazy/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/ros_crazy" TYPE FILE FILES "/home/cristinaescribano/CrazyDrones/src/ros_crazy/package.xml")
 endif()
 

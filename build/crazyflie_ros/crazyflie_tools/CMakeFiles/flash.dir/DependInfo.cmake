@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/diego/CrazyDrones/src/crazyflie_ros/crazyflie_tools/src/flash.cpp" "/home/diego/CrazyDrones/build/crazyflie_ros/crazyflie_tools/CMakeFiles/flash.dir/src/flash.cpp.o"
+  "/home/cristinaescribano/CrazyDrones/src/crazyflie_ros/crazyflie_tools/src/flash.cpp" "/home/cristinaescribano/CrazyDrones/build/crazyflie_ros/crazyflie_tools/CMakeFiles/flash.dir/src/flash.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -15,12 +15,12 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
-  "/home/diego/CrazyDrones/src/crazyflie_ros/crazyflie_cpp/include"
+  "/home/cristinaescribano/CrazyDrones/src/crazyflie_ros/crazyflie_cpp/include"
   )
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
-  "/home/diego/CrazyDrones/build/crazyflie_ros/crazyflie_cpp/CMakeFiles/crazyflie_cpp.dir/DependInfo.cmake"
+  "/home/cristinaescribano/CrazyDrones/build/crazyflie_ros/crazyflie_cpp/CMakeFiles/crazyflie_cpp.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.

@@ -13,34 +13,6 @@ def onNewPosition(position):
 
     rospy.loginfo("Received position: " + str(position.pose.pose.position.x) + ", " + str(position.pose.pose.position.y) + ", " + str(position.pose.pose.position.z))
 
-    # LO DE SIEMPRE:
-
-    #if firstPosition:
-        # initialize kalman filter
-     #   rospy.set_param("kalman/initialX", position.pose.pose.position.x)
-      #  rospy.set_param("kalman/initialY", position.pose.pose.position.y)
-       # rospy.set_param("kalman/initialZ", position.pose.pose.position.z)
-
-        # Aplica los cmabios en el dron
-        #update_params(["kalman/initialX", "kalman/initialY", "kalman/initialZ"])
-
-        # Resetea el kalman filter
- #       rospy.set_param("kalman/resetEstimation", 1)
-
-        # Aplica los cambios en el drone
-        #update_params(["kalman/resetEstimation"]) #, "locSrv/extPosStdDev"])
-    #    firstPosition = False
-  #  else:
-
- #   	msg.header.frame_id = position.header.frame_id
-  #  	msg.header.stamp = position.header.stamp
-   # 	msg.header.seq += 1
-    #	msg.point.x = position.pose.pose.position.x
-    #	msg.point.y = position.pose.pose.position.y
-    #	msg.point.z = position.pose.pose.position.z
-    #	pub.publish(msg)
-
-    # LO NUEVO
 
     if firstPosition:
     
@@ -54,7 +26,7 @@ def onNewPosition(position):
 	rospy.set_param("kalman/resetEstimation", 0) 
         update_params(["kalman/resetEstimation"])
     	
-		msg.header.frame_id = position.header.frame_id
+        msg.header.frame_id = position.header.frame_id
     	msg.header.stamp = position.header.stamp
     	msg.header.seq += 1
     	msg.point.x = position.pose.pose.position.x
@@ -62,15 +34,6 @@ def onNewPosition(position):
     	msg.point.z = position.pose.pose.position.z
     	pub.publish(msg)
 
-    # SIN NADA DE KALMAN
-
-#    msg.header.frame_id = position.header.frame_id
-#    msg.header.stamp = position.header.stamp
-#    msg.header.seq += 1
-#    msg.point.x = position.pose.pose.position.x
-#    msg.point.y = position.pose.pose.position.y
-#    msg.point.z = position.pose.pose.position.z
-#    pub.publish(msg)
 
 if __name__ == '__main__':
 

@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/listMemories.dir/src/listMemories.cpp.o"
-  "/home/diego/CrazyDrones/devel/lib/crazyflie_tools/listMemories.pdb"
-  "/home/diego/CrazyDrones/devel/lib/crazyflie_tools/listMemories"
+  "/home/cristinaescribano/CrazyDrones/devel/lib/crazyflie_tools/listMemories.pdb"
+  "/home/cristinaescribano/CrazyDrones/devel/lib/crazyflie_tools/listMemories"
 )
 
 # Per-language clean rules from dependency scanning.

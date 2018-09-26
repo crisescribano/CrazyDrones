@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/diego/CrazyDrones/src/crazyflie_ros/crazyflie_demo/src/quadrotor_teleop.cpp
+/home/cristinaescribano/CrazyDrones/src/crazyflie_ros/crazyflie_demo/src/quadrotor_teleop.cpp
 ros/ros.h
 -
 sensor_msgs/Joy.h

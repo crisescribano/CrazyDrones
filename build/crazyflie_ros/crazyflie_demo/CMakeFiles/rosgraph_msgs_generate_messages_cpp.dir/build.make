@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/diego/CrazyDrones/src
+CMAKE_SOURCE_DIR = /home/cristinaescribano/CrazyDrones/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/diego/CrazyDrones/build
+CMAKE_BINARY_DIR = /home/cristinaescribano/CrazyDrones/build
 
 # Utility rule file for rosgraph_msgs_generate_messages_cpp.
 
@@ -63,10 +63,10 @@ crazyflie_ros/crazyflie_demo/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/
 .PHONY : crazyflie_ros/crazyflie_demo/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build
 
 crazyflie_ros/crazyflie_demo/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/clean:
-	cd /home/diego/CrazyDrones/build/crazyflie_ros/crazyflie_demo && $(CMAKE_COMMAND) -P CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/cmake_clean.cmake
+	cd /home/cristinaescribano/CrazyDrones/build/crazyflie_ros/crazyflie_demo && $(CMAKE_COMMAND) -P CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/cmake_clean.cmake
 .PHONY : crazyflie_ros/crazyflie_demo/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/clean
 
 crazyflie_ros/crazyflie_demo/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/depend:
-	cd /home/diego/CrazyDrones/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/diego/CrazyDrones/src /home/diego/CrazyDrones/src/crazyflie_ros/crazyflie_demo /home/diego/CrazyDrones/build /home/diego/CrazyDrones/build/crazyflie_ros/crazyflie_demo /home/diego/CrazyDrones/build/crazyflie_ros/crazyflie_demo/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/cristinaescribano/CrazyDrones/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/cristinaescribano/CrazyDrones/src /home/cristinaescribano/CrazyDrones/src/crazyflie_ros/crazyflie_demo /home/cristinaescribano/CrazyDrones/build /home/cristinaescribano/CrazyDrones/build/crazyflie_ros/crazyflie_demo /home/cristinaescribano/CrazyDrones/build/crazyflie_ros/crazyflie_demo/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : crazyflie_ros/crazyflie_demo/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/depend
 

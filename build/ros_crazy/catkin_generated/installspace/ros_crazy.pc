@@ -1,8 +1,8 @@
-prefix=/home/diego/CrazyDrones/install
+prefix=/home/cristinaescribano/CrazyDrones/install
 
 Name: ros_crazy
 Description: Description of ros_crazy
 Version: 0.0.0
 Cflags: 
-Libs: -L/home/diego/CrazyDrones/install/lib 
+Libs: -L/home/cristinaescribano/CrazyDrones/install/lib 
 Requires: 

@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/diego/CrazyDrones/devel/include/crazyflie_driver/AddCrazyflie.h
+/home/cristinaescribano/CrazyDrones/devel/include/crazyflie_driver/AddCrazyflie.h
 ros/service_traits.h
 -
 crazyflie_driver/AddCrazyflieRequest.h
@@ -14,7 +14,7 @@ crazyflie_driver/AddCrazyflieRequest.h
 crazyflie_driver/AddCrazyflieResponse.h
 -
 
-/home/diego/CrazyDrones/devel/include/crazyflie_driver/AddCrazyflieRequest.h
+/home/cristinaescribano/CrazyDrones/devel/include/crazyflie_driver/AddCrazyflieRequest.h
 string
 -
 vector
@@ -32,7 +32,7 @@ ros/message_operations.h
 crazyflie_driver/LogBlock.h
 -
 
-/home/diego/CrazyDrones/devel/include/crazyflie_driver/AddCrazyflieResponse.h
+/home/cristinaescribano/CrazyDrones/devel/include/crazyflie_driver/AddCrazyflieResponse.h
 string
 -
 vector
@@ -48,7 +48,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/diego/CrazyDrones/devel/include/crazyflie_driver/FullState.h
+/home/cristinaescribano/CrazyDrones/devel/include/crazyflie_driver/FullState.h
 string
 -
 vector
@@ -72,7 +72,7 @@ geometry_msgs/Twist.h
 geometry_msgs/Vector3.h
 -
 
-/home/diego/CrazyDrones/devel/include/crazyflie_driver/GenericLogData.h
+/home/cristinaescribano/CrazyDrones/devel/include/crazyflie_driver/GenericLogData.h
 string
 -
 vector
@@ -90,7 +90,7 @@ ros/message_operations.h
 std_msgs/Header.h
 -
 
-/home/diego/CrazyDrones/devel/include/crazyflie_driver/GoTo.h
+/home/cristinaescribano/CrazyDrones/devel/include/crazyflie_driver/GoTo.h
 ros/service_traits.h
 -
 crazyflie_driver/GoToRequest.h
@@ -98,7 +98,7 @@ crazyflie_driver/GoToRequest.h
 crazyflie_driver/GoToResponse.h
 -
 
-/home/diego/CrazyDrones/devel/include/crazyflie_driver/GoToRequest.h
+/home/cristinaescribano/CrazyDrones/devel/include/crazyflie_driver/GoToRequest.h
 string
 -
 vector
@@ -116,7 +116,7 @@ ros/message_operations.h
 geometry_msgs/Point.h
 -
 
-/home/diego/CrazyDrones/devel/include/crazyflie_driver/GoToResponse.h
+/home/cristinaescribano/CrazyDrones/devel/include/crazyflie_driver/GoToResponse.h
 string
 -
 vector
@@ -132,7 +132,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/diego/CrazyDrones/devel/include/crazyflie_driver/Hover.h
+/home/cristinaescribano/CrazyDrones/devel/include/crazyflie_driver/Hover.h
 string
 -
 vector
@@ -150,7 +150,7 @@ ros/message_operations.h
 std_msgs/Header.h
 -
 
-/home/diego/CrazyDrones/devel/include/crazyflie_driver/Land.h
+/home/cristinaescribano/CrazyDrones/devel/include/crazyflie_driver/Land.h
 ros/service_traits.h
 -
 crazyflie_driver/LandRequest.h
@@ -158,7 +158,7 @@ crazyflie_driver/LandRequest.h
 crazyflie_driver/LandResponse.h
 -
 
-/home/diego/CrazyDrones/devel/include/crazyflie_driver/LandRequest.h
+/home/cristinaescribano/CrazyDrones/devel/include/crazyflie_driver/LandRequest.h
 string
 -
 vector
@@ -174,7 +174,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/diego/CrazyDrones/devel/include/crazyflie_driver/LandResponse.h
+/home/cristinaescribano/CrazyDrones/devel/include/crazyflie_driver/LandResponse.h
 string
 -
 vector
@@ -190,7 +190,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/diego/CrazyDrones/devel/include/crazyflie_driver/LogBlock.h
+/home/cristinaescribano/CrazyDrones/devel/include/crazyflie_driver/LogBlock.h
 string
 -
 vector
@@ -206,7 +206,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/diego/CrazyDrones/devel/include/crazyflie_driver/Position.h
+/home/cristinaescribano/CrazyDrones/devel/include/crazyflie_driver/Position.h
 string
 -
 vector
@@ -224,7 +224,7 @@ ros/message_operations.h
 std_msgs/Header.h
 -
 
-/home/diego/CrazyDrones/devel/include/crazyflie_driver/RemoveCrazyflie.h
+/home/cristinaescribano/CrazyDrones/devel/include/crazyflie_driver/RemoveCrazyflie.h
 ros/service_traits.h
 -
 crazyflie_driver/RemoveCrazyflieRequest.h
@@ -232,7 +232,7 @@ crazyflie_driver/RemoveCrazyflieRequest.h
 crazyflie_driver/RemoveCrazyflieResponse.h
 -
 
-/home/diego/CrazyDrones/devel/include/crazyflie_driver/RemoveCrazyflieRequest.h
+/home/cristinaescribano/CrazyDrones/devel/include/crazyflie_driver/RemoveCrazyflieRequest.h
 string
 -
 vector
@@ -248,7 +248,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/diego/CrazyDrones/devel/include/crazyflie_driver/RemoveCrazyflieResponse.h
+/home/cristinaescribano/CrazyDrones/devel/include/crazyflie_driver/RemoveCrazyflieResponse.h
 string
 -
 vector
@@ -264,7 +264,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/diego/CrazyDrones/devel/include/crazyflie_driver/SetGroupMask.h
+/home/cristinaescribano/CrazyDrones/devel/include/crazyflie_driver/SetGroupMask.h
 ros/service_traits.h
 -
 crazyflie_driver/SetGroupMaskRequest.h
@@ -272,7 +272,7 @@ crazyflie_driver/SetGroupMaskRequest.h
 crazyflie_driver/SetGroupMaskResponse.h
 -
 
-/home/diego/CrazyDrones/devel/include/crazyflie_driver/SetGroupMaskRequest.h
+/home/cristinaescribano/CrazyDrones/devel/include/crazyflie_driver/SetGroupMaskRequest.h
 string
 -
 vector
@@ -288,7 +288,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/diego/CrazyDrones/devel/include/crazyflie_driver/SetGroupMaskResponse.h
+/home/cristinaescribano/CrazyDrones/devel/include/crazyflie_driver/SetGroupMaskResponse.h
 string
 -
 vector
@@ -304,7 +304,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/diego/CrazyDrones/devel/include/crazyflie_driver/StartTrajectory.h
+/home/cristinaescribano/CrazyDrones/devel/include/crazyflie_driver/StartTrajectory.h
 ros/service_traits.h
 -
 crazyflie_driver/StartTrajectoryRequest.h
@@ -312,7 +312,7 @@ crazyflie_driver/StartTrajectoryRequest.h
 crazyflie_driver/StartTrajectoryResponse.h
 -
 
-/home/diego/CrazyDrones/devel/include/crazyflie_driver/StartTrajectoryRequest.h
+/home/cristinaescribano/CrazyDrones/devel/include/crazyflie_driver/StartTrajectoryRequest.h
 string
 -
 vector
@@ -328,7 +328,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/diego/CrazyDrones/devel/include/crazyflie_driver/StartTrajectoryResponse.h
+/home/cristinaescribano/CrazyDrones/devel/include/crazyflie_driver/StartTrajectoryResponse.h
 string
 -
 vector
@@ -344,7 +344,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/diego/CrazyDrones/devel/include/crazyflie_driver/Stop.h
+/home/cristinaescribano/CrazyDrones/devel/include/crazyflie_driver/Stop.h
 ros/service_traits.h
 -
 crazyflie_driver/StopRequest.h
@@ -352,7 +352,7 @@ crazyflie_driver/StopRequest.h
 crazyflie_driver/StopResponse.h
 -
 
-/home/diego/CrazyDrones/devel/include/crazyflie_driver/StopRequest.h
+/home/cristinaescribano/CrazyDrones/devel/include/crazyflie_driver/StopRequest.h
 string
 -
 vector
@@ -368,7 +368,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/diego/CrazyDrones/devel/include/crazyflie_driver/StopResponse.h
+/home/cristinaescribano/CrazyDrones/devel/include/crazyflie_driver/StopResponse.h
 string
 -
 vector
@@ -384,7 +384,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/diego/CrazyDrones/devel/include/crazyflie_driver/Takeoff.h
+/home/cristinaescribano/CrazyDrones/devel/include/crazyflie_driver/Takeoff.h
 ros/service_traits.h
 -
 crazyflie_driver/TakeoffRequest.h
@@ -392,7 +392,7 @@ crazyflie_driver/TakeoffRequest.h
 crazyflie_driver/TakeoffResponse.h
 -
 
-/home/diego/CrazyDrones/devel/include/crazyflie_driver/TakeoffRequest.h
+/home/cristinaescribano/CrazyDrones/devel/include/crazyflie_driver/TakeoffRequest.h
 string
 -
 vector
@@ -408,7 +408,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/diego/CrazyDrones/devel/include/crazyflie_driver/TakeoffResponse.h
+/home/cristinaescribano/CrazyDrones/devel/include/crazyflie_driver/TakeoffResponse.h
 string
 -
 vector
@@ -424,7 +424,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/diego/CrazyDrones/devel/include/crazyflie_driver/TrajectoryPolynomialPiece.h
+/home/cristinaescribano/CrazyDrones/devel/include/crazyflie_driver/TrajectoryPolynomialPiece.h
 string
 -
 vector
@@ -440,7 +440,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/diego/CrazyDrones/devel/include/crazyflie_driver/UpdateParams.h
+/home/cristinaescribano/CrazyDrones/devel/include/crazyflie_driver/UpdateParams.h
 ros/service_traits.h
 -
 crazyflie_driver/UpdateParamsRequest.h
@@ -448,7 +448,7 @@ crazyflie_driver/UpdateParamsRequest.h
 crazyflie_driver/UpdateParamsResponse.h
 -
 
-/home/diego/CrazyDrones/devel/include/crazyflie_driver/UpdateParamsRequest.h
+/home/cristinaescribano/CrazyDrones/devel/include/crazyflie_driver/UpdateParamsRequest.h
 string
 -
 vector
@@ -464,7 +464,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/diego/CrazyDrones/devel/include/crazyflie_driver/UpdateParamsResponse.h
+/home/cristinaescribano/CrazyDrones/devel/include/crazyflie_driver/UpdateParamsResponse.h
 string
 -
 vector
@@ -480,7 +480,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/diego/CrazyDrones/devel/include/crazyflie_driver/UploadTrajectory.h
+/home/cristinaescribano/CrazyDrones/devel/include/crazyflie_driver/UploadTrajectory.h
 ros/service_traits.h
 -
 crazyflie_driver/UploadTrajectoryRequest.h
@@ -488,7 +488,7 @@ crazyflie_driver/UploadTrajectoryRequest.h
 crazyflie_driver/UploadTrajectoryResponse.h
 -
 
-/home/diego/CrazyDrones/devel/include/crazyflie_driver/UploadTrajectoryRequest.h
+/home/cristinaescribano/CrazyDrones/devel/include/crazyflie_driver/UploadTrajectoryRequest.h
 string
 -
 vector
@@ -506,7 +506,7 @@ ros/message_operations.h
 crazyflie_driver/TrajectoryPolynomialPiece.h
 -
 
-/home/diego/CrazyDrones/devel/include/crazyflie_driver/UploadTrajectoryResponse.h
+/home/cristinaescribano/CrazyDrones/devel/include/crazyflie_driver/UploadTrajectoryResponse.h
 string
 -
 vector
@@ -522,7 +522,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/diego/CrazyDrones/devel/include/crazyflie_driver/crtpPacket.h
+/home/cristinaescribano/CrazyDrones/devel/include/crazyflie_driver/crtpPacket.h
 string
 -
 vector
@@ -538,7 +538,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/diego/CrazyDrones/devel/include/crazyflie_driver/sendPacket.h
+/home/cristinaescribano/CrazyDrones/devel/include/crazyflie_driver/sendPacket.h
 ros/service_traits.h
 -
 crazyflie_driver/sendPacketRequest.h
@@ -546,7 +546,7 @@ crazyflie_driver/sendPacketRequest.h
 crazyflie_driver/sendPacketResponse.h
 -
 
-/home/diego/CrazyDrones/devel/include/crazyflie_driver/sendPacketRequest.h
+/home/cristinaescribano/CrazyDrones/devel/include/crazyflie_driver/sendPacketRequest.h
 string
 -
 vector
@@ -564,7 +564,7 @@ ros/message_operations.h
 crazyflie_driver/crtpPacket.h
 -
 
-/home/diego/CrazyDrones/devel/include/crazyflie_driver/sendPacketResponse.h
+/home/cristinaescribano/CrazyDrones/devel/include/crazyflie_driver/sendPacketResponse.h
 string
 -
 vector
@@ -580,7 +580,7 @@ ros/builtin_message_traits.h
 ros/message_operations.h
 -
 
-/home/diego/CrazyDrones/src/crazyflie_ros/crazyflie_cpp/include/crazyflie_cpp/Crazyflie.h
+/home/cristinaescribano/CrazyDrones/src/crazyflie_ros/crazyflie_cpp/include/crazyflie_cpp/Crazyflie.h
 cstring
 -
 sstream
@@ -588,9 +588,9 @@ sstream
 functional
 -
 Crazyradio.h
-/home/diego/CrazyDrones/src/crazyflie_ros/crazyflie_cpp/include/crazyflie_cpp/Crazyradio.h
+/home/cristinaescribano/CrazyDrones/src/crazyflie_ros/crazyflie_cpp/include/crazyflie_cpp/Crazyradio.h
 crtp.h
-/home/diego/CrazyDrones/src/crazyflie_ros/crazyflie_cpp/include/crazyflie_cpp/crtp.h
+/home/cristinaescribano/CrazyDrones/src/crazyflie_ros/crazyflie_cpp/include/crazyflie_cpp/crtp.h
 list
 -
 set
@@ -600,91 +600,91 @@ map
 chrono
 -
 
-/home/diego/CrazyDrones/src/crazyflie_ros/crazyflie_cpp/include/crazyflie_cpp/Crazyradio.h
+/home/cristinaescribano/CrazyDrones/src/crazyflie_ros/crazyflie_cpp/include/crazyflie_cpp/Crazyradio.h
 stdint.h
 -
 vector
 -
 ITransport.h
-/home/diego/CrazyDrones/src/crazyflie_ros/crazyflie_cpp/include/crazyflie_cpp/ITransport.h
+/home/cristinaescribano/CrazyDrones/src/crazyflie_ros/crazyflie_cpp/include/crazyflie_cpp/ITransport.h
 USBDevice.h
-/home/diego/CrazyDrones/src/crazyflie_ros/crazyflie_cpp/include/crazyflie_cpp/USBDevice.h
+/home/cristinaescribano/CrazyDrones/src/crazyflie_ros/crazyflie_cpp/include/crazyflie_cpp/USBDevice.h
 
-/home/diego/CrazyDrones/src/crazyflie_ros/crazyflie_cpp/include/crazyflie_cpp/ITransport.h
+/home/cristinaescribano/CrazyDrones/src/crazyflie_ros/crazyflie_cpp/include/crazyflie_cpp/ITransport.h
 stdint.h
 -
 
-/home/diego/CrazyDrones/src/crazyflie_ros/crazyflie_cpp/include/crazyflie_cpp/USBDevice.h
+/home/cristinaescribano/CrazyDrones/src/crazyflie_ros/crazyflie_cpp/include/crazyflie_cpp/USBDevice.h
 stdint.h
 -
 
-/home/diego/CrazyDrones/src/crazyflie_ros/crazyflie_cpp/include/crazyflie_cpp/crtp.h
+/home/cristinaescribano/CrazyDrones/src/crazyflie_ros/crazyflie_cpp/include/crazyflie_cpp/crtp.h
 Crazyradio.h
-/home/diego/CrazyDrones/src/crazyflie_ros/crazyflie_cpp/include/crazyflie_cpp/Crazyradio.h
+/home/cristinaescribano/CrazyDrones/src/crazyflie_ros/crazyflie_cpp/include/crazyflie_cpp/Crazyradio.h
 cstdint
 -
 
-/home/diego/CrazyDrones/src/crazyflie_ros/crazyflie_driver/src/crazyflie_server.cpp
+/home/cristinaescribano/CrazyDrones/src/crazyflie_ros/crazyflie_driver/src/crazyflie_server.cpp
 ros/ros.h
 -
 ros/callback_queue.h
 -
 crazyflie_driver/AddCrazyflie.h
-/home/diego/CrazyDrones/src/crazyflie_ros/crazyflie_driver/src/crazyflie_driver/AddCrazyflie.h
+/home/cristinaescribano/CrazyDrones/src/crazyflie_ros/crazyflie_driver/src/crazyflie_driver/AddCrazyflie.h
 crazyflie_driver/GoTo.h
-/home/diego/CrazyDrones/src/crazyflie_ros/crazyflie_driver/src/crazyflie_driver/GoTo.h
+/home/cristinaescribano/CrazyDrones/src/crazyflie_ros/crazyflie_driver/src/crazyflie_driver/GoTo.h
 crazyflie_driver/Land.h
-/home/diego/CrazyDrones/src/crazyflie_ros/crazyflie_driver/src/crazyflie_driver/Land.h
+/home/cristinaescribano/CrazyDrones/src/crazyflie_ros/crazyflie_driver/src/crazyflie_driver/Land.h
 crazyflie_driver/RemoveCrazyflie.h
-/home/diego/CrazyDrones/src/crazyflie_ros/crazyflie_driver/src/crazyflie_driver/RemoveCrazyflie.h
+/home/cristinaescribano/CrazyDrones/src/crazyflie_ros/crazyflie_driver/src/crazyflie_driver/RemoveCrazyflie.h
 crazyflie_driver/SetGroupMask.h
-/home/diego/CrazyDrones/src/crazyflie_ros/crazyflie_driver/src/crazyflie_driver/SetGroupMask.h
+/home/cristinaescribano/CrazyDrones/src/crazyflie_ros/crazyflie_driver/src/crazyflie_driver/SetGroupMask.h
 crazyflie_driver/StartTrajectory.h
-/home/diego/CrazyDrones/src/crazyflie_ros/crazyflie_driver/src/crazyflie_driver/StartTrajectory.h
+/home/cristinaescribano/CrazyDrones/src/crazyflie_ros/crazyflie_driver/src/crazyflie_driver/StartTrajectory.h
 crazyflie_driver/Stop.h
-/home/diego/CrazyDrones/src/crazyflie_ros/crazyflie_driver/src/crazyflie_driver/Stop.h
+/home/cristinaescribano/CrazyDrones/src/crazyflie_ros/crazyflie_driver/src/crazyflie_driver/Stop.h
 crazyflie_driver/Takeoff.h
-/home/diego/CrazyDrones/src/crazyflie_ros/crazyflie_driver/src/crazyflie_driver/Takeoff.h
+/home/cristinaescribano/CrazyDrones/src/crazyflie_ros/crazyflie_driver/src/crazyflie_driver/Takeoff.h
 crazyflie_driver/UpdateParams.h
-/home/diego/CrazyDrones/src/crazyflie_ros/crazyflie_driver/src/crazyflie_driver/UpdateParams.h
+/home/cristinaescribano/CrazyDrones/src/crazyflie_ros/crazyflie_driver/src/crazyflie_driver/UpdateParams.h
 crazyflie_driver/UploadTrajectory.h
-/home/diego/CrazyDrones/src/crazyflie_ros/crazyflie_driver/src/crazyflie_driver/UploadTrajectory.h
+/home/cristinaescribano/CrazyDrones/src/crazyflie_ros/crazyflie_driver/src/crazyflie_driver/UploadTrajectory.h
 crazyflie_driver/sendPacket.h
-/home/diego/CrazyDrones/src/crazyflie_ros/crazyflie_driver/src/crazyflie_driver/sendPacket.h
+/home/cristinaescribano/CrazyDrones/src/crazyflie_ros/crazyflie_driver/src/crazyflie_driver/sendPacket.h
 crazyflie_driver/LogBlock.h
-/home/diego/CrazyDrones/src/crazyflie_ros/crazyflie_driver/src/crazyflie_driver/LogBlock.h
+/home/cristinaescribano/CrazyDrones/src/crazyflie_ros/crazyflie_driver/src/crazyflie_driver/LogBlock.h
 crazyflie_driver/GenericLogData.h
-/home/diego/CrazyDrones/src/crazyflie_ros/crazyflie_driver/src/crazyflie_driver/GenericLogData.h
+/home/cristinaescribano/CrazyDrones/src/crazyflie_ros/crazyflie_driver/src/crazyflie_driver/GenericLogData.h
 crazyflie_driver/FullState.h
-/home/diego/CrazyDrones/src/crazyflie_ros/crazyflie_driver/src/crazyflie_driver/FullState.h
+/home/cristinaescribano/CrazyDrones/src/crazyflie_ros/crazyflie_driver/src/crazyflie_driver/FullState.h
 crazyflie_driver/Hover.h
-/home/diego/CrazyDrones/src/crazyflie_ros/crazyflie_driver/src/crazyflie_driver/Hover.h
+/home/cristinaescribano/CrazyDrones/src/crazyflie_ros/crazyflie_driver/src/crazyflie_driver/Hover.h
 crazyflie_driver/Stop.h
-/home/diego/CrazyDrones/src/crazyflie_ros/crazyflie_driver/src/crazyflie_driver/Stop.h
+/home/cristinaescribano/CrazyDrones/src/crazyflie_ros/crazyflie_driver/src/crazyflie_driver/Stop.h
 crazyflie_driver/Position.h
-/home/diego/CrazyDrones/src/crazyflie_ros/crazyflie_driver/src/crazyflie_driver/Position.h
+/home/cristinaescribano/CrazyDrones/src/crazyflie_ros/crazyflie_driver/src/crazyflie_driver/Position.h
 crazyflie_driver/crtpPacket.h
-/home/diego/CrazyDrones/src/crazyflie_ros/crazyflie_driver/src/crazyflie_driver/crtpPacket.h
+/home/cristinaescribano/CrazyDrones/src/crazyflie_ros/crazyflie_driver/src/crazyflie_driver/crtpPacket.h
 crazyflie_cpp/Crazyradio.h
-/home/diego/CrazyDrones/src/crazyflie_ros/crazyflie_driver/src/crazyflie_cpp/Crazyradio.h
+/home/cristinaescribano/CrazyDrones/src/crazyflie_ros/crazyflie_driver/src/crazyflie_cpp/Crazyradio.h
 crazyflie_cpp/crtp.h
-/home/diego/CrazyDrones/src/crazyflie_ros/crazyflie_driver/src/crazyflie_cpp/crtp.h
+/home/cristinaescribano/CrazyDrones/src/crazyflie_ros/crazyflie_driver/src/crazyflie_cpp/crtp.h
 std_srvs/Empty.h
-/home/diego/CrazyDrones/src/crazyflie_ros/crazyflie_driver/src/std_srvs/Empty.h
+/home/cristinaescribano/CrazyDrones/src/crazyflie_ros/crazyflie_driver/src/std_srvs/Empty.h
 std_msgs/Empty.h
 -
 geometry_msgs/Twist.h
-/home/diego/CrazyDrones/src/crazyflie_ros/crazyflie_driver/src/geometry_msgs/Twist.h
+/home/cristinaescribano/CrazyDrones/src/crazyflie_ros/crazyflie_driver/src/geometry_msgs/Twist.h
 geometry_msgs/PointStamped.h
-/home/diego/CrazyDrones/src/crazyflie_ros/crazyflie_driver/src/geometry_msgs/PointStamped.h
+/home/cristinaescribano/CrazyDrones/src/crazyflie_ros/crazyflie_driver/src/geometry_msgs/PointStamped.h
 sensor_msgs/Imu.h
-/home/diego/CrazyDrones/src/crazyflie_ros/crazyflie_driver/src/sensor_msgs/Imu.h
+/home/cristinaescribano/CrazyDrones/src/crazyflie_ros/crazyflie_driver/src/sensor_msgs/Imu.h
 sensor_msgs/Temperature.h
-/home/diego/CrazyDrones/src/crazyflie_ros/crazyflie_driver/src/sensor_msgs/Temperature.h
+/home/cristinaescribano/CrazyDrones/src/crazyflie_ros/crazyflie_driver/src/sensor_msgs/Temperature.h
 sensor_msgs/MagneticField.h
-/home/diego/CrazyDrones/src/crazyflie_ros/crazyflie_driver/src/sensor_msgs/MagneticField.h
+/home/cristinaescribano/CrazyDrones/src/crazyflie_ros/crazyflie_driver/src/sensor_msgs/MagneticField.h
 std_msgs/Float32.h
-/home/diego/CrazyDrones/src/crazyflie_ros/crazyflie_driver/src/std_msgs/Float32.h
+/home/cristinaescribano/CrazyDrones/src/crazyflie_ros/crazyflie_driver/src/std_msgs/Float32.h
 thread
 -
 mutex
@@ -694,6 +694,66 @@ string
 map
 -
 crazyflie_cpp/Crazyflie.h
+-
+
+/opt/ros/kinetic/include/boost_161_condition_variable.h
+boost/thread/detail/platform.hpp
+-
+boost/thread/win32/condition_variable.hpp
+-
+boost_161_pthread_condition_variable.h
+/opt/ros/kinetic/include/boost_161_pthread_condition_variable.h
+
+/opt/ros/kinetic/include/boost_161_pthread_condition_variable.h
+boost_161_pthread_condition_variable_fwd.h
+/opt/ros/kinetic/include/boost_161_pthread_condition_variable_fwd.h
+boost/thread/pthread/timespec.hpp
+-
+boost/thread/pthread/pthread_mutex_scoped_lock.hpp
+-
+boost/thread/pthread/thread_data.hpp
+-
+boost/chrono/system_clocks.hpp
+-
+boost/chrono/ceil.hpp
+-
+boost/thread/detail/delete.hpp
+-
+boost/config/abi_prefix.hpp
+-
+boost/config/abi_suffix.hpp
+-
+
+/opt/ros/kinetic/include/boost_161_pthread_condition_variable_fwd.h
+boost/assert.hpp
+-
+boost/throw_exception.hpp
+-
+pthread.h
+-
+boost/thread/cv_status.hpp
+-
+boost/thread/mutex.hpp
+-
+boost/thread/lock_types.hpp
+-
+boost/thread/thread_time.hpp
+-
+boost/thread/pthread/timespec.hpp
+-
+boost/thread/xtime.hpp
+-
+boost/chrono/system_clocks.hpp
+-
+boost/chrono/ceil.hpp
+-
+boost/thread/detail/delete.hpp
+-
+boost/date_time/posix_time/posix_time_duration.hpp
+-
+boost/config/abi_prefix.hpp
+-
+boost/config/abi_suffix.hpp
 -
 
 /opt/ros/kinetic/include/geometry_msgs/Point.h
@@ -841,6 +901,14 @@ ros/time.h
 /opt/ros/kinetic/include/ros/ros/time.h
 
 /opt/ros/kinetic/include/ros/callback_queue.h
+boost/version.hpp
+-
+boost_161_condition_variable.h
+/opt/ros/kinetic/include/ros/boost_161_condition_variable.h
+boost/thread/condition_variable.hpp
+-
+boost/thread/condition_variable.hpp
+-
 ros/callback_queue_interface.h
 /opt/ros/kinetic/include/ros/ros/callback_queue_interface.h
 ros/time.h
@@ -852,8 +920,6 @@ boost/shared_ptr.hpp
 boost/thread/mutex.hpp
 -
 boost/thread/shared_mutex.hpp
--
-boost/thread/condition_variable.hpp
 -
 boost/thread/tss.hpp
 -

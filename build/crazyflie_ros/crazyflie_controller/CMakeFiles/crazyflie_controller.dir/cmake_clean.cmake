@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/crazyflie_controller.dir/src/controller.cpp.o"
-  "/home/diego/CrazyDrones/devel/lib/crazyflie_controller/crazyflie_controller.pdb"
-  "/home/diego/CrazyDrones/devel/lib/crazyflie_controller/crazyflie_controller"
+  "/home/cristinaescribano/CrazyDrones/devel/lib/crazyflie_controller/crazyflie_controller.pdb"
+  "/home/cristinaescribano/CrazyDrones/devel/lib/crazyflie_controller/crazyflie_controller"
 )
 
 # Per-language clean rules from dependency scanning.

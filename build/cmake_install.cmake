@@ -1,8 +1,8 @@
-# Install script for directory: /home/diego/CrazyDrones/src
+# Install script for directory: /home/cristinaescribano/CrazyDrones/src
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/diego/CrazyDrones/install")
+  set(CMAKE_INSTALL_PREFIX "/home/cristinaescribano/CrazyDrones/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -44,87 +44,88 @@ endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/diego/CrazyDrones/install/_setup_util.py")
+   "/home/cristinaescribano/CrazyDrones/install/_setup_util.py")
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-file(INSTALL DESTINATION "/home/diego/CrazyDrones/install" TYPE PROGRAM FILES "/home/diego/CrazyDrones/build/catkin_generated/installspace/_setup_util.py")
+file(INSTALL DESTINATION "/home/cristinaescribano/CrazyDrones/install" TYPE PROGRAM FILES "/home/cristinaescribano/CrazyDrones/build/catkin_generated/installspace/_setup_util.py")
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/diego/CrazyDrones/install/env.sh")
+   "/home/cristinaescribano/CrazyDrones/install/env.sh")
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-file(INSTALL DESTINATION "/home/diego/CrazyDrones/install" TYPE PROGRAM FILES "/home/diego/CrazyDrones/build/catkin_generated/installspace/env.sh")
+file(INSTALL DESTINATION "/home/cristinaescribano/CrazyDrones/install" TYPE PROGRAM FILES "/home/cristinaescribano/CrazyDrones/build/catkin_generated/installspace/env.sh")
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/diego/CrazyDrones/install/setup.bash")
+   "/home/cristinaescribano/CrazyDrones/install/setup.bash")
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-file(INSTALL DESTINATION "/home/diego/CrazyDrones/install" TYPE FILE FILES "/home/diego/CrazyDrones/build/catkin_generated/installspace/setup.bash")
+file(INSTALL DESTINATION "/home/cristinaescribano/CrazyDrones/install" TYPE FILE FILES "/home/cristinaescribano/CrazyDrones/build/catkin_generated/installspace/setup.bash")
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/diego/CrazyDrones/install/setup.sh")
+   "/home/cristinaescribano/CrazyDrones/install/setup.sh")
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-file(INSTALL DESTINATION "/home/diego/CrazyDrones/install" TYPE FILE FILES "/home/diego/CrazyDrones/build/catkin_generated/installspace/setup.sh")
+file(INSTALL DESTINATION "/home/cristinaescribano/CrazyDrones/install" TYPE FILE FILES "/home/cristinaescribano/CrazyDrones/build/catkin_generated/installspace/setup.sh")
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/diego/CrazyDrones/install/setup.zsh")
+   "/home/cristinaescribano/CrazyDrones/install/setup.zsh")
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-file(INSTALL DESTINATION "/home/diego/CrazyDrones/install" TYPE FILE FILES "/home/diego/CrazyDrones/build/catkin_generated/installspace/setup.zsh")
+file(INSTALL DESTINATION "/home/cristinaescribano/CrazyDrones/install" TYPE FILE FILES "/home/cristinaescribano/CrazyDrones/build/catkin_generated/installspace/setup.zsh")
 endif()
 
 if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/diego/CrazyDrones/install/.rosinstall")
+   "/home/cristinaescribano/CrazyDrones/install/.rosinstall")
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-file(INSTALL DESTINATION "/home/diego/CrazyDrones/install" TYPE FILE FILES "/home/diego/CrazyDrones/build/catkin_generated/installspace/.rosinstall")
+file(INSTALL DESTINATION "/home/cristinaescribano/CrazyDrones/install" TYPE FILE FILES "/home/cristinaescribano/CrazyDrones/build/catkin_generated/installspace/.rosinstall")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/diego/CrazyDrones/build/gtest/cmake_install.cmake")
-  include("/home/diego/CrazyDrones/build/crazyflie_ros/crazyflie/cmake_install.cmake")
-  include("/home/diego/CrazyDrones/build/crazyflie_ros/crazyflie_cpp/cmake_install.cmake")
-  include("/home/diego/CrazyDrones/build/crazyflie_ros/crazyflie_description/cmake_install.cmake")
-  include("/home/diego/CrazyDrones/build/crazyflie_ros/crazyflie_tools/cmake_install.cmake")
-  include("/home/diego/CrazyDrones/build/crazyflie_ros/crazyflie_demo/cmake_install.cmake")
-  include("/home/diego/CrazyDrones/build/ros_crazy/cmake_install.cmake")
-  include("/home/diego/CrazyDrones/build/crazyflie_ros/crazyflie_controller/cmake_install.cmake")
-  include("/home/diego/CrazyDrones/build/crazyflie_ros/crazyflie_driver/cmake_install.cmake")
+  include("/home/cristinaescribano/CrazyDrones/build/gtest/cmake_install.cmake")
+  include("/home/cristinaescribano/CrazyDrones/build/crazyflie_ros/crazyflie/cmake_install.cmake")
+  include("/home/cristinaescribano/CrazyDrones/build/crazyflie_ros/crazyflie_cpp/cmake_install.cmake")
+  include("/home/cristinaescribano/CrazyDrones/build/crazyflie_ros/crazyflie_description/cmake_install.cmake")
+  include("/home/cristinaescribano/CrazyDrones/build/crazyflie_ros/crazyflie_tools/cmake_install.cmake")
+  include("/home/cristinaescribano/CrazyDrones/build/crazyflie_ros/crazyflie_demo/cmake_install.cmake")
+  include("/home/cristinaescribano/CrazyDrones/build/ros_crazy/cmake_install.cmake")
+  include("/home/cristinaescribano/CrazyDrones/build/crazyflie_ros/crazyflie_controller/cmake_install.cmake")
+  include("/home/cristinaescribano/CrazyDrones/build/crazyflie_ros/crazyflie_driver/cmake_install.cmake")
+  include("/home/cristinaescribano/CrazyDrones/build/qualisys/cmake_install.cmake")
 
 endif()
 
@@ -136,5 +137,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/diego/CrazyDrones/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/cristinaescribano/CrazyDrones/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

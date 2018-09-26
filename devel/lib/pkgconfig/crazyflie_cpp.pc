@@ -1,8 +1,8 @@
-prefix=/home/diego/CrazyDrones/devel
+prefix=/home/cristinaescribano/CrazyDrones/devel
 
 Name: crazyflie_cpp
 Description: Description of crazyflie_cpp
 Version: 0.0.1
-Cflags: -I/home/diego/CrazyDrones/src/crazyflie_ros/crazyflie_cpp/include
-Libs: -L/home/diego/CrazyDrones/devel/lib -lcrazyflie_cpp
+Cflags: -I/home/cristinaescribano/CrazyDrones/src/crazyflie_ros/crazyflie_cpp/include
+Libs: -L/home/cristinaescribano/CrazyDrones/devel/lib -lcrazyflie_cpp
 Requires: 

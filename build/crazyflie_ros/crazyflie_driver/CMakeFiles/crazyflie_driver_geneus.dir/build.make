@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/diego/CrazyDrones/src
+CMAKE_SOURCE_DIR = /home/cristinaescribano/CrazyDrones/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/diego/CrazyDrones/build
+CMAKE_BINARY_DIR = /home/cristinaescribano/CrazyDrones/build
 
 # Utility rule file for crazyflie_driver_geneus.
 
@@ -63,10 +63,10 @@ crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_driver_geneus.dir/build: cra
 .PHONY : crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_driver_geneus.dir/build
 
 crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_driver_geneus.dir/clean:
-	cd /home/diego/CrazyDrones/build/crazyflie_ros/crazyflie_driver && $(CMAKE_COMMAND) -P CMakeFiles/crazyflie_driver_geneus.dir/cmake_clean.cmake
+	cd /home/cristinaescribano/CrazyDrones/build/crazyflie_ros/crazyflie_driver && $(CMAKE_COMMAND) -P CMakeFiles/crazyflie_driver_geneus.dir/cmake_clean.cmake
 .PHONY : crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_driver_geneus.dir/clean
 
 crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_driver_geneus.dir/depend:
-	cd /home/diego/CrazyDrones/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/diego/CrazyDrones/src /home/diego/CrazyDrones/src/crazyflie_ros/crazyflie_driver /home/diego/CrazyDrones/build /home/diego/CrazyDrones/build/crazyflie_ros/crazyflie_driver /home/diego/CrazyDrones/build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_driver_geneus.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/cristinaescribano/CrazyDrones/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/cristinaescribano/CrazyDrones/src /home/cristinaescribano/CrazyDrones/src/crazyflie_ros/crazyflie_driver /home/cristinaescribano/CrazyDrones/build /home/cristinaescribano/CrazyDrones/build/crazyflie_ros/crazyflie_driver /home/cristinaescribano/CrazyDrones/build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_driver_geneus.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_driver_geneus.dir/depend
 
