@@ -26,6 +26,8 @@
         </node>
         <node name="lee_estado_cf" pkg="ros_crazy" type="lee_estado_cf.py" output="screen">
         </node>
+        <node name="send_pos_setpoints" pkg="ros_crazy" type="send_pos_setpoints.py" output="screen">
+        </node>
     </group>
     <!-- Defining the arguments -->
     <include file="$(find qualisys)/launch/qualisys.launch" />    

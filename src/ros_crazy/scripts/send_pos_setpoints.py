@@ -5,7 +5,7 @@ import tf
 from crazyflie_driver.msg import Position
 from geometry_msgs.msg import Twist
 
-#rostopic pub /<nombre_del_node_crazyflie>/pos_from_terminal geometry_msgs/Twist  '{linear:  {x: 0.1, y: 0.0, z: 0.0}, angular: {x: 0.0,y: 0.0,z: 0.0}}'
+#rostopic pub /<nombre_del_node_crazyflie>/pos_from_terminal geometry_msgs/Twist  '[linear:  {x: 0.1, y: 0.0, z: 0.0}, angular: {x: 0.0,y: 0.0,z: 0.0}]'
 def getPose(messageIn):
     msg.header.seq = 0
     msg.header.stamp = rospy.Time.now()
@@ -28,3 +28,4 @@ if __name__ == '__main__':
 
     pub = rospy.Publisher("cmd_position", Position, queue_size=1)
     sub = rospy.Subscriber("pos_from_terminal", Twist, getPose)
+    rospy.spin()

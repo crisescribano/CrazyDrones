@@ -12,9 +12,9 @@ def onNewTransform(transform):
 
     if firstTransform:
         # initialize kalman filter
-        rospy.set_param("kalman/initialX", transform.transform.translation.x)
-        rospy.set_param("kalman/initialY", transform.transform.translation.y)
-        rospy.set_param("kalman/initialZ", transform.transform.translation.z)
+        rospy.set_param("kalman/initialX", 0)
+        rospy.set_param("kalman/initialY", 0)
+        rospy.set_param("kalman/initialZ", 0)
         update_params(["kalman/initialX", "kalman/initialY", "kalman/initialZ"])
 
         rospy.set_param("kalman/resetEstimation", 1)
