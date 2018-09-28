@@ -15,6 +15,12 @@ def onNewPosition(position):
 
 
     if firstPosition:
+
+        # initialize kalman filter
+        rospy.set_param("kalman/initialX", transform.transform.translation.x)
+        rospy.set_param("kalman/initialY", transform.transform.translation.y)
+        rospy.set_param("kalman/initialZ", transform.transform.translation.z)
+        update_params(["kalman/initialX", "kalman/initialY", "kalman/initialZ"])
     
         # Resetea el kalman filter
 	rospy.set_param("kalman/resetEstimation", 1)
