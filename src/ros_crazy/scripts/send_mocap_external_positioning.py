@@ -17,21 +17,30 @@ def onNewPosition(position):
     if firstPosition:
 
         # initialize kalman filter
-        rospy.set_param("kalman/initialX", transform.transform.translation.x)
-        rospy.set_param("kalman/initialY", transform.transform.translation.y)
-        rospy.set_param("kalman/initialZ", transform.transform.translation.z)
+        #rospy.set_param("kalman/initialX", position.pose.pose.position.x)
+        #rospy.set_param("kalman/initialY", position.pose.pose.position.y)
+        #rospy.set_param("kalman/initialZ", position.pose.pose.position.z)
+        #update_params(["kalman/initialX", "kalman/initialY", "kalman/initialZ"])
+
+        # initialize kalman filter
+        rospy.set_param("kalman/initialX", 0)
+        rospy.set_param("kalman/initialY", 0)
+        rospy.set_param("kalman/initialZ", 0)
         update_params(["kalman/initialX", "kalman/initialY", "kalman/initialZ"])
-    
+
         # Resetea el kalman filter
-	rospy.set_param("kalman/resetEstimation", 1)
+        rospy.set_param("kalman/resetEstimation", 1)
 
         # Aplica los cambios en el drone
-        update_params(["kalman/resetEstimation"]) #, "locSrv/extPosStdDev"])
+        update_params(["kalman/resetEstimation"]) 
+
+        rospy.set_param("kalman/resetEstimation", 0)
+        update_params(["kalman/resetEstimation"])
+        rospy.set_param("kalman/resetEstimation", 1)
+        update_params(["kalman/resetEstimation"]) 
+
         firstPosition = False
     else:
-	rospy.set_param("kalman/resetEstimation", 0) 
-        update_params(["kalman/resetEstimation"])
-    	
         msg.header.frame_id = position.header.frame_id
     	msg.header.stamp = position.header.stamp
     	msg.header.seq += 1

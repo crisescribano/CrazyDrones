@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+
+<launch>
+  <arg name="uri_1" default="radio://0/90/2M/E7E7E7E7EA" />
+  <arg name="robot_name" default="crazyflie_1"/>
+
+  <include file="$(find crazyflie_driver)/launch/crazyflie_server.launch"/>
+  <group ns="$(arg robot_name)">
+    <!--<param name="crazyflie/pid_rate/yaw_kp" value="200"/>-->
+    <include file="$(find crazyflie_driver)/launch/crazyflie_add.launch">
+      <arg name="uri" value="$(arg uri_1)" />
+      <arg name="tf_prefix" value="$(arg robot_name)" />
+      <arg name="enable_logging" value="False" />
+    </include>
+
+    <remap from="/$(arg robot_name)/odometry" to="/$(arg robot_name)/odom"/>
+    <node name="controller" pkg="ros_crazy" type="position_broadcaster.py" output="screen"/>
+
+  </group>
+
+</launch>
