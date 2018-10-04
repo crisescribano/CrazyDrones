@@ -9,6 +9,9 @@ class CF_parameters():
     def __init__(self):
             # Update rate
             self.DT_CF = 0.001
+            self.DT_ATT_PIDS = 0.002
+            self.DT_POS_PIDS = 0.01
+            self.DT_COMMUNICATION = 0.01
 
             # Thrust base used for the altitude algorithm in the firmware
             self.BASE_THRUST = 36000
