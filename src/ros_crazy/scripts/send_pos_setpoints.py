@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 import rospy
-import tf
 from crazyflie_driver.msg import Position
 from geometry_msgs.msg import Twist
 
@@ -42,6 +41,7 @@ class SendSetpoint():
 				self.msg.yaw = self.pos_setpoint[3]
 				self.pub.publish(self.msg)
 				self.rate.sleep()
+
 if __name__ == '__main__':
 	sendSetpoint = SendSetpoint()
 	sendSetpoint._main_loop()
