@@ -49,6 +49,7 @@ class CF_parameters():
             self.IYZ = 2.0831e-06
 
             self.INERTIA_MATRIX = np.array([[self.IXX, self.IXY, self.IXZ], [self.IXY, self.IYY, self.IYZ], [self.IXZ, self.IYZ, self.IZZ]])
+            self.INV_INERTIA_MATRIX = np.linalg.inv(self.INERTIA_MATRIX)
             # Arm length to the center of mass
             # CHECK THIS DISTANCE
             self.L = 39.73e-3
