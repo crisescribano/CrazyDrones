@@ -39,6 +39,10 @@ class CF_model():
 
     def __init__(self):
 
+        rospy.init_node("model", anonymous=True)
+        self.pub = rospy.Publisher("cmd_position", Position, queue_size=1)
+        self.sub = rospy.Subscriber("cmd_position", Position, self.publish_)
+
         # Main CF variables initialization (if needed)
         self.simulation_freq = rospy.Rate(int(1/self.cf_physical_params.DT_CF))
 
@@ -185,10 +189,6 @@ class CF_model():
 
         new_state.attitude = np.dot(euler_matrix, self.cf_state.ang_vel)
 
-        ###########################
-        # ADD SYSTEM EQUATIONS HERE
-        ###########################
-
 
         # Update the state of the system
         self.cf_state = new_state
@@ -251,3 +251,7 @@ class CF_model():
             self.simulation_freq.sleep()
 
 
+
+if __name__ == '__main__':
+    model = CF_model()
+    CF_model.run()
