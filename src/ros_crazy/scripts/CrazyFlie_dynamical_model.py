@@ -78,17 +78,20 @@ class CF_model():
         self.wx_pid = PID(self.cf_pid_gains.KP_WX,
                           self.cf_pid_gains.KI_WX,
                           self.cf_pid_gains.KD_WX,
-                          self.cf_pid_gains.INT_MAX_WX)
+                          self.cf_pid_gains.INT_MAX_WX,
+                          self.cf_pid_gains.WX_DT)
 
         self.wy_pid = PID(self.cf_pid_gains.KP_WY,
                           self.cf_pid_gains.KI_WY,
                           self.cf_pid_gains.KD_WY,
-                          self.cf_pid_gains.INT_MAX_WY)
+                          self.cf_pid_gains.INT_MAX_WY,
+                          self.cf_pid_gains.WY_DT)
 
         self.wz_pid = PID(self.cf_pid_gains.KP_WZ,
                           self.cf_pid_gains.KI_WZ,
                           self.cf_pid_gains.KD_WZ,
-                          self.cf_pid_gains.INT_MAX_WZ)
+                          self.cf_pid_gains.INT_MAX_WZ,
+                          self.cf_pid_gains.WZ_DT)
 
         self.desired_ang_vel = np.zeros(3)
 
@@ -99,12 +102,14 @@ class CF_model():
         self.roll_pid = PID(self.cf_pid_gains.KP_ROLL,
                           self.cf_pid_gains.KI_ROLL,
                           self.cf_pid_gains.KD_ROLL,
-                          self.cf_pid_gains.INT_MAX_ROLL)
+                          self.cf_pid_gains.INT_MAX_ROLL,
+                          self.cf_pid_gains.ROLL_DT)
 
         self.pitch_pid = PID(self.cf_pid_gains.KP_PITCH,
                           self.cf_pid_gains.KI_PITCH,
                           self.cf_pid_gains.KD_PITCH,
-                          self.cf_pid_gains.INT_MAX_PITCH)
+                          self.cf_pid_gains.INT_MAX_PITCH,
+                          self.cf_pid_gains.PITCH_DT)
 
         self.att_pid_counter = 0
         self.att_vel_pid_counter_max = int( self.cf_physical_params.DT_ATT_PIDS / self.cf_physical_params.DT_CF) - 1
@@ -179,6 +184,7 @@ class CF_model():
         new_state.ang_vel = np.dot(self.cf_physical_params.INV_INERTIA_MATRIX, preoperation)
 
         new_state.attitude = np.dot(euler_matrix, self.cf_state.ang_vel)
+
         ###########################
         # ADD SYSTEM EQUATIONS HERE
         ###########################
@@ -213,8 +219,8 @@ class CF_model():
 
     def run_att_pid(self):
         self.desired_att = np.array([self.roll_pid.update(self.desired_att[0], self.cf_state.attitude[0]),
-                                     self.pitch_pid.update(self.desired_att[1], self.cf_state.attitude[1]),
-                                     self.roll_pid.update(self.desired_att[2], self.cf_state.attitude[2])])
+                                     self.pitch_pid.update(self.desired_att[1], self.cf_state.attitude[1])])
+                                     # self.roll_pid.update(self.desired_att[2], self.cf_state.attitude[2])])
 
     def publish_state(self):
         pass
@@ -232,7 +238,7 @@ class CF_model():
                 self.run_att_pid()
                 self.run_ang_vel_pid()
             else:
-                self.att_pid_counter_max = self.att_pid_counter_max + 1
+                self.att_pid_counter = self.att_pid_counter + 1
 
             if(self.counter_out_pos == self.counter_out_pos_max):
                 self.counter_out_pos = 0
