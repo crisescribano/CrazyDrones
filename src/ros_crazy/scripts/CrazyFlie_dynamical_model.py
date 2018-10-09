@@ -145,8 +145,8 @@ class CF_model():
     def euler_matrix(self, roll, pitch, yaw):
         if(pitch != np.pi/2):
             return np.array([[1, sin(roll)*tan(pitch), cos(roll)*tan(yaw)],
-                         [0, cos(roll), -sin(roll)],
-                         [0, sin(roll)/cos(pitch), cos(roll)/cos(pitch)]])
+                            [0, cos(roll), -sin(roll)],
+                            [0, sin(roll)/cos(pitch), cos(roll)/cos(pitch)]])
         else:
             return np.array([[1, sin(roll) * tan(pitch), cos(roll) * tan(yaw)],
                              [0, cos(roll), -sin(roll)],
@@ -198,8 +198,8 @@ class CF_model():
 
     def run_att_pid(self):
         self.desired_ang_vel = np.array([self.roll_pid.update(self.desired_att[0], self.cf_state.attitude[0]),
-                                     self.pitch_pid.update(self.desired_att[1], self.cf_state.attitude[1])])
-                                     # self.roll_pid.update(self.desired_att[2], self.cf_state.attitude[2])])
+                                        self.pitch_pid.update(self.desired_att[1], self.cf_state.attitude[1])])
+                                        # self.roll_pid.update(self.desired_att[2], self.cf_state.attitude[2])])
 
 
     def run_ang_vel_pid(self):
@@ -228,15 +228,15 @@ class CF_model():
         R = r / 2.0f
         P = p / 2.0f
         Y = y
-        motor_pwm[0] = self.cf_physical_params.PWM_MAX(thrust - R + P + Y)
-        motor_pwm[1] = self.cf_physical_params.PWM_MAX(thrust - R - P - Y)
-        motor_pwm[2] = self.cf_physical_params.PWM_MAX(thrust + R - P + Y)
-        motor_pwm[3] = self.cf_physical_params.PWM_MAX(thrust + R + P - Y)
+        self.cf_state.motor_pwm[0] = self.cf_physical_params.PWM_MAX(thrust - R + P + Y)
+        self.cf_state.motor_pwm[1] = self.cf_physical_params.PWM_MAX(thrust - R - P - Y)
+        self.cf_state.motor_pwm[2] = self.cf_physical_params.PWM_MAX(thrust + R - P + Y)
+        self.cf_state.motor_pwm[3] = self.cf_physical_params.PWM_MAX(thrust + R + P - Y)
         
-        motor_rotation_speed[0] = 0.2685 × motor_pwm[0] + 4070.3
-        motor_rotation_speed[1] = 0.2685 × motor_pwm[1] + 4070.3
-        motor_rotation_speed[2] = 0.2685 × motor_pwm[2] + 4070.3
-        motor_rotation_speed[3] = 0.2685 × motor_pwm[3] + 4070.3
+        self.cf_state.motor_rotation_speed[0] = 0.2685 × motor_pwm[0] + 4070.3
+        self.cf_state.motor_rotation_speed[1] = 0.2685 × motor_pwm[1] + 4070.3
+        self.cf_state.motor_rotation_speed[2] = 0.2685 × motor_pwm[2] + 4070.3
+        self.cf_state.motor_rotation_speed[3] = 0.2685 × motor_pwm[3] + 4070.3
 
 
     def publish_state(self):
