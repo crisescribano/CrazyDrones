@@ -11,18 +11,21 @@ class CF_pid_params():
         self.KP_X = 2
         self.KI_X = 0
         self.KD_X = 0.0
+        self.INT_MAX_X = 0.0
         self.X_DT = 0.01
 
         # Y POS
         self.KP_Y = 2
         self.KI_Y = 0.0
         self.KD_Y = 0.0
+        self.INT_MAX_Y = 0.0
         self.Y_DT = 0.01
 
         # Z POS
         self.KP_Z = 2.0
         self.KI_Z = 0.5
         self.KD_Z = 0.0
+        self.INT_MAX_Z = 0.0
         self.Z_DT = 0.01
 
 

@@ -40,8 +40,8 @@ class CF_model():
     def __init__(self):
 
         rospy.init_node("model", anonymous=True)
-        self.pub = rospy.Publisher("cmd_position", Position, queue_size=1)
-        self.sub = rospy.Subscriber("cmd_position", Position, self.publish_)
+        self.pub = rospy.Publisher("state_estimation", Position, queue_size=1)
+        self.sub = rospy.Subscriber("pitch_roll_topic", ?????????, ??????????)
 
         # Main CF variables initialization (if needed)
         self.simulation_freq = rospy.Rate(int(1/self.cf_physical_params.DT_CF))
@@ -99,7 +99,7 @@ class CF_model():
 
         self.desired_ang_vel = np.zeros(3)
 
-        ######################
+        ######################                                                  
         # Attitudes
         ######################
 
@@ -118,7 +118,7 @@ class CF_model():
         self.att_pid_counter = 0
         self.att_vel_pid_counter_max = int( self.cf_physical_params.DT_ATT_PIDS / self.cf_physical_params.DT_CF) - 1
 
-        self.desired_att = np.zeros(3)
+        self.desired_ang_vel = np.zeros(3)
 
         ############################
         # Communication control
@@ -193,6 +193,22 @@ class CF_model():
         # Update the state of the system
         self.cf_state = new_state
 
+    
+
+
+    def run_att_pid(self):
+        self.desired_ang_vel = np.array([self.roll_pid.update(self.desired_att[0], self.cf_state.attitude[0]),
+                                     self.pitch_pid.update(self.desired_att[1], self.cf_state.attitude[1])])
+                                     # self.roll_pid.update(self.desired_att[2], self.cf_state.attitude[2])])
+
+
+    def run_ang_vel_pid(self):
+        self.desired_rpy = np.array([self.wx_pid.update(self.desired_ang_vel[0], self.cf_state.ang_vel[0]),
+                                     self.wy_pid.update(self.desired_ang_vel[1], self.cf_state.ang_vel[1]),
+                                     self.wz_pid.update(self.desired_ang_vel[2], self.cf_state.ang_vel[2])])
+
+        self.rpyt_2_motor_pwm()
+
     def rpyt_2_motor_pwm(self):
 
         # Inputs
@@ -210,17 +226,6 @@ class CF_model():
         # applied to each motor
         ##########################
 
-    def run_ang_vel_pid(self):
-        self.desired_rpy = np.array([self.wx_pid.update(self.desired_ang_vel[0], self.cf_state.ang_vel[0]),
-                                     self.wy_pid.update(self.desired_ang_vel[1], self.cf_state.ang_vel[1]),
-                                     self.wz_pid.update(self.desired_ang_vel[2], self.cf_state.ang_vel[2])])
-
-        self.rpyt_2_motor_pwm()
-
-    def run_att_pid(self):
-        self.desired_att = np.array([self.roll_pid.update(self.desired_att[0], self.cf_state.attitude[0]),
-                                     self.pitch_pid.update(self.desired_att[1], self.cf_state.attitude[1])])
-                                     # self.roll_pid.update(self.desired_att[2], self.cf_state.attitude[2])])
 
     def publish_state(self):
         pass
@@ -254,4 +259,4 @@ class CF_model():
 
 if __name__ == '__main__':
     model = CF_model()
-    CF_model.run()
+    model.run()
