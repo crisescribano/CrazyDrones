@@ -98,20 +98,19 @@ class PID_pos_linvel():
 
         def run(self):
 
-        while(not rospy.is_shutdown()):
+        	while(not rospy.is_shutdown()):
 
 
-            if(self.pos_pid_counter == self.pos_pid_counter_max):
-                self.pos_pid_counter = 0
-                self.run_pos_pid()
-                self.run_lin_vel_pid()
-            else:
-                self.att_pid_counter = self.att_pid_counter + 1
+            	if(self.pos_pid_counter == self.pos_pid_counter_max):
+                	self.pos_pid_counter = 0
+                	self.run_pos_pid()
+                	self.run_lin_vel_pid()
+            	else:
+                	self.att_pid_counter = self.att_pid_counter + 1
 
-            rospy.spin()
-            # Wait for the cycle left time
-            self.simulation_freq.sleep()
-
+            	rospy.spin()
+            	# Wait for the cycle left time
+            	self.simulation_freq.sleep()
 
 
 if __name__ == '__main__':

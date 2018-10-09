@@ -41,7 +41,7 @@ class CF_model():
 
         rospy.init_node("model", anonymous=True)
         self.pub = rospy.Publisher("state_estimation", Position, queue_size=1)
-        self.sub = rospy.Subscriber("pitch_roll_topic", ?????????, ??????????)
+        self.sub = rospy.Subscriber("pitch_roll_topic", ????????, ??????????)
 
         # Main CF variables initialization (if needed)
         self.simulation_freq = rospy.Rate(int(1/self.cf_physical_params.DT_CF))
@@ -225,6 +225,18 @@ class CF_model():
         # into the values of the PWM
         # applied to each motor
         ##########################
+        R = r / 2.0f
+        P = p / 2.0f
+        Y = y
+        motor_pwm[0] = self.cf_physical_params.PWM_MAX(thrust - R + P + Y)
+        motor_pwm[1] = self.cf_physical_params.PWM_MAX(thrust - R - P - Y)
+        motor_pwm[2] = self.cf_physical_params.PWM_MAX(thrust + R - P + Y)
+        motor_pwm[3] = self.cf_physical_params.PWM_MAX(thrust + R + P - Y)
+        
+        motor_rotation_speed[0] = 0.2685 × motor_pwm[0] + 4070.3
+        motor_rotation_speed[1] = 0.2685 × motor_pwm[1] + 4070.3
+        motor_rotation_speed[2] = 0.2685 × motor_pwm[2] + 4070.3
+        motor_rotation_speed[3] = 0.2685 × motor_pwm[3] + 4070.3
 
 
     def publish_state(self):
@@ -236,7 +248,6 @@ class CF_model():
 
         while(not rospy.is_shutdown()):
 
-            self.apply_simulation_step()
 
             if(self.att_pid_counter == self.att_pid_counter_max):
                 self.att_pid_counter = 0
@@ -250,6 +261,8 @@ class CF_model():
                 self.publish_state()
             else:
                 self.counter_out_pos = self.counter_out_pos + 1
+            
+            self.apply_simulation_step()
 
             rospy.spin()
             # Wait for the cycle left time
