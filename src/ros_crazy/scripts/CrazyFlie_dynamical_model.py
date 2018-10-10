@@ -21,6 +21,8 @@ class CF_state():
         self.forces = np.zeros(3)
         self.momentums = np.zeros(3)
 
+
+
     def getMotorRotationSpeed(self):
         for i in CF_parameters().NUM_MOTORS:
             self.motor_rotation_speed[i] = 0.2685*self.motor_pwm[i] + 4070.3
@@ -41,7 +43,7 @@ class CF_model():
 
         rospy.init_node("model", anonymous=True)
         self.pub = rospy.Publisher("state_estimation", Position, queue_size=1)
-        self.sub = rospy.Subscriber("pitch_roll_topic", ????????, ??????????)
+        rospy.Subscriber("pitch_roll_topic", GenericLogData, NewInfo)
 
         # Main CF variables initialization (if needed)
         self.simulation_freq = rospy.Rate(int(1/self.cf_physical_params.DT_CF))
@@ -116,17 +118,17 @@ class CF_model():
                           self.cf_pid_gains.PITCH_DT)
 
         self.att_pid_counter = 0
-        self.att_vel_pid_counter_max = int( self.cf_physical_params.DT_ATT_PIDS / self.cf_physical_params.DT_CF) - 1
+        self.att_pid_counter_max = int( self.cf_physical_params.DT_ATT_PIDS / self.cf_physical_params.DT_CF) - 1
 
         self.desired_ang_vel = np.zeros(3)
 
         ############################
         # Communication control
         ############################
-        self.counter_out_pos = 0
-        self.counter_out_pos_max = int(self.cf_physical_params.DT_COMMUNICATION / self.cf_physical_params.DT_CF) - 1
+        self.out_pos_counter = 0
+        self.out_pos_counter_max = int(self.cf_physical_params.DT_COMMUNICATION / self.cf_physical_params.DT_CF) - 1
 
-
+     
     ###########################
     # Math operations functions
     ###########################
@@ -151,6 +153,14 @@ class CF_model():
             return np.array([[1, sin(roll) * tan(pitch), cos(roll) * tan(yaw)],
                              [0, cos(roll), -sin(roll)],
                              [0, sin(roll) / (cos(pitch) + 1e-100), cos(roll) / (cos(pitch) + 1e-100)]])
+
+    ###########################
+    # Callback function
+    ###########################
+    def NewInfo(attitude):
+    	for i in 3:
+    		self.CF_state.attitude[i] = attitude[i]
+
 
     ###########################
     # Single step simulation
@@ -240,8 +250,8 @@ class CF_model():
 
 
     def publish_state(self):
-        pass
-
+    	for i in CF_parameters().NUM_MOTORS:
+    		self.pub.publish(self.cf_state.position[i])
 
 
     def run(self):
@@ -256,12 +266,12 @@ class CF_model():
             else:
                 self.att_pid_counter = self.att_pid_counter + 1
 
-            if(self.counter_out_pos == self.counter_out_pos_max):
-                self.counter_out_pos = 0
+            if(self.out_pos_counter == self.out_pos_counter_max):
+                self.out_pos_counter = 0
                 self.publish_state()
             else:
-                self.counter_out_pos = self.counter_out_pos + 1
-            
+                self.out_pos_counter = self.out_pos_counter + 1
+
             self.apply_simulation_step()
 
             rospy.spin()

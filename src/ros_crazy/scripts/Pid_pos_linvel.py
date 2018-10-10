@@ -6,16 +6,16 @@ from CrazyFlie_dynamical_model import CF_state
 from cf_physical_parameters import CF_parameters
 from cf_pid_params import CF_pid_params
 from pid import PID  
-
+3
 
 class PID_pos_linvel():
 
     def __init__(self):
 
         rospy.init_node("pid_pos_linvel", anonymous=True)
-        self.pub = rospy.Publisher("pitch_roll_topic", ??????, queue_size=1)
-        self.sub = rospy.Subscriber("external_position", Position, ??????????)
-        self.sub = rospy.Subscriber("cmd_position", Position, ??????????)
+        self.pub = rospy.Publisher("pitch_roll_topic", GenericLogData, queue_size=1)
+        rospy.Subscriber("external_position", Position, ??????????)
+        rospy.Subscriber("cmd_position", Position, ??????????)
 
         # System state: position, linear velocities,
         # attitude and angular velocities
@@ -37,6 +37,7 @@ class PID_pos_linvel():
         ######################
 
         self.desired_lin_vel = np.zeros(3)
+        self.desired_att = np.zeros(3)
 
 
         ######################
@@ -88,13 +89,18 @@ class PID_pos_linvel():
 
         def run_pos_pid(self):
         	self.desired_lin_vel = np.array([self.x_pid.update(self.desired_lin_vel[0], self.cf_state.lin_vel[0]),
-                                     self.y_pid.update(self.desired_lin_vel[1], self.cf_state.lin_vel[1]),
-                                     self.z_pid.update(self.desired_lin_vel[2], self.cf_state.lin_vel[2])])
+                                           self.y_pid.update(self.desired_lin_vel[1], self.cf_state.lin_vel[1]),
+                                           self.z_pid.update(self.desired_lin_vel[2], self.cf_state.lin_vel[2])])
  
         def run_lin_vel_pid(self):
-        	self.desired_lin_vel = np.array([self.x_pid.update(self.desired_lin_vel[0], self.cf_state.lin_vel[0]),
-                                     self.y_pid.update(self.desired_lin_vel[1], self.cf_state.lin_vel[1]),
-                                     self.z_pid.update(self.desired_lin_vel[2], self.cf_state.lin_vel[2])])
+        	self.desired_att = np.array([self.x_pid.update(self.desired_lin_vel[0], self.cf_state.lin_vel[0]),
+                                       self.y_pid.update(self.desired_lin_vel[1], self.cf_state.lin_vel[1]),
+                                       self.z_pid.update(self.desired_lin_vel[2], self.cf_state.lin_vel[2])])
+
+        def publish_state(self):
+          for i in CF_parameters().NUM_MOTORS:
+            self.pub.publish(ATTITUDE)
+
 
         def run(self):
 
@@ -106,9 +112,15 @@ class PID_pos_linvel():
                 	self.run_pos_pid()
                 	self.run_lin_vel_pid()
             	else:
-                	self.att_pid_counter = self.att_pid_counter + 1
+                	self.pos_pid_counter = self.pos_pid_counter + 1
 
+              if(self.out_pos_counter == self.out_pos_counter_max):
+                self.out_pos_counter = 0
+                self.publish_state()
+              else:
+                self.out_pos_counter = self.out_pos_counter + 1
             	rospy.spin()
+
             	# Wait for the cycle left time
             	self.simulation_freq.sleep()
 
