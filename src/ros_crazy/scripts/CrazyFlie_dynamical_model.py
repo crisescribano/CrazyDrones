@@ -14,7 +14,7 @@ class CF_state():
         self.position = np.zeros(3)
         self.lin_vel = np.zeros(3)
         self.attitude = np.zeros(3)
-        self.ang_vel = np.zeros(3)   ##DUDA: ang_vel[3] ES EL YAWRATE?
+        self.ang_vel = np.zeros(3)   ##DUDA: ang_vel[3] ES EL YAWRATE? ### SI
         self.motor_pwm = np.zeros(CF_parameters().NUM_MOTORS)
         self.motor_rotation_speed = np.zeros(CF_parameters().NUM_MOTORS)
         self.sum_motor_rotations = 0.0
@@ -33,7 +33,7 @@ class CF_state():
         self.forces = np.array([0, 0, CF_parameters().KT*self.sum_motor_rotations])
 
     def getMomentums(self):
-
+		### Ya lo comprobare
         self.momentums[0] = (self.CF_parameters().L*self.CF_parameters().KT/np.sqrt(2))*(-self.motor_rotation_speed[0]**2 - self.motor_rotation_speed[1]**2 + self.motor_rotation_speed[2]**2 + self.motor_rotation_speed[3]**2)
         self.momentums[1] = (self.CF_parameters().L*self.CF_parameters().KT/np.sqrt(2))*(-self.motor_rotation_speed[0]**2 + self.motor_rotation_speed[1]**2 + self.motor_rotation_speed[2]**2 - self.motor_rotation_speed[3]**2)
         self.momentums[2] = self.CF_parameters().KD * (-self.motor_rotation_speed[0]**2 + self.motor_rotation_speed[1]**2 - self.motor_rotation_speed[2]**2 + self.motor_rotation_speed[3]**2)
@@ -122,7 +122,7 @@ class CF_model():
         self.att_pid_counter = 0
         self.att_pid_counter_max = int( self.cf_physical_params.DT_ATT_PIDS / self.cf_physical_params.DT_CF) - 1
 
-        self.desired_ang_vel = np.zeros(3)
+        self.desired_att = np.zeros(3)
 
         ############################
         # Communication control
@@ -164,7 +164,12 @@ class CF_model():
     ###OTRA DUDA ES SI TENGO QUE USAR cf_state O CF_state YA QUE UNA ES
     ### UN OBJETO DE LA OTRA... OSEA NO SE QUE ES LO MAS OPTIMO. ADEMAS 
     ### SEGURO QUE ESTA MAL PQ A VECES USO UNO Y OTRAS OTRO...
+	
+	### NO TIENES QUE USAR NINGUNO DE LOS DOS, LO QUE TE VIENE AQUI
+	### SON LOS SETPOINTS. ENTONCES LO QUE RECIBES ES DESIRED_ATT[0]
+	### DESIRED_ATT[1] DEISRED_ANG_VEL[3] DESIRED_THRUST
     def NewInfoHover(hover_msg):
+
     	self.cf_state.attitude[0] = hover_msg.vx
         self.cf_state.attitude[1] = hover_msg.vy
         self.cf_state.ang_vel[2] = hover_msg.YAWRATE
@@ -210,6 +215,8 @@ class CF_model():
 		### TIENES QUE INTEGRAR antes de hacer la asignacion
 		### del nuevo estado
         ### DUDA: COMO LO HAGO??
+		### YA TE LO EXPLIQUE Y PASASTE DE MI. 
+		### PISTA: EXPANSION DE TAYLOR
         # Update the state of the system
         self.cf_state = new_state
 
