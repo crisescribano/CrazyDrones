@@ -14,7 +14,7 @@ class CF_state():
         self.position = np.zeros(3)
         self.lin_vel = np.zeros(3)
         self.attitude = np.zeros(3)
-        self.ang_vel = np.zeros(3)
+        self.ang_vel = np.zeros(3)   ##DUDA: ang_vel[3] ES EL YAWRATE?
         self.motor_pwm = np.zeros(CF_parameters().NUM_MOTORS)
         self.motor_rotation_speed = np.zeros(CF_parameters().NUM_MOTORS)
         self.sum_motor_rotations = 0.0
@@ -45,8 +45,7 @@ class CF_model():
 
         rospy.init_node("model", anonymous=True)
         self.pub = rospy.Publisher("state_estimation", Position, queue_size=1)
-		### cmd_hover
-        rospy.Subscriber("pitch_roll_topic", GenericLogData, NewInfo)
+        rospy.Subscriber("cmd_hover", Hover, NewInfoHover)
 
         # Main CF variables initialization (if needed)
         self.simulation_freq = rospy.Rate(int(1/self.cf_physical_params.DT_CF))
@@ -160,10 +159,16 @@ class CF_model():
     ###########################
     # Callback function
     ###########################
-    def NewInfo(attitude):
-    	for i in 3:
-    		self.CF_state.attitude[i] = attitude[i]
+    ###DUDISIMA DE SI ESTO LO PUEDO HACER ASI
 
+    ###OTRA DUDA ES SI TENGO QUE USAR cf_state O CF_state YA QUE UNA ES
+    ### UN OBJETO DE LA OTRA... OSEA NO SE QUE ES LO MAS OPTIMO. ADEMAS 
+    ### SEGURO QUE ESTA MAL PQ A VECES USO UNO Y OTRAS OTRO...
+    def NewInfoHover(hover_msg):
+    	self.cf_state.attitude[0] = hover_msg.vx
+        self.cf_state.attitude[1] = hover_msg.vy
+        self.cf_state.ang_vel[2] = hover_msg.YAWRATE
+        self.cf_state.thrust = hover_msg.zDistance
 
     ###########################
     # Single step simulation
