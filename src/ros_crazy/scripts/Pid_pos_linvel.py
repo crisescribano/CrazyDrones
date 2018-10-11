@@ -14,11 +14,17 @@ class PID_pos_linvel():
 
         rospy.init_node("pid_pos_linvel", anonymous=True)
         self.pub = rospy.Publisher("pitch_roll_topic", GenericLogData, queue_size=1)
+		### Este no va a aqui, este va en otro nodo que enviara la posicion a este nodo(simulando
+		### asi el qualisys)
         rospy.Subscriber("external_position", Position, ??????????)
+		
+		### Esta esta bien, quizas haya que añadir un paramtero desde el launch para que sepamos para que drone
+		### es : y seria "/" + topic + "cmd_position" o algo asi
         rospy.Subscriber("cmd_position", Position, ??????????)
 
         # System state: position, linear velocities,
         # attitude and angular velocities
+		### Para que? lo que necesitas te llega a traves de cmd_position
         self.cf_state = CF_state()
 
         # Import the crazyflie physical paramters
@@ -27,6 +33,7 @@ class PID_pos_linvel():
         #       to : DESIGN OF A TRAJECTORY TRACKING CONTROLLER FOR A
         #            NANOQUADCOPTER
         #            Luis, C., & Le Ny, J. (August, 2016)
+		### Creo que no es necesario
         self.cf_physical_params = CF_parameters()
 
         # Import the PID gains (from the firmware)
@@ -35,7 +42,9 @@ class PID_pos_linvel():
         ######################
         # Initialize PID
         ######################
-
+		
+		### Falta el yaw:) Y ten cuidado, 
+		### del pid del eje z sale el thrust, no attitude
         self.desired_lin_vel = np.zeros(3)
         self.desired_att = np.zeros(3)
 
@@ -85,6 +94,8 @@ class PID_pos_linvel():
                           self.cf_pid_gains.KD_VZ,
                           self.cf_pid_gains.INT_MAX_VZ,
                           self.cf_pid_gains.VZ_DT)
+						  
+		### Falta el pid del yaw!!
 
 
         def run_pos_pid(self):
@@ -98,6 +109,12 @@ class PID_pos_linvel():
                                        self.z_pid.update(self.desired_lin_vel[2], self.cf_state.lin_vel[2])])
 
         def publish_state(self):
+		  ### No entiendo esto. TIenes que publicar un mensaje solo
+		  ### y del tipo (roll, pitch, yaw_rate, thrust)
+		  ### el yaw rate es la salida del yaw pid
+		  ### y el trusht del pid_vz. La salida del pid_vz hay ademas
+		  ### que mulstiplicarla por 1000 (segun el firmware)
+		  ### Que es ATTITUDE?
           for i in CF_parameters().NUM_MOTORS:
             self.pub.publish(ATTITUDE)
 
@@ -105,8 +122,9 @@ class PID_pos_linvel():
         def run(self):
 
         	while(not rospy.is_shutdown()):
-
-
+				### No has declarado ni inicializado estos counters,
+				### El del yaw tiene que ir a 500 Hz, asique tiene que 
+				### runearse en otro 
             	if(self.pos_pid_counter == self.pos_pid_counter_max):
                 	self.pos_pid_counter = 0
                 	self.run_pos_pid()
@@ -116,12 +134,15 @@ class PID_pos_linvel():
 
               if(self.out_pos_counter == self.out_pos_counter_max):
                 self.out_pos_counter = 0
+				### Publish va al mismo rate que los pids en este caso
+				### pero esta bien que lo dejes asi:)
                 self.publish_state()
               else:
                 self.out_pos_counter = self.out_pos_counter + 1
             	rospy.spin()
 
             	# Wait for the cycle left time
+				### Esto no lo has inicializado tampoco 
             	self.simulation_freq.sleep()
 
 
