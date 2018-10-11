@@ -33,8 +33,8 @@ class CF_state():
         self.forces = np.array([0, 0, CF_parameters().KT*self.sum_motor_rotations])
 
     def getMomentums(self):
-        self.momentums[0] = (self.CF_parameters().L*self.CF_parameters().KT/np.sqrt(2))*(-self.motor_rotation_speed[0]**2 - self.motor_rotation_speed[1]**2 + self.motor_rotation_speed[2]**2 + self.motor_rotation_speed[3]**2)
-        self.momentums[1] = (self.CF_parameters().L*self.CF_parameters().KT/np.sqrt(2))*(-self.motor_rotation_speed[0]**2 + self.motor_rotation_speed[1]**2 + self.motor_rotation_speed[2]**2 - self.motor_rotation_speed[3]**2)
+        self.momentums[0] = (self.CF_parameters().L * self.CF_parameters().KT/np.sqrt(2))*(-self.motor_rotation_speed[0]**2 - self.motor_rotation_speed[1]**2 + self.motor_rotation_speed[2]**2 + self.motor_rotation_speed[3]**2)
+        self.momentums[1] = (self.CF_parameters().L * self.CF_parameters().KT/np.sqrt(2))*(-self.motor_rotation_speed[0]**2 + self.motor_rotation_speed[1]**2 + self.motor_rotation_speed[2]**2 - self.motor_rotation_speed[3]**2)
         self.momentums[2] = self.CF_parameters().KD * (-self.motor_rotation_speed[0]**2 + self.motor_rotation_speed[1]**2 - self.motor_rotation_speed[2]**2 + self.motor_rotation_speed[3]**2)
 
 
@@ -42,7 +42,7 @@ class CF_model():
 
     def __init__(self):
 
-        rospy.init_node("model", anonymous=True)
+        rospy.init_node("dynamic_model", anonymous=True)
         self.pub = rospy.Publisher("state_estimation", Position, queue_size=1)
         rospy.Subscriber("cmd_hover", Hover, NewInfoHover)
 
@@ -198,9 +198,9 @@ class CF_model():
 
         new_state.ang_vel = np.dot(self.cf_physical_params.INV_INERTIA_MATRIX, preoperation)
 		
-        new_state.attitude = np.dot(euler_matrix(self.attitude[0], self.attitude[1], self.attitude[2])
+        new_state.attitude = np.dot(euler_matrix(self.attitude[0], self.attitude[1], self.attitude[2]))
 
-		self.cf_state = self.cf_state + new_state*self.cf_physical_params.DT_CF
+		self.cf_state = self.cf_state + (new_state * self.cf_physical_params.DT_CF)
 
     def run_att_pid(self):
         self.desired_ang_vel = np.array([self.roll_pid.update(self.desired_att[0], self.cf_state.attitude[0]),
