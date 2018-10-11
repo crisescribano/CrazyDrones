@@ -13,19 +13,15 @@ class PID_pos_linvel():
     def __init__(self):
 
         rospy.init_node("pid_pos_linvel", anonymous=True)
-        self.pub = rospy.Publisher("pitch_roll_topic", GenericLogData, queue_size=1)
-		### Este no va a aqui, este va en otro nodo que enviara la posicion a este nodo(simulando
-		### asi el qualisys)
-        rospy.Subscriber("external_position", Position, ??????????)
-		
+        self.pub = rospy.Publisher("cmd_hover", Hover, queue_size=1)
+
 		### Esta esta bien, quizas haya que añadir un paramtero desde el launch para que sepamos para que drone
 		### es : y seria "/" + topic + "cmd_position" o algo asi
-        rospy.Subscriber("cmd_position", Position, ??????????)
+        rospy.Subscriber("cmd_position", Position, NewPointToAchieve)
 
         # System state: position, linear velocities,
         # attitude and angular velocities
-		### Para que? lo que necesitas te llega a traves de cmd_position
-        self.cf_state = CF_state()
+
 
         # Import the crazyflie physical paramters
         #     - These parameters are obtained from different sources.
@@ -33,20 +29,25 @@ class PID_pos_linvel():
         #       to : DESIGN OF A TRAJECTORY TRACKING CONTROLLER FOR A
         #            NANOQUADCOPTER
         #            Luis, C., & Le Ny, J. (August, 2016)
-		### Creo que no es necesario
+		
         self.cf_physical_params = CF_parameters()
 
         # Import the PID gains (from the firmware)
         self.cf_pid_gains = CF_pid_params()
 
+
+        ### DUDA: ESTA BIEN ESTA FRECUENCIA?
+        self.simulation_freq = rospy.Rate(int(1/self.cf_physical_params.DT_CF))
+
+
         ######################
         # Initialize PID
         ######################
 		
-		### Falta el yaw:) Y ten cuidado, 
-		### del pid del eje z sale el thrust, no attitude
-        self.desired_lin_vel = np.zeros(3)
-        self.desired_att = np.zeros(3)
+        self.desired_lin_vel = np.zeros(3)      # Obtained from 'pos controller'
+        self.desired_pitch_roll = np.zeros(2)   # Obtained from 'lin vel controller'
+        self.desired_yawrate = 0                # Obtained from 'yaw controller'
+        self.desired_thrust = 0                 # Obtained from cmd_hover
 
 
         ######################
@@ -95,7 +96,19 @@ class PID_pos_linvel():
                           self.cf_pid_gains.INT_MAX_VZ,
                           self.cf_pid_gains.VZ_DT)
 						  
-		### Falta el pid del yaw!!
+		    ######################
+        # Yaw
+        ######################
+
+        self.yaw_pid = PID(self.cf_pid_gains.KP_YAW,
+                          self.cf_pid_gains.KI_YAW,
+                          self.cf_pid_gains.KD_YAW,
+                          self.cf_pid_gains.INT_MAX_YAW,
+                          self.cf_pid_gains.YAW_DT)
+
+
+        def NewPointToAchieve(position):
+            self.
 
 
         def run_pos_pid(self):
@@ -104,20 +117,24 @@ class PID_pos_linvel():
                                            self.z_pid.update(self.desired_lin_vel[2], self.cf_state.lin_vel[2])])
  
         def run_lin_vel_pid(self):
-        	self.desired_att = np.array([self.x_pid.update(self.desired_lin_vel[0], self.cf_state.lin_vel[0]),
+        	self.desired_pitch_roll = np.array([self.x_pid.update(self.desired_lin_vel[0], self.cf_state.lin_vel[0]),
                                        self.y_pid.update(self.desired_lin_vel[1], self.cf_state.lin_vel[1]),
                                        self.z_pid.update(self.desired_lin_vel[2], self.cf_state.lin_vel[2])])
 
         def publish_state(self):
-		  ### No entiendo esto. TIenes que publicar un mensaje solo
-		  ### y del tipo (roll, pitch, yaw_rate, thrust)
-		  ### el yaw rate es la salida del yaw pid
-		  ### y el trusht del pid_vz. La salida del pid_vz hay ademas
-		  ### que mulstiplicarla por 1000 (segun el firmware)
-		  ### Que es ATTITUDE?
-          for i in CF_parameters().NUM_MOTORS:
-            self.pub.publish(ATTITUDE)
+		  ### DUDA: NO SE SI PUEDO PONER MSG = Hover() DIRECTAMENTE Y 
+      ### LO RECONOCE COMO EL TIPO DE MENSAJE
 
+      ### DUDA: LO QUE PIDE EL Hover ES DIRECTAMENTE zDistance ENTONCES
+      ### ENTIENDO QUE ES EL THRUST DIRECTAMENTE SIN EL PID PERO NOT SURE
+
+          msg = Hover()
+          msg.vx = desired_pitch_roll[0] 
+          msg.vx = desired_pitch_roll[1] 
+          msg.yawrate = desired_yawrate
+          msg.zDistance = desired_thrust * 1000
+
+          self.pub.publish(msg)
 
         def run(self):
 
@@ -132,10 +149,14 @@ class PID_pos_linvel():
             	else:
                 	self.pos_pid_counter = self.pos_pid_counter + 1
 
+              if(self.yaw_pid_counter == self.yaw_pid_counter_max):
+                  self.yaw_pid_counter = 0
+                  self.run_yaw_pid()
+              else:
+                  self.yaw_pid_counter = self.yaw_pid_counter + 1
+
               if(self.out_pos_counter == self.out_pos_counter_max):
                 self.out_pos_counter = 0
-				### Publish va al mismo rate que los pids en este caso
-				### pero esta bien que lo dejes asi:)
                 self.publish_state()
               else:
                 self.out_pos_counter = self.out_pos_counter + 1

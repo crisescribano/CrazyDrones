@@ -21,8 +21,6 @@ class CF_state():
         self.forces = np.zeros(3)
         self.momentums = np.zeros(3)
 
-
-
     def getMotorRotationSpeed(self):
         for i in CF_parameters().NUM_MOTORS:
             self.motor_rotation_speed[i] = 0.2685*self.motor_pwm[i] + 4070.3
@@ -35,8 +33,11 @@ class CF_state():
         self.forces = np.array([0, 0, CF_parameters().KT*self.sum_motor_rotations])
 
     def getMomentums(self):
-		### Acaba los momentums!!!
-        self.momentums[0] = (self.L*self.KT/np.sqrt(2))
+
+        self.momentums[0] = (self.CF_parameters().L*self.CF_parameters().KT/np.sqrt(2))*(-self.motor_rotation_speed[0]**2 - self.motor_rotation_speed[1]**2 + self.motor_rotation_speed[2]**2 + self.motor_rotation_speed[3]**2)
+        self.momentums[1] = (self.CF_parameters().L*self.CF_parameters().KT/np.sqrt(2))*(-self.motor_rotation_speed[0]**2 + self.motor_rotation_speed[1]**2 + self.motor_rotation_speed[2]**2 - self.motor_rotation_speed[3]**2)
+        self.momentums[2] = self.CF_parameters().KD * (-self.motor_rotation_speed[0]**2 + self.motor_rotation_speed[1]**2 - self.motor_rotation_speed[2]**2 + self.motor_rotation_speed[3]**2)
+
 
 class CF_model():
 
@@ -199,15 +200,13 @@ class CF_model():
 
         new_state.ang_vel = np.dot(self.cf_physical_params.INV_INERTIA_MATRIX, preoperation)
 		
-		### DONDE ESTA euler matrix??
-        new_state.attitude = np.dot(euler_matrix, self.cf_state.ang_vel)
+        new_state.attitude = np.dot(euler_matrix(self.attitude[0], self.attitude[1], self.attitude[2])
 
 		### TIENES QUE INTEGRAR antes de hacer la asignacion
 		### del nuevo estado
+        ### DUDA: COMO LO HAGO??
         # Update the state of the system
         self.cf_state = new_state
-
-    
 
 
     def run_att_pid(self):
@@ -247,22 +246,15 @@ class CF_model():
         self.cf_state.motor_pwm[2] = self.cf_physical_params.PWM_MAX(thrust + R - P + Y)
         self.cf_state.motor_pwm[3] = self.cf_physical_params.PWM_MAX(thrust + R + P - Y)
         
-		### Motor_pwm no es nada, usa self.cf_state.motor_pwm[0]
-		### puedes hacer un bucle aqui
-		### for i in range(len(self.cf_state.motor_pwm)):
-		### 	self.cf_state.motor_rotation_speed[i] = 0.2685 × motor_pwm[i] + 4070.3
-        self.cf_state.motor_rotation_speed[0] = 0.2685 × motor_pwm[0] + 4070.3
-        self.cf_state.motor_rotation_speed[1] = 0.2685 × motor_pwm[1] + 4070.3
-        self.cf_state.motor_rotation_speed[2] = 0.2685 × motor_pwm[2] + 4070.3
-        self.cf_state.motor_rotation_speed[3] = 0.2685 × motor_pwm[3] + 4070.3
+	
+		for i in range(len(self.cf_state.motor_pwm)):
+		 	self.cf_state.motor_rotation_speed[i] = 0.2685 * self.cf_state.motor_pwm[i] + 4070.3
+    
 
 
     def publish_state(self):
-		### Aqui tienes que publicar la posicion, velocidades, att y vel angulares
-		### en el topic state estimation
-		### Sola una vez, borra el motor
-    	for i in CF_parameters().NUM_MOTORS:
-    		self.pub.publish(self.cf_state.position[i])
+    	
+    	self.pub.publish(self.cf_state.position)
 
 
     def run(self):
