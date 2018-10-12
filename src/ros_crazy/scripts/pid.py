@@ -1,3 +1,9 @@
+#!/usr/bin/env python
+
+import rospy
+from crazyflie_driver.msg import Position
+
+
 class PID():
 
     def __init__(self, _kp, _ki, _kd, _max_i_value, _dt):
@@ -7,9 +13,9 @@ class PID():
         self.ki = _ki
         self.kd = _kd
         self.max_i_value = _max_i_value
-		### Y max_pid_value??
+        ### Y max_pid_value??
         self.dt = _dt
-	
+
         self.prev_error = 0
 
         # The control output that we want to
@@ -17,9 +23,15 @@ class PID():
         self.output = 0
         self.control_out_P = 0
         self.control_out_D = 0
-		
+
         self.deriv = 0
         self.integ = 0
+
+    def constrain(self, val, min_val, max_val):
+
+        if val < min_val: return min_val
+        if val > max_val: return max_val
+        return val
 
     def update(self, desired, measurement):
 
@@ -32,7 +44,7 @@ class PID():
         ########################
 
         #P:
-		### self.output? aunque no necesario
+        ### self.output? aunque no necesario
         self.output = 0
         self.control_out_P = self.kp * error
         self.output += self.control_out_P
@@ -43,16 +55,15 @@ class PID():
         self.output += self.control_out_D
 
         #I
-        self.integ += error * self.dt 
-        if (self.max_i_value != 0) 
-			### DUDA: BUSQUE EN INTERNET LO DEL CONSTRAIN ASI QUE 
-            ### CREO QUE ESTA BIEN
-            self.integ = constrain(self.integ, -self.max_i_value, self.max_i_value);
+        self.integ += error * self.dt
+        if(self.max_i_value != 0):
+            self.integ = self.constrain(self.integ, -self.max_i_value, self.max_i_value)
+
         self.control_out_I = self.ki * self.integ
         self.output += self.control_out_I
 
-        if (self.max_pid_value != 0)
-            self.output = constraint(self.output, -self.max_pid_value, self.max_pid_value)
+        #if(self.max_pid_value != 0):
+        #    self.output = self.constraint(self.output, -self.max_pid_value, self.max_pid_value)
         self.prev_error = error
-        
+
         return self.output

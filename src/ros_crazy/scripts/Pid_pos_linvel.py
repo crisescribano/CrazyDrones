@@ -15,8 +15,8 @@ class PID_pos_linvel():
         rospy.init_node("pid_pos_linvel", anonymous=True)
         self.pub = rospy.Publisher("cmd_hover", Hover, queue_size=1)
 
-		### Esta esta bien, quizas haya que añadir un paramtero desde el launch para que sepamos para que drone
-		### es : y seria "/" + topic + "cmd_position" o algo asi
+    ### Esta esta bien, quizas haya que añadir un paramtero desde el launch para que sepamos para que drone
+    ### es : y seria "/" + topic + "cmd_position" o algo asi
         rospy.Subscriber("cmd_position", Position, NewPointToAchieve)
 
         # System state: position, linear velocities,
@@ -29,7 +29,7 @@ class PID_pos_linvel():
         #       to : DESIGN OF A TRAJECTORY TRACKING CONTROLLER FOR A
         #            NANOQUADCOPTER
         #            Luis, C., & Le Ny, J. (August, 2016)
-		
+
         self.cf_physical_params = CF_parameters()
 
         # Import the PID gains (from the firmware)
@@ -43,7 +43,7 @@ class PID_pos_linvel():
         ######################
         # Initialize PID
         ######################
-		
+
         self.desired_lin_vel = np.zeros(3)      # Obtained from 'pos controller'
         self.desired_pitch_roll = np.zeros(2)   # Obtained from 'lin vel controller'
         self.desired_yawrate = 0                # Obtained from 'yaw controller'
@@ -122,7 +122,7 @@ class PID_pos_linvel():
                                        self.z_pid.update(self.desired_lin_vel[2], self.cf_state.lin_vel[2])])
 
         def publish_state(self):
-		  ### DUDA: NO SE SI PUEDO PONER MSG = Hover() DIRECTAMENTE Y 
+      ### DUDA: NO SE SI PUEDO PONER MSG = Hover() DIRECTAMENTE Y 
       ### LO RECONOCE COMO EL TIPO DE MENSAJE
 
       ### DUDA: LO QUE PIDE EL Hover ES DIRECTAMENTE zDistance ENTONCES
@@ -139,33 +139,32 @@ class PID_pos_linvel():
         def run(self):
 
         	while(not rospy.is_shutdown()):
-				### No has declarado ni inicializado estos counters,
-				### El del yaw tiene que ir a 500 Hz, asique tiene que 
-				### runearse en otro 
-            	if(self.pos_pid_counter == self.pos_pid_counter_max):
-                	self.pos_pid_counter = 0
-                	self.run_pos_pid()
-                	self.run_lin_vel_pid()
-            	else:
-                	self.pos_pid_counter = self.pos_pid_counter + 1
+        ### No has declarado ni inicializado estos counters,
+        ### El del yaw tiene que ir a 500 Hz, asique tiene que 
+        ### runearse en otro 
+            if(self.pos_pid_counter == self.pos_pid_counter_max):
+              self.pos_pid_counter = 0
+              self.run_pos_pid()
+              self.run_lin_vel_pid()
+            else:
+              self.pos_pid_counter = self.pos_pid_counter + 1
 
-              if(self.yaw_pid_counter == self.yaw_pid_counter_max):
-                  self.yaw_pid_counter = 0
-                  self.run_yaw_pid()
-              else:
-                  self.yaw_pid_counter = self.yaw_pid_counter + 1
+            if(self.yaw_pid_counter == self.yaw_pid_counter_max):
+              self.yaw_pid_counter = 0
+              self.run_yaw_pid()
+            else:
+              self.yaw_pid_counter = self.yaw_pid_counter + 1
 
-              if(self.out_pos_counter == self.out_pos_counter_max):
-                self.out_pos_counter = 0
-                self.publish_state()
-              else:
-                self.out_pos_counter = self.out_pos_counter + 1
-            	rospy.spin()
+            if(self.out_pos_counter == self.out_pos_counter_max):
+              self.out_pos_counter = 0
+              self.publish_state()
+            else:
+              self.out_pos_counter = self.out_pos_counter + 1
+            rospy.spin()
 
-            	# Wait for the cycle left time
-				### Esto no lo has inicializado tampoco 
-            	self.simulation_freq.sleep()
-
+            # Wait for the cycle left time
+            ### Esto no lo has inicializado tampoco 
+            self.simulation_freq.sleep()
 
 if __name__ == '__main__':
     pid_pos = PID_pos_linvel()

@@ -7,6 +7,9 @@ from math import cos, sin, tan
 from cf_physical_parameters import CF_parameters
 from cf_pid_params import CF_pid_params
 from pid import PID
+from crazyflie_driver.msg import Position
+from crazyflie_driver.msg import Hover
+
 
 class CF_state():
 
@@ -22,20 +25,20 @@ class CF_state():
         self.momentums = np.zeros(3)
 
     def getMotorRotationSpeed(self):
-        for i in CF_parameters().NUM_MOTORS:
+        for i in range(0,4):
             self.motor_rotation_speed[i] = 0.2685*self.motor_pwm[i] + 4070.3
 
     def addMotorsRotationsSpeed(self):
-        for i in CF_parameters().NUM_MOTORS:
+        for i in range(0,4):
             self.sum_motor_rotations = self.sum_motor_rotations + self.motor_rotation_speed[i]
 
     def getForces(self):
         self.forces = np.array([0, 0, CF_parameters().KT*self.sum_motor_rotations])
 
     def getMomentums(self):
-        self.momentums[0] = (self.CF_parameters().L * self.CF_parameters().KT/np.sqrt(2))*(-self.motor_rotation_speed[0]**2 - self.motor_rotation_speed[1]**2 + self.motor_rotation_speed[2]**2 + self.motor_rotation_speed[3]**2)
-        self.momentums[1] = (self.CF_parameters().L * self.CF_parameters().KT/np.sqrt(2))*(-self.motor_rotation_speed[0]**2 + self.motor_rotation_speed[1]**2 + self.motor_rotation_speed[2]**2 - self.motor_rotation_speed[3]**2)
-        self.momentums[2] = self.CF_parameters().KD * (-self.motor_rotation_speed[0]**2 + self.motor_rotation_speed[1]**2 - self.motor_rotation_speed[2]**2 + self.motor_rotation_speed[3]**2)
+        self.momentums[0] = (CF_parameters().L * CF_parameters().KT/np.sqrt(2))*(-self.motor_rotation_speed[0]**2 - self.motor_rotation_speed[1]**2 + self.motor_rotation_speed[2]**2 + self.motor_rotation_speed[3]**2)
+        self.momentums[1] = (CF_parameters().L * CF_parameters().KT/np.sqrt(2))*(-self.motor_rotation_speed[0]**2 + self.motor_rotation_speed[1]**2 + self.motor_rotation_speed[2]**2 - self.motor_rotation_speed[3]**2)
+        self.momentums[2] = CF_parameters().KD * (-self.motor_rotation_speed[0]**2 + self.motor_rotation_speed[1]**2 - self.motor_rotation_speed[2]**2 + self.motor_rotation_speed[3]**2)
 
 
 class CF_model():
@@ -44,10 +47,7 @@ class CF_model():
 
         rospy.init_node("dynamic_model", anonymous=True)
         self.pub = rospy.Publisher("state_estimation", Position, queue_size=1)
-        rospy.Subscriber("cmd_hover", Hover, NewInfoHover)
-
-        # Main CF variables initialization (if needed)
-        self.simulation_freq = rospy.Rate(int(1/self.cf_physical_params.DT_CF))
+        rospy.Subscriber("cmd_hover", Hover, self.NewInfoHover)
 
         # System state: position, linear velocities,
         # attitude and angular velocities
@@ -63,6 +63,9 @@ class CF_model():
 
         # Import the PID gains (from the firmware)
         self.cf_pid_gains = CF_pid_params()
+
+        # Main CF variables initialization (if needed)
+        self.simulation_freq = rospy.Rate(int(1/self.cf_physical_params.DT_CF))
 
         ######################
         # Initialize PID
@@ -156,13 +159,13 @@ class CF_model():
     ###########################
     # Callback function
     ###########################
-    def NewInfoHover(hover_msg):
+    def NewInfoHover(self, hover_msg):
 
     	self.desired_att[0] = hover_msg.vx
         self.desired_att[1] = hover_msg.vy
-        self.desired_ang_vel[3] = hover_msg.yawrate
+        self.desired_ang_vel[2] = hover_msg.yawrate
         self.desired_thrust = hover_msg.zDistance
-
+        rospy.loginfo("Received new hover info: " + str(hover_msg.vx) + ", " + str(hover_msg.vy) + ", " + str(hover_msg.yawrate) + ", " + str(hover_msg.zDistance))
     ###########################
     # Single step simulation
     ###########################
@@ -197,14 +200,20 @@ class CF_model():
                                             self.cf_state.ang_vel))
 
         new_state.ang_vel = np.dot(self.cf_physical_params.INV_INERTIA_MATRIX, preoperation)
-		
-        new_state.attitude = np.dot(euler_matrix(self.attitude[0], self.attitude[1], self.attitude[2]))
+        
+        new_state.attitude = np.dot(euler_matrix, self.cf_state.ang_vel)
 
-		self.cf_state = self.cf_state + (new_state * self.cf_physical_params.DT_CF)
+        for i in range(0, 4):
+            self.cf_state.position = self.cf_state.position + (new_state.position * self.cf_physical_params.DT_CF)
+            self.cf_state.lin_vel = self.cf_state.lin_vel + (new_state.lin_vel * self.cf_physical_params.DT_CF)
+            self.cf_state.attitude = self.cf_state.attitude + (new_state.attitude * self.cf_physical_params.DT_CF)
+            self.cf_state.ang_vel = self.cf_state.ang_vel + (new_state.ang_vel * self.cf_physical_params.DT_CF)
+
 
     def run_att_pid(self):
         self.desired_ang_vel = np.array([self.roll_pid.update(self.desired_att[0], self.cf_state.attitude[0]),
-                                        self.pitch_pid.update(self.desired_att[1], self.cf_state.attitude[1])])
+                                        self.pitch_pid.update(self.desired_att[1], self.cf_state.attitude[1]),
+                                        self.desired_ang_vel[2]])
 
 
     def run_ang_vel_pid(self):
@@ -228,23 +237,26 @@ class CF_model():
         # into the values of the PWM
         # applied to each motor
         ##########################
-        R = r / 2.0f
-        P = p / 2.0f
+        R = r / 2.0
+        P = p / 2.0
         Y = y
         self.cf_state.motor_pwm[0] = self.cf_physical_params.PWM_MAX(thrust - R + P + Y)
         self.cf_state.motor_pwm[1] = self.cf_physical_params.PWM_MAX(thrust - R - P - Y)
         self.cf_state.motor_pwm[2] = self.cf_physical_params.PWM_MAX(thrust + R - P + Y)
         self.cf_state.motor_pwm[3] = self.cf_physical_params.PWM_MAX(thrust + R + P - Y)
+        ### BASADO EN ESTA PARTE DEL FILMWARE:
+        #motorPower.m1 = limitThrust(control->thrust - r + p + control->yaw);
+        #motorPower.m2 = limitThrust(control->thrust - r - p - control->yaw);
+        #motorPower.m3 =  limitThrust(control->thrust + r - p + control->yaw);
+        #motorPower.m4 =  limitThrust(control->thrust + r + p - control->yaw);
+        ### PERO TENGO QUE INVESTIGARLO
         
-	
-		for i in range(len(self.cf_state.motor_pwm)):
-		 	self.cf_state.motor_rotation_speed[i] = 0.2685 * self.cf_state.motor_pwm[i] + 4070.3
-    
-
+        for i in range(len(self.cf_state.motor_pwm)):
+            self.cf_state.motor_rotation_speed[i] = 0.2685 * self.cf_state.motor_pwm[i] + 4070.3
 
     def publish_state(self):
-    	
-    	self.pub.publish(self.cf_state.position)
+
+        self.pub.publish(self.cf_state.position)
 
 
     def run(self):
@@ -255,23 +267,31 @@ class CF_model():
                 self.att_pid_counter = 0
                 self.run_att_pid()
                 self.run_ang_vel_pid()
+                rospy.loginfo("Counter pid IN IF: " + str(self.att_pid_counter))
+
             else:
                 self.att_pid_counter = self.att_pid_counter + 1
+                rospy.loginfo("Counter pid: " + str(self.att_pid_counter))
 
             if(self.out_pos_counter == self.out_pos_counter_max):
                 self.out_pos_counter = 0
                 self.publish_state()
+                rospy.loginfo("Counter out IN IF: " + str(self.att_pid_counter))
+
             else:
                 self.out_pos_counter = self.out_pos_counter + 1
+                rospy.loginfo("Counter out: " + str(self.out_pos_counter))
 
             self.apply_simulation_step()
+            rospy.loginfo("Simulation step done")
 
-            rospy.spin()
             # Wait for the cycle left time
             self.simulation_freq.sleep()
-
-
+            rospy.loginfo("Sleep done")
 
 if __name__ == '__main__':
     model = CF_model()
     model.run()
+    rospy.spin()
+
+    
