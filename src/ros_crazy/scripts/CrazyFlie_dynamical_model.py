@@ -160,6 +160,16 @@ class CF_model():
                              [0, cos(roll), -sin(roll)],
                              [0, sin(roll) / (cos(pitch) + 1e-100), cos(roll) / (cos(pitch) + 1e-100)]])
 
+    def limit(self, value):
+        VAL_MAX = 65535
+        if(value > VAL_MAX):
+            value = VAL_MAX
+
+        if(value < 0):
+            value = 0
+
+        return value
+
     ###########################
     # Callback function
     ###########################
@@ -246,10 +256,11 @@ class CF_model():
         R = r / 2.0
         P = p / 2.0
         Y = y
-        self.cf_state.motor_pwm[0] = self.cf_physical_params.PWM_MAX * (thrust - R + P + Y)
-        self.cf_state.motor_pwm[1] = self.cf_physical_params.PWM_MAX * (thrust - R - P - Y)
-        self.cf_state.motor_pwm[2] = self.cf_physical_params.PWM_MAX * (thrust + R - P + Y)
-        self.cf_state.motor_pwm[3] = self.cf_physical_params.PWM_MAX * (thrust + R + P - Y)
+        self.cf_state.motor_pwm[0] = self.limit(thrust - R + P + Y)
+        self.cf_state.motor_pwm[1] = self.limit(thrust - R - P - Y)
+        self.cf_state.motor_pwm[2] = self.limit(thrust + R - P + Y)
+        self.cf_state.motor_pwm[3] = self.limit(thrust + R + P - Y)
+
         ### BASADO EN ESTA PARTE DEL FILMWARE:
         #motorPower.m1 = limitThrust(control->thrust - r + p + control->yaw);
         #motorPower.m2 = limitThrust(control->thrust - r - p - control->yaw);
@@ -306,3 +317,5 @@ if __name__ == '__main__':
     rospy.spin()
     
     
+### PARA METER VALORES POR TECLADO EN cmd_hover:
+### rostopic pub /cmd_hover crazyflie_driver/Hover '{vx: 0.0, vy: 0.0, yawrate: 0.0 , zDistance: 0.0}'
