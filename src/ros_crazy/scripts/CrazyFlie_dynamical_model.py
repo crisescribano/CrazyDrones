@@ -3,6 +3,7 @@
 import rospy
 import numpy as np
 from math import cos, sin, tan
+from geometry_msgs.msg import PointStamped
 
 from cf_physical_parameters import CF_parameters
 from cf_pid_params import CF_pid_params
@@ -48,6 +49,9 @@ class CF_model():
         rospy.init_node("dynamic_model", anonymous=True)
         self.pub = rospy.Publisher("state_estimation", Position, queue_size=1)
         rospy.Subscriber("cmd_hover", Hover, self.NewInfoHover)
+        self.rate = rospy.Rate(10)
+        self.msg = Position()
+
 
         # System state: position, linear velocities,
         # attitude and angular velocities
@@ -166,6 +170,8 @@ class CF_model():
         self.desired_ang_vel[2] = hover_msg.yawrate
         self.desired_thrust = hover_msg.zDistance
         rospy.loginfo("Received new hover info: " + str(hover_msg.vx) + ", " + str(hover_msg.vy) + ", " + str(hover_msg.yawrate) + ", " + str(hover_msg.zDistance))
+    
+
     ###########################
     # Single step simulation
     ###########################
@@ -203,11 +209,11 @@ class CF_model():
         
         new_state.attitude = np.dot(euler_matrix, self.cf_state.ang_vel)
 
-        for i in range(0, 4):
-            self.cf_state.position = self.cf_state.position + (new_state.position * self.cf_physical_params.DT_CF)
-            self.cf_state.lin_vel = self.cf_state.lin_vel + (new_state.lin_vel * self.cf_physical_params.DT_CF)
-            self.cf_state.attitude = self.cf_state.attitude + (new_state.attitude * self.cf_physical_params.DT_CF)
-            self.cf_state.ang_vel = self.cf_state.ang_vel + (new_state.ang_vel * self.cf_physical_params.DT_CF)
+        for i in range(0, 3):
+            self.cf_state.position[i] = self.cf_state.position[i] + (new_state.position[i] * self.cf_physical_params.DT_CF)
+            #self.cf_state.lin_vel[i] = self.cf_state.lin_vel[i] + (new_state.lin_vel[i] * self.cf_physical_params.DT_CF)
+            self.cf_state.attitude[i] = self.cf_state.attitude[i] + (new_state.attitude[i] * self.cf_physical_params.DT_CF)
+            self.cf_state.ang_vel[i] = self.cf_state.ang_vel[i] + (new_state.ang_vel[i] * self.cf_physical_params.DT_CF)
 
 
     def run_att_pid(self):
@@ -240,10 +246,10 @@ class CF_model():
         R = r / 2.0
         P = p / 2.0
         Y = y
-        self.cf_state.motor_pwm[0] = self.cf_physical_params.PWM_MAX(thrust - R + P + Y)
-        self.cf_state.motor_pwm[1] = self.cf_physical_params.PWM_MAX(thrust - R - P - Y)
-        self.cf_state.motor_pwm[2] = self.cf_physical_params.PWM_MAX(thrust + R - P + Y)
-        self.cf_state.motor_pwm[3] = self.cf_physical_params.PWM_MAX(thrust + R + P - Y)
+        self.cf_state.motor_pwm[0] = self.cf_physical_params.PWM_MAX * (thrust - R + P + Y)
+        self.cf_state.motor_pwm[1] = self.cf_physical_params.PWM_MAX * (thrust - R - P - Y)
+        self.cf_state.motor_pwm[2] = self.cf_physical_params.PWM_MAX * (thrust + R - P + Y)
+        self.cf_state.motor_pwm[3] = self.cf_physical_params.PWM_MAX * (thrust + R + P - Y)
         ### BASADO EN ESTA PARTE DEL FILMWARE:
         #motorPower.m1 = limitThrust(control->thrust - r + p + control->yaw);
         #motorPower.m2 = limitThrust(control->thrust - r - p - control->yaw);
@@ -255,9 +261,20 @@ class CF_model():
             self.cf_state.motor_rotation_speed[i] = 0.2685 * self.cf_state.motor_pwm[i] + 4070.3
 
     def publish_state(self):
+       
+        print("MESSAGE IN: cf_state.position[0] " + str(self.cf_state.position[0]))
+        print("MESSAGE IN: cf_state.position[1] " + str(self.cf_state.position[1]))
+        print("MESSAGE IN: cf_state.position[2] " + str(self.cf_state.position[2]))
 
-        self.pub.publish(self.cf_state.position)
-
+        self.msg.header.seq = 0
+        self.msg.header.stamp = rospy.Time.now()
+        self.msg.header.frame_id = "1"
+        self.msg.x = self.cf_state.position[0]
+        self.msg.y = self.cf_state.position[1]
+        self.msg.z = self.cf_state.position[2]
+        self.msg.yaw = 0.0
+        self.pub.publish(self.msg)
+        self.rate.sleep()
 
     def run(self):
 
@@ -267,31 +284,25 @@ class CF_model():
                 self.att_pid_counter = 0
                 self.run_att_pid()
                 self.run_ang_vel_pid()
-                rospy.loginfo("Counter pid IN IF: " + str(self.att_pid_counter))
 
             else:
                 self.att_pid_counter = self.att_pid_counter + 1
-                rospy.loginfo("Counter pid: " + str(self.att_pid_counter))
 
             if(self.out_pos_counter == self.out_pos_counter_max):
                 self.out_pos_counter = 0
                 self.publish_state()
-                rospy.loginfo("Counter out IN IF: " + str(self.att_pid_counter))
-
             else:
                 self.out_pos_counter = self.out_pos_counter + 1
-                rospy.loginfo("Counter out: " + str(self.out_pos_counter))
 
             self.apply_simulation_step()
-            rospy.loginfo("Simulation step done")
 
             # Wait for the cycle left time
             self.simulation_freq.sleep()
-            rospy.loginfo("Sleep done")
 
 if __name__ == '__main__':
     model = CF_model()
+    
     model.run()
     rospy.spin()
-
+    
     
