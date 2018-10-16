@@ -205,15 +205,18 @@ class CF_model():
         self.cf_state.getForces()
         self.cf_state.getMomentums()
 
-        print("Last state: Velocidad lineal[0]: " + str(new_state.lin_vel[0]))
-        print("Last state: Velocidad lineal[1]: " + str(new_state.lin_vel[1]))
-        print("Last state: Velocidad lineal[2]: " + str(new_state.lin_vel[2]))
+        #print("Last state: Velocidad lineal[0]: " + str(new_state.lin_vel[0]))
+        #print("Last state: Velocidad lineal[1]: " + str(new_state.lin_vel[1]))
+        #print("Last state: Velocidad lineal[2]: " + str(new_state.lin_vel[2]))
 
         new_state.lin_vel = np.array([0, 0, self.cf_state.forces[2]/self.cf_physical_params.DRONE_MASS]) - np.matmul(rotation_matrix, [0, 0, self.cf_physical_params.G]) - np.cross(self.cf_state.ang_vel, self.cf_state.lin_vel)
-        
-        print("New state: Velocidad lineal[0]: " + str(new_state.lin_vel[0]))
-        print("New state: Velocidad lineal[1]: " + str(new_state.lin_vel[1]))
-        print("New state: Velocidad lineal[2]: " + str(new_state.lin_vel[2]))
+        print("After integration. lin_vel[0]: " + str(new_state.lin_vel[0]))
+        print("After integration. lin_vel[1]: " + str(new_state.lin_vel[1]))
+        print("After integration. lin_vel[3]: " + str(new_state.lin_vel[2]))
+
+        #print("New state: Velocidad lineal[0]: " + str(new_state.lin_vel[0]))
+        #print("New state: Velocidad lineal[1]: " + str(new_state.lin_vel[1]))
+        #print("New state: Velocidad lineal[2]: " + str(new_state.lin_vel[2]))
 
         new_state.position = np.dot(np.transpose(rotation_matrix), self.cf_state.lin_vel)
 
@@ -231,6 +234,7 @@ class CF_model():
             self.cf_state.lin_vel[i] = self.cf_state.lin_vel[i] + (new_state.lin_vel[i] * self.cf_physical_params.DT_CF)
             self.cf_state.ang_vel[i] = self.cf_state.ang_vel[i] + (new_state.ang_vel[i] * self.cf_physical_params.DT_CF)
 
+            print("Nuevo estado: " + str(self.cf_state.position[i]) + ", " + str(self.cf_state.attitude[i]) + ", " + str(self.cf_state.lin_vel[i]) + ", " + str(self.cf_state.ang_vel[i]) + ".")
 
     def run_att_pid(self):
         self.desired_ang_vel = np.array([self.roll_pid.update(self.desired_att[0], self.cf_state.attitude[0]),
