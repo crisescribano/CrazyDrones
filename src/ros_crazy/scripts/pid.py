@@ -49,6 +49,10 @@ class PID():
         self.control_out_P = self.kp * error
         self.output += self.control_out_P
 
+
+        print("Tras aplicar P. Error: " + str(error))
+        print("Tras aplicar P. Output: " + str(self.output))
+       
         #D:
         self.deriv = (error - self.prev_error) / self.dt
         self.control_out_D = self.kd * self.deriv 

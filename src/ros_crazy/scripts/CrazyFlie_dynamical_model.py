@@ -205,9 +205,15 @@ class CF_model():
         self.cf_state.getForces()
         self.cf_state.getMomentums()
 
-        new_state.lin_vel = np.array([0, 0, self.cf_state.forces[2]/self.cf_physical_params.DRONE_MASS]) \
-                            - rotation_matrix * np.array([0, 0, self.cf_physical_params.G]) \
-                            - np.cross(self.cf_state.ang_vel, self.cf_state.lin_vel)
+        print("Last state: Velocidad lineal[0]: " + str(new_state.lin_vel[0]))
+        print("Last state: Velocidad lineal[1]: " + str(new_state.lin_vel[1]))
+        print("Last state: Velocidad lineal[2]: " + str(new_state.lin_vel[2]))
+
+        new_state.lin_vel = np.array([0, 0, self.cf_state.forces[2]/self.cf_physical_params.DRONE_MASS]) - np.matmul(rotation_matrix, [0, 0, self.cf_physical_params.G]) - np.cross(self.cf_state.ang_vel, self.cf_state.lin_vel)
+        
+        print("New state: Velocidad lineal[0]: " + str(new_state.lin_vel[0]))
+        print("New state: Velocidad lineal[1]: " + str(new_state.lin_vel[1]))
+        print("New state: Velocidad lineal[2]: " + str(new_state.lin_vel[2]))
 
         new_state.position = np.dot(np.transpose(rotation_matrix), self.cf_state.lin_vel)
 
@@ -221,8 +227,8 @@ class CF_model():
 
         for i in range(0, 3):
             self.cf_state.position[i] = self.cf_state.position[i] + (new_state.position[i] * self.cf_physical_params.DT_CF)
-            #self.cf_state.lin_vel[i] = self.cf_state.lin_vel[i] + (new_state.lin_vel[i] * self.cf_physical_params.DT_CF)
             self.cf_state.attitude[i] = self.cf_state.attitude[i] + (new_state.attitude[i] * self.cf_physical_params.DT_CF)
+            self.cf_state.lin_vel[i] = self.cf_state.lin_vel[i] + (new_state.lin_vel[i] * self.cf_physical_params.DT_CF)
             self.cf_state.ang_vel[i] = self.cf_state.ang_vel[i] + (new_state.ang_vel[i] * self.cf_physical_params.DT_CF)
 
 
@@ -230,6 +236,14 @@ class CF_model():
         self.desired_ang_vel = np.array([self.roll_pid.update(self.desired_att[0], self.cf_state.attitude[0]),
                                         self.pitch_pid.update(self.desired_att[1], self.cf_state.attitude[1]),
                                         self.desired_ang_vel[2]])
+        print("Pid att donne[0]: "+ str(self.desired_ang_vel[0]))
+        print("Pid att donne[1]: "+ str(self.desired_ang_vel[1]))
+        print("Pid att donne[2]: "+ str(self.desired_ang_vel[2]))
+
+
+        print("Medido: "+ str(self.cf_state.attitude[0]))
+        print("Desired: "+ str(self.desired_att[0]))
+
 
 
     def run_ang_vel_pid(self):
@@ -295,6 +309,7 @@ class CF_model():
                 self.att_pid_counter = 0
                 self.run_att_pid()
                 self.run_ang_vel_pid()
+                self.apply_simulation_step()
 
             else:
                 self.att_pid_counter = self.att_pid_counter + 1
@@ -305,7 +320,7 @@ class CF_model():
             else:
                 self.out_pos_counter = self.out_pos_counter + 1
 
-            self.apply_simulation_step()
+            
 
             # Wait for the cycle left time
             self.simulation_freq.sleep()
