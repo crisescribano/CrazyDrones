@@ -23,7 +23,7 @@ class SendSetpoint():
 		self.rate = rospy.Rate(10)
 		
 	def getPose(self, messageIn):
-		print("MESSAGE IN: pos to send: " + str(pos_setpoint))
+		print("MESSAGE IN: pos to send: " + str(self.pos_setpoint[0]))
 		self.pos_setpoint = [messageIn.linear.x, messageIn.linear.y, messageIn.linear.z, messageIn.angular.z]
 		if not self.started:
 			self.started = True
