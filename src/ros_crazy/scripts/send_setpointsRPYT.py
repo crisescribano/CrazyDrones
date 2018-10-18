@@ -4,26 +4,25 @@ import rospy
 from crazyflie_driver.msg import Position
 from geometry_msgs.msg import Twist
 
-#rostopic pub /crazyflie/pos_from_terminal geometry_msgs/Twist  '[0.0, 0.0, 0.0]' '[0.0, 0.0, 0.0]'
+#rostopic pub /crazyflie/rpyt_from_terminal geometry_msgs/Twist  '[0.0, 0.0, 0.0]' '[0.0, 0.0, 0.0]'
 
 class SendSetpointRPYT(): 
 
 	def __init__(self):
 
 		self.started = False
-		self.pos_setpointRPYT = [0.0, 0.0, 0.0, 0.0]
 		rospy.init_node("send_setpointsRPYT", anonymous=True)
+		self.pos_setpointRPYT = [0.0, 0.0, 0.0, 0.0]
 
 		self.worldFrame = rospy.get_param("~worldFrame", "/world")
 
 		self.msg = Twist()
 		self.pub = rospy.Publisher("cmd_vel", Twist, queue_size=1)
 		self.sub = rospy.Subscriber("rpyt_from_terminal", Twist, self.getRpyt)
-		self.rate = rospy.Rate(10)
+		self.rate = rospy.Rate(50)
 
 
 	def getRpyt(self, messageIn):
-		print("MESSAGE IN: Rpyt to send: " + str(self.pos_setpointRPYT))
 		self.pos_setpointRPYT = [messageIn.angular.x, messageIn.angular.y, messageIn.angular.z, messageIn.linear.z]
 		if not self.started:
 			self.started = True
