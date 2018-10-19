@@ -28,7 +28,7 @@
         </node>
         <node name="send_pos_setpoints" pkg="ros_crazy" type="send_pos_setpoints.py">
         </node>
-        <node name="send_setpointsRPYT" pkg="ros_crazy" type="send_setpointsRPYT.py">
+        <node name="send_setpointsRPYT" pkg="ros_crazy" type="send_setpointsRPYT.py" output="screen">
         </node>
     </group>
     <!-- Defining the arguments -->

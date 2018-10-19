@@ -30,15 +30,18 @@ class SendSetpointRPYT():
 	def _main_loop(self):
 
 		while(not rospy.is_shutdown()): 
+			
 			if(self.started):
 				#self.msg.header.seq = 0
 				#self.msg.header.stamp = rospy.Time.now()
 				#self.msg.header.frame_id = self.worldFrame
-				self.msg.angular.x = self.pos_setpointRPYT[0]
-				self.msg.angular.y = self.pos_setpointRPYT[1]
-				self.msg.angular.z = self.pos_setpointRPYT[2]
-				self.msg.linear.z = self.pos_setpointRPYT[3]
+				self.msg.angular.x = float(self.pos_setpointRPYT[0])
+				self.msg.angular.y = float(self.pos_setpointRPYT[1])
+				self.msg.angular.z = float(self.pos_setpointRPYT[2])
+				self.msg.linear.z = float(self.pos_setpointRPYT[3])
+
 				self.pub.publish(self.msg)
+				print("Publicado en cmd_vel: " + str(self.msg.linear.z))
 				self.rate.sleep()
 
 
