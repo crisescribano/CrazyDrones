@@ -1,0 +1,8 @@
+prefix=/home/cristinaescribano/CrazyDrones/devel
+
+Name: multi_crazyflie_simulator
+Description: Description of multi_crazyflie_simulator
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/cristinaescribano/CrazyDrones/devel/lib 
+Requires: 

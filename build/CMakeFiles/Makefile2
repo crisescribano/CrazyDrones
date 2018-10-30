@@ -877,6 +877,24 @@ clean: crazyflie_ros/crazyflie_tools/CMakeFiles/flash.dir/clean
 .PHONY : clean
 
 #=============================================================================
+# Directory level rules for directory multi_crazyflie_simulator
+
+# Convenience name for "all" pass in the directory.
+multi_crazyflie_simulator/all:
+
+.PHONY : multi_crazyflie_simulator/all
+
+# Convenience name for "clean" pass in the directory.
+multi_crazyflie_simulator/clean:
+
+.PHONY : multi_crazyflie_simulator/clean
+
+# Convenience name for "preinstall" pass in the directory.
+multi_crazyflie_simulator/preinstall:
+
+.PHONY : multi_crazyflie_simulator/preinstall
+
+#=============================================================================
 # Directory level rules for directory crazyflie_ros/crazyflie_demo
 
 # Convenience name for "all" pass in the directory.

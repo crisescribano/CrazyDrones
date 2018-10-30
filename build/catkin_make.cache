@@ -1,2 +1,2 @@
-crazyflie_ros/crazyflie:crazyflie_ros/crazyflie_controller:crazyflie_ros/crazyflie_cpp:crazyflie_ros/crazyflie_demo:crazyflie_ros/crazyflie_description:crazyflie_ros/crazyflie_driver:crazyflie_ros/crazyflie_tools:qualisys:ros_crazy
+crazyflie_ros/crazyflie:crazyflie_ros/crazyflie_controller:crazyflie_ros/crazyflie_cpp:crazyflie_ros/crazyflie_demo:crazyflie_ros/crazyflie_description:crazyflie_ros/crazyflie_driver:crazyflie_ros/crazyflie_tools:multi_crazyflie_simulator:qualisys:ros_crazy
 -DCATKIN_DEVEL_PREFIX=/home/cristinaescribano/CrazyDrones/devel -DCMAKE_INSTALL_PREFIX=/home/cristinaescribano/CrazyDrones/install -G Unix Makefiles
