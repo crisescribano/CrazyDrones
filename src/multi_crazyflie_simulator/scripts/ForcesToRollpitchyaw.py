@@ -15,23 +15,21 @@ class Forces():
 		# Init forces node:
 		rospy.init_node("force_to_att", anonymous = True)
 
+		self.topic = rospy.get_param("~topic")
 		# Comunication:
-		#rospy.Subscriber("force_from_terminal", GenericLogData, getForces)
-		self.pub = rospy.Publisher("/crazyflie_0/cmd_vel", Twist, queue_size=1)
+		rospy.Subscriber(self.topic + "/force_from_terminal", GenericLogData, self.getForces)
+		self.pub = rospy.Publisher(self.topic + "/cmd_vel", Twist, queue_size=1)
 
 		self.desired_3d_force = [0, 0, 0]
 		self.M = [(0,0,0), (0,0,0),(0,0,0)]
 		self.psi_angle = 0 # We do not care about the yaw rate
 		self.I = [(1,0,0), (0,1,0),(0,0,1)]
 
-	#def getForces(self, force_msg):
-    #	desired_3d_force = [force_msg[0], force_msg[1],force_msg[2]]
-
-	# def rot_z(self, gamma):
- #        cos_g = cos(gamma)
- #        sin_g = sin(gamma)
- #        self.M = np.array([[cos_g, sin_g, 0], [-sin_g, cos_g, 0], [0, 0, 1]])
- #        return self.M
+	def getForces(self, force_msg):
+		self.desired_3d_force[0] = force_msg.values[0]
+		self.desired_3d_force[1] = force_msg.values[1]
+		self.desired_3d_force[2] = force_msg.values[2]
+		print("forces: "+ str(self.desired_3d_force[0]) + ", "+ str(self.desired_3d_force[1]) + ", "+ str(self.desired_3d_force[2]))
 
 	def run(self):
 		while(not rospy.is_shutdown()):

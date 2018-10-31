@@ -4,4 +4,7 @@
   <node name="$(anon dynamical_model)" pkg="multi_crazyflie_simulator" type="CrazyFlie_dynamical_model.py" output="screen">
     <param name="topic" value="/crazyflie_$(arg quad_number)" />
   </node>
+  <node name="$(anon force_to_att)" pkg="multi_crazyflie_simulator" type="ForcesToRollpitchyaw.py" output="screen">
+    <param name="topic" value="/crazyflie_$(arg quad_number)" />
+  </node>
 </launch>
