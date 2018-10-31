@@ -45,9 +45,9 @@ class Control():
 			self.message.values[2] = self.fuerza[2]
 
 			self.pub.publish(self.message)
-			print("pos: "+ str(self.pos))
-			print("pos_des: "+ str(self.pos_des))
-			print("fuerza: "+str(self.fuerza))
+			# print("pos: "+ str(self.pos))
+			# print("pos_des: "+ str(self.pos_des))
+			# print("fuerza: "+str(self.fuerza))
 
 if __name__ == '__main__':
 	forces_control = Control()
