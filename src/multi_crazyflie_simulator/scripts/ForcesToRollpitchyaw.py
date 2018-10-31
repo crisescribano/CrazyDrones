@@ -33,7 +33,7 @@ class Forces():
 
 	def run(self):
 		while(not rospy.is_shutdown()):
-			self.desired_3d_force = [0, 0, 0]
+			
 			
 			norm = np.linalg.norm(self.desired_3d_force)
 
@@ -64,6 +64,8 @@ class Forces():
 			message.linear.y = pitch
 			#message.angular.z = yaw_rate_desired
 			message.linear.z = self.desired_3d_force[2]
+			print("message publish in cmd_vel: "+ str(message.linear.x) + ", "+ str(message.linear.y) + ", "+ str(message.linear.z))
+			print("desired forces: "+ str(self.desired_3d_force[0]) + ", "+ str(self.desired_3d_force[1]) + ", "+ str(self.desired_3d_force[2]))
 
 			self.pub.publish(message)
 
