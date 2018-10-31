@@ -7,4 +7,7 @@
   <node name="$(anon force_to_att)" pkg="multi_crazyflie_simulator" type="ForcesToRollpitchyaw.py" output="screen">
     <param name="topic" value="/crazyflie_$(arg quad_number)" />
   </node>
+    <node name="$(anon force_control)" pkg="multi_crazyflie_simulator" type="forces_control.py" output="screen">
+    <param name="topic" value="/crazyflie_$(arg quad_number)" />
+  </node>
 </launch>

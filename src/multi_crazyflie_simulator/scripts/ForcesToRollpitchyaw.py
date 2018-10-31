@@ -17,7 +17,7 @@ class Forces():
 
 		self.topic = rospy.get_param("~topic")
 		# Comunication:
-		rospy.Subscriber(self.topic + "/force_from_terminal", GenericLogData, self.getForces)
+		rospy.Subscriber(self.topic + "/forces_input", GenericLogData, self.getForces)
 		self.pub = rospy.Publisher(self.topic + "/cmd_vel", Twist, queue_size=1)
 
 		self.desired_3d_force = [0, 0, 0]
@@ -29,7 +29,6 @@ class Forces():
 		self.desired_3d_force[0] = force_msg.values[0]
 		self.desired_3d_force[1] = force_msg.values[1]
 		self.desired_3d_force[2] = force_msg.values[2]
-		print("forces: "+ str(self.desired_3d_force[0]) + ", "+ str(self.desired_3d_force[1]) + ", "+ str(self.desired_3d_force[2]))
 
 	def run(self):
 		while(not rospy.is_shutdown()):
@@ -64,8 +63,8 @@ class Forces():
 			message.linear.y = pitch
 			#message.angular.z = yaw_rate_desired
 			message.linear.z = self.desired_3d_force[2]
-			print("message publish in cmd_vel: "+ str(message.linear.x) + ", "+ str(message.linear.y) + ", "+ str(message.linear.z))
-			print("desired forces: "+ str(self.desired_3d_force[0]) + ", "+ str(self.desired_3d_force[1]) + ", "+ str(self.desired_3d_force[2]))
+			#print("message publish in cmd_vel: "+ str(message.linear.x) + ", "+ str(message.linear.y) + ", "+ str(message.linear.z))
+			#print("desired forces: "+ str(self.desired_3d_force[0]) + ", "+ str(self.desired_3d_force[1]) + ", "+ str(self.desired_3d_force[2]))
 
 			self.pub.publish(message)
 
