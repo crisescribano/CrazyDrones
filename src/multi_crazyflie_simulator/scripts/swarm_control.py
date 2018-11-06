@@ -21,45 +21,45 @@ from dynamic_reconfigure.server import Server
 import yaw_controller.yaw_controller as yaw_controller
 
 
-
 class Nav_control():
 
 	def __init__(self):
 
 		rospy.init_node('navigation_node_SIM') 
 
-		self.reference_pose = nav_msgs.msg.Odometry()
+		self.reference_pose = nav_msgs.msg.Odometry()	# NOT USED, INVEST
 		self.agent_pose = nav_msgs.msg.Odometry()
 		self.other_agents_pose_1 = nav_msgs.msg.Odometry()  #agent 2 for 1, agent 1 for 2, agent 1 for 3, agent 1 for 4, agent 1 for 5, agent 1 for 6
 		self.other_agents_pose_2 = nav_msgs.msg.Odometry()  #agent 3 for 1, agent 3 for 2, agent 2 for 3, agent 2 for 4, agent 2 for 5, agent 2 for 6
 		self.other_agents_pose_3 = nav_msgs.msg.Odometry()  #agent 4 for 1, agent 4 for 2, agent 4 for 3, agent 3 for 4, agent 3 for 5, agent 3 for 6
 		self.other_agents_pose_4 = nav_msgs.msg.Odometry()  #agent 5 for 1, agent 5 for 2, agent 5 for 3, agent 5 for 4, agent 4 for 5, agent 4 for 6
 		self.other_agents_pose_5 = nav_msgs.msg.Odometry()  #agent 6 for 1, agent 6 for 2, agent 6 for 3, agent 6 for 4, agent 6 for 5, agent 5 for 6
-	
+		
+		self.topic = rospy.get_param("~topic")
+
 		force_pub = rospy.Publisher('uav_force_reference', mav_msgs.msg.TorqueThrust, queue_size = 100)
 
-		rospy.Subscriber('uav_odometry', nav_msgs.msg.Odometry, self.callback_sub_uav_odometry)
-		rospy.Subscriber('other_uav_odometry_1', nav_msgs.msg.Odometry, self.callback_sub_othet_uav_odometry_1)
-		rospy.Subscriber('other_uav_odometry_2', nav_msgs.msg.Odometry, self.callback_sub_othet_uav_odometry_2)
-		rospy.Subscriber('other_uav_odometry_3', nav_msgs.msg.Odometry, self.callback_sub_othet_uav_odometry_3)
-		rospy.Subscriber('other_uav_odometry_4', nav_msgs.msg.Odometry, self.callback_sub_othet_uav_odometry_4)
-		rospy.Subscriber('other_uav_odometry_5', nav_msgs.msg.Odometry, self.callback_sub_othet_uav_odometry_5)
+		rospy.Subscriber(self.topic + "/out_pos_odometry", nav_msgs.msg.Odometry, self.callback_crazyflie_1)
+		rospy.Subscriber(self.topic + "/out_pos_odometry", nav_msgs.msg.Odometry, self.callback_crazyflie_2)
+		rospy.Subscriber(self.topic + "/out_pos_odometry", nav_msgs.msg.Odometry, self.callback_crazyflie_3)
+		rospy.Subscriber(self.topic + "/out_pos_odometry", nav_msgs.msg.Odometry, self.callback_crazyflie_4)
+		rospy.Subscriber(self.topic + "/out_pos_odometry", nav_msgs.msg.Odometry, self.callback_crazyflie_5)
+		rospy.Subscriber(self.topic + "/out_pos_odometry", nav_msgs.msg.Odometry, self.callback_crazyflie_6)
 
 		time = rospy.get_time()
 
-		# Trayectoria a seguir por el leader: CREO
+		# Trayectory to follow:
 		self.PoI = np.array([[0, 0, 5], [4, 5, 3],[-2, 4, 2],[3, -2, 3]])
 
-
-########### DUDAS #################################################
 		self.priority = rospy.get_param("priority")
 		self.agent_number = rospy.get_param("agent_number")
-		self.region_idx = rospy.get_param("first_region")
+		self.region_idx = 0
 
+
+		### DUDA #######################################################################################################################
 		if self.agent_number == 1:
 			self.e_p_pub = rospy.Publisher('leader_error', std_msgs.msg.Float64, queue_size = 100)
 			self.leader_time_pub = rospy.Publisher('leader_time', std_msgs.msg.Float64, queue_size = 100)
-###################################################################
 
 		self.con_offset = 0
 		self.col_offset = 0
@@ -77,19 +77,13 @@ class Nav_control():
 
 		self.rate = rospy.Rate(100) 
 
-		#xd = np.array([10,-0.5,3])
-
-
-
 	def position_and_velocity_from_odometry(odometry):
 
 		x = np.array([odometry.pose.pose.position.x,\
 						odometry.pose.pose.position.y,\
 						odometry.pose.pose.position.z])
-
 		# TODO: naming of child_frame_id
 		if odometry.child_frame_id == 'firefly/base_link':
-
 			# velocity is in the body reference frame
 			v_body = np.array([odometry.twist.twist.linear.x,\
 								odometry.twist.twist.linear.y,\
@@ -99,37 +93,62 @@ class Nav_control():
 									odometry.pose.pose.orientation.y,\
 									odometry.pose.pose.orientation.z,\
 									odometry.pose.pose.orientation.w])
-
 			# TODO
 			rotation_matrix  = utility_functions.rot_from_quaternion(quaternion)
-
 			v = np.dot(rotation_matrix,v_body)
-
 		else:
 		# velocity is in the body reference frame
 			v = np.array([odometry.twist.twist.linear.x,\
 		  				odometry.twist.twist.linear.y,\
 		  				odometry.twist.twist.linear.z])
-
 		return x,v
 
-	def callback_sub_uav(self, data):
-		self.agent_pose = data
+	### Remap to change the number os the Crazyflie we refer depending on which Crazyflie runs the code:
+	#		This remap is donne following the graph that is already given
+	def callback_crazyflie_1(self, data): 
+		if self.agent_number == 1:
+			self.agent_pose = data
+		else: 
+			self.other_agents_pose_1 = data
 
-	def callback_sub_othet_uav_odometry_1(self, data):  
-		self.other_agents_pose_1 = data
+	def callback_crazyflie_2(self, data): 
+		if self.agent_number == 1: 
+			self.other_agents_pose_1 = data
+		elif self.agent_number == 2:
+			self.agent_pose = data
+		else: 
+			self.other_agents_pose_2 = data 
 
-	def callback_sub_othet_uav_odometry_2(self, data):  
-		self.other_agents_pose_2 = data
+	def callback_crazyflie_3(self, data):  
+		if self.agent_number == 1 or self.agent_number == 2: 
+			self.other_agents_pose_2 = data
+		elif self.agent_number == 3:
+			self.agent_pose = data
+		else: 
+			self.other_agents_pose_3 = data 
 
-	def callback_sub_othet_uav_odometry_3(self, data):  
-		self.other_agents_pose_3 = data
+	def callback_crazyflie_4(self, data):  
+		if self.agent_number == 5 or self.agent_number == 6: 
+			self.other_agents_pose_4 = data
+		elif self.agent_number == 4:
+			self.agent_pose = data
+		else: 
+			self.other_agents_pose_3 = data 
 
-	def callback_sub_othet_uav_odometry_4(self, data):  
-		self.other_agents_pose_4 = data
-
-	def callback_sub_othet_uav_odometry_5(self, data):  
+	def callback_crazyflie_5(self, data):  
+		if self.agent_number == 6: 
+			self.other_agents_pose_5 = data
+		elif self.agent_number == 5:
+			self.agent_pose = data
+		else: 
+			self.other_agents_pose_4 = data 
 		self.other_agents_pose_5 = data
+
+	def callback_crazyflie_6(self, data): 
+		if self.agent_number == 6:
+			self.agent_pose = data
+		else: 
+			self.other_agents_pose_5 = data 
 
 	def eta_funtion(self, x, x_other, v, v_other):
 		eta_con = d_con**2 - np.linalg.norm(x-x_other)**2     
@@ -160,9 +179,7 @@ class Nav_control():
 	def beta_con(self, eta_con, eta_con_dot):
 		beta_con = self.coeff[0]*eta_con**5 + self.coeff[1]*eta_con**4 + self.coeff[2]*eta_con**3
 		beta_con_dot = (5*self.coeff[0]*eta_con**4 + 4*self.coeff[1]*eta_con**3 + 3*self.coeff[2]*eta_con**2) * eta_con_dot
-		
 		return beta_con, beta_con_dot
-
 
 	def grad_beta_con(self, beta_con, beta_con_dot, eta_con, eta_con_dot, x, x_other, v, v_other):
 		grad_beta_con = -1/beta_con**2*(5*self.coeff[0]*eta_con**4 + 4*self.coeff[1]*eta_con**3 + 3*self.coeff[2]*eta_con**2)*(-2*(x-x_other))
@@ -170,22 +187,17 @@ class Nav_control():
 		term2 = -1/beta_con**2 * (20*self.coeff[0]*eta_con**3 + 12*self.coeff[1]*eta_con**2 + 6*self.coeff[2]*eta_con)*eta_con_dot*(-2*(x-x_other))
 		term3 = -1/beta_con**2*(5*self.coeff[0]*eta_con**4 + 4*self.coeff[1]*eta_con**3 + 3*self.coeff[2]*eta_con**2)*(-2*(v-v_other))
 		grad_beta_con_dot = term1 + term2 + term3
-
 		return grad_beta_con, grad_beta_con_dot
-
 
 	def reset_grad_beta(self):
 		grad_beta = np.zeros(3)
 		grad_beta_dot = np.zeros(3)
 		return grad_beta, grad_beta_dot
 
-
 	def beta_col(self, iota_col, iota_col_dot):
 		beta_col = self.coeff[0]*iota_col**5 + self.coeff[1]*iota_col**4 + self.coeff[2]*iota_col**3
 		beta_col_dot = (5*self.coeff[0]*iota_col**4 + 4*self.coeff[1]*iota_col**3 + 3*self.coeff[2]*iota_col**2)*iota_col_dot
-
 		return beta_col, beta_col_dot
-
 
 	def grad_beta_col(self, beta_col, beta_col_dot, iota_col, iota_col_dot, x, x_other, v, v_other):
 		grad_beta_col = -1/beta_col**2*(5*self.coeff[0]*iota_col**4 + 4*self.coeff[1]*iota_col**3 + 3*self.coeff[2]*iota_col**2)*(2*(x-x_other))
@@ -193,7 +205,6 @@ class Nav_control():
 		term2 = -1/beta_col**2 * (20*self.coeff[0]*iota_col**3 + 12*self.coeff[1]*iota_col**2 + 6*self.coeff[2]*iota_col)*iota_col_dot*(2*(x-x_other))
 		term3 = -1/beta_col**2*(5*self.coeff[0]*iota_col**4 + 4*self.coeff[1]*iota_col**3 + 3*self.coeff[2]*iota_col**2)*(2*(v-v_other))
 		grad_beta_col_dot = term1 + term2 + term3 
-
 		return grad_beta_col, grad_beta_col_dot
 
 
@@ -237,7 +248,6 @@ class Nav_control():
 
 		while not rospy.is_shutdown():
 
-
 			# Initiation 
 			eta_con_3 = 0       
 			eta_con_dot_3 = 0
@@ -254,6 +264,8 @@ class Nav_control():
 			# Error
 			ep = np.zeros(3)
 
+
+			# YA REFERIDO A CADA UNO, EL 1 ES DISTINTO SEGUN QUE CRAZYFLIE SEAMOS. MAPEO YA REALIZADO
 			# Get the position and velocity of all the CrazyFlies
 			x,v = position_and_velocity_from_odometry(self.agent_pose)
 			x_other_1, v_other_1 = position_and_velocity_from_odometry(self.other_agents_pose_1)
@@ -275,6 +287,7 @@ class Nav_control():
 			self.theta_hat = self.theta_hat + self.dt*self.theta_hat_dot
 
 			# Point to achieve
+
 			xd = self.PoI[self.region_idx] ### DUDISIMA
 
 			# If the Crazyflie is the leader:

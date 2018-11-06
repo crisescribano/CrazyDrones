@@ -55,7 +55,8 @@ class CF_model():
         rospy.Subscriber(self.topic + "/cmd_vel", Twist, self.new_attitude_setpoint)
         rospy.Subscriber(self.topic + "/cmd_pos", Position, self.new_position_setpoint)
         rospy.Subscriber("/init_pose", PointStamped, self.new_init_position)
-        self.pub_pos = rospy.Publisher(self.topic +"/out_pos", PoseStamped, queue_size = 1000)
+        self.pub_pos = rospy.Publisher(self.topic + "/out_pos", PoseStamped, queue_size = 1000)
+        ### DO A TOPIC WITH "/out_pos_odometry" simulando al mocap
         self.pub_ack = rospy.Publisher("/init_pose_ack", String, queue_size = 1000)
         self.msg = PoseStamped()
 
