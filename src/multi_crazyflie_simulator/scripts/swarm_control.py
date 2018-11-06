@@ -61,6 +61,10 @@ class Nav_control():
 			self.leader_time_pub = rospy.Publisher('leader_time', std_msgs.msg.Float64, queue_size = 100)
 ###################################################################
 
+		self.con_offset = 0
+		self.col_offset = 0
+		self.beta_bound = 0
+		self.coeff = [0, 0, 0]
 
 		self.a_hat = 0
 		self.a_hat_dot = 0
@@ -127,6 +131,71 @@ class Nav_control():
 	def callback_sub_othet_uav_odometry_5(self, data):  
 		self.other_agents_pose_5 = data
 
+	def eta_funtion(self, x, x_other, v, v_other):
+		eta_con = d_con**2 - np.linalg.norm(x-x_other)**2     
+		eta_con_dot = -2*np.dot((x-x_other), (v - v_other))
+		return eta_con, eta_con_dot
+
+	def iota_con(self, x, x_other, v, v_other):
+		iota_con = np.linalg.norm(x-x_other)**2 - 4*r**2
+		iota_col_dot = 2*np.dot(x-x_other, v-v_other)
+		return iota_con, iota_col_dot
+
+	def A_con(self):
+		A = np.array([[self.con_offset**5,self.con_offset**4, self.con_offset**3],[5*self.con_offset**4, 4*self.con_offset**3, 3*self.con_offset**2], [20*self.con_offset**3, 12*self.con_offset**2, 6*self.con_offset]])
+		return A
+
+	def B_con(self):
+		B = np.array([self.beta_bound,0,0])
+		return B
+
+	def A_col(self):
+		A = np.array([[self.col_offset**5,self.col_offset**4, self.col_offset**3],[5*self.col_offset**4, 4*self.col_offset**3, 3*self.col_offset**2], [20*self.col_offset**3, 12*self.col_offset**2, 6*self.col_offset]])
+		return A
+
+	def B_col(self):
+		B = np.array([self.beta_bound,0,0])
+		return B
+
+	def beta_con(self, eta_con, eta_con_dot):
+		beta_con = self.coeff[0]*eta_con**5 + self.coeff[1]*eta_con**4 + self.coeff[2]*eta_con**3
+		beta_con_dot = (5*self.coeff[0]*eta_con**4 + 4*self.coeff[1]*eta_con**3 + 3*self.coeff[2]*eta_con**2) * eta_con_dot
+		
+		return beta_con, beta_con_dot
+
+
+	def grad_beta_con(self, beta_con, beta_con_dot, eta_con, eta_con_dot, x, x_other, v, v_other):
+		grad_beta_con = -1/beta_con**2*(5*self.coeff[0]*eta_con**4 + 4*self.coeff[1]*eta_con**3 + 3*self.coeff[2]*eta_con**2)*(-2*(x-x_other))
+		term1 = 2/beta_con**3 * beta_con_dot * (5*self.coeff[0]*eta_con**4 + 4*self.coeff[1]*eta_con**3 + 3*self.coeff[2]*eta_con**2)*(-2*(x-x_other))
+		term2 = -1/beta_con**2 * (20*self.coeff[0]*eta_con**3 + 12*self.coeff[1]*eta_con**2 + 6*self.coeff[2]*eta_con)*eta_con_dot*(-2*(x-x_other))
+		term3 = -1/beta_con**2*(5*self.coeff[0]*eta_con**4 + 4*self.coeff[1]*eta_con**3 + 3*self.coeff[2]*eta_con**2)*(-2*(v-v_other))
+		grad_beta_con_dot = term1 + term2 + term3
+
+		return grad_beta_con, grad_beta_con_dot
+
+
+	def reset_grad_beta(self):
+		grad_beta = np.zeros(3)
+		grad_beta_dot = np.zeros(3)
+		return grad_beta, grad_beta_dot
+
+
+	def beta_col(self, iota_col, iota_col_dot):
+		beta_col = self.coeff[0]*iota_col**5 + self.coeff[1]*iota_col**4 + self.coeff[2]*iota_col**3
+		beta_col_dot = (5*self.coeff[0]*iota_col**4 + 4*self.coeff[1]*iota_col**3 + 3*self.coeff[2]*iota_col**2)*iota_col_dot
+
+		return beta_col, beta_col_dot
+
+
+	def grad_beta_col(self, beta_col, beta_col_dot, iota_col, iota_col_dot, x, x_other, v, v_other):
+		grad_beta_col = -1/beta_col**2*(5*self.coeff[0]*iota_col**4 + 4*self.coeff[1]*iota_col**3 + 3*self.coeff[2]*iota_col**2)*(2*(x-x_other))
+		term1 = 2/beta_col**3 * beta_col_dot * (5*self.coeff[0]*iota_col**4 + 4*self.coeff[1]*iota_col**3 + 3*self.coeff[2]*iota_col**2)*(2*(x-x_other))
+		term2 = -1/beta_col**2 * (20*self.coeff[0]*iota_col**3 + 12*self.coeff[1]*iota_col**2 + 6*self.coeff[2]*iota_col)*iota_col_dot*(2*(x-x_other))
+		term3 = -1/beta_col**2*(5*self.coeff[0]*iota_col**4 + 4*self.coeff[1]*iota_col**3 + 3*self.coeff[2]*iota_col**2)*(2*(v-v_other))
+		grad_beta_col_dot = term1 + term2 + term3 
+
+		return grad_beta_col, grad_beta_col_dot
+
 
 	def navigation():
 
@@ -164,10 +233,28 @@ class Nav_control():
 		counter = 1
 		mode = 0
 		second_reg = False
-		
+		grav = 9.81
 
 		while not rospy.is_shutdown():
 
+
+			# Initiation 
+			eta_con_3 = 0       
+			eta_con_dot_3 = 0
+
+			grad_beta_con_2, grad_beta_con_dot_2 = reset_grad_beta()
+			grad_beta_con_3, grad_beta_con_dot_3 = reset_grad_beta()
+
+			# Control:
+			control = np.zeros(3)
+
+			# Duda:
+			e3 = np.array([0.0,0.0,1.0])
+
+			# Error
+			ep = np.zeros(3)
+
+			# Get the position and velocity of all the CrazyFlies
 			x,v = position_and_velocity_from_odometry(self.agent_pose)
 			x_other_1, v_other_1 = position_and_velocity_from_odometry(self.other_agents_pose_1)
 			x_other_2, v_other_2 = position_and_velocity_from_odometry(self.other_agents_pose_2)
@@ -175,424 +262,317 @@ class Nav_control():
 			x_other_4, v_other_4 = position_and_velocity_from_odometry(self.other_agents_pose_4)
 			x_other_5, v_other_5 = position_and_velocity_from_odometry(self.other_agents_pose_5)
 
-			if self.priority == 1:
-				mode = 1
-			else:
+			# Check if we are lider o follower
+			if self.priority == 1: # Lider
+				mode = 1 
+			else:                  # Follower
 				mode = 0
 
+			# Integration
 			self.a_hat = self.a_hat + self.dt*self.a_hat_dot
 			self.d_b_hat = self._b_hat + self.dt*self.d_b_hat_dot
 			self.f_b_hat = self.f_b_hat + self.dt*self.f_b_hat_dot
 			self.theta_hat = self.theta_hat + self.dt*self.theta_hat_dot
 
+			# Point to achieve
 			xd = self.PoI[self.region_idx] ### DUDISIMA
 
-			ep = np.zeros(3)
-
-			if mode==1:      
+			# If the Crazyflie is the leader:
+			if mode == 1:      
 				ep = x - xd
 				integrator = integrator + dt*ep
-				ki = .5      
-				#kv_z = 1.5
-
-			if mode==1:      
+				ki = 0.5          
 
 				leader_time_msg = std_msgs.msg.Float64()
 				leader_time_msg.data = rospy.get_time()
 				leader_time_pub.publish(leader_time_msg)
 
-				if np.linalg.norm(ep) < 0.075:
-					print 'REACHED!!!'
-					self.region_idx+= 1
-					integrator = np.zeros(3)
+				if np.linalg.norm(ep) < 0.075:	# Check if desired point is achieved
+					print 'REACHED!!!'			# Point achieved
+					self.region_idx+= 1			# Another point to achieve
+					integrator = np.zeros(3)	# Reset the integrator
 
 
-			u = np.zeros(3)
-			e3 = np.array([0.0,0.0,1.0])
 
-				
-			#edges = { (1,2), (1,3), (1,4), (3,4), (3,5) }
-			if self.agent_number == 5:
-				eta_con_1 = d_con**2 - np.linalg.norm(x-x_other_3)**2     
-				eta_con_dot_1 = -2*np.dot((x-x_other_3), (v - v_other_3))
 
-			elif self.agent_number == 6:
-				eta_con_1 = d_con**2 - np.linalg.norm(x-x_other_5)**2     
-				eta_con_dot_1 = -2*np.dot((x-x_other_5), (v - v_other_5))
+			###############################
+			### Value of etas and iotas ###
+			###############################
 
-			else:
-				eta_con_1 = d_con**2 - np.linalg.norm(x-x_other_1)**2  
-				eta_con_dot_1 = -2*np.dot((x-x_other_1), (v - v_other_1))   
+			# Define the conections in the graph
+			# Edges = {(1,2), (1,3), (1,4), (3,4), (3,5), (5,6), (6,2)}
 			
-			eta_con_3 = 0       
-			eta_con_dot_3 = 0
-
-
-			grad_beta_con_2 = np.zeros(3)
-			grad_beta_con_3 = np.zeros(3)
-			grad_beta_con_dot_2 = np.zeros(3)
-			grad_beta_con_dot_3 = np.zeros(3)
-
+			# Definition of etas depending on the Crazyflie we are
 			if self.agent_number == 1:
-				eta_con_2 = d_con**2 - np.linalg.norm(x-x_other_2)**2
-				eta_con_3 = d_con**2 - np.linalg.norm(x-x_other_3)**2
-				eta_con_dot_2 = -2*np.dot((x-x_other_2), (v - v_other_2))
-				eta_con_dot_3 = -2*np.dot((x-x_other_3), (v - v_other_3))
+				eta_con_1, eta_con_dot_1 = eta_funtion(x, x_other_1, v, v_other_1)
+				eta_con_2, eta_con_dot_2 = eta_funtion(x, x_other_2, v, v_other_2)
+				eta_con_3, eta_con_dot_3 = eta_funtion(x, x_other_3, v, v_other_3)
 
 			if self.agent_number == 2:
-				eta_con_2 = d_con**2 - np.linalg.norm(x-x_other_5)**2
-				eta_con_dot_2 = -2*np.dot((x-x_other_5), (v - v_other_5))
+				eta_con_1, eta_con_dot_1 = eta_funtion(x, x_other_1, v, v_other_1)
+				eta_con_2, eta_con_dot_2 = eta_funtion(x, x_other_5, v, v_other_5)
 
 			if self.agent_number == 3:
-				eta_con_2 = d_con**2 - np.linalg.norm(x-x_other_3)**2
-				eta_con_3 = d_con**2 - np.linalg.norm(x-x_other_4)**2
-				eta_con_dot_2 = -2*np.dot((x-x_other_3), (v - v_other_3))
-				eta_con_dot_3 = -2*np.dot((x-x_other_4), (v - v_other_4))
+				eta_con_1, eta_con_dot_1 = eta_funtion(x, x_other_1, v, v_other_1)
+				eta_con_2, eta_con_dot_2 = eta_funtion(x, x_other_3, v, v_other_3)
+				eta_con_3, eta_con_dot_3 = eta_funtion(x, x_other_4, v, v_other_4)
 
 			if self.agent_number == 4:
-				eta_con_2 = d_con**2 - np.linalg.norm(x-x_other_3)**2
-				eta_con_dot_2 = -2*np.dot((x-x_other_3), (v - v_other_3))
+				eta_con_1, eta_con_dot_1 = eta_funtion(x, x_other_1, v, v_other_1)
+				eta_con_2, eta_con_dot_2 = eta_funtion(x, x_other_3, v, v_other_3)
 
 			if self.agent_number == 5:
-				eta_con_2 = d_con**2 - np.linalg.norm(x-x_other_5)**2
-				eta_con_dot_2 = -2*np.dot((x-x_other_5), (v - v_other_5))
+				eta_con_1, eta_con_dot_1 = eta_funtion(x, x_other_3, v, v_other_3)
+				eta_con_2, eta_con_dot_2 = eta_funtion(x, x_other_5, v, v_other_5)
 
 			if self.agent_number == 6:
-				eta_con_2 = d_con**2 - np.linalg.norm(x-x_other_2)**2
-				eta_con_dot_2 = -2*np.dot((x-x_other_2), (v - v_other_2))
+				eta_con_1, eta_con_dot_1 = eta_funtion(x, x_other_5, v, v_other_5)
+				eta_con_2, eta_con_dot_2 = eta_funtion(x, x_other_2, v, v_other_2)
+			
+
+			# Definition of the posible collision (everyone with everyone)
+			iota_col_1, iota_col_dot_1 = iota_con(x, x_other_1, v, v_other_1)
+			iota_col_2, iota_col_dot_2 = iota_con(x, x_other_2, v, v_other_2)
+			iota_col_3, iota_col_dot_3 = iota_con(x, x_other_3, v, v_other_3)
+			iota_col_4, iota_col_dot_4 = iota_con(x, x_other_4, v, v_other_4)
+			iota_col_5, iota_col_dot_5 = iota_con(x, x_other_5, v, v_other_5)
 
 
-			iota_col_1 = np.linalg.norm(x-x_other_1)**2 - 4*r**2
-			iota_col_2 = np.linalg.norm(x-x_other_2)**2 - 4*r**2
-			iota_col_3 = np.linalg.norm(x-x_other_3)**2 - 4*r**2
-			iota_col_4 = np.linalg.norm(x-x_other_4)**2 - 4*r**2
-			iota_col_5 = np.linalg.norm(x-x_other_5)**2 - 4*r**2
-
-			iota_col_dot_1 = 2*np.dot(x-x_other_1, v-v_other_1)
-			iota_col_dot_2 = 2*np.dot(x-x_other_2, v-v_other_2)
-			iota_col_dot_3 = 2*np.dot(x-x_other_3, v-v_other_3)
-			iota_col_dot_4 = 2*np.dot(x-x_other_4, v-v_other_4)
-			iota_col_dot_5 = 2*np.dot(x-x_other_5, v-v_other_5)
 
 
-			con_distance_meas = 0 #inter agent distance where we start taking con. into account (greater than)
-			con_offset = d_con**2 - con_distance_meas**2
+			####################################################################################
+			### Implementation of not disconnection: ETA BIGGER THAT 0 FOR NOT DISCONNECTION ###
+			####################################################################################
 
-			beta_bound = 10**4
+			con_distance_meas = 0 								# Inter agent distance where we start taking conection into account (greater than)
+			self.con_offset = d_con**2 - con_distance_meas**2	# DUDA ####################################################################
+			self.beta_bound = 10**4
 
-			# if agent_number==5:
-			#   beta_bound = 10**3
-			#   ki = 10
+			# CODE FOR ETA 1
 
-			if eta_con_1 < 0:
+			if eta_con_1 < 0:					# Eta less than 0, everything 0 
 				beta_con_1 = 0
-				grad_beta_con_1 = np.zeros(3)
-				grad_beta_con_dot_1 = np.zeros(3)
+				grad_beta_con_1, grad_beta_con_dot_1 = reset_grad_beta()
 
-			elif eta_con_1 < con_offset:
-
-				#[con_offset^5 con_offset^4 con_offset^3;5*con_offset^4 4*con_offset^3 3*con_offset^2;20*con_offset^3 12*con_offset^2 6*con_offset];
-
-				# beta_con(m) = coeff(1)*eta(m)^5 + coeff(2)*eta(m)^4 + coeff(3)*eta(m)^3;
-				# grad_beta_con_m1(:,m) = -1/beta_con(m)^2 * ( 5*coeff(1)*eta(m)^4 + 4*coeff(2)*eta(m)^3 + 3*coeff(3)*eta(m)^2 )*(-2*(p(:,m_1)-p(:,m_2)));
-				# grad_beta_con_m1_dot(:,m) = -1/beta_con(m)^2 * ( 5*coeff(1)*eta(m)^4 + 4*coeff(2)*eta(m)^3 + 3*coeff(3)*eta(m)^2 )*(-2*(v(:,m_1)-v(:,m_2)))+ ...
-				#                      2/beta_con(m)^3 * ( 5*coeff(1)*eta(m)^4 + 4*coeff(2)*eta(m)^3 + 3*coeff(3)*eta(m)^2 )^2*(-2*(p(:,m_1)-p(:,m_2)))'*(v(:,m_1)-v(:,m_2))*(-2*(p(:,m_1)-p(:,m_2))) + ...
-				#                        -1/beta_con(m)^2 * ( 20*coeff(1)*eta(m)^3 + 12*coeff(2)*eta(m)^2 + 6*coeff(3)*eta(m) )*(-2*(p(:,m_1)-p(:,m_2)))'*(v(:,m_1)-v(:,m_2))*(-2*(p(:,m_1)-p(:,m_2)));
-				    
-				A = np.array([[con_offset**5,con_offset**4, con_offset**3],[5*con_offset**4, 4*con_offset**3, 3*con_offset**2], [20*con_offset**3, 12*con_offset**2, 6*con_offset]])
-				B = np.array([beta_bound,0,0])
-
-				coeff = np.dot(np.linalg.inv(A),B)
+			elif eta_con_1 < self.con_offset:	# If the distante between Crazyflie is more that 0, define betas
+				### DUDA ##################################################################################################################
+				A = A_con() # 
+				B = B_con()
+				self.coeff = np.dot(np.linalg.inv(A),B)
+				###########################################################################################################################
+				beta_con_1, beta_con_dot_1 = beta_con(eta_con_1, eta_con_dot_1)
+				grad_beta_con_1, grad_beta_con_dot_1 = grad_beta_con(beta_con_1, beta_con_dot_1, eta_con_1, eta_con_dot_1, x, x_other_1, v, v_other_1)
+				
+			else:								# If the distance between Crazuflies is less than 0:
+				beta_con_1 = self.beta_bound
+				grad_beta_con_1, grad_beta_con_dot_1 = reset_grad_beta()
 
 
-				beta_con_1 = coeff[0]*eta_con_1**5 + coeff[1]*eta_con_1**4 + coeff[2]*eta_con_1**3
-				grad_beta_con_1 = -1/beta_con_1**2*(5*coeff[0]*eta_con_1**4 + 4*coeff[1]*eta_con_1**3 + 3*coeff[2]*eta_con_1**2)*(-2*(x-x_other_1))
+			# CODE FOR ETA 2
 
-				beta_con_dot_1 = (5*coeff[0]*eta_con_1**4 + 4*coeff[1]*eta_con_1**3 + 3*coeff[2]*eta_con_1**2) * eta_con_dot_1
-				term1 = 2/beta_con_1**3 * beta_con_dot_1 * (5*coeff[0]*eta_con_1**4 + 4*coeff[1]*eta_con_1**3 + 3*coeff[2]*eta_con_1**2)*(-2*(x-x_other_1))
-				term2 = -1/beta_con_1**2 * (20*coeff[0]*eta_con_1**3 + 12*coeff[1]*eta_con_1**2 + 6*coeff[2]*eta_con_1)*eta_con_dot_1*(-2*(x-x_other_1))
-				term3 = -1/beta_con_1**2*(5*coeff[0]*eta_con_1**4 + 4*coeff[1]*eta_con_1**3 + 3*coeff[2]*eta_con_1**2)*(-2*(v-v_other_1))
-				grad_beta_con_dot_1 = term1 + term2 + term3
-
-			else:
-				beta_con_1 = beta_bound
-				grad_beta_con_1 = np.zeros(3)
-				grad_beta_con_dot_1 = np.zeros(3)
-
-
-			#if agent_number != 4 #agent_number==1 or agent_number==2 or agent_number==3 or agent_number==5 or agent_number==6:
 			if eta_con_2 < 0:
 				beta_con_2 = 0
-				grad_beta_con_2 = np.zeros(3)
-				grad_beta_con_dot_2 = np.zeros(3)
+				grad_beta_con_2, grad_beta_con_dot_2 = reset_grad_beta()
 
-			elif eta_con_2 < con_offset:
+			elif eta_con_2 < self.con_offset:
 
-				A = np.array([[con_offset**5,con_offset**4, con_offset**3],[5*con_offset**4, 4*con_offset**3, 3*con_offset**2], [20*con_offset**3, 12*con_offset**2, 6*con_offset]])
-				B = np.array([beta_bound,0,0])
+				A = A_con()
+				B = B_con()
+				self.coeff = np.dot(np.linalg.inv(A),B)
 
-				coeff = np.dot(np.linalg.inv(A),B)
-
-				beta_con_2 = coeff[0]*eta_con_2**5 + coeff[1]*eta_con_2**4 + coeff[2]*eta_con_2**3
-				grad_beta_con_2 = -1/beta_con_2**2*(5*coeff[0]*eta_con_2**4 + 4*coeff[1]*eta_con_2**3 + 3*coeff[2]*eta_con_2**2)*(-2*(x-x_other_2))
-
-				beta_con_dot_2 = (5*coeff[0]*eta_con_2**4 + 4*coeff[1]*eta_con_2**3 + 3*coeff[2]*eta_con_2**2 )*eta_con_dot_2
-				term1 = 2/beta_con_2**3 * beta_con_dot_2 * (5*coeff[0]*eta_con_2**4 + 4*coeff[1]*eta_con_2**3 + 3*coeff[2]*eta_con_2**2)*(-2*(x-x_other_2))
-				term2 = -1/beta_con_2**2 * (20*coeff[0]*eta_con_2**3 + 12*coeff[1]*eta_con_2**2 + 6*coeff[2]*eta_con_2)*eta_con_dot_2*(-2*(x-x_other_2))
-				term3 = -1/beta_con_2**2*(5*coeff[0]*eta_con_2**4 + 4*coeff[1]*eta_con_2**3 + 3*coeff[2]*eta_con_2**2)*(-2*(v-v_other_2))
-				grad_beta_con_dot_2 = term1 + term2 + term3
-
+				beta_con_2, beta_con_dot_2 = beta_con(eta_con_2, eta_con_dot_2)
+				grad_beta_con_2, grad_beta_con_dot_2 = grad_beta_con(beta_con_2, beta_con_dot_2, eta_con_2, eta_con_dot_2, x, x_other_2, v, v_other_2)
+				
 			else:
-				beta_con_2 = beta_bound
-				grad_beta_con_2 = np.zeros(3)
-				grad_beta_con_dot_2 = np.zeros(3)
+				beta_con_2 = self.beta_bound
+				grad_beta_con_2, grad_beta_con_dot_2 = reset_grad_beta()
 
+			# CODE FOR ETA 3 (JUST IF NECESSARY)
 
-			if self.agent_number==1 or self.agent_number==3:
+			if self.agent_number == 1 or self.agent_number == 3:
+
 				if eta_con_3 < 0:
 					beta_con_3 = 0
-					grad_beta_con_3 = np.zeros(3)
-					grad_beta_con_dot_3 = np.zeros(3)
+					grad_beta_con_3, grad_beta_con_dot_3 = reset_grad_beta()
 
-				elif eta_con_3 < con_offset:
+				elif eta_con_3 < self.con_offset:
 
-					A = np.array([[con_offset**5,con_offset**4, con_offset**3],[5*con_offset**4, 4*con_offset**3, 3*con_offset**2], [20*con_offset**3, 12*con_offset**2, 6*con_offset]])
-					B = np.array([beta_bound,0,0])
+					A = A_con()
+					B = B_con()
+					self.coeff = np.dot(np.linalg.inv(A),B)
 
-					coeff = np.dot(np.linalg.inv(A),B)
-
-					beta_con_3 = coeff[0]*eta_con_3**5 + coeff[1]*eta_con_3**4 + coeff[2]*eta_con_3**3
-					grad_beta_con_3 = -1/beta_con_3**2*(5*coeff[0]*eta_con_3**4 + 4*coeff[1]*eta_con_3**3 + 3*coeff[2]*eta_con_3**2)*(-2*(x-x_other_3))
-
-					beta_con_dot_3 = (5*coeff[0]*eta_con_3**4 + 4*coeff[1]*eta_con_3**3 + 3*coeff[2]*eta_con_3**2)*eta_con_dot_3
-					term1 = 2/beta_con_3**3 * beta_con_dot_3 * (5*coeff[0]*eta_con_3**4 + 4*coeff[1]*eta_con_3**3 + 3*coeff[2]*eta_con_3**2)*(-2*(x-x_other_3))
-					term2 = -1/beta_con_3**2 * (20*coeff[0]*eta_con_3**3 + 12*coeff[1]*eta_con_3**2 + 6*coeff[2]*eta_con_3)*eta_con_dot_3*(-2*(x-x_other_3))
-					term3 = -1/beta_con_3**2*(5*coeff[0]*eta_con_3**4 + 4*coeff[1]*eta_con_3**3 + 3*coeff[2]*eta_con_3**2)*(-2*(v-v_other_3))
-					grad_beta_con_dot_3 = term1 + term2 + term3 
+					beta_con_3, beta_con_dot_3 = beta_con(eta_con_3, eta_con_dot_3)
+					grad_beta_con_3, grad_beta_con_dot_3 = grad_beta_con(beta_con_3, beta_con_dot_3, eta_con_3, eta_con_dot_3, x, x_other_3, v, v_other_3)
+				
 				else:
-					beta_con_3 = beta_bound
-					grad_beta_con_3 = np.zeros(3)
-					grad_beta_con_dot_3 = np.zeros(3)
-
-
-			col_distance_meas = d_con #inter agent distance where we start taking coll. into account (less than)
-			col_offset = col_distance_meas**2 - 4*r**2
+					beta_con_3 = self.beta_bound
+					grad_beta_con_3, grad_beta_con_dot_3 = reset_grad_beta()
 
 
 
+			#############################################################################
+			### Implementation of not collision: IOTA BIGGER THAT 0 FOR NOT COLLISION ###
+			#############################################################################
+																# Iota = real distance between Crazuflies: | * |----------| * |     (just -----)
+			col_distance_meas = d_con 							# Inter agent distance where we start taking collision into account (less than)
+			self.col_offset = col_distance_meas**2 - 4*r**2
+			self.beta_bound = 10**4
 
-			beta_bound = 10**4
+			# CODE FOR IOTA 1
 
-			if iota_col_1 <= 0:
+			if iota_col_1 <= 0:						# If iota less than 0, everything 0
 				beta_col_1 = 0
-				grad_beta_col_1 = np.zeros(3)
-				grad_beta_col_dot_1 = np.zeros(3)
+				grad_beta_col_1, grad_beta_col_dot_1 = reset_grad_beta()
 			        
-			elif iota_col_1 <= col_offset:
+			elif iota_col_1 <= self.col_offset:		# If iota is smaller than a value, define betas
 
-				A = np.array([[col_offset**5,col_offset**4, col_offset**3],[5*col_offset**4, 4*col_offset**3, 3*col_offset**2], [20*col_offset**3, 12*col_offset**2, 6*col_offset]])
-				B = np.array([beta_bound,0,0])
+				A = A_col()
+				B = B_col()
+				self.coeff = np.dot(np.linalg.inv(A),B)
 
-				coeff = np.dot(np.linalg.inv(A),B)
+				beta_col_1, beta_col_dot_1 = beta_col(iota_col_1, iota_col_dot_1)
+				grad_beta_col_1, grad_beta_col_dot_1 = grad_beta_col(beta_col_1 , beta_col_dot_2, iota_col_3, iota_col_dot_3, x, x_other_3, v, v_other_3)
+				
+			else:									# If iota is bigger than a value:
+				beta_col_1 = self.beta_bound
+				grad_beta_col_1, grad_beta_col_dot_1 = reset_grad_beta()
 
-				# beta_col(m) = coeff(1)*Delta(m)^5 + coeff(2)*Delta(m)^4 + coeff(3)*Delta(m)^3;
-				#       grad_beta_col_m1(:,m) = -1/beta_col(m)^2 * ( 5*coeff(1)*Delta(m)^4 + 4*coeff(2)*Delta(m)^3 + 3*coeff(3)*Delta(m)^2 )*[2*(p(:,m_1)-p(:,m_2))];
-				#       grad_beta_col_m1_dot(:,m) = -1/beta_col(m)^2 * ( 5*coeff(1)*Delta(m)^4 + 4*coeff(2)*Delta(m)^3 + 3*coeff(3)*Delta(m)^2 )*(2*(v(:,m_1)-v(:,m_2)))+ ...
-				#                                    2/beta_col(m)^3 * ( 5*coeff(1)*Delta(m)^4 + 4*coeff(2)*Delta(m)^3 + 3*coeff(3)*Delta(m)^2 )^2*(2*(p(:,m_1)-p(:,m_2)))'*(v(:,m_1)-v(:,m_2))*2*(p(:,m_1)-p(:,m_2)) + ...
-				#                                   -1/beta_col(m)^2 * ( 20*coeff(1)*Delta(m)^3 + 12*coeff(2)*Delta(m)^2 + 6*coeff(3)*Delta(m) )*(2*(p(:,m_1)-p(:,m_2)))'*(v(:,m_1)-v(:,m_2))*2*(p(:,m_1)-p(:,m_2));
 
-
-				beta_col_1 = coeff[0]*iota_col_1**5 + coeff[1]*iota_col_1**4 + coeff[2]*iota_col_1**3
-				grad_beta_col_1 = -1/beta_col_1**2*(5*coeff[0]*iota_col_1**4 + 4*coeff[1]*iota_col_1**3 + 3*coeff[2]*iota_col_1**2)*(2*(x-x_other_1))
-
-				beta_col_dot_1 = (5*coeff[0]*iota_col_1**4 + 4*coeff[1]*iota_col_1**3 + 3*coeff[2]*iota_col_1**2)*iota_col_dot_1
-				term1 = 2/beta_col_1**3 * beta_col_dot_1 * (5*coeff[0]*iota_col_1**4 + 4*coeff[1]*iota_col_1**3 + 3*coeff[2]*iota_col_1**2)*(2*(x-x_other_1))
-				term2 = -1/beta_col_1**2 * (20*coeff[0]*iota_col_1**3 + 12*coeff[1]*iota_col_1**2 + 6*coeff[2]*iota_col_1)*iota_col_dot_1*(2*(x-x_other_1))
-				term3 = -1/beta_col_1**2*(5*coeff[0]*iota_col_1**4 + 4*coeff[1]*iota_col_1**3 + 3*coeff[2]*iota_col_1**2)*(2*(v-v_other_1))
-				grad_beta_col_dot_1 = term1 + term2 + term3 
-
-			else:
-				beta_col_1 = beta_bound
-				grad_beta_col_1 = np.zeros(3)    
-				grad_beta_col_dot_1 = np.zeros(3)        
-     
+			# CODE FOR IOTA 2
 
 			if iota_col_2 <= 0:
 				beta_col_2 = 0
-				grad_beta_col_2 = np.zeros(3)
-				grad_beta_col_dot_2 = np.zeros(3)  
+				grad_beta_col_2, grad_beta_col_dot_2 = reset_grad_beta()
 			        
-			elif iota_col_2 <= col_offset:
+			elif iota_col_2 <= self.col_offset:
 
-				A = np.array([[col_offset**5,col_offset**4, col_offset**3],[5*col_offset**4, 4*col_offset**3, 3*col_offset**2], [20*col_offset**3, 12*col_offset**2, 6*col_offset]])
-				B = np.array([beta_bound,0,0])
+				A = A_col()
+				B = B_col()
+				self.coeff = np.dot(np.linalg.inv(A),B)
 
-				coeff = np.dot(np.linalg.inv(A),B)
-				#print A
-				#print
-				#print 'coef = ', coeff 
-
-				beta_col_2 = coeff[0]*iota_col_2**5 + coeff[1]*iota_col_2**4 + coeff[2]*iota_col_2**3
-				grad_beta_col_2 = -1/beta_col_2**2*(5*coeff[0]*iota_col_2**4 + 4*coeff[1]*iota_col_2**3 + 3*coeff[2]*iota_col_2**2)*(2*(x-x_other_2))
-
-				beta_col_dot_2 = (5*coeff[0]*iota_col_2**4 + 4*coeff[1]*iota_col_2**3 + 3*coeff[2]*iota_col_2**2)*iota_col_dot_2
-				term1 = 2/beta_col_2**3 * beta_col_dot_2 * (5*coeff[0]*iota_col_2**4 + 4*coeff[1]*iota_col_2**3 + 3*coeff[2]*iota_col_2**2)*(2*(x-x_other_2))
-				term2 = -1/beta_col_2**2 * (20*coeff[0]*iota_col_2**3 + 12*coeff[1]*iota_col_2**2 + 6*coeff[2]*iota_col_2)*iota_col_dot_2*(2*(x-x_other_2))
-				term3 = -1/beta_col_2**2*(5*coeff[0]*iota_col_2**4 + 4*coeff[1]*iota_col_2**3 + 3*coeff[2]*iota_col_2**2)*(2*(v-v_other_2))
-				grad_beta_col_dot_2 = term1 + term2 + term3 
-
+				beta_col_2, beta_col_dot_2 = beta_col(iota_col_2, iota_col_dot_2)
+				grad_beta_col_2, grad_beta_col_dot_2 = grad_beta_col(beta_col_2 , beta_col_dot_2, iota_col_2, iota_col_dot_2, x, x_other_2, v, v_other_2)
+				
 			else:
-				beta_col_2 = beta_bound
-				grad_beta_col_2 = np.zeros(3)
-				grad_beta_col_dot_2 = np.zeros(3)  
-
+				beta_col_2 = self.beta_bound
+				grad_beta_col_2, grad_beta_col_dot_2 = reset_grad_beta()
 
 			if iota_col_3 <= 0:
 				beta_col_3 = 0
-				grad_beta_col_3 = np.zeros(3)
-				grad_beta_col_dot_3 = np.zeros(3) 
-				    
-			elif iota_col_3 <= col_offset:
-
-				A = np.array([[col_offset**5,col_offset**4, col_offset**3],[5*col_offset**4, 4*col_offset**3, 3*col_offset**2], [20*col_offset**3, 12*col_offset**2, 6*col_offset]])
-				B = np.array([beta_bound,0,0])
-
-				coeff = np.dot(np.linalg.inv(A),B)
-				#print A
-				#print
-				#print 'coef = ', coeff 
-
-				beta_col_3 = coeff[0]*iota_col_3**5 + coeff[1]*iota_col_3**4 + coeff[2]*iota_col_3**3
-				grad_beta_col_3 = -1/beta_col_3**2*(5*coeff[0]*iota_col_3**4 + 4*coeff[1]*iota_col_3**3 + 3*coeff[2]*iota_col_3**2)*(2*(x-x_other_3))
-
-				beta_col_dot_3 = (5*coeff[0]*iota_col_3**4 + 4*coeff[1]*iota_col_3**3 + 3*coeff[2]*iota_col_3**2)*iota_col_dot_3
-				term1 = 2/beta_col_3**3 * beta_col_dot_3 * (5*coeff[0]*iota_col_3**4 + 4*coeff[1]*iota_col_3**3 + 3*coeff[2]*iota_col_3**2)*(2*(x-x_other_3))
-				term2 = -1/beta_col_3**2 * (20*coeff[0]*iota_col_3**3 + 12*coeff[1]*iota_col_3**2 + 6*coeff[2]*iota_col_3)*iota_col_dot_3*(2*(x-x_other_3))
-				term3 = -1/beta_col_3**2*(5*coeff[0]*iota_col_3**4 + 4*coeff[1]*iota_col_3**3 + 3*coeff[2]*iota_col_3**2)*(2*(v-v_other_3))
-				grad_beta_col_dot_3 = term1 + term2 + term3 
+				grad_beta_col_3, grad_beta_col_dot_3 = reset_grad_beta()
 
 
+			# CODE FOR IOTA 3
+
+			elif iota_col_3 <= self.col_offset:
+
+				A = A_col()
+				B = B_col()
+				self.coeff = np.dot(np.linalg.inv(A),B)
+
+				beta_col_3, beta_col_dot_3 = beta_col(iota_col_3, iota_col_dot_3)
+				grad_beta_col_3, grad_beta_col_dot_3 = grad_beta_col(beta_col_3 , beta_col_dot_3, iota_col_3, iota_col_dot_3, x, x_other_3, v, v_other_3)
+				
 			else:
-				beta_col_3 = beta_bound
-				grad_beta_col_3 = np.zeros(3)
-				grad_beta_col_dot_3 = np.zeros(3)
+				beta_col_3 = self.beta_bound
+				grad_beta_col_3, grad_beta_col_dot_3 = reset_grad_beta()
 
+			# CODE FOR IOTA 4
 
 			if iota_col_4 <= 0:
 				beta_col_4 = 0
-				grad_beta_col_4 = np.zeros(3)
-				grad_beta_col_dot_4 = np.zeros(3) 
+				grad_beta_col_4, grad_beta_col_dot_4 = reset_grad_beta()
 			        
-			elif iota_col_4 <= col_offset:
+			elif iota_col_4 <= self.col_offset:
 
-				A = np.array([[col_offset**5,col_offset**4, col_offset**3],[5*col_offset**4, 4*col_offset**3, 3*col_offset**2], [20*col_offset**3, 12*col_offset**2, 6*col_offset]])
-				B = np.array([beta_bound,0,0])
+				A = A_col()
+				B = B_col()
+				self.coeff = np.dot(np.linalg.inv(A),B)
 
-				coeff = np.dot(np.linalg.inv(A),B)
-				#print A
-				#print
-				#print 'coef = ', coeff 
-
-				beta_col_4 = coeff[0]*iota_col_4**5 + coeff[1]*iota_col_4**4 + coeff[2]*iota_col_4**3
-				grad_beta_col_4 = -1/beta_col_4**2*(5*coeff[0]*iota_col_4**4 + 4*coeff[1]*iota_col_4**3 + 3*coeff[2]*iota_col_4**2)*(2*(x-x_other_4))
-
-				beta_col_dot_4 = (5*coeff[0]*iota_col_4**4 + 4*coeff[1]*iota_col_4**3 + 3*coeff[2]*iota_col_4**2)*iota_col_dot_4
-				term1 = 2/beta_col_4**3 * beta_col_dot_4 * (5*coeff[0]*iota_col_4**4 + 4*coeff[1]*iota_col_4**3 + 3*coeff[2]*iota_col_4**2)*(2*(x-x_other_4))
-				term2 = -1/beta_col_4**2 * (20*coeff[0]*iota_col_4**3 + 12*coeff[1]*iota_col_4**2 + 6*coeff[2]*iota_col_4)*iota_col_dot_4*(2*(x-x_other_4))
-				term3 = -1/beta_col_4**2*(5*coeff[0]*iota_col_4**4 + 4*coeff[1]*iota_col_4**3 + 3*coeff[2]*iota_col_4**2)*(2*(v-v_other_4))
-				grad_beta_col_dot_4 = term1 + term2 + term3 
-
-
+				beta_col_4, beta_col_dot_4 = beta_col(iota_col_4, iota_col_dot_4)
+				grad_beta_col_4, grad_beta_col_dot_4 = grad_beta_col(beta_col_4 , beta_col_dot_4, iota_col_4, iota_col_dot_4, x, x_other_4, v, v_other_4)
+				
 			else:
-				beta_col_4 = beta_bound
-				grad_beta_col_4 = np.zeros(3)
-				grad_beta_col_dot_4 = np.zeros(3) 
+				beta_col_4 = self.beta_bound
+				grad_beta_col_4, grad_beta_col_dot_4 = reset_grad_beta()
 
+
+			# CODE FOR IOTA 5
 
 			if iota_col_5 <= 0:
 				beta_col_5 = 0
-				grad_beta_col_5 = np.zeros(3)
-				grad_beta_col_dot_5 = np.zeros(3) 
+				grad_beta_col_5, grad_beta_col_dot_5 = reset_grad_beta()
     
-			elif iota_col_5 <= col_offset:
+			elif iota_col_5 <= self.col_offset:
+				
+				A = A_col()
+				B = B_col()
+				self.coeff = np.dot(np.linalg.inv(A),B)
 
-				A = np.array([[col_offset**5,col_offset**4, col_offset**3],[5*col_offset**4, 4*col_offset**3, 3*col_offset**2], [20*col_offset**3, 12*col_offset**2, 6*col_offset]])
-				B = np.array([beta_bound,0,0])
-
-				coeff = np.dot(np.linalg.inv(A),B)
-				#print A
-				#print
-				#print 'coef = ', coeff 
-
-				beta_col_5 = coeff[0]*iota_col_5**5 + coeff[1]*iota_col_5**4 + coeff[2]*iota_col_5**3
-				grad_beta_col_5 = -1/beta_col_5**2*(5*coeff[0]*iota_col_5**4 + 4*coeff[1]*iota_col_5**3 + 3*coeff[2]*iota_col_5**2)*(2*(x-x_other_5))
-
-				beta_col_dot_5 = (5*coeff[0]*iota_col_5**4 + 4*coeff[1]*iota_col_5**3 + 3*coeff[2]*iota_col_5**2)*iota_col_dot_5
-				term1 = 2/beta_col_5**3 * beta_col_dot_5 * (5*coeff[0]*iota_col_5**4 + 4*coeff[1]*iota_col_5**3 + 3*coeff[2]*iota_col_5**2)*(2*(x-x_other_5))
-				term2 = -1/beta_col_5**2 * (20*coeff[0]*iota_col_5**3 + 12*coeff[1]*iota_col_5**2 + 6*coeff[2]*iota_col_5)*iota_col_dot_5*(2*(x-x_other_5))
-				term3 = -1/beta_col_5**2*(5*coeff[0]*iota_col_5**4 + 4*coeff[1]*iota_col_5**3 + 3*coeff[2]*iota_col_5**2)*(2*(v-v_other_5))
-				grad_beta_col_dot_5 = term1 + term2 + term3 
-
-
+				beta_col_5, beta_col_dot_5 = beta_col(iota_col_5, iota_col_dot_5)
+				grad_beta_col_5, grad_beta_col_dot_5 = grad_beta_col(beta_col_5 , beta_col_dot_5, iota_col_5, iota_col_dot_5, x, x_other_5, v, v_other_5)
+				
 			else:
-				beta_col_5 = beta_bound
-				grad_beta_col_5 = np.zeros(3)
-				grad_beta_col_dot_5 = np.zeros(3) 
+				beta_col_5 = self.beta_bound
+				grad_beta_col_5, grad_beta_col_dot_5 = reset_grad_beta()
 
-			#Desired velocity:
+
+			########################
+			### Desired velocity ###
+			########################
+
 			beta_term_con = -grad_beta_con_1 - grad_beta_con_2 - grad_beta_con_3 
 			beta_term_col = -grad_beta_col_1 - grad_beta_col_2 - grad_beta_col_3 - grad_beta_col_4 - grad_beta_col_5  
 
 			beta_term_con_dot = -grad_beta_con_dot_1 - grad_beta_con_dot_2 - grad_beta_con_dot_3 
 			beta_term_col_dot = -grad_beta_col_dot_1 - grad_beta_col_dot_2 - grad_beta_col_dot_3 - grad_beta_col_dot_4 - grad_beta_col_dot_5
 
-			if mode==1:
+
+			if mode == 1:
 				navigation_term[0] = - kp_x*ep[0]
 				navigation_term[1] = - kp_y*ep[1] 
 				navigation_term[2] = - kp_z*ep[2] 
 				v_des = navigation_term + ki*(beta_term_col + beta_term_con) - lambda_int*integrator
 				v_des_dot = np.array([-kp_x*v[0],-kp_y*v[1],-kp_z*v[2]]) + ki*(beta_term_col_dot + beta_term_con_dot) - lambda_int*ep
+
 			else:
 				v_des = ki*(beta_term_col + beta_term_con) 
 				v_des_dot = ki*(beta_term_col_dot + beta_term_con_dot) 
 
+			# Calcutale the velocity error:
 			e_v = v - v_des
 
+			# Dissipative terms:
 			dissip_term[0]   = - kv_x*e_v[0]
 			dissip_term[1]   = - kv_y*e_v[1]
 			dissip_term[2]   = - kv_z*e_v[2]
 
-			if mode==1:
+			# Calculate estimations needed:
+			if mode == 1:
 				e_tilde = ep + lambda_int*integrator
+
 			else:
 				e_tilde = np.zeros(3)
 
-			grav = 9.81
-			#dynamics: 
-			#  Y = [px_ddot    0     0     0; 
-			#       py_ddot    0     0     0;
-			#       pz_ddot+g  0     0     0; ]
+			# Calculate Y matrix:
 			Y = np.array( [v_des_dot[0],v_des_dot[1],v_des_dot[2]+grav])
 
-			#      [0          0   -w2*w3  w2*w3;
-			#       0         w1*w3  0    -w1*w3;
-			#       0        -w1*w2 w1*w2  0;]
-
+			# Calculate term of control:
 			control = beta_term_col + beta_term_con - k_e_tilde*e_tilde + Y*self.theta_hat + dissip_term - np.sign(e_v)*np.linalg.norm(v,1)*self.f_b_hat - np.sign(e_v)*self.d_b_hat
 
-
-
-
+			# Calculate discrepance terms:
 			self.d_b_hat_dot = k_d_b*np.linalg.norm(e_v)
 			self.f_b_hat_dot = k_f_b*np.linalg.norm(e_v,1)*np.linalg.norm(v)
 			self.theta_hat_dot = -k_theta*np.dot(Y,e_v)
 
-		
-			if mode==1:
+			# Publish several messages:
+				# Publish lider errors (GUESS)
+			if mode == 1:
 				e_msg = std_msgs.msg.Float64()
 				e_msg.data = np.linalg.norm( np.concatenate((e_tilde,e_v)) )
 				e_p_pub.publish(e_msg)
 
+				# Publish theta, d and f
 			self.theta_hat_msg = std_msgs.msg.Float64()
 			self.theta_hat_msg.data = np.linalg.norm(self.theta_hat)
 			self.theta_hat_pub.publish(self.theta_hat_msg)
@@ -605,16 +585,19 @@ class Nav_control():
 			f_hat_msg.data = self.f_b_hat
 			f_hat_pub.publish(f_hat_msg)
 
+				# Publish control
 			mesage_to_pub = mav_msgs.msg.TorqueThrust()
 			mesage_to_pub.thrust.x = control[0]
 			mesage_to_pub.thrust.y = control[1]
 			mesage_to_pub.thrust.z = control[2]
-			#mesage_to_pub.thrust.z = force_z #keep z component
+			force_pub.publish(mesage_to_pub)
 
-			tmp_mesage_to_pub = mav_msgs.msg.TorqueThrust()
-			tmp_mesage_to_pub.thrust.x = x_other_1[0]
-			tmp_mesage_to_pub.thrust.y = x_other_1[1]
-			tmp_mesage_to_pub.thrust.z = x_other_1[2]
+				# Publish ?????????##############################################################################
+			# tmp_mesage_to_pub = mav_msgs.msg.TorqueThrust()
+			# tmp_mesage_to_pub.thrust.x = x_other_1[0]
+			# tmp_mesage_to_pub.thrust.y = x_other_1[1]
+			# tmp_mesage_to_pub.thrust.z = x_other_1[2]
+   #  		temp_pub.publish(tmp_mesage_to_pub)
 
 			self.rate.sleep()
 
