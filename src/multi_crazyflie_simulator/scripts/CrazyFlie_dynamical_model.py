@@ -44,7 +44,6 @@ class CF_state():
         self.momentums[1] = (CF_parameters().L * CF_parameters().CT/np.sqrt(2))*(-self.motor_rotation_speed[0]**2 + self.motor_rotation_speed[1]**2 + self.motor_rotation_speed[2]**2 - self.motor_rotation_speed[3]**2)
         self.momentums[2] = CF_parameters().CD * (-self.motor_rotation_speed[0]**2 + self.motor_rotation_speed[1]**2 - self.motor_rotation_speed[2]**2 + self.motor_rotation_speed[3]**2)
 
-
 class CF_model():
 
     def __init__(self):

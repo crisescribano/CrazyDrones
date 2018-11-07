@@ -23,10 +23,8 @@ def position_and_velocity_from_odometry(odometry):
     x = np.array([odometry.pose.pose.position.x,\
                   odometry.pose.pose.position.y,\
                   odometry.pose.pose.position.z])
-
     # TODO: naming of child_frame_id
     if odometry.child_frame_id == 'firefly/base_link':
-
         # velocity is in the body reference frame
         v_body = np.array([odometry.twist.twist.linear.x,\
                            odometry.twist.twist.linear.y,\
@@ -36,22 +34,15 @@ def position_and_velocity_from_odometry(odometry):
                                odometry.pose.pose.orientation.y,\
                                odometry.pose.pose.orientation.z,\
                                odometry.pose.pose.orientation.w])
-
         # TODO
         rotation_matrix  = utility_functions.rot_from_quaternion(quaternion)
-
         v = np.dot(rotation_matrix,v_body)
-
     else:
         # velocity is in the body reference frame
         v = np.array([odometry.twist.twist.linear.x,\
                       odometry.twist.twist.linear.y,\
                       odometry.twist.twist.linear.z])
-
-    
-
     return x,v
-
 
 def callback_uav_pose_reference(data):  
   global reference_pose
@@ -77,10 +68,12 @@ def callback_sub_othet_uav_odometry_3(data):
   global other_agents_pose_3
   other_agents_pose_3 = data
   return
+
 def callback_sub_othet_uav_odometry_4(data):  
   global other_agents_pose_4
   other_agents_pose_4 = data
   return
+  
 def callback_sub_othet_uav_odometry_5(data):  
   global other_agents_pose_5
   other_agents_pose_5= data
