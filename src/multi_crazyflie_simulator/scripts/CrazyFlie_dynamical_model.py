@@ -266,9 +266,6 @@ class CF_model():
     ###########################
     def new_attitude_setpoint(self, twist_msg):
 
-        ##############!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        ### DUDA EN EL CODIGO DEL SERVER DE LO QUE ES m_X_trim
-        ######################################################
         self.mode = "ATT"
         self.desired_att[0] = twist_msg.linear.y
         self.desired_att[1] = -twist_msg.linear.x

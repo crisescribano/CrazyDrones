@@ -3,7 +3,7 @@
 import numpy as np
 import rospy
 from geometry_msgs.msg import Twist
-from crazyflie_driver.msg import GenericLogData
+import mav_msgs.msg
 
 # desired_3d_force: input
 # psi_angle: yaw angle
@@ -17,7 +17,7 @@ class Forces():
 
 		self.topic = rospy.get_param("~topic")
 		# Comunication:
-		rospy.Subscriber(self.topic + "/forces_input", GenericLogData, self.getForces)
+		rospy.Subscriber(self.topic + "/forces_input", mav_msgs.msg.TorqueThrust, self.getForces)
 		self.pub = rospy.Publisher(self.topic + "/cmd_vel", Twist, queue_size=1)
 
 		self.desired_3d_force = [0, 0, 0]
@@ -26,9 +26,9 @@ class Forces():
 		self.I = [(1,0,0), (0,1,0),(0,0,1)]
 
 	def getForces(self, force_msg):
-		self.desired_3d_force[0] = force_msg.values[0]
-		self.desired_3d_force[1] = force_msg.values[1]
-		self.desired_3d_force[2] = force_msg.values[2]
+		self.desired_3d_force[0] = force_msg.thrust.x
+		self.desired_3d_force[1] = force_msg.thrust.y
+		self.desired_3d_force[2] = force_msg.thrust.z
 
 	def run(self):
 		while(not rospy.is_shutdown()):

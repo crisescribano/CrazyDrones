@@ -30,15 +30,16 @@ class Nav_control():
 		self.other_agents_pose_5 = nav_msgs.msg.Odometry()  #agent 6 for 1, agent 6 for 2, agent 6 for 3, agent 6 for 4, agent 6 for 5, agent 5 for 6
 		
 		self.topic = rospy.get_param("~topic")
+		self.agent_number = rospy.get_param("~agent_number")
+		self.priority = rospy.get_param("~priority")
 
-		self.force_pub = rospy.Publisher('uav_force_reference', mav_msgs.msg.TorqueThrust, queue_size = 100)
+		# PUBLISHER
+		self.force_pub = rospy.Publisher(self.topic + "/forces_input", mav_msgs.msg.TorqueThrust, queue_size = 100)
+		#self.theta_hat_pub = rospy.Publisher('theta_hat_pub', std_msgs.msg.Float64, queue_size = 100)
+		#self.d_hat_pub = rospy.Publisher('d_hat_pub', std_msgs.msg.Float64, queue_size = 100)
+		#self.f_hat_pub = rospy.Publisher('f_hat_pub', std_msgs.msg.Float64, queue_size = 100)
 
-		self.theta_hat_pub = rospy.Publisher('theta_hat_pub', std_msgs.msg.Float64, queue_size = 100)
-		self.d_hat_pub = rospy.Publisher('d_hat_pub', std_msgs.msg.Float64, queue_size = 100)
-		self.f_hat_pub = rospy.Publisher('f_hat_pub', std_msgs.msg.Float64, queue_size = 100)
-
-
-
+		# SUBSCRIBER
 		rospy.Subscriber(self.topic + "/out_pos_odometry", nav_msgs.msg.Odometry, self.callback_crazyflie_0)
 		rospy.Subscriber(self.topic + "/out_pos_odometry", nav_msgs.msg.Odometry, self.callback_crazyflie_1)
 		rospy.Subscriber(self.topic + "/out_pos_odometry", nav_msgs.msg.Odometry, self.callback_crazyflie_2)
@@ -50,9 +51,6 @@ class Nav_control():
 
 		# Trayectory to follow:
 		self.PoI = np.array([[0, 0, 5], [4, 5, 3],[-2, 4, 2],[3, -2, 3]])
-
-		self.priority = rospy.get_param("~priority")
-		self.agent_number = rospy.get_param("~agent_number")
 		self.region_idx = 0
 
 		if self.agent_number == 0:
@@ -341,7 +339,6 @@ class Nav_control():
 
 
 
-
 			###############################
 			### Value of etas and iotas ###
 			###############################
@@ -620,23 +617,23 @@ class Nav_control():
 				self.e_p_pub.publish(e_msg)
 
 				# Publish theta, d and f
-			theta_hat_msg = std_msgs.msg.Float64()
-			theta_hat_msg.data = np.linalg.norm(self.theta_hat)
-			self.theta_hat_pub.publish(theta_hat_msg)
+			#theta_hat_msg = std_msgs.msg.Float64()
+			#theta_hat_msg.data = np.linalg.norm(self.theta_hat)
+			#self.theta_hat_pub.publish(theta_hat_msg)
 
-			d_hat_msg = std_msgs.msg.Float64()
-			d_hat_msg.data = self.d_b_hat
-			self.d_hat_pub.publish(d_hat_msg)
+			#d_hat_msg = std_msgs.msg.Float64()
+			#d_hat_msg.data = self.d_b_hat
+			#self.d_hat_pub.publish(d_hat_msg)
 
-			f_hat_msg = std_msgs.msg.Float64()
-			f_hat_msg.data = self.f_b_hat
-			self.f_hat_pub.publish(f_hat_msg)
+			#f_hat_msg = std_msgs.msg.Float64()
+			#f_hat_msg.data = self.f_b_hat
+			#self.f_hat_pub.publish(f_hat_msg)
 
 				# Publish control
 			mesage_to_pub = mav_msgs.msg.TorqueThrust()
-			mesage_to_pub.thrust.x = control[0]
-			mesage_to_pub.thrust.y = control[1]
-			mesage_to_pub.thrust.z = control[2]
+			mesage_to_pub.thrust.x = control[0] * 10000
+			mesage_to_pub.thrust.y = control[1] * 10000
+			mesage_to_pub.thrust.z = control[2] * 10000
 			self.force_pub.publish(mesage_to_pub)
 
 				# Publish ?????????##############################################################################
