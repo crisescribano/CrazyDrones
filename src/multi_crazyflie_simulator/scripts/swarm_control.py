@@ -70,7 +70,7 @@ class Nav_control():
 		self.theta_hat = 0
 		self.theta_hat_dot = 0
 		self.d_con = 3 
-		self.r = 0.35
+		self.r = 0.75
 
 		self.rate = rospy.Rate(100) 
 
@@ -242,17 +242,17 @@ class Nav_control():
 	def navigation(self):
 
 		#GAINS
-		kp_x = .05 #0.5 for 10     ..*0.05 
-		kv_x = 2     #3
-		ki_x = 0 #.01  
+		kp_x = 2 
+		kv_x = 0
+		ki_x = 0  
 
-		kp_y = .05 #0.5 for 10    
-		kv_y = 2
-		ki_y = 0 # .01
+		kp_y = 2   
+		kv_y = 0
+		ki_y = 0 
 
-		kp_z = .1  #0.25 for 3
-		kv_z = 2
-		ki_z = 0 #.01
+		kp_z = 2
+		kv_z = 0
+		ki_z = 0.5
 
 		k_e_tilde = 0.005
 		lambda_int = 0.00015
@@ -260,8 +260,9 @@ class Nav_control():
 		k_f_b = 0.1
 		k_d_b = .01
 		ki = 5
-		mass = 1.56779
+		mass = 0.027
 		dt = 0.01
+		grav = 9.81
 		
 		integrator = np.zeros(3)
 		navigation_term = np.zeros(3)
@@ -581,9 +582,9 @@ class Nav_control():
 			e_v = v - v_des
 
 			# Dissipative terms:
-			dissip_term[0] = - kv_x*e_v[0]
-			dissip_term[1] = - kv_y*e_v[1]
-			dissip_term[2] = - kv_z*e_v[2]
+			dissip_term[0] = kv_x*e_v[0]
+			dissip_term[1] = kv_y*e_v[1]
+			dissip_term[2] = kv_z*e_v[2]
 
 			# Calculate estimations needed:
 			if mode == 1:
@@ -596,7 +597,7 @@ class Nav_control():
 			Y = np.array( [v_des_dot[0],v_des_dot[1],v_des_dot[2]+grav])
 
 			# Calculate term of control:
-			control = beta_term_col + beta_term_con - k_e_tilde*e_tilde + Y*self.theta_hat + dissip_term - np.sign(e_v)*np.linalg.norm(v,1)*self.f_b_hat - np.sign(e_v)*self.d_b_hat
+			control = beta_term_col + beta_term_con - dissip_term + Y*self.theta_hat - k_e_tilde*e_tilde - np.sign(e_v)*np.linalg.norm(v,1)*self.f_b_hat - np.sign(e_v)*self.d_b_hat
 
 			# Calculate discrepance terms:
 			self.d_b_hat_dot = k_d_b*np.linalg.norm(e_v)

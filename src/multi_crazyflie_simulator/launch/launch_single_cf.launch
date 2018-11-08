@@ -10,7 +10,7 @@
   </node>
   <node name="$(anon navigation_node_sim)" pkg="multi_crazyflie_simulator" type="swarm_control.py" output="screen">
     <param name="topic" value="/crazyflie_$(arg quad_number)" />
-    <param name = "agent_number" value = "$(arg quad_number)" />
-    <param name = "priority" value = "$(arg prior)" />
+    <param name="agent_number" value="$(arg quad_number)" />
+    <param name="priority" value="$(arg prior)" />
   </node>
 </launch>
