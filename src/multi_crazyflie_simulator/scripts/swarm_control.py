@@ -61,7 +61,6 @@ class Nav_control():
 		self.col_offset = 0
 		self.beta_bound = 0
 		self.coeff = [0, 0, 0]
-
 		self.a_hat = 0
 		self.a_hat_dot = 0
 		self.d_b_hat = 0
@@ -70,7 +69,7 @@ class Nav_control():
 		self.f_b_hat_dot = 0
 		self.theta_hat = 0
 		self.theta_hat_dot = 0
-		self.d_con = 3 #4
+		self.d_con = 3 
 		self.r = 0.35
 
 		self.rate = rospy.Rate(100) 
@@ -255,12 +254,8 @@ class Nav_control():
 		kv_z = 2
 		ki_z = 0 #.01
 
-		#kp_max = np.maximum(kp_x,kp_y,kp_z)
-
 		k_e_tilde = 0.005
 		lambda_int = 0.00015
-		#k_con = 5  #10-15
-		#k_col = 0.5  #0.5
 		k_theta = 0.1
 		k_f_b = 0.1
 		k_d_b = .01
@@ -268,9 +263,7 @@ class Nav_control():
 		mass = 1.56779
 		dt = 0.01
 		
-		
 		integrator = np.zeros(3)
-
 		navigation_term = np.zeros(3)
 		dissip_term = np.zeros(3)
 		counter = 1
@@ -319,11 +312,14 @@ class Nav_control():
 			self.theta_hat = self.theta_hat + dt*self.theta_hat_dot
 
 			# Point to achieve
+			xd = self.PoI[self.region_idx]
 
-			xd = self.PoI[self.region_idx] ### DUDISIMA
 
-			# If the Crazyflie is the leader:
-			if mode == 1:      
+			###########################################
+			### Achieve desired point by the leader ###
+			###########################################
+
+			if mode == 1:
 				ep = x - xd
 				integrator = integrator + dt*ep
 				ki = 0.5          
@@ -336,7 +332,6 @@ class Nav_control():
 					print 'REACHED!!!'			# Point achieved
 					self.region_idx+= 1			# Another point to achieve
 					integrator = np.zeros(3)	# Reset the integrator
-
 
 
 			###############################
@@ -373,15 +368,12 @@ class Nav_control():
 				eta_con_1, eta_con_dot_1 = self.eta_funtion(x, x_other_5, v, v_other_5)
 				eta_con_2, eta_con_dot_2 = self.eta_funtion(x, x_other_2, v, v_other_2)
 			
-
 			# Definition of the posible collision (everyone with everyone)
 			iota_col_1, iota_col_dot_1 = self.iota_con(x, x_other_1, v, v_other_1)
 			iota_col_2, iota_col_dot_2 = self.iota_con(x, x_other_2, v, v_other_2)
 			iota_col_3, iota_col_dot_3 = self.iota_con(x, x_other_3, v, v_other_3)
 			iota_col_4, iota_col_dot_4 = self.iota_con(x, x_other_4, v, v_other_4)
 			iota_col_5, iota_col_dot_5 = self.iota_con(x, x_other_5, v, v_other_5)
-
-
 
 
 			####################################################################################
@@ -392,6 +384,7 @@ class Nav_control():
 			self.con_offset = self.d_con**2 - con_distance_meas**2	# DUDA ####################################################################
 			self.beta_bound = 10**4
 
+
 			# CODE FOR ETA 1
 
 			if eta_con_1 < 0:					# Eta less than 0, everything 0 
@@ -399,11 +392,11 @@ class Nav_control():
 				grad_beta_con_1, grad_beta_con_dot_1 = self.reset_grad_beta()
 
 			elif eta_con_1 < self.con_offset:	# If the distante between Crazyflie is more that 0, define betas
-				### DUDA ##################################################################################################################
-				A = self.A_con() # 
+
+				A = self.A_con()
 				B = self.B_con()
 				self.coeff = np.dot(np.linalg.inv(A),B)
-				###########################################################################################################################
+
 				beta_con_1, beta_con_dot_1 = self.beta_con(eta_con_1, eta_con_dot_1)
 				grad_beta_con_1, grad_beta_con_dot_1 = self.grad_beta_con(beta_con_1, beta_con_dot_1, eta_con_1, eta_con_dot_1, x, x_other_1, v, v_other_1)
 				
@@ -431,6 +424,7 @@ class Nav_control():
 				beta_con_2 = self.beta_bound
 				grad_beta_con_2, grad_beta_con_dot_2 = self.reset_grad_beta()
 
+
 			# CODE FOR ETA 3 (JUST IF NECESSARY)
 
 			if self.agent_number == 0 or self.agent_number == 2:
@@ -451,7 +445,6 @@ class Nav_control():
 				else:
 					beta_con_3 = self.beta_bound
 					grad_beta_con_3, grad_beta_con_dot_3 = self.reset_grad_beta()
-
 
 
 			#############################################################################
@@ -521,6 +514,7 @@ class Nav_control():
 				beta_col_3 = self.beta_bound
 				grad_beta_col_3, grad_beta_col_dot_3 = self.reset_grad_beta()
 
+
 			# CODE FOR IOTA 4
 
 			if iota_col_4 <= 0:
@@ -564,15 +558,15 @@ class Nav_control():
 			########################
 			### Desired velocity ###
 			########################
-
+			# Vi = Ki * SUM alfa * grad_beta, as alfa is (-1, 1, 0) if i=m1, i=m2, i=|m1,m2  
+			#	respectively in the specific Crazyflie alfa = -1
 			beta_term_con = -grad_beta_con_1 - grad_beta_con_2 - grad_beta_con_3 
 			beta_term_col = -grad_beta_col_1 - grad_beta_col_2 - grad_beta_col_3 - grad_beta_col_4 - grad_beta_col_5  
 
 			beta_term_con_dot = -grad_beta_con_dot_1 - grad_beta_con_dot_2 - grad_beta_con_dot_3 
 			beta_term_col_dot = -grad_beta_col_dot_1 - grad_beta_col_dot_2 - grad_beta_col_dot_3 - grad_beta_col_dot_4 - grad_beta_col_dot_5
 
-
-			if mode == 1:
+			if mode == 1:	# If the Crazyflie is the leader, one more term to 
 				navigation_term[0] = - kp_x*ep[0]
 				navigation_term[1] = - kp_y*ep[1] 
 				navigation_term[2] = - kp_z*ep[2] 
@@ -587,9 +581,9 @@ class Nav_control():
 			e_v = v - v_des
 
 			# Dissipative terms:
-			dissip_term[0]   = - kv_x*e_v[0]
-			dissip_term[1]   = - kv_y*e_v[1]
-			dissip_term[2]   = - kv_z*e_v[2]
+			dissip_term[0] = - kv_x*e_v[0]
+			dissip_term[1] = - kv_y*e_v[1]
+			dissip_term[2] = - kv_z*e_v[2]
 
 			# Calculate estimations needed:
 			if mode == 1:
