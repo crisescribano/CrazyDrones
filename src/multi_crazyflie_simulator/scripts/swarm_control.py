@@ -268,23 +268,48 @@ class Nav_control():
 		second_reg = False
 		grav = 9.81
 
-		while not rospy.is_shutdown():
+		# Initiation etas and iotas 
+		eta_con = np.zeros(3)   
+		eta_con_dot = np.zeros(3) 
+		beta_con = np.zeros(3) 
+		beta_con_dot = np.zeros(3)
+		grad_beta_con = np.zeros(3) 
+		grad_beta_con_dot = np.zeros(3) 
 
-			# Initiation 
-			eta_con[2] = 0       
-			eta_con_dot[3] = 0
-			grad_beta_con[1], grad_beta_con_dot[1] = self.reset_grad_beta()
-			grad_beta_con[2], grad_beta_con_dot[2] = self.reset_grad_beta()
-			# Control:
-			control = np.zeros(3)
-			# Duda:
-			e3 = np.array([0.0,0.0,1.0])
-			# Error
-			ep = np.zeros(3)
+		iota_col = np.zeros(5)
+		iota_col_dot = np.zeros(5)
+		beta_col = np.zeros(5) 
+		beta_col_dot = np.zeros(5)
+		grad_beta_col = np.zeros(5)
+		grad_beta_col_dot = np.zeros(5) 
+
+		beta_term_con = np.zeros(3)
+		beta_term_col = np.zeros(5) 
+
+		beta_term_con_dot = np.zeros(3)
+		beta_term_col_dot = np.zeros(5)
+
+		navigation_term = np.zeros(3)
+		dissip_term = np.zeros(3)
+		e_tilde = np.zeros(3)
+		
+		# Control:
+		control = np.zeros(3)
+		# Duda:
+		e3 = np.array([0.0,0.0,1.0])
+		# Error
+		ep = np.zeros(3)
+
+		x = np.array([[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0]])
+		v = np.array([[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0]])
+		
+
+
+		while not rospy.is_shutdown():
 
 			# Get the position and velocity of all the CrazyFlies
 			for i in range(0, 6):
-				x[i], v[i] = self.position_and_velocity_from_odometry(self.agent_pose[i])
+				x[i],v[i] = self.position_and_velocity_from_odometry(self.agent_pose[i])
 			
 			# Check if we are lider o follower
 			if self.priority == 1: # Lider
