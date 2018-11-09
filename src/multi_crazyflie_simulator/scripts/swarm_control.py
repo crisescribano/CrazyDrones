@@ -20,10 +20,12 @@ class Nav_control():
 	def __init__(self):
 
 		rospy.init_node('navigation_node_sim') 
-
-		for i=0 in 6:
-			self.agent_pose[i] = nav_msgs.msg.Odometry()
 		
+		self.agent_pose=[nav_msgs.msg.Odometry(),nav_msgs.msg.Odometry(),nav_msgs.msg.Odometry(),nav_msgs.msg.Odometry(),nav_msgs.msg.Odometry()]
+		# for i in range(0, 6):
+		# 	self.agent_pose.append(i) = nav_msgs.msg.Odometry()
+	
+
 		self.topic = rospy.get_param("~topic")
 		self.agent_number = rospy.get_param("~agent_number")
 		self.priority = rospy.get_param("~priority")
@@ -281,7 +283,7 @@ class Nav_control():
 			ep = np.zeros(3)
 
 			# Get the position and velocity of all the CrazyFlies
-			for i=0 in 6:
+			for i in range(0, 6):
 				x[i], v[i] = self.position_and_velocity_from_odometry(self.agent_pose[i])
 			
 			# Check if we are lider o follower
@@ -355,7 +357,7 @@ class Nav_control():
 			
 			# Definition of the posible collision (everyone with everyone)
 
-			for i=0 in 5:
+			for i in range(0, 5):
 				iota_col[i], iota_col_dot[i] = self.iota_con(x[i], x[i+1], v[i], v[i+1])
 			
 
@@ -368,9 +370,9 @@ class Nav_control():
 			self.beta_bound = 10**4
 
 
-			for i=0 in 3:
+			for i in range(0, 3):
 
-				if i=|2 or self.agent_number == 0 or self.agent_number == 2:
+				if i<>2 or self.agent_number == 0 or self.agent_number == 2:
 
 					if eta_con[i] < 0:					# Eta less than 0, everything 0 
 						beta_con[i] = 0
@@ -400,7 +402,7 @@ class Nav_control():
 			self.beta_bound = 10**4
 
 			
-			for i=0 in 5:
+			for i in range(0, 5):
 
 				if iota_col[i] <= 0:						# If iota less than 0, everything 0
 					beta_col[i] = 0
@@ -424,7 +426,7 @@ class Nav_control():
 			### Desired velocity ###
 			########################
 
-			# Vi = Ki * SUM alfa * grad_beta, as alfa is (-1, 1, 0) if i=m1, i=m2, i=|m1,m2  
+			# Vi = Ki * SUM alfa * grad_beta, as alfa is (-1, 1, 0) if i=m1, i=m2, i<>m1,m2  
 			#	respectively in the specific Crazyflie alfa = -1
 			beta_term_con = -sum(grad_beta_con)
 			beta_term_col = -sum(grad_beta_col) 
@@ -436,7 +438,7 @@ class Nav_control():
 				navigation_term[0] = - kp_x*ep[0]
 				navigation_term[1] = - kp_y*ep[1] 
 				navigation_term[2] = - kp_z*ep[2] 
-				
+
 				v_des = navigation_term + ki*(beta_term_col + beta_term_con) - lambda_int*integrator ################ VECTOR PLUS SCALAR
 				v_des_dot = np.array([-kp_x*v[0],-kp_y*v[1],-kp_z*v[2]]) + ki*(beta_term_col_dot + beta_term_con_dot) - lambda_int*ep ##### VECTOR PLUS SCALAR
 
