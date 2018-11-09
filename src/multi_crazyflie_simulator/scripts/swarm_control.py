@@ -21,13 +21,8 @@ class Nav_control():
 
 		rospy.init_node('navigation_node_sim') 
 
-		self.reference_pose = nav_msgs.msg.Odometry()	# NOT USED, INVEST
-		self.agent_pose = nav_msgs.msg.Odometry()
-		self.other_agents_pose_1 = nav_msgs.msg.Odometry()  #agent 2 for 1, agent 1 for 2, agent 1 for 3, agent 1 for 4, agent 1 for 5, agent 1 for 6
-		self.other_agents_pose_2 = nav_msgs.msg.Odometry()  #agent 3 for 1, agent 3 for 2, agent 2 for 3, agent 2 for 4, agent 2 for 5, agent 2 for 6
-		self.other_agents_pose_3 = nav_msgs.msg.Odometry()  #agent 4 for 1, agent 4 for 2, agent 4 for 3, agent 3 for 4, agent 3 for 5, agent 3 for 6
-		self.other_agents_pose_4 = nav_msgs.msg.Odometry()  #agent 5 for 1, agent 5 for 2, agent 5 for 3, agent 5 for 4, agent 4 for 5, agent 4 for 6
-		self.other_agents_pose_5 = nav_msgs.msg.Odometry()  #agent 6 for 1, agent 6 for 2, agent 6 for 3, agent 6 for 4, agent 6 for 5, agent 5 for 6
+		for i=0 in 6:
+			self.agent_pose[i] = nav_msgs.msg.Odometry()
 		
 		self.topic = rospy.get_param("~topic")
 		self.agent_number = rospy.get_param("~agent_number")
@@ -138,48 +133,47 @@ class Nav_control():
 	#		This remap is donne following the graph that is already given
 	def callback_crazyflie_0(self, data): 
 		if self.agent_number == 0:
-			self.agent_pose = data
+			self.agent_pose[0] = data
 		else: 
-			self.other_agents_pose_1 = data
+			self.agent_pose[1] = data
 
 	def callback_crazyflie_1(self, data): 
 		if self.agent_number == 0: 
-			self.other_agents_pose_1 = data
+			self.agent_pose[1] = data
 		elif self.agent_number == 1:
-			self.agent_pose = data
+			self.agent_pose[0] = data
 		else: 
-			self.other_agents_pose_2 = data 
+			self.agent_pose[2] = data 
 
 	def callback_crazyflie_2(self, data):  
 		if self.agent_number == 0 or self.agent_number == 1: 
-			self.other_agents_pose_2 = data
+			self.agent_pose[2] = data
 		elif self.agent_number == 2:
-			self.agent_pose = data
+			self.agent_pose[0] = data
 		else: 
-			self.other_agents_pose_3 = data 
+			self.gent_pose[3] = data 
 
 	def callback_crazyflie_3(self, data):  
 		if self.agent_number == 4 or self.agent_number == 5: 
-			self.other_agents_pose_4 = data
+			self.agent_pose[4] = data
 		elif self.agent_number == 3:
-			self.agent_pose = data
+			self.agent_pose[0] = data
 		else: 
-			self.other_agents_pose_3 = data 
+			self.agent_pose[3] = data 
 
 	def callback_crazyflie_4(self, data):  
 		if self.agent_number == 5: 
-			self.other_agents_pose_5 = data
+			self.agent_pose[5] = data
 		elif self.agent_number == 4:
-			self.agent_pose = data
+			self.agent_pose[0] = data
 		else: 
-			self.other_agents_pose_4 = data 
-		self.other_agents_pose_5 = data
+			self.agent_pose[4] = data 
 
 	def callback_crazyflie_5(self, data): 
 		if self.agent_number == 5:
-			self.agent_pose = data
+			self.agent_pose[0] = data
 		else: 
-			self.other_agents_pose_5 = data 
+			self.agent_pose[5] = data 
 
 	def eta_funtion(self, x, x_other, v, v_other):
 		eta_con = self.d_con**2 - np.linalg.norm(x-x_other)**2     
@@ -275,31 +269,21 @@ class Nav_control():
 		while not rospy.is_shutdown():
 
 			# Initiation 
-			eta_con_3 = 0       
-			eta_con_dot_3 = 0
-
-			grad_beta_con_2, grad_beta_con_dot_2 = self.reset_grad_beta()
-			grad_beta_con_3, grad_beta_con_dot_3 = self.reset_grad_beta()
-
+			eta_con[2] = 0       
+			eta_con_dot[3] = 0
+			grad_beta_con[1], grad_beta_con_dot[1] = self.reset_grad_beta()
+			grad_beta_con[2], grad_beta_con_dot[2] = self.reset_grad_beta()
 			# Control:
 			control = np.zeros(3)
-
 			# Duda:
 			e3 = np.array([0.0,0.0,1.0])
-
 			# Error
 			ep = np.zeros(3)
 
-
-			# YA REFERIDO A CADA UNO, EL 1 ES DISTINTO SEGUN QUE CRAZYFLIE SEAMOS. MAPEO YA REALIZADO
 			# Get the position and velocity of all the CrazyFlies
-			x,v = self.position_and_velocity_from_odometry(self.agent_pose)
-			x_other_1, v_other_1 = self.position_and_velocity_from_odometry(self.other_agents_pose_1)
-			x_other_2, v_other_2 = self.position_and_velocity_from_odometry(self.other_agents_pose_2)
-			x_other_3, v_other_3 = self.position_and_velocity_from_odometry(self.other_agents_pose_3)
-			x_other_4, v_other_4 = self.position_and_velocity_from_odometry(self.other_agents_pose_4)
-			x_other_5, v_other_5 = self.position_and_velocity_from_odometry(self.other_agents_pose_5)
-
+			for i=0 in 6:
+				x[i], v[i] = self.position_and_velocity_from_odometry(self.agent_pose[i])
+			
 			# Check if we are lider o follower
 			if self.priority == 1: # Lider
 				mode = 1 
@@ -315,13 +299,12 @@ class Nav_control():
 			# Point to achieve
 			xd = self.PoI[self.region_idx]
 
-
 			###########################################
 			### Achieve desired point by the leader ###
 			###########################################
 
 			if mode == 1:
-				ep = x - xd
+				ep = x[0] - xd
 				integrator = integrator + dt*ep
 				ki = 0.5          
 
@@ -341,41 +324,40 @@ class Nav_control():
 
 			# Define the conections in the graph
 			# Edges = {(1,2), (1,3), (1,4), (3,4), (3,5), (5,6), (6,2)}
-			
+			# Edges = {(0,1), (0,2), (0,3), (2,3), (2,4), (4,5), (5,1)}
+
 			# Definition of etas depending on the Crazyflie we are
 			if self.agent_number == 0:
-				eta_con_1, eta_con_dot_1 = self.eta_funtion(x, x_other_1, v, v_other_1)
-				eta_con_2, eta_con_dot_2 = self.eta_funtion(x, x_other_2, v, v_other_2)
-				eta_con_3, eta_con_dot_3 = self.eta_funtion(x, x_other_3, v, v_other_3)
+				eta_con[0], eta_con_dot[0] = self.eta_funtion(x[0], x[1], v[0], v[1])
+				eta_con[1], eta_con_dot[1] = self.eta_funtion(x[0], x[2], v[0], v[2])
+				eta_con[2], eta_con_dot[2] = self.eta_funtion(x[0], x[3], v[0], v[3])
 
 			if self.agent_number == 1:
-				eta_con_1, eta_con_dot_1 = self.eta_funtion(x, x_other_1, v, v_other_1)
-				eta_con_2, eta_con_dot_2 = self.eta_funtion(x, x_other_5, v, v_other_5)
+				eta_con[0], eta_con_dot[0] = self.eta_funtion(x[0], x[1], v[0], v[1])
+				eta_con[1], eta_con_dot[1] = self.eta_funtion(x[0], x[5], v[0], v[5])
 
 			if self.agent_number == 2:
-				eta_con_1, eta_con_dot_1 = self.eta_funtion(x, x_other_1, v, v_other_1)
-				eta_con_2, eta_con_dot_2 = self.eta_funtion(x, x_other_3, v, v_other_3)
-				eta_con_3, eta_con_dot_3 = self.eta_funtion(x, x_other_4, v, v_other_4)
+				eta_con[0], eta_con_dot[0] = self.eta_funtion(x[0], x[1], v[0], v[1])
+				eta_con[1], eta_con_dot[1] = self.eta_funtion(x[0], [3], v[0], v[3])
+				eta_con_3, eta_con_dot_3 = self.eta_funtion(x[0], x[4], v[0], v[4])
 
 			if self.agent_number == 3:
-				eta_con_1, eta_con_dot_1 = self.eta_funtion(x, x_other_1, v, v_other_1)
-				eta_con_2, eta_con_dot_2 = self.eta_funtion(x, x_other_3, v, v_other_3)
+				eta_con[0], eta_con_dot[0] = self.eta_funtion(x[0], x[1], v[0], v[1])
+				eta_con[1], eta_con_dot[1] = self.eta_funtion(x[0], x[3], v[0], v[3])
 
 			if self.agent_number == 4:
-				eta_con_1, eta_con_dot_1 = self.eta_funtion(x, x_other_3, v, v_other_3)
-				eta_con_2, eta_con_dot_2 = self.eta_funtion(x, x_other_5, v, v_other_5)
+				eta_con[0], eta_con_dot[0] = self.eta_funtion(x[0], x[3], v[0], v[3])
+				eta_con[1], eta_con_dot[1] = self.eta_funtion(x[0], x_[5], v[0], v[5])
 
 			if self.agent_number == 5:
-				eta_con_1, eta_con_dot_1 = self.eta_funtion(x, x_other_5, v, v_other_5)
-				eta_con_2, eta_con_dot_2 = self.eta_funtion(x, x_other_2, v, v_other_2)
+				eta_con[0], eta_con_dot[0] = self.eta_funtion(x[0], x[5], v[0], v[5])
+				eta_con[1], eta_con_dot[1] = self.eta_funtion(x[0], x[2], v[0], v[2])
 			
 			# Definition of the posible collision (everyone with everyone)
-			iota_col_1, iota_col_dot_1 = self.iota_con(x, x_other_1, v, v_other_1)
-			iota_col_2, iota_col_dot_2 = self.iota_con(x, x_other_2, v, v_other_2)
-			iota_col_3, iota_col_dot_3 = self.iota_con(x, x_other_3, v, v_other_3)
-			iota_col_4, iota_col_dot_4 = self.iota_con(x, x_other_4, v, v_other_4)
-			iota_col_5, iota_col_dot_5 = self.iota_con(x, x_other_5, v, v_other_5)
 
+			for i=0 in 5:
+				iota_col[i], iota_col_dot[i] = self.iota_con(x[i], x[i+1], v[i], v[i+1])
+			
 
 			####################################################################################
 			### Implementation of not disconnection: ETA BIGGER THAT 0 FOR NOT DISCONNECTION ###
@@ -386,197 +368,81 @@ class Nav_control():
 			self.beta_bound = 10**4
 
 
-			# CODE FOR ETA 1
+			for i=0 in 3:
 
-			if eta_con_1 < 0:					# Eta less than 0, everything 0 
-				beta_con_1 = 0
-				grad_beta_con_1, grad_beta_con_dot_1 = self.reset_grad_beta()
+				if i=|2 or self.agent_number == 0 or self.agent_number == 2:
 
-			elif eta_con_1 < self.con_offset:	# If the distante between Crazyflie is more that 0, define betas
+					if eta_con[i] < 0:					# Eta less than 0, everything 0 
+						beta_con[i] = 0
+						grad_beta_con[i], grad_beta_con_dot[i] = self.reset_grad_beta()
 
-				A = self.A_con()
-				B = self.B_con()
-				self.coeff = np.dot(np.linalg.inv(A),B)
+					elif eta_con[i] < self.con_offset:	# If the distante between Crazyflie is more that 0, define betas
 
-				beta_con_1, beta_con_dot_1 = self.beta_con(eta_con_1, eta_con_dot_1)
-				grad_beta_con_1, grad_beta_con_dot_1 = self.grad_beta_con(beta_con_1, beta_con_dot_1, eta_con_1, eta_con_dot_1, x, x_other_1, v, v_other_1)
-				
-			else:								# If the distance between Crazuflies is less than 0:
-				beta_con_1 = self.beta_bound
-				grad_beta_con_1, grad_beta_con_dot_1 = self.reset_grad_beta()
+						A = self.A_con()
+						B = self.B_con()
+						self.coeff = np.dot(np.linalg.inv(A),B)
 
-
-			# CODE FOR ETA 2
-
-			if eta_con_2 < 0:
-				beta_con_2 = 0
-				grad_beta_con_2, grad_beta_con_dot_2 = self.reset_grad_beta()
-
-			elif eta_con_2 < self.con_offset:
-
-				A = self.A_con()
-				B = self.B_con()
-				self.coeff = np.dot(np.linalg.inv(A),B)
-
-				beta_con_2, beta_con_dot_2 = self.beta_con(eta_con_2, eta_con_dot_2)
-				grad_beta_con_2, grad_beta_con_dot_2 = self.grad_beta_con(beta_con_2, beta_con_dot_2, eta_con_2, eta_con_dot_2, x, x_other_2, v, v_other_2)
-				
-			else:
-				beta_con_2 = self.beta_bound
-				grad_beta_con_2, grad_beta_con_dot_2 = self.reset_grad_beta()
-
-
-			# CODE FOR ETA 3 (JUST IF NECESSARY)
-
-			if self.agent_number == 0 or self.agent_number == 2:
-
-				if eta_con_3 < 0:
-					beta_con_3 = 0
-					grad_beta_con_3, grad_beta_con_dot_3 = self.reset_grad_beta()
-
-				elif eta_con_3 < self.con_offset:
-
-					A = self.A_con()
-					B = self.B_con()
-					self.coeff = np.dot(np.linalg.inv(A),B)
-
-					beta_con_3, beta_con_dot_3 = self.beta_con(eta_con_3, eta_con_dot_3)
-					grad_beta_con_3, grad_beta_con_dot_3 = self.grad_beta_con(beta_con_3, beta_con_dot_3, eta_con_3, eta_con_dot_3, x, x_other_3, v, v_other_3)
-				
-				else:
-					beta_con_3 = self.beta_bound
-					grad_beta_con_3, grad_beta_con_dot_3 = self.reset_grad_beta()
+						beta_con[i], beta_con_dot[i] = self.beta_con(eta_con[i], eta_con_dot[i])
+						grad_beta_con[i], grad_beta_con_dot[i] = self.grad_beta_con(beta_con[i], beta_con_dot[i], eta_con[i], eta_con_dot[i], x[i], x[i+1], v[i], v[i+1])
+						
+					else:								# If the distance between Crazuflies is less than 0:
+						beta_con[i] = self.beta_bound
+						grad_beta_con[i], grad_beta_con_dot[i] = self.reset_grad_beta()
 
 
 			#############################################################################
 			### Implementation of not collision: IOTA BIGGER THAT 0 FOR NOT COLLISION ###
 			#############################################################################
-																# Iota = real distance between Crazuflies: | * |----------| * |     (just -----)
+
+			# Iota = real distance between Crazuflies: | * |----------| * |     (just -----)
 			col_distance_meas = self.d_con 							# Inter agent distance where we start taking collision into account (less than)
 			self.col_offset = col_distance_meas**2 - 4*self.r**2
 			self.beta_bound = 10**4
 
-			# CODE FOR IOTA 1
+			
+			for i=0 in 5:
 
-			if iota_col_1 <= 0:						# If iota less than 0, everything 0
-				beta_col_1 = 0
-				grad_beta_col_1, grad_beta_col_dot_1 = self.reset_grad_beta()
-			        
-			elif iota_col_1 <= self.col_offset:		# If iota is smaller than a value, define betas
+				if iota_col[i] <= 0:						# If iota less than 0, everything 0
+					beta_col[i] = 0
+					grad_beta_col[i], grad_beta_col_dot[i] = self.reset_grad_beta()
+				        
+				elif iota_col[i] <= self.col_offset:		# If iota is smaller than a value, define betas
 
-				A = self.A_col()
-				B = self.B_col()
-				self.coeff = np.dot(np.linalg.inv(A),B)
+					A = self.A_col()
+					B = self.B_col()
+					self.coeff = np.dot(np.linalg.inv(A),B)
 
-				beta_col_1, beta_col_dot_1 = self.beta_col(iota_col_1, iota_col_dot_1)
-				grad_beta_col_1, grad_beta_col_dot_1 = self.grad_beta_col(beta_col_1 , beta_col_dot_2, iota_col_3, iota_col_dot_3, x, x_other_3, v, v_other_3)
-				
-			else:									# If iota is bigger than a value:
-				beta_col_1 = self.beta_bound
-				grad_beta_col_1, grad_beta_col_dot_1 = self.reset_grad_beta()
-
-
-			# CODE FOR IOTA 2
-
-			if iota_col_2 <= 0:
-				beta_col_2 = 0
-				grad_beta_col_2, grad_beta_col_dot_2 = self.reset_grad_beta()
-			        
-			elif iota_col_2 <= self.col_offset:
-
-				A = self.A_col()
-				B = self.B_col()
-				self.coeff = np.dot(np.linalg.inv(A),B)
-
-				beta_col_2, beta_col_dot_2 = self.beta_col(iota_col_2, iota_col_dot_2)
-				grad_beta_col_2, grad_beta_col_dot_2 = self.grad_beta_col(beta_col_2 , beta_col_dot_2, iota_col_2, iota_col_dot_2, x, x_other_2, v, v_other_2)
-				
-			else:
-				beta_col_2 = self.beta_bound
-				grad_beta_col_2, grad_beta_col_dot_2 = self.reset_grad_beta()
-
-			if iota_col_3 <= 0:
-				beta_col_3 = 0
-				grad_beta_col_3, grad_beta_col_dot_3 = self.reset_grad_beta()
-
-
-			# CODE FOR IOTA 3
-
-			elif iota_col_3 <= self.col_offset:
-
-				A = self.A_col()
-				B = self.B_col()
-				self.coeff = np.dot(np.linalg.inv(A),B)
-
-				beta_col_3, beta_col_dot_3 = self.beta_col(iota_col_3, iota_col_dot_3)
-				grad_beta_col_3, grad_beta_col_dot_3 = self.grad_beta_col(beta_col_3 , beta_col_dot_3, iota_col_3, iota_col_dot_3, x, x_other_3, v, v_other_3)
-				
-			else:
-				beta_col_3 = self.beta_bound
-				grad_beta_col_3, grad_beta_col_dot_3 = self.reset_grad_beta()
-
-
-			# CODE FOR IOTA 4
-
-			if iota_col_4 <= 0:
-				beta_col_4 = 0
-				grad_beta_col_4, grad_beta_col_dot_4 = self.reset_grad_beta()
-			        
-			elif iota_col_4 <= self.col_offset:
-
-				A = self.A_col()
-				B = self.B_col()
-				self.coeff = np.dot(np.linalg.inv(A),B)
-
-				beta_col_4, beta_col_dot_4 = self.beta_col(iota_col_4, iota_col_dot_4)
-				grad_beta_col_4, grad_beta_col_dot_4 = self.grad_beta_col(beta_col_4 , beta_col_dot_4, iota_col_4, iota_col_dot_4, x, x_other_4, v, v_other_4)
-				
-			else:
-				beta_col_4 = self.beta_bound
-				grad_beta_col_4, grad_beta_col_dot_4 = self.reset_grad_beta()
-
-
-			# CODE FOR IOTA 5
-
-			if iota_col_5 <= 0:
-				beta_col_5 = 0
-				grad_beta_col_5, grad_beta_col_dot_5 = self.reset_grad_beta()
-    
-			elif iota_col_5 <= self.col_offset:
-				
-				A = self.A_col()
-				B = self.B_col()
-				self.coeff = np.dot(np.linalg.inv(A),B)
-
-				beta_col_5, beta_col_dot_5 = self.beta_col(iota_col_5, iota_col_dot_5)
-				grad_beta_col_5, grad_beta_col_dot_5 = self.grad_beta_col(beta_col_5 , beta_col_dot_5, iota_col_5, iota_col_dot_5, x, x_other_5, v, v_other_5)
-				
-			else:
-				beta_col_5 = self.beta_bound
-				grad_beta_col_5, grad_beta_col_dot_5 = self.reset_grad_beta()
+					beta_col[i], beta_col_dot[i] = self.beta_col(iota_col[i], iota_col_dot[i])
+					grad_beta_col[i], grad_beta_col_dot[i] = self.grad_beta_col(beta_col[i] , beta_col_dot[i], iota_col[i], iota_col_dot[i], x[i], x[i+1], v[i], v[i+1])
+					
+				else:									# If iota is bigger than a value:
+					beta_col[i] = self.beta_bound
+					grad_beta_col[i], grad_beta_col_dot[i] = self.reset_grad_beta()
 
 
 			########################
 			### Desired velocity ###
 			########################
+
 			# Vi = Ki * SUM alfa * grad_beta, as alfa is (-1, 1, 0) if i=m1, i=m2, i=|m1,m2  
 			#	respectively in the specific Crazyflie alfa = -1
-			beta_term_con = -grad_beta_con_1 - grad_beta_con_2 - grad_beta_con_3 
-			beta_term_col = -grad_beta_col_1 - grad_beta_col_2 - grad_beta_col_3 - grad_beta_col_4 - grad_beta_col_5  
+			beta_term_con = -sum(grad_beta_con)
+			beta_term_col = -sum(grad_beta_col) 
 
-			beta_term_con_dot = -grad_beta_con_dot_1 - grad_beta_con_dot_2 - grad_beta_con_dot_3 
-			beta_term_col_dot = -grad_beta_col_dot_1 - grad_beta_col_dot_2 - grad_beta_col_dot_3 - grad_beta_col_dot_4 - grad_beta_col_dot_5
+			beta_term_con_dot = -sum(grad_beta_con_dot) 
+			beta_term_col_dot = -sum(grad_beta_col_dot)
 
 			if mode == 1:	# If the Crazyflie is the leader, one more term to 
 				navigation_term[0] = - kp_x*ep[0]
 				navigation_term[1] = - kp_y*ep[1] 
 				navigation_term[2] = - kp_z*ep[2] 
-				v_des = navigation_term + ki*(beta_term_col + beta_term_con) - lambda_int*integrator
-				v_des_dot = np.array([-kp_x*v[0],-kp_y*v[1],-kp_z*v[2]]) + ki*(beta_term_col_dot + beta_term_con_dot) - lambda_int*ep
+				
+				v_des = navigation_term + ki*(beta_term_col + beta_term_con) - lambda_int*integrator ################ VECTOR PLUS SCALAR
+				v_des_dot = np.array([-kp_x*v[0],-kp_y*v[1],-kp_z*v[2]]) + ki*(beta_term_col_dot + beta_term_con_dot) - lambda_int*ep ##### VECTOR PLUS SCALAR
 
 			else:
-				v_des = ki*(beta_term_col + beta_term_con) 
-				v_des_dot = ki*(beta_term_col_dot + beta_term_con_dot) 
+				v_des = ki*(beta_term_col + beta_term_con) ############################################ SCALAR USED AS VECTOR
+				v_des_dot = ki*(beta_term_col_dot + beta_term_con_dot) ############################################ SCALAR USED AS VECTOR
 
 			# Calcutale the velocity error:
 			e_v = v - v_des
@@ -594,7 +460,7 @@ class Nav_control():
 				e_tilde = np.zeros(3)
 
 			# Calculate Y matrix:
-			Y = np.array( [v_des_dot[0],v_des_dot[1],v_des_dot[2]+grav])
+			Y = np.array( [v_des_dot[0],v_des_dot[1],v_des_dot[2]+grav]) ############################################ SCALAR USED AS VECTOR HERE
 
 			# Calculate term of control:
 			control = beta_term_col + beta_term_con - dissip_term + Y*self.theta_hat - k_e_tilde*e_tilde - np.sign(e_v)*np.linalg.norm(v,1)*self.f_b_hat - np.sign(e_v)*self.d_b_hat
