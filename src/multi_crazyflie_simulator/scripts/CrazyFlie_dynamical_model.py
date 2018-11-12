@@ -48,12 +48,11 @@ class CF_model():
 
     def __init__(self):
 
+        self.desired_att = np.zeros(3)
+
         rospy.init_node("dynamic_model", anonymous = True)
         self.topic = rospy.get_param("~topic")
 
-        rospy.Subscriber(self.topic + "/cmd_vel", Twist, self.new_attitude_setpoint)
-        rospy.Subscriber(self.topic + "/cmd_pos", Position, self.new_position_setpoint)
-        rospy.Subscriber("/init_pose", PointStamped, self.new_init_position)
         self.pub_pos = rospy.Publisher(self.topic + "/out_pos", PoseStamped, queue_size = 1000)
         ### DO A TOPIC WITH "/out_pos_odometry" simulando al mocap
         self.pub_ack = rospy.Publisher("/init_pose_ack", String, queue_size = 1000)
@@ -140,7 +139,6 @@ class CF_model():
         self.att_pid_counter = 0
         self.att_pid_counter_max = int( self.cf_physical_params.DT_ATT_PIDS / self.cf_physical_params.DT_CF) - 1
 
-        self.desired_att = np.zeros(3)
 
         ######################
         # Angular velocities
@@ -200,6 +198,10 @@ class CF_model():
 
         self.time_processing = []
         self.delta_time = []
+
+        rospy.Subscriber(self.topic + "/cmd_vel", Twist, self.new_attitude_setpoint)
+        rospy.Subscriber(self.topic + "/cmd_pos", Position, self.new_position_setpoint)
+        rospy.Subscriber("/init_pose", PointStamped, self.new_init_position)
      
     ###########################
     # Math operations functions
