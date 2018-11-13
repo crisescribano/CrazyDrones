@@ -9,7 +9,7 @@ from cf_physical_parameters import CF_parameters
 from cf_pid_params import CF_pid_params
 from pid import PID
 import time
-from nav_msgs.msg import Odometry
+import nav_msgs.msg 
 from geometry_msgs.msg import Twist, PoseStamped, PointStamped
 from crazyflie_driver.msg import Position
 from std_msgs.msg import String
@@ -54,10 +54,11 @@ class CF_model():
         self.topic = rospy.get_param("~topic")
 
         self.pub_pos = rospy.Publisher(self.topic + "/out_pos", PoseStamped, queue_size = 1000)
-        ### DO A TOPIC WITH "/out_pos_odometry" simulando al mocap
+        self.pub_pos_odom = rospy.Publisher(self.topic + "/out_pos_odometry", nav_msgs.msg.Odometry, queue_size = 1000)
         self.pub_ack = rospy.Publisher("/init_pose_ack", String, queue_size = 1000)
         self.msg = PoseStamped()
-
+        self.msg_odom = nav_msgs.msg.Odometry()
+        
         self.isInit = False
 
         # System state: position, linear velocities,
@@ -428,12 +429,26 @@ class CF_model():
         self.msg.pose.orientation.y = quaternion[1]
         self.msg.pose.orientation.z = quaternion[2]
         self.pub_pos.publish(self.msg)
+
+        self.msg_odom.pose.pose.position.x = self.cf_state.position[0]
+        self.msg_odom.pose.pose.position.y = self.cf_state.position[1]
+        self.msg_odom.pose.pose.position.z = self.cf_state.position[2]
+        self.msg_odom.twist.twist.linear.x = self.cf_state.lin_vel[0]
+        self.msg_odom.twist.twist.linear.y = self.cf_state.lin_vel[1]
+        self.msg_odom.twist.twist.linear.z = self.cf_state.lin_vel[2]
+        self.msg_odom.pose.pose.orientation.x = quaternion[0]
+        self.msg_odom.pose.pose.orientation.y = quaternion[1]
+        self.msg_odom.pose.pose.orientation.z = quaternion[2]
+        self.msg_odom.pose.pose.orientation.w = quaternion[3]
+        self.pub_pos_odom.publish(self.msg_odom)
+
         br = tf.TransformBroadcaster()
         br.sendTransform(self.cf_state.position,
                          quaternion,
                          rospy.Time.now(),
                          self.topic + "/base_link",
                          "/base_link")
+
 
     def run(self):
         tic_init = time.time()

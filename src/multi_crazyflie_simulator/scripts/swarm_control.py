@@ -21,11 +21,8 @@ class Nav_control():
 
 		rospy.init_node('navigation_node_sim') 
 		
-		self.agent_pose=[nav_msgs.msg.Odometry(),nav_msgs.msg.Odometry(),nav_msgs.msg.Odometry(),nav_msgs.msg.Odometry(),nav_msgs.msg.Odometry(),nav_msgs.msg.Odometry()]
-		# for i in range(0, 6):
-		# 	self.agent_pose.append(i) = nav_msgs.msg.Odometry()
-	
-
+		self.agent_pose= np.array([nav_msgs.msg.Odometry(),nav_msgs.msg.Odometry(),nav_msgs.msg.Odometry(),nav_msgs.msg.Odometry(),nav_msgs.msg.Odometry(),nav_msgs.msg.Odometry()])
+		
 		self.topic = rospy.get_param("~topic")
 		self.agent_number = rospy.get_param("~agent_number")
 		self.priority = rospy.get_param("~priority")
@@ -48,7 +45,7 @@ class Nav_control():
 
 		self.con_offset = 0
 		self.col_offset = 0
-		self.beta_bound = 0
+		self.beta_bound = 10**4
 		self.coeff = np.zeros(3)
 		self.a_hat = 0
 		self.a_hat_dot = 0
@@ -59,24 +56,23 @@ class Nav_control():
 		self.theta_hat = 0
 		self.theta_hat_dot = 0
 		self.d_con = 3 
-		self.r = 0.75
+		self.r = 0.075
 
 		self.rate = rospy.Rate(100) 
 
 				# SUBSCRIBER
-		rospy.Subscriber(self.topic + "/out_pos_odometry", nav_msgs.msg.Odometry, self.callback_crazyflie_0)
-		rospy.Subscriber(self.topic + "/out_pos_odometry", nav_msgs.msg.Odometry, self.callback_crazyflie_1)
-		rospy.Subscriber(self.topic + "/out_pos_odometry", nav_msgs.msg.Odometry, self.callback_crazyflie_2)
-		rospy.Subscriber(self.topic + "/out_pos_odometry", nav_msgs.msg.Odometry, self.callback_crazyflie_3)
-		rospy.Subscriber(self.topic + "/out_pos_odometry", nav_msgs.msg.Odometry, self.callback_crazyflie_4)
-		rospy.Subscriber(self.topic + "/out_pos_odometry", nav_msgs.msg.Odometry, self.callback_crazyflie_5)
+		rospy.Subscriber("/crazyflie_0/out_pos_odometry", nav_msgs.msg.Odometry, self.callback_crazyflie_0)
+		rospy.Subscriber("/crazyflie_1/out_pos_odometry", nav_msgs.msg.Odometry, self.callback_crazyflie_1)
+		rospy.Subscriber("/crazyflie_2/out_pos_odometry", nav_msgs.msg.Odometry, self.callback_crazyflie_2)
+		rospy.Subscriber("/crazyflie_3/out_pos_odometry", nav_msgs.msg.Odometry, self.callback_crazyflie_3)
+		rospy.Subscriber("/crazyflie_4/out_pos_odometry", nav_msgs.msg.Odometry, self.callback_crazyflie_4)
+		rospy.Subscriber("/crazyflie_5/out_pos_odometry", nav_msgs.msg.Odometry, self.callback_crazyflie_5)
 
 	# Rotation matrix around Y
 	def rot_y(self, beta):
 		cos_b = cos(beta)
 		sin_b = sin(beta)
 		M = np.array([[cos_b, 0, -sin_b], [0, 1, 0], [sin_b, 0, cos_b]])
-
 		return M
 
 	# Rotation matrix around Z
@@ -106,28 +102,42 @@ class Nav_control():
 							cos(roll)*cos(pitch)]])
 
 	def position_and_velocity_from_odometry(self, odometry):
+		x = np.zeros(3)
+		x[0] = odometry.pose.pose.position.x
+		x[1] = odometry.pose.pose.position.y
+		x[2] = odometry.pose.pose.position.z
 
-		x = [odometry.pose.pose.position.x, odometry.pose.pose.position.y, odometry.pose.pose.position.z]
 		# TODO: naming of child_frame_id
 		if odometry.child_frame_id == 'firefly/base_link':
 			# velocity is in the body reference frame
-			v_body = [odometry.twist.twist.linear.x, odometry.twist.twist.linear.y, odometry.twist.twist.linear.z]
+			v_doby = np.zeros(3)
+			v_body[0] = odometry.twist.twist.linear.x
+			v_body[1] = odometry.twist.twist.linear.y
+			v_body[2] = odometry.twist.twist.linear.z
 
-			quaternion = [odometry.pose.pose.orientation.x, odometry.pose.pose.orientation.y, odometry.pose.pose.orientation.z, odometry.pose.pose.orientation.w]
+			quaternion = np.zeros(4)
+			quaternion[0] = odometry.pose.pose.orientation.x
+			quaternion[1] = odometry.pose.pose.orientation.y
+			quaternion[2] = odometry.pose.pose.orientation.z
+			quaternion[3] = odometry.pose.pose.orientation.w
 			# TODO
 			rotation_matrix = self.rot_m(quaternion[0], quaternion[1], quaternion[2])
 			v = np.dot(rotation_matrix,v_body)
 		else:
 		# velocity is in the body reference frame
-			v = [odometry.twist.twist.linear.x, odometry.twist.twist.linear.y, odometry.twist.twist.linear.z]
-
-	
+			v = np.zeros(3)
+			v[0] = odometry.twist.twist.linear.x
+			v[1] = odometry.twist.twist.linear.y
+			v[2] = odometry.twist.twist.linear.z
+		# if self.agent_number == 0:
+		# 	print("x: " + str(x))
+		# 	print("v: " + str(v))
 
 		return x,v
 
 	### Remap to change the number os the Crazyflie we refer depending on which Crazyflie runs the code:
 	#		This remap is donne following the graph that is already given
-	def callback_crazyflie_0(self, data): 
+	def callback_crazyflie_0(self, data):
 		if self.agent_number == 0:
 			self.agent_pose[0] = data
 		else: 
@@ -147,7 +157,7 @@ class Nav_control():
 		elif self.agent_number == 2:
 			self.agent_pose[0] = data
 		else: 
-			self.gent_pose[3] = data 
+			self.agent_pose[3] = data 
 
 	def callback_crazyflie_3(self, data):  
 		if self.agent_number == 4 or self.agent_number == 5: 
@@ -310,10 +320,9 @@ class Nav_control():
 
 		x = [np.zeros(3),np.zeros(3),np.zeros(3),np.zeros(3),np.zeros(3),np.zeros(3)]
 		v = [np.zeros(3),np.zeros(3),np.zeros(3),np.zeros(3),np.zeros(3),np.zeros(3)]
-		
 
 		while not rospy.is_shutdown():
-
+			
 			# Get the position and velocity of all the CrazyFlies
 			for i in range(0, 6):
 				x[i],v[i] = self.position_and_velocity_from_odometry(self.agent_pose[i])
@@ -343,9 +352,9 @@ class Nav_control():
 				integrator = integrator + dt*ep
 				ki = 0.5          
 
-				leader_time_msg = std_msgs.msg.Float64()
-				leader_time_msg.data = rospy.get_time()
-				self.leader_time_pub.publish(leader_time_msg)
+				# leader_time_msg = std_msgs.msg.Float64()
+				# leader_time_msg.data = rospy.get_time()
+				# self.leader_time_pub.publish(leader_time_msg)
 
 				if np.linalg.norm(ep) < 0.075:	# Check if desired point is achieved
 					print 'REACHED!!!'			# Point achieved
@@ -387,21 +396,18 @@ class Nav_control():
 			if self.agent_number == 5:
 				eta_con[0], eta_con_dot[0] = self.eta_funtion(x[0], x[5], v[0], v[5])
 				eta_con[1], eta_con_dot[1] = self.eta_funtion(x[0], x[2], v[0], v[2])
-			
+
 			# Definition of the posible collision (everyone with everyone)
 
 			for i in range(0, 5):
 				iota_col[i],iota_col_dot[i] = self.iota_con(x[i], x[i+1], v[i], v[i+1])
 			
-
 			####################################################################################
-			### Implementation of not disconnection: ETA BIGGER THAT 0 FOR NOT DISCONNECTION ###
+			### Implementation of not disconnection: ETA BIGGER THAN 0 FOR NOT DISCONNECTION ###
 			####################################################################################
 
 			con_distance_meas = 0 								# Inter agent distance where we start taking conection into account (greater than)
 			self.con_offset = self.d_con**2 - con_distance_meas**2	# DUDA ####################################################################
-			self.beta_bound = 10**4
-
 
 			for i in range(0, 3):
 
@@ -409,8 +415,8 @@ class Nav_control():
 
 					if eta_con[i] < 0:					# Eta less than 0, everything 0 
 						beta_con[i] = 0
+						beta_con_dot[i] = 0
 						grad_beta_con[i],grad_beta_con_dot[i] = self.reset_grad_beta()
-						print ("entre")
 
 					elif eta_con[i] < self.con_offset:	# If the distante between Crazyflie is more that 0, define betas
 
@@ -419,14 +425,13 @@ class Nav_control():
 						self.coeff = np.dot(np.linalg.inv(A),B)
 
 						beta_con[i],beta_con_dot[i] = self.beta_con(eta_con[i], eta_con_dot[i])
-						print (grad_beta_con)
 						grad_beta_con[i],grad_beta_con_dot[i] = self.grad_beta_con(beta_con[i], beta_con_dot[i], eta_con[i], eta_con_dot[i], x[i], x[i+1], v[i], v[i+1])
 						
 					else:								# If the distance between Crazyflies is less than 0:
 						beta_con[i] = self.beta_bound
 						grad_beta_con[i],grad_beta_con_dot[i] = self.reset_grad_beta()
 
-
+		
 			#############################################################################
 			### Implementation of not collision: IOTA BIGGER THAT 0 FOR NOT COLLISION ###
 			#############################################################################
@@ -434,13 +439,12 @@ class Nav_control():
 			# Iota = real distance between Crazuflies: | * |----------| * |     (just -----)
 			col_distance_meas = self.d_con 							# Inter agent distance where we start taking collision into account (less than)
 			self.col_offset = col_distance_meas**2 - 4*self.r**2
-			self.beta_bound = 10**4
-
 			
 			for i in range(0, 5):
 
 				if iota_col[i] <= 0:						# If iota less than 0, everything 0
 					beta_col[i] = 0
+					beta_col_dot[i] = 0
 					grad_beta_col[i],grad_beta_col_dot[i] = self.reset_grad_beta()
 				        
 				elif iota_col[i] <= self.col_offset:		# If iota is smaller than a value, define betas
@@ -468,6 +472,11 @@ class Nav_control():
 
 			beta_term_con_dot = -grad_beta_con_dot[0] - grad_beta_con_dot[1] - grad_beta_con_dot[2] 
 			beta_term_col_dot = -grad_beta_col_dot[0] - grad_beta_col_dot[1] - grad_beta_col_dot[2] - grad_beta_col_dot[3] - grad_beta_col_dot[4] - grad_beta_col_dot[5]
+			
+			# print("beta_term_con : "+str(beta_term_con))
+			# print("beta_term_col : "+str(beta_term_col))
+			# print("beta_term_con_dot : "+str(beta_term_con_dot))
+			# print("beta_term_col_dot : "+str(beta_term_col_dot))
 
 			if mode == 1:	# If the Crazyflie is the leader
 				# navigation_term[0] = - kp_x*ep[0]
