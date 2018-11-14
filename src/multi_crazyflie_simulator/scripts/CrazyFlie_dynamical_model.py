@@ -52,6 +52,7 @@ class CF_model():
 
         rospy.init_node("dynamic_model", anonymous = True)
         self.topic = rospy.get_param("~topic")
+        self.agent_number = rospy.get_param("~agent_number")
 
         self.pub_pos = rospy.Publisher(self.topic + "/out_pos", PoseStamped, queue_size = 1000)
         self.pub_pos_odom = rospy.Publisher(self.topic + "/out_pos_odometry", nav_msgs.msg.Odometry, queue_size = 1000)
@@ -200,10 +201,11 @@ class CF_model():
         self.time_processing = []
         self.delta_time = []
 
-        rospy.Subscriber(self.topic + "/cmd_vel", Twist, self.new_attitude_setpoint)
         rospy.Subscriber(self.topic + "/cmd_pos", Position, self.new_position_setpoint)
         rospy.Subscriber("/init_pose", PointStamped, self.new_init_position)
-     
+        if self.agent_number != 0:
+          rospy.Subscriber(self.topic + "/cmd_vel", Twist, self.new_attitude_setpoint)
+
     ###########################
     # Math operations functions
     ###########################
@@ -354,10 +356,10 @@ class CF_model():
                                          self.y_pid.update(self.desired_pos[1], self.cf_state.position[1]),
                                          self.z_pid.update(self.desired_pos[2], self.cf_state.position[2])])
 
+
     def run_lin_vel_pid(self):
         raw_pitch = self.vy_pid.update(self.desired_lin_vel[1], self.cf_state.lin_vel[1])
         raw_roll = self.vx_pid.update(self.desired_lin_vel[0], self.cf_state.lin_vel[0])
-
         # Current YAW
         raw_yaw = -self.cf_state.attitude[2]
 

@@ -15,35 +15,35 @@ class SendSetpoint():
 	def __init__(self):
 
 		self.started = False
-		self.pos_setpoint = [0.0, 0.0, 0.0, 0.0]
+		self.pos_setpoint = [5.0, 3.0, 2.0, 0.0]
 		rospy.init_node("send_pos_setpoints", anonymous=True)
 
 		#self.worldFrame = rospy.get_param("~worldFrame", "/world")
 
 		self.msg = Position()
 		self.pub = rospy.Publisher("/crazyflie_0/cmd_pos", Position, queue_size=1)
-		self.sub = rospy.Subscriber("pos_from_terminal", Twist, self.getPose)
+		#self.sub = rospy.Subscriber("pos_from_terminal", Twist, self.getPose)
 		self.rate = rospy.Rate(10)
 		
-	def getPose(self, messageIn):
-		print("MESSAGE IN: pos to send: " + str(self.pos_setpoint[0]))
-		self.pos_setpoint = [messageIn.linear.x, messageIn.linear.y, messageIn.linear.z, messageIn.angular.z]
-		if not self.started:
-			self.started = True
+	# def getPose(self, messageIn):
+	# 	print("MESSAGE IN: pos to send: " + str(self.pos_setpoint[0]))
+	# 	self.pos_setpoint = [messageIn.linear.x, messageIn.linear.y, messageIn.linear.z, messageIn.angular.z]
+	# 	if not self.started:
+	# 		self.started = True
 
 	def _main_loop(self):
 
 		while(not rospy.is_shutdown()): 
-			if(self.started):
-				self.msg.header.seq = 0
-				self.msg.header.stamp = rospy.Time.now()
-				#self.msg.header.frame_id = self.worldFrame
-				self.msg.x = self.pos_setpoint[0]
-				self.msg.y = self.pos_setpoint[1]
-				self.msg.z = self.pos_setpoint[2]
-				self.msg.yaw = self.pos_setpoint[3]
-				self.pub.publish(self.msg)
-				self.rate.sleep()
+			#if(self.started):
+			self.msg.header.seq = 0
+			self.msg.header.stamp = rospy.Time.now()
+			#self.msg.header.frame_id = self.worldFrame
+			self.msg.x = self.pos_setpoint[0]
+			self.msg.y = self.pos_setpoint[1]
+			self.msg.z = self.pos_setpoint[2]
+			self.msg.yaw = self.pos_setpoint[3]
+			self.pub.publish(self.msg)
+			self.rate.sleep()
 
 if __name__ == '__main__':
 	sendSetpoint = SendSetpoint()

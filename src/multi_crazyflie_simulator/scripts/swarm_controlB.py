@@ -36,7 +36,8 @@ class Nav_control():
 		time = rospy.get_time()
 
 		# Trayectory to follow:
-		self.PoI = np.array([[0, 0, 5], [4, 5, 3],[-2, 4, 2],[3, -2, 3]])
+		#self.PoI = np.array([[0, 0, 5], [4, 5, 3],[-2, 4, 2],[3, -2, 3]])
+		self.PoI = np.array([[0, 0, 2], [-2, 0, 2],[-4, 2, 4],[1, -2, 5]])
 		self.region_idx = 0
 
 		if self.agent_number == 0:
@@ -336,7 +337,7 @@ class Nav_control():
 
 			# Point to achieve
 			xd = self.PoI[self.region_idx]
-
+			#xd = [0, 0, 1]
 			###########################################
 			### Achieve desired point by the leader ###
 			###########################################
@@ -359,8 +360,12 @@ class Nav_control():
 				# self.leader_time_pub.publish(leader_time_msg)
 
 				if np.linalg.norm(ep) < 0.075:	# Cheqck if desired point is achieved
-					print 'REACHED!!!'			# Point achieved
-					self.region_idx+= 1			# Another point to achieve
+					if self.region_idx == 3: 
+						print ('REACHED!!! POINT NUMBER ' + str(self.region_idx))
+						self.region_idx = 0
+					if self.region_idx < 3:
+						print ('REACHED!!! POINT NUMBER ' + str(self.region_idx))
+						self.region_idx+= 1			# Another point to achieve
 					integrator = np.zeros(3)	# Reset the integrator
 
 			###############################
