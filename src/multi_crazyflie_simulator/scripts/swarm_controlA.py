@@ -19,7 +19,7 @@ class Nav_control():
 
 	def __init__(self):
 
-		rospy.init_node('navigation_node_sim') 
+		rospy.init_node('navigation_node_simA') 
 		
 		self.agent_pose= np.array([nav_msgs.msg.Odometry(),nav_msgs.msg.Odometry(),nav_msgs.msg.Odometry(),nav_msgs.msg.Odometry(),nav_msgs.msg.Odometry(),nav_msgs.msg.Odometry()])
 		
@@ -560,4 +560,4 @@ if __name__ == '__main__':
     control = Nav_control()
     
     control.navigation()
-    rospy.spin()
+rospy.spin()
