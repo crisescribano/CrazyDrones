@@ -30,18 +30,18 @@ class Nav_control():
 		self.priority = rospy.get_param("~priority")
 
 		# PUBLISHER
-		if self.agent_number != 0:
-			self.force_pub = rospy.Publisher(self.topic + "/forces_input", mav_msgs.msg.TorqueThrust, queue_size = 100)
+		#if self.agent_number != 0:
+		self.force_pub = rospy.Publisher(self.topic + "/forces_input", mav_msgs.msg.TorqueThrust, queue_size = 100)
 
 		time = rospy.get_time()
 
 		# Trayectory to follow:
 		#self.PoI = np.array([[0, 0, 5], [4, 5, 3],[-2, 4, 2],[3, -2, 3]])
-		self.PoI = np.array([[0, 0, 2], [-2, 0, 2],[-4, 2, 4],[1, -2, 5]])
+		self.PoI = np.array([[2, 2, 1], [2, 2, 1],[2, 2, 1],[2, 2, 1]])
 		self.region_idx = 0
 
-		if self.agent_number == 0:
-			self.pub_xd = rospy.Publisher('/crazyflie_0/cmd_pos', Position, queue_size = 100)
+		#if self.agent_number == 0:
+		#	self.pub_xd = rospy.Publisher('/crazyflie_0/cmd_pos', Position, queue_size = 100)
 
 		self.con_offset = 0
 		self.col_offset = 0
@@ -55,7 +55,7 @@ class Nav_control():
 		self.f_b_hat_dot = 0
 		self.theta_hat = 0
 		self.theta_hat_dot = 0
-		self.d_con = 3 
+		self.d_con = 3
 		self.r = 0.075
 
 		self.rate = rospy.Rate(10) 
@@ -121,7 +121,8 @@ class Nav_control():
 			quaternion[2] = odometry.pose.pose.orientation.z
 			quaternion[3] = odometry.pose.pose.orientation.w
 			# TODO
-			rotation_matrix = self.rot_m(quaternion[0], quaternion[1], quaternion[2])
+			rotation_matrix = tf.transformations.quaternion_from_euler(quaternion[0], quaternion[1], squaternion[2])
+			#rotation_matrix = self.rot_m(quaternion[0], quaternion[1], quaternion[2])
 			v = np.dot(rotation_matrix,v_body)
 		else:
 		# velocity is in the body reference frame
@@ -252,27 +253,28 @@ class Nav_control():
 	def navigation(self):
 
 		#GAINS
-		kp_x = 2 
-		kv_x = 0
+		#kp_x = .05 #0.5 for 10     ..*0.05 
+		
+		kp_x = .1#2
+		kv_x = 15
 		ki_x = 0  
 
-		kp_y = 2   
-		kv_y = 0
+		kp_y = .1#2   
+		kv_y = 15
 		ki_y = 0 
 
-		kp_z = 2
-		kv_z = 0
-		ki_z = 0.5
+		kp_z = 3#2
+		kv_z = 5
+		ki_z = 0#0.5
 
-		k_e_tilde = 0.005
-		lambda_int = 0.00015
-		k_theta = 0.1
-		k_f_b = 0.1
-		k_d_b = .01
-		ki = 5
+		k_e_tilde = 5
+		lambda_int = 0.0015
+		k_theta = .01
+		k_f_b = 0
+		k_d_b = 0
+		ki = 10#
 		mass = 0.027
 		dt = 0.01
-		grav = 9.81
 		
 		integrator = np.zeros(3)
 		navigation_term = np.zeros(3)
@@ -322,7 +324,9 @@ class Nav_control():
 			# Get the position and velocity of all the CrazyFlies
 			for i in range(0, 6):
 				x[i],v[i] = self.position_and_velocity_from_odometry(self.agent_pose[i])
-				
+				# if self.agent_number == 0:
+				# 	rospy.loginfo("value "+str(i)+" is: " + str(v[i]))
+			
 			# Check if we are lider o follower
 			if self.priority == 1: # Lider
 				mode = 1 
@@ -345,27 +349,28 @@ class Nav_control():
 			if mode == 1:
 
 				ep = x[0] - xd
+				#print(ep)
 				integrator = integrator + dt*ep
-				ki = 0.5  
+				ki = 1
 				point = Position()
 				point.header.seq = 0
 				point.header.stamp = rospy.Time.now()
 				point.x = xd[0]
 				point.y = xd[1]
 				point.z = xd[2]
-				self.pub_xd.publish(point)
+				#self.pub_xd.publish(point)
 
 				# leader_time_msg = std_msgs.msg.Float64()
 				# leader_time_msg.data = rospy.get_time()
 				# self.leader_time_pub.publish(leader_time_msg)
 
 				if np.linalg.norm(ep) < 0.075:	# Cheqck if desired point is achieved
-					if self.region_idx == 3: 
-						print ('REACHED!!! POINT NUMBER ' + str(self.region_idx))
-						self.region_idx = 0
 					if self.region_idx < 3:
 						print ('REACHED!!! POINT NUMBER ' + str(self.region_idx))
 						self.region_idx+= 1			# Another point to achieve
+					if self.region_idx == 3: 
+						print ('REACHED!!! POINT NUMBER ' + str(self.region_idx))
+						self.region_idx = 0
 					integrator = np.zeros(3)	# Reset the integrator
 
 			###############################
@@ -479,9 +484,9 @@ class Nav_control():
 			beta_term_col_dot = -grad_beta_col_dot[0] - grad_beta_col_dot[1] - grad_beta_col_dot[2] - grad_beta_col_dot[3] - grad_beta_col_dot[4] - grad_beta_col_dot[5]
 			
 			if mode == 1:	# If the Crazyflie is the leader
-				 navigation_term = np.dot([-kp_x, -kp_y, -kp_z], ep)
+				 navigation_term = np.array([-kp_x*ep[0], -kp_y*ep[1], -kp_z*ep[2]])
 				 v_des = navigation_term + ki*(beta_term_col + beta_term_con) - lambda_int*integrator ################ VECTOR PLUS SCALAR
-				 v_des_dot = np.dot([-kp_x, -kp_y, -kp_z], v[0]) + ki*(beta_term_col + beta_term_con) - lambda_int*ep ##### VECTOR PLUS SCALAR
+				 v_des_dot = np.array([-kp_x*v[0][0], -kp_y*v[0][1], -kp_z*v[0][2]] ) + ki*(beta_term_col_dot + beta_term_con_dot) - lambda_int*ep ##### VECTOR PLUS SCALAR
 
 			else:
 				v_des = ki*(beta_term_col + beta_term_con) 
@@ -491,7 +496,7 @@ class Nav_control():
 			e_v = v[self.agent_number] - v_des
 
 			# Dissipative terms:
-			dissip_term = np.dot([kv_x, kv_y, kv_z], e_v)
+			dissip_term = np.array([kv_x*e_v[0], kv_y*e_v[1], kv_z*e_v[2]])
 
 			# Calculate estimations needed:
 			if mode == 1:
@@ -505,12 +510,40 @@ class Nav_control():
 			Y = v_des_dot + [0, 0, grav]
 
 			# Calculate term of control:
-			control = beta_term_col + beta_term_con - dissip_term + Y*self.theta_hat - k_e_tilde*e_tilde - np.sign(e_v)*np.linalg.norm(v[self.agent_number],1)*self.f_b_hat - np.sign(e_v)*self.d_b_hat
+			if self.agent_number == 0:
+				print('xd = ', xd)
+				print("position = ", x[0])
+				print("velocity = ", v[0])
+				print("printstuff")
+				print("nav term = ", navigation_term)
+				print("integr = ", lambda_int*integrator)
+				print("v_des = ", v_des)
+				#print(np.sign(e_v)*self.d_b_hat)
+				#print(np.sign(e_v)*np.linalg.norm(v[self.agent_number],1)*self.f_b_hat)
+				print("diss term = ", dissip_term)
+				#print(Y*self.theta_hat)
+				print("Y = ", Y)
+				print("theta hat = ", self.theta_hat)
+				print("beta_term_col = ", beta_term_col)
+				print("beta_term_con = ", beta_term_con)
 
+			control = beta_term_col + beta_term_con - dissip_term + Y*self.theta_hat - k_e_tilde*e_tilde # - np.sign(e_v)*np.linalg.norm(v[self.agent_number],1)*self.f_b_hat - np.sign(e_v)*self.d_b_hat
+			#control = beta_term_col + beta_term_con - dissip_term + Y*self.theta_hat - k_e_tilde*e_tilde #- np.sign(e_v)*np.linalg.norm(v[self.agent_number],1)*self.f_b_hat
+			
+			if self.agent_number == 0:
+				rospy.loginfo("value  is: " + str(control))
 			# Calculate discrepance terms:
-			self.d_b_hat_dot = k_d_b*np.linalg.norm(e_v)
-			self.f_b_hat_dot = k_f_b*np.linalg.norm(e_v,1)*np.linalg.norm(v[self.agent_number])
+			self.d_b_hat_dot = 0 #k_d_b*np.linalg.norm(e_v)
+			self.f_b_hat_dot = 0#k_f_b*np.linalg.norm(e_v,1)*np.linalg.norm(v[self.agent_number])
 			self.theta_hat_dot = -k_theta*np.dot(Y,e_v)
+
+
+			# if self.agent_number == 1:
+			# 	rospy.loginfo("value e_v "+str(self.agent_number)+" is: " + str(e_v)+"\n")
+			# 	rospy.loginfo("value Y "+str(self.agent_number)+" is: " + str(Y)+"\n")
+			# 	rospy.loginfo("value theta_hat_dot "+str(self.agent_number)+" is: " + str(self.theta_hat_dot)+"\n")
+			# 	rospy.loginfo("value theta_hat "+str(self.agent_number)+" is: " + str(self.theta_hat_dot)+"\n")
+
 
 			# Publish several messages:
 			# 	# Publish lider errors (GUESS)
@@ -531,13 +564,13 @@ class Nav_control():
 			#f_hat_msg = std_msgs.msg.Float64()
 			#f_hat_msg.data = self.f_b_hat
 			#self.f_hat_pub.publish(f_hat_msg)
-			if self.agent_number != 0:
+			#if self.agent_number != 0:
 				# Publish control
-				mesage_to_pub = mav_msgs.msg.TorqueThrust()
-				mesage_to_pub.thrust.x = control[0] * 10000
-				mesage_to_pub.thrust.y = control[1] * 10000
-				mesage_to_pub.thrust.z = control[2] * 10000
-				self.force_pub.publish(mesage_to_pub)
+			mesage_to_pub = mav_msgs.msg.TorqueThrust()
+			mesage_to_pub.thrust.x = control[0] * 10000
+			mesage_to_pub.thrust.y = control[1] * 10000
+			mesage_to_pub.thrust.z = control[2] * 10000
+			self.force_pub.publish(mesage_to_pub)
 
 				# Publish 
 			# tmp_mesage_to_pub = mav_msgs.msg.TorqueThrust()

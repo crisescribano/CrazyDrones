@@ -4,6 +4,7 @@ import numpy as np
 import rospy
 from geometry_msgs.msg import Twist
 import mav_msgs.msg
+import time
 
 # desired_3d_force: input
 # psi_angle: yaw angle
@@ -26,14 +27,17 @@ class Forces():
 		self.I = [(1,0,0), (0,1,0),(0,0,1)]
 
 	def getForces(self, force_msg):
+		#print("message publish forces: "+ str(force_msg.thrust.x) + ", "+ str(force_msg.thrust.y) + ", "+ str( force_msg.thrust.z))
 		self.desired_3d_force[0] = force_msg.thrust.x
 		self.desired_3d_force[1] = force_msg.thrust.y
 		self.desired_3d_force[2] = force_msg.thrust.z
 
+
 	def run(self):
 		while(not rospy.is_shutdown()):
 			
-			
+			#print("Forces file")
+
 			norm = np.linalg.norm(self.desired_3d_force)
 
 			if norm > 0.1:        # could change threshold 0.1
@@ -56,11 +60,15 @@ class Forces():
 			cos_theta = np.clip(cos_theta,-1,1)
 			pitch = np.arctan2(sin_theta,cos_theta)
 
+			#print("desired force = ", self.desired_3d_force)
+			#print("roll, pitch = ", roll, pitch)
+			#time.sleep(0.01)
+			
 
 			message = Twist()
 			#message.header.stamp = rospy.get_rostime()
-			message.linear.x = roll 
-			message.linear.y = pitch
+			message.linear.x = pitch 
+			message.linear.y = roll
 			#message.angular.z = yaw_rate_desired
 			message.linear.z = self.desired_3d_force[2]
 			#print("message publish in cmd_vel: "+ str(message.linear.x) + ", "+ str(message.linear.y) + ", "+ str(message.linear.z))
@@ -73,3 +81,4 @@ if __name__ == '__main__':
 
 	forces.run()
 	rospy.spin()
+

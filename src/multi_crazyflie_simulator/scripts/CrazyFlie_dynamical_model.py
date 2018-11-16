@@ -201,10 +201,9 @@ class CF_model():
         self.time_processing = []
         self.delta_time = []
 
-        rospy.Subscriber(self.topic + "/cmd_pos", Position, self.new_position_setpoint)
+        #rospy.Subscriber(self.topic + "/cmd_pos", Position, self.new_position_setpoint)
         rospy.Subscriber("/init_pose", PointStamped, self.new_init_position)
-        if self.agent_number != 0:
-          rospy.Subscriber(self.topic + "/cmd_vel", Twist, self.new_attitude_setpoint)
+        rospy.Subscriber(self.topic + "/cmd_vel", Twist, self.new_attitude_setpoint)
 
     ###########################
     # Math operations functions
@@ -334,11 +333,18 @@ class CF_model():
 
         new_state.attitude = np.dot(euler_matrix, self.cf_state.ang_vel)
 
+
+        #print('dynamics :')
         for i in range(0, 3):
             self.cf_state.position[i] = self.cf_state.position[i] + (new_state.position[i] * self.cf_physical_params.DT_CF)
             self.cf_state.attitude[i] = self.cf_state.attitude[i] + (new_state.attitude[i] * self.cf_physical_params.DT_CF)
             self.cf_state.lin_vel[i] = self.cf_state.lin_vel[i] + (new_state.lin_vel[i] * self.cf_physical_params.DT_CF)
             self.cf_state.ang_vel[i] = self.cf_state.ang_vel[i] + (new_state.ang_vel[i] * self.cf_physical_params.DT_CF)
+            #print(i)
+            #print("lin vel = ", new_state.position[i])
+            #print("rot vel = ", new_state.attitude[i])
+            #print("lin acc = ", new_state.lin_vel[i])
+            #print("rot acc = ", new_state.ang_vel[i])
 
         self.cf_state.ang_vel_deg = self.cf_state.ang_vel*180.0/np.pi
         self.cf_state.attitude_deg = self.cf_state.attitude*180.0/np.pi

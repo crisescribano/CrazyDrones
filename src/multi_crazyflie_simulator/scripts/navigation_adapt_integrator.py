@@ -335,7 +335,7 @@ def navigation():
     r = 0.35
     d_con = 3 #4
 
-
+F
     #edges = { (1,2), (1,3), (1,4), (3,4), (3,5) }
     if agent_number == 5:
       eta_con_1 = d_con**2 - np.linalg.norm(x-x_other_3)**2     
