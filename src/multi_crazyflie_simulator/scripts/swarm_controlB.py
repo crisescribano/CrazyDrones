@@ -37,7 +37,10 @@ class Nav_control():
 
 		# Trayectory to follow:
 		#self.PoI = np.array([[0, 0, 5], [4, 5, 3],[-2, 4, 2],[3, -2, 3]])
-		self.PoI = np.array([[2, 2, 1], [2, 2, 1],[2, 2, 1],[2, 2, 1]])
+		#self.PoI = np.array([[2, 2, 1], [-2, 2, 1],[-2, -2, 1],[2, -2, 1]])
+		#self.PoI = np.array([[0, 0, 1], [0, 0, 3],[0, 0,5],[5, 0, 5]])
+		self.PoI = np.array([[0, 0, 1], [0, 0, 2],[0, 0,3],[0, 0, 4]])
+
 		self.region_idx = 0
 
 		#if self.agent_number == 0:
@@ -214,7 +217,7 @@ class Nav_control():
 		return beta_con, beta_con_dot
 
 	def grad_beta_con(self, beta_con, beta_con_dot, eta_con, eta_con_dot, x, x_other, v, v_other):
-		if beta_con > 0:
+		if beta_con != 0:
 			preop_x = np.array([x[0]-x_other[0], x[1]-x_other[1], x[2]-x_other[2]])
 			preop_v = np.array([v[0]-v_other[0], v[1]-v_other[1], v[2]-v_other[2]])
 			grad_beta_con = -1/beta_con**2*(5*self.coeff[0]*eta_con**4 + 4*self.coeff[1]*eta_con**3 + 3*self.coeff[2]*eta_con**2)*(-2*(preop_x))
@@ -225,9 +228,15 @@ class Nav_control():
 			return grad_beta_con, grad_beta_con_dot
 		else:
 			print ("error en las grad_betas_con")
-			grad_beta_con = np.array([0, 0, 0])
-			grad_beta_con_dot = np.array([0, 0, 0])
-
+			preop_x = np.array([x[0]-x_other[0], x[1]-x_other[1], x[2]-x_other[2]])
+			preop_v = np.array([v[0]-v_other[0], v[1]-v_other[1], v[2]-v_other[2]])
+			grad_beta_con = -1/0.0001**2*(5*self.coeff[0]*eta_con**4 + 4*self.coeff[1]*eta_con**3 + 3*self.coeff[2]*eta_con**2)*(-2*(preop_x))
+			term1 = 2/0.0001**3 * beta_con_dot * (5*self.coeff[0]*eta_con**4 + 4*self.coeff[1]*eta_con**3 + 3*self.coeff[2]*eta_con**2)*(-2*(preop_x))
+			term2 = -1/0.0001**2 * (20*self.coeff[0]*eta_con**3 + 12*self.coeff[1]*eta_con**2 + 6*self.coeff[2]*eta_con)*eta_con_dot*(-2*(preop_x))
+			term3 = -1/0.0001**2*(5*self.coeff[0]*eta_con**4 + 4*self.coeff[1]*eta_con**3 + 3*self.coeff[2]*eta_con**2)*(-2*(preop_v))
+			grad_beta_con_dot = term1 + term2 + term3
+			return grad_beta_con, grad_beta_con_dot
+			
 
 	def reset_grad_beta(self):
 		grad_beta = np.zeros(3)
@@ -272,7 +281,18 @@ class Nav_control():
 		k_theta = .01
 		k_f_b = 0
 		k_d_b = 0
-		ki = 10#
+
+		k = 9 # Beta conexion
+
+		if self.agent_number == 0:
+			ki = 1
+			k_y_tet= 1
+			k_dis = 1
+		else:
+			ki = 0.3 # Velocidades
+			k_dis = 0.00001 # Termino diss
+			k_y_tet = 2 # Termino Y*theta
+
 		mass = 0.027
 		dt = 0.01
 		
@@ -341,7 +361,6 @@ class Nav_control():
 
 			# Point to achieve
 			xd = self.PoI[self.region_idx]
-			#xd = [0, 0, 1]
 			###########################################
 			### Achieve desired point by the leader ###
 			###########################################
@@ -349,28 +368,15 @@ class Nav_control():
 			if mode == 1:
 
 				ep = x[0] - xd
-				#print(ep)
 				integrator = integrator + dt*ep
-				ki = 1
-				point = Position()
-				point.header.seq = 0
-				point.header.stamp = rospy.Time.now()
-				point.x = xd[0]
-				point.y = xd[1]
-				point.z = xd[2]
-				#self.pub_xd.publish(point)
 
-				# leader_time_msg = std_msgs.msg.Float64()
-				# leader_time_msg.data = rospy.get_time()
-				# self.leader_time_pub.publish(leader_time_msg)
-
-				if np.linalg.norm(ep) < 0.075:	# Cheqck if desired point is achieved
+				if np.linalg.norm(ep) < 0.2:	# Cheqck if desired point is achieved
 					if self.region_idx < 3:
-						print ('REACHED!!! POINT NUMBER ' + str(self.region_idx))
+						#print ('REACHED!!! POINT NUMBER ' + str(self.region_idx))
 						self.region_idx+= 1			# Another point to achieve
 					if self.region_idx == 3: 
-						print ('REACHED!!! POINT NUMBER ' + str(self.region_idx))
-						self.region_idx = 0
+						#print ('REACHED!!! POINT NUMBER ' + str(self.region_idx))
+						self.region_idx = 3
 					integrator = np.zeros(3)	# Reset the integrator
 
 			###############################
@@ -418,15 +424,15 @@ class Nav_control():
 			####################################################################################
 
 			con_distance_meas = 0 								# Inter agent distance where we start taking conection into account (greater than)
-			self.con_offset = self.d_con**2 - con_distance_meas**2	# DUDA ####################################################################
+			self.con_offset = self.d_con**2 - con_distance_meas**2	
 
 			for i in range(0, 3):
 
 				if i!=2 or self.agent_number == 0 or self.agent_number == 2:
 
-					if eta_con[i] < 0:					# Eta less than 0, everything 0 
+					if eta_con[i] < 0:		# Real distance btw CF is more than d_con they can not see each other
 						beta_con[i] = 0
-						beta_con_dot[i] = 0
+						#beta_con_dot[i] = 0
 						grad_beta_con[i],grad_beta_con_dot[i] = self.reset_grad_beta()
 
 					elif eta_con[i] < self.con_offset:	# If the distante between Crazyflie is more that 0, define betas
@@ -441,7 +447,7 @@ class Nav_control():
 					else:								# If the distance between Crazyflies is less than 0:
 						beta_con[i] = self.beta_bound
 						grad_beta_con[i],grad_beta_con_dot[i] = self.reset_grad_beta()
-
+						#print("DISTANCIA ENTRE CF MENOR QUE CERO000000000000000000000000000000000000000")
 		
 			#############################################################################
 			### Implementation of not collision: IOTA BIGGER THAT 0 FOR NOT COLLISION ###
@@ -477,16 +483,16 @@ class Nav_control():
 			########################
 			# Vi = Ki * SUM alfa * grad_beta, as alfa is (-1, 1, 0) if i=m1, i=m2, i!=m1,m2  
 			#	respectively in the specific Crazyflie alfa = -1
-			beta_term_con = -grad_beta_con[0] - grad_beta_con[1] - grad_beta_con[2] 
-			beta_term_col = -grad_beta_col[0] - grad_beta_col[1] - grad_beta_col[2] - grad_beta_col[3] - grad_beta_col[4] - grad_beta_col[5]
+			beta_term_con = -grad_beta_con[0]# - grad_beta_con[1] - grad_beta_con[2] 
+			beta_term_col = 0#-grad_beta_col[0] - grad_beta_col[1] - grad_beta_col[2] - grad_beta_col[3] - grad_beta_col[4] - grad_beta_col[5]
 
-			beta_term_con_dot = -grad_beta_con_dot[0] - grad_beta_con_dot[1] - grad_beta_con_dot[2] 
-			beta_term_col_dot = -grad_beta_col_dot[0] - grad_beta_col_dot[1] - grad_beta_col_dot[2] - grad_beta_col_dot[3] - grad_beta_col_dot[4] - grad_beta_col_dot[5]
+			beta_term_con_dot = -grad_beta_con_dot[0]# - grad_beta_con_dot[1] - grad_beta_con_dot[2] 
+			beta_term_col_dot = 0#-grad_beta_col_dot[0] - grad_beta_col_dot[1] - grad_beta_col_dot[2] - grad_beta_col_dot[3] - grad_beta_col_dot[4] - grad_beta_col_dot[5]
 			
 			if mode == 1:	# If the Crazyflie is the leader
 				 navigation_term = np.array([-kp_x*ep[0], -kp_y*ep[1], -kp_z*ep[2]])
-				 v_des = navigation_term + ki*(beta_term_col + beta_term_con) - lambda_int*integrator ################ VECTOR PLUS SCALAR
-				 v_des_dot = np.array([-kp_x*v[0][0], -kp_y*v[0][1], -kp_z*v[0][2]] ) + ki*(beta_term_col_dot + beta_term_con_dot) - lambda_int*ep ##### VECTOR PLUS SCALAR
+				 v_des = navigation_term + ki*(beta_term_col + beta_term_con) - lambda_int*integrator 
+				 v_des_dot = np.array([-kp_x*v[0][0], -kp_y*v[0][1], -kp_z*v[0][2]] ) + ki*(beta_term_col_dot + beta_term_con_dot) - lambda_int*ep 
 
 			else:
 				v_des = ki*(beta_term_col + beta_term_con) 
@@ -505,45 +511,37 @@ class Nav_control():
 			else:
 				e_tilde = np.zeros(3)
 
-			# Calculate Y matrix:
-			#Y = np.array( [v_des_dot[0],v_des_dot[1],v_des_dot[2]+grav]) ############################################ SCALAR USED AS VECTOR HERE
+			# Calculate Y matrix:#Y = np.array( [v_des_dot[0],v_des_dot[1],v_des_dot[2]+grav])
 			Y = v_des_dot + [0, 0, grav]
 
 			# Calculate term of control:
-			if self.agent_number == 0:
-				print('xd = ', xd)
-				print("position = ", x[0])
-				print("velocity = ", v[0])
-				print("printstuff")
-				print("nav term = ", navigation_term)
-				print("integr = ", lambda_int*integrator)
-				print("v_des = ", v_des)
-				#print(np.sign(e_v)*self.d_b_hat)
-				#print(np.sign(e_v)*np.linalg.norm(v[self.agent_number],1)*self.f_b_hat)
-				print("diss term = ", dissip_term)
-				#print(Y*self.theta_hat)
-				print("Y = ", Y)
-				print("theta hat = ", self.theta_hat)
-				print("beta_term_col = ", beta_term_col)
-				print("beta_term_con = ", beta_term_con)
-
-			control = beta_term_col + beta_term_con - dissip_term + Y*self.theta_hat - k_e_tilde*e_tilde # - np.sign(e_v)*np.linalg.norm(v[self.agent_number],1)*self.f_b_hat - np.sign(e_v)*self.d_b_hat
+			control = beta_term_col + k*beta_term_con - k_dis*dissip_term + k_y_tet*Y*self.theta_hat - k_e_tilde*e_tilde # - np.sign(e_v)*np.linalg.norm(v[self.agent_number],1)*self.f_b_hat - np.sign(e_v)*self.d_b_hat
 			#control = beta_term_col + beta_term_con - dissip_term + Y*self.theta_hat - k_e_tilde*e_tilde #- np.sign(e_v)*np.linalg.norm(v[self.agent_number],1)*self.f_b_hat
+
+			#if self.agent_number == 0:
+			# 	#print("position lider = ", x[0])
+			#	print("beta_term_con de 0 = ", beta_term_con)
+			#	print("ep = ", np.linalg.norm(ep))
+			#	print('xd = ', xd)
+			#	print("control value for 0 is: " + str(control))
+				
+
+			if self.agent_number == 1:
+			#	print("position follower = ", x[0])
+				print("beta_term_con de 1 = ", k*beta_term_con)
+				print("dissip_term de 1 = ", -k_dis*dissip_term)
+				print("Y*self.theta_hat de 1 = ", k_y_tet*Y*self.theta_hat)
+				print("######################################################################")
+
+			# 	print("e_v de 1 = ", e_v)
+			# 	print("control value for 1 is: " + str(control))
+			# 	print("eta0 de 1 is: " , eta_con[0])
 			
-			if self.agent_number == 0:
-				rospy.loginfo("value  is: " + str(control))
+
 			# Calculate discrepance terms:
 			self.d_b_hat_dot = 0 #k_d_b*np.linalg.norm(e_v)
 			self.f_b_hat_dot = 0#k_f_b*np.linalg.norm(e_v,1)*np.linalg.norm(v[self.agent_number])
 			self.theta_hat_dot = -k_theta*np.dot(Y,e_v)
-
-
-			# if self.agent_number == 1:
-			# 	rospy.loginfo("value e_v "+str(self.agent_number)+" is: " + str(e_v)+"\n")
-			# 	rospy.loginfo("value Y "+str(self.agent_number)+" is: " + str(Y)+"\n")
-			# 	rospy.loginfo("value theta_hat_dot "+str(self.agent_number)+" is: " + str(self.theta_hat_dot)+"\n")
-			# 	rospy.loginfo("value theta_hat "+str(self.agent_number)+" is: " + str(self.theta_hat_dot)+"\n")
-
 
 			# Publish several messages:
 			# 	# Publish lider errors (GUESS)
