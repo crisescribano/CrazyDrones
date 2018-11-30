@@ -62,7 +62,7 @@ class initPose():
                 #     radius = random.random()*self.spread_radius
                 #     self.poses["/crazyflie_" + str(i)] = self.getXYinCircle(radius, deltaTheta)
                 self.poses["/crazyflie_0"] = [0.0, 0.0]
-                self.poses["/crazyflie_1"] = [0.2, -0.2]
+                self.poses["/crazyflie_1"] = [2, -0.5]
                 self.poses["/crazyflie_2"] = [-1.5, 1.5]
                 self.poses["/crazyflie_3"] = [1, 2]
                 self.poses["/crazyflie_4"] = [-1.5, -1]
