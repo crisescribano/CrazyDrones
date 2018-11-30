@@ -537,7 +537,7 @@ F
       beta_col_dot_1 = (5*coeff[0]*iota_col_1**4 + 4*coeff[1]*iota_col_1**3 + 3*coeff[2]*iota_col_1**2)*iota_col_dot_1
       term1 = 2/beta_col_1**3 * beta_col_dot_1 * (5*coeff[0]*iota_col_1**4 + 4*coeff[1]*iota_col_1**3 + 3*coeff[2]*iota_col_1**2)*(2*(x-x_other_1))
       term2 = -1/beta_col_1**2 * (20*coeff[0]*iota_col_1**3 + 12*coeff[1]*iota_col_1**2 + 6*coeff[2]*iota_col_1)*iota_col_dot_1*(2*(x-x_other_1))
-      term3 = -1/beta_col_1**2*(5*coeff[0]*iota_col_1**4 + 4*coeff[1]*iota_col_1**3 + 3*coeff[2]*iota_col_1**2)*(2*(v-v_other_1))
+      term3 = -1/beta_col_1**2*(5*coeff[0]*iota_col_1**4 + 4*coeff[1]*iota_col_1**3 + 3*coeff[2]*iota_col_1**2)*(2*(v-v_other_1)Y)
       grad_beta_col_dot_1 = term1 + term2 + term3 
 
     else:
@@ -591,7 +591,7 @@ F
       #print
       #print 'coef = ', coeff 
 
-      beta_col_3 = coeff[0]*iota_col_3**5 + coeff[1]*iota_col_3**4 + coeff[2]*iota_col_3**3
+      beta_col_3 = coeff[0]*iota_col_3**5 + coeff[1]*iota_col_Y3**4 + coeff[2]*iota_col_3**3
       grad_beta_col_3 = -1/beta_col_3**2*(5*coeff[0]*iota_col_3**4 + 4*coeff[1]*iota_col_3**3 + 3*coeff[2]*iota_col_3**2)*(2*(x-x_other_3))
 
       beta_col_dot_3 = (5*coeff[0]*iota_col_3**4 + 4*coeff[1]*iota_col_3**3 + 3*coeff[2]*iota_col_3**2)*iota_col_dot_3

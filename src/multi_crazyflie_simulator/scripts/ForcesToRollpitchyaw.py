@@ -4,6 +4,7 @@ import numpy as np
 import rospy
 from geometry_msgs.msg import Twist
 import mav_msgs.msg
+from cf_physical_parameters import CF_parameters
 import time
 
 # desired_3d_force: input
@@ -60,17 +61,17 @@ class Forces():
 			cos_theta = np.clip(cos_theta,-1,1)
 			pitch = np.arctan2(sin_theta,cos_theta)
 
-			#print("desired force = ", self.desired_3d_force)
+			#rospy.loginfo("desired force for " + str(self.topic) + " = " + str(self.desired_3d_force))
 			#print("roll, pitch = ", roll, pitch)
 			#time.sleep(0.01)
 			
 
 			message = Twist()
 			#message.header.stamp = rospy.get_rostime()
-			message.linear.x = pitch 
-			message.linear.y = roll
+			message.linear.x = 0*pitch*180/np.pi
+			message.linear.y = 0*roll*180/np.pi
 			#message.angular.z = yaw_rate_desired
-			message.linear.z = self.desired_3d_force[2]
+			message.linear.z = (np.sqrt(self.desired_3d_force[2]/CF_parameters().CT) - 4070.3)/0.2685
 			#print("message publish in cmd_vel: "+ str(message.linear.x) + ", "+ str(message.linear.y) + ", "+ str(message.linear.z))
 			#print("desired forces: "+ str(self.desired_3d_force[0]) + ", "+ str(self.desired_3d_force[1]) + ", "+ str(self.desired_3d_force[2]))
 

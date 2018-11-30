@@ -11,6 +11,7 @@ import rosgraph_msgs.msg
 import std_srvs.srv
 from std_msgs.msg import Int32, String
 from geometry_msgs.msg import Twist, PoseStamped
+from cf_physical_parameters import CF_parameters
 import tf.transformations
 import rosbag
 from crazyflie_driver.msg import Position
@@ -37,9 +38,9 @@ class Nav_control():
 
 		# Trayectory to follow:
 		#self.PoI = np.array([[0, 0, 5], [4, 5, 3],[-2, 4, 2],[3, -2, 3]])
-		#self.PoI = np.array([[2, 2, 1], [-2, 2, 1],[-2, -2, 1],[2, -2, 1]])
-		#self.PoI = np.array([[0, 0, 1], [0, 0, 3],[0, 0,5],[5, 0, 5]])
-		self.PoI = np.array([[0, 0, 1], [0, 0, 2],[0, 0,3],[0, 0, 4]])
+		self.PoI = np.array([[0, 0, 1], [0, 0, 1],[0, 0, 1],[0, 0, 1]])
+		#self.PoI = np.array([[0, 0, 1], [0, 0, 1],[0, 0, 1],[0, 0, 1]])
+		#self.PoI = np.array([[0, 0, 1], [0, 0, 2],[0, 0,3],[0, 0, 4]])
 
 		self.region_idx = 0
 
@@ -48,7 +49,7 @@ class Nav_control():
 
 		self.con_offset = 0
 		self.col_offset = 0
-		self.beta_bound = 10**4
+		self.beta_bound = 1**4
 		self.coeff = np.zeros(3)
 		self.a_hat = 0
 		self.a_hat_dot = 0
@@ -58,10 +59,10 @@ class Nav_control():
 		self.f_b_hat_dot = 0
 		self.theta_hat = 0
 		self.theta_hat_dot = 0
-		self.d_con = 3
+		self.d_con = 0.5
 		self.r = 0.075
 
-		self.rate = rospy.Rate(10) 
+		self.rate = rospy.Rate(100) 
 
 				# SUBSCRIBER
 		rospy.Subscriber("/crazyflie_0/out_pos_odometry", nav_msgs.msg.Odometry, self.callback_crazyflie_0)
@@ -71,18 +72,24 @@ class Nav_control():
 		rospy.Subscriber("/crazyflie_4/out_pos_odometry", nav_msgs.msg.Odometry, self.callback_crazyflie_4)
 		rospy.Subscriber("/crazyflie_5/out_pos_odometry", nav_msgs.msg.Odometry, self.callback_crazyflie_5)
 
+	def rot_x(self, beta):
+		cos_b = np.cos(beta)
+		sin_b = np.sin(beta)
+		M = np.array([[1, 0, 0], [0, cos_b, -sin_b], [0, sin_b, cos_b]])
+		return M
+
 	# Rotation matrix around Y
 	def rot_y(self, beta):
-		cos_b = cos(beta)
-		sin_b = sin(beta)
-		M = np.array([[cos_b, 0, -sin_b], [0, 1, 0], [sin_b, 0, cos_b]])
+		cos_b = np.cos(beta)
+		sin_b = np.sin(beta)
+		M = np.array([[cos_b, 0, sin_b], [0, 1, 0], [-sin_b, 0, cos_b]])
 		return M
 
 	# Rotation matrix around Z
 	def rot_z(self, gamma):
-		cos_g = cos(gamma)
-		sin_g = sin(gamma)
-		M = np.array([[cos_g, sin_g, 0], [-sin_g, cos_g, 0], [0, 0, 1]])
+		cos_g = np.cos(gamma)
+		sin_g = np.sin(gamma)
+		M = np.array([[cos_g, -sin_g, 0], [sin_g, cos_g, 0], [0, 0, 1]])
 		return M
 
 	# Rotation matrix - from the body frame to the inertial frame
@@ -90,19 +97,10 @@ class Nav_control():
 		rotx = self.rot_x(roll)
 		roty = self.rot_y(pitch)
 		rotz = self.rot_z(yaw)
-		rot = np.dot(np.dot(rotx, roty), rotz)
+		rot = np.dot(np.dot(rotz, roty), rotx)	#z-y-x convention hopefully
 		return rot
 
-	def rotation_matrix(self, roll, pitch, yaw):
-		return np.array([[cos(pitch)*cos(yaw),
-							cos(pitch)*sin(yaw),
-							-sin(pitch)],
-							[sin(roll)*sin(pitch)*cos(yaw) - cos(roll)*sin(yaw),
-							sin(roll)*sin(pitch)*sin(yaw) + cos(roll)*cos(yaw),
-							sin(roll)*cos(pitch)],
-							[cos(roll)*sin(pitch)*cos(yaw) + sin(roll)*sin(yaw),
-							cos(roll)*sin(pitch)*sin(yaw) - sin(roll)*cos(yaw),
-							cos(roll)*cos(pitch)]])
+	
 
 	def position_and_velocity_from_odometry(self, odometry):
 		x = np.zeros(3)
@@ -264,39 +262,43 @@ class Nav_control():
 		#GAINS
 		#kp_x = .05 #0.5 for 10     ..*0.05 
 		
-		kp_x = .1#2
-		kv_x = 15
-		ki_x = 0  
+		kp_x = 2
+		kp_vx = 25
+		ki_vx = 1 
 
-		kp_y = .1#2   
-		kv_y = 15
-		ki_y = 0 
+		
+		kp_y = 2
+		kp_vy = 25
+		ki_vy = 1  
 
-		kp_z = 3#2
-		kv_z = 5
-		ki_z = 0#0.5
+		kp_z = 2#2
+		ki_z = 0.5#2
+		
+		kp_vz = 25
+		ki_vz = 15#0.5
 
 		k_e_tilde = 5
-		lambda_int = 0.0015
+		lambda_int = 0.00015
 		k_theta = .01
 		k_f_b = 0
 		k_d_b = 0
 
-		k = 9 # Beta conexion
+		k_connect = 0 # Beta for connetivity
 
 		if self.agent_number == 0:
 			ki = 1
 			k_y_tet= 1
 			k_dis = 1
 		else:
-			ki = 0.3 # Velocidades
-			k_dis = 0.00001 # Termino diss
-			k_y_tet = 2 # Termino Y*theta
+			ki = 5 # Velocidades
+			k_dis = 1 # Termino diss
+			k_y_tet = 1 # Termino Y*theta
 
 		mass = 0.027
 		dt = 0.01
 		
-		integrator = np.zeros(3)
+		integrator_pos = np.zeros(3)
+		integrator_v = np.zeros(3)
 		navigation_term = np.zeros(3)
 		dissip_term = np.zeros(3)
 		counter = 1
@@ -344,9 +346,8 @@ class Nav_control():
 			# Get the position and velocity of all the CrazyFlies
 			for i in range(0, 6):
 				x[i],v[i] = self.position_and_velocity_from_odometry(self.agent_pose[i])
-				# if self.agent_number == 0:
-				# 	rospy.loginfo("value "+str(i)+" is: " + str(v[i]))
-			
+
+
 			# Check if we are lider o follower
 			if self.priority == 1: # Lider
 				mode = 1 
@@ -368,16 +369,16 @@ class Nav_control():
 			if mode == 1:
 
 				ep = x[0] - xd
-				integrator = integrator + dt*ep
+				integrator_pos = integrator_pos + dt*ep
 
-				if np.linalg.norm(ep) < 0.2:	# Cheqck if desired point is achieved
+				if np.linalg.norm(ep) < 0.15:	# Cheqck if desired point is achieved
 					if self.region_idx < 3:
 						#print ('REACHED!!! POINT NUMBER ' + str(self.region_idx))
 						self.region_idx+= 1			# Another point to achieve
 					if self.region_idx == 3: 
 						#print ('REACHED!!! POINT NUMBER ' + str(self.region_idx))
 						self.region_idx = 3
-					integrator = np.zeros(3)	# Reset the integrator
+					#integrator_pos = np.zeros(3)	# Reset the integrator
 
 			###############################
 			### Value of etas and iotas ###
@@ -417,7 +418,7 @@ class Nav_control():
 			# Definition of the posible collision (everyone with everyone)
 
 			for i in range(0, 5):
-				iota_col[i],iota_col_dot[i] = self.iota_con(x[i], x[i+1], v[i], v[i+1])
+				iota_col[i],iota_col_dot[i] = self.iota_con(x[0], x[i+1], v[0], v[i+1])
 			
 			####################################################################################
 			### Implementation of not disconnection: ETA BIGGER THAN 0 FOR NOT DISCONNECTION ###
@@ -477,7 +478,6 @@ class Nav_control():
 					beta_col[i] = self.beta_bound
 					grad_beta_col[i],grad_beta_col_dot[i] = self.reset_grad_beta()
 
-
 			########################
 			### Desired velocity ###
 			########################
@@ -486,27 +486,30 @@ class Nav_control():
 			beta_term_con = -grad_beta_con[0]# - grad_beta_con[1] - grad_beta_con[2] 
 			beta_term_col = 0#-grad_beta_col[0] - grad_beta_col[1] - grad_beta_col[2] - grad_beta_col[3] - grad_beta_col[4] - grad_beta_col[5]
 
-			beta_term_con_dot = -grad_beta_con_dot[0]# - grad_beta_con_dot[1] - grad_beta_con_dot[2] 
+			beta_term_con_dot =  -grad_beta_con_dot[0]# - grad_beta_con_dot[1] - grad_beta_con_dot[2] 
 			beta_term_col_dot = 0#-grad_beta_col_dot[0] - grad_beta_col_dot[1] - grad_beta_col_dot[2] - grad_beta_col_dot[3] - grad_beta_col_dot[4] - grad_beta_col_dot[5]
 			
 			if mode == 1:	# If the Crazyflie is the leader
-				 navigation_term = np.array([-kp_x*ep[0], -kp_y*ep[1], -kp_z*ep[2]])
-				 v_des = navigation_term + ki*(beta_term_col + beta_term_con) - lambda_int*integrator 
-				 v_des_dot = np.array([-kp_x*v[0][0], -kp_y*v[0][1], -kp_z*v[0][2]] ) + ki*(beta_term_col_dot + beta_term_con_dot) - lambda_int*ep 
+				v_des = np.array([-kp_x*ep[0], -kp_y*ep[1], -kp_z*ep[2] - ki_z*integrator_pos[2]]) # + ki*(beta_term_col + beta_term_con) 
+				 # Calcutale the velocity error:
+				
+			 	v_des_dot = np.array([-kp_vx*v[0][0], -kp_vy*v[0][1], -kp_vz*v[0][2]]) - lambda_int*ep # + ki*(beta_term_col_dot + beta_term_con_dot) 
 
 			else:
 				v_des = ki*(beta_term_col + beta_term_con) 
+				# Calcutale the velocity error:
 				v_des_dot = ki*(beta_term_col_dot + beta_term_con_dot) 
 
-			# Calcutale the velocity error:
-			e_v = v[self.agent_number] - v_des
+			e_v = v[0] - v_des
+			integrator_v = integrator_v + e_v*dt
 
 			# Dissipative terms:
-			dissip_term = np.array([kv_x*e_v[0], kv_y*e_v[1], kv_z*e_v[2]])
-
+			dissip_term = np.array([kp_vx*e_v[0] + ki_vx*integrator_v[0], kp_vy*e_v[1] + ki_vy*integrator_v[1], kp_vz*e_v[2] + ki_vz*integrator_v[2]])
+			rospy.loginfo("e_v " + str(e_v))
+			rospy.loginfo("ep " + str(ep))
 			# Calculate estimations needed:
 			if mode == 1:
-				e_tilde = ep + lambda_int*integrator
+				e_tilde = ep + lambda_int*integrator_pos
 
 			else:
 				e_tilde = np.zeros(3)
@@ -514,24 +517,36 @@ class Nav_control():
 			# Calculate Y matrix:#Y = np.array( [v_des_dot[0],v_des_dot[1],v_des_dot[2]+grav])
 			Y = v_des_dot + [0, 0, grav]
 
+			#print(ep)
+			#print(1/2*np.linalg.norm(ep)**2)
+			#print(1/2*mass*np.linalg.norm(e_v)**2 )
+			#print('energy = ', .5**np.linalg.norm(ep)**2 + .5*mass*np.linalg.norm(e_v)**2 )
 			# Calculate term of control:
-			control = beta_term_col + k*beta_term_con - k_dis*dissip_term + k_y_tet*Y*self.theta_hat - k_e_tilde*e_tilde # - np.sign(e_v)*np.linalg.norm(v[self.agent_number],1)*self.f_b_hat - np.sign(e_v)*self.d_b_hat
+			#gravity compensation: k_y_tet*Y*self.theta_hat np.array([0,0,mass*grav])
+
+			#print('F_inertial = ', control)
+			control = beta_term_col + k_connect*beta_term_con - k_dis*dissip_term + k_y_tet*Y*self.theta_hat - k_e_tilde*e_tilde # - np.sign(e_v)*np.linalg.norm(v[self.agent_number],1)*self.f_b_hat - np.sign(e_v)*self.d_b_hat
 			#control = beta_term_col + beta_term_con - dissip_term + Y*self.theta_hat - k_e_tilde*e_tilde #- np.sign(e_v)*np.linalg.norm(v[self.agent_number],1)*self.f_b_hat
-
-			#if self.agent_number == 0:
-			# 	#print("position lider = ", x[0])
-			#	print("beta_term_con de 0 = ", beta_term_con)
-			#	print("ep = ", np.linalg.norm(ep))
-			#	print('xd = ', xd)
-			#	print("control value for 0 is: " + str(control))
-				
-
-			if self.agent_number == 1:
-			#	print("position follower = ", x[0])
-				print("beta_term_con de 1 = ", k*beta_term_con)
-				print("dissip_term de 1 = ", -k_dis*dissip_term)
-				print("Y*self.theta_hat de 1 = ", k_y_tet*Y*self.theta_hat)
-				print("######################################################################")
+			control = - k_dis*dissip_term 
+			#control = beta_term_col + beta_term_con - dissip_term + Y*self.theta_hat - k_e_tilde*e_tilde
+			#control = (control/0.027)*dt**2
+			#print(control)
+			# if self.agent_number == 1:
+			# #	print("position follower = ", x[0])
+			# 	print("beta_term_con de 1 = ", k*beta_term_con)
+			# 	print("dissip_term de 1 = ", -k_dis*dissip_term)
+			# 	print("Y*self.theta_hat de 1 = ", k_y_tet*Y*self.theta_hat)
+			# 	print("######################################################################")
+			# if self.agent_number == 0:
+			# 	print("control: " + str(control))
+			# 	print("position follower = ", x[0])
+			# 	print("beta_term_con de 0 = ", k_connect*beta_term_con)
+			# 	print("dissip_term de 0 = ", -k_dis*dissip_term)
+			# 	print("Y*self.theta_hat de 0 = ", k_y_tet*Y*self.theta_hat)
+			# 	print("Y de 0 = ", k_y_tet*Y)
+			# 	print("-k_theta*np.dot(Y,e_v) de 0 = ", -k_theta*np.dot(Y,e_v))
+			# 	print("- k_e_tilde*e_tilde de 0 = ", - k_e_tilde*e_tilde)
+			# 	print("######################################################################")
 
 			# 	print("e_v de 1 = ", e_v)
 			# 	print("control value for 1 is: " + str(control))
@@ -565,9 +580,9 @@ class Nav_control():
 			#if self.agent_number != 0:
 				# Publish control
 			mesage_to_pub = mav_msgs.msg.TorqueThrust()
-			mesage_to_pub.thrust.x = control[0] * 10000
-			mesage_to_pub.thrust.y = control[1] * 10000
-			mesage_to_pub.thrust.z = control[2] * 10000
+			mesage_to_pub.thrust.x = control[0] 
+			mesage_to_pub.thrust.y = control[1]
+			mesage_to_pub.thrust.z = control[2]
 			self.force_pub.publish(mesage_to_pub)
 
 				# Publish 
