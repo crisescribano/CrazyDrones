@@ -38,7 +38,10 @@ class Nav_control():
 
 		# Trayectory to follow:
 		#self.PoI = np.array([[0, 0, 5], [4, 5, 3],[-2, 4, 2],[3, -2, 3]])
-		self.PoI = np.array([[0, 0, 1], [0, 0, 1],[0, 0, 1],[0, 0, 1]])
+		self.PoI = np.array([[0, 0, 1], [1, 0, 1],[1, 1, 1],[0, 1, 1],
+							[-1, 1, 1], [-1, 0, 1],[-1, -1, 1],[0, -1, 1], 
+							[1, -1, 1]])
+		self.counterPoI = 0
 		#self.PoI = np.array([[0, 0, 1], [0, 0, 1],[0, 0, 1],[0, 0, 1]])
 		#self.PoI = np.array([[0, 0, 1], [0, 0, 2],[0, 0,3],[0, 0, 4]])
 
@@ -262,20 +265,23 @@ class Nav_control():
 		#GAINS
 		#kp_x = .05 #0.5 for 10     ..*0.05 
 		
-		kp_x = 2
-		kp_vx = 25
-		ki_vx = 1 
+		kp_x = 2# 2
+		ki_x = 0*0.1
 
-		
-		kp_y = 2
-		kp_vy = 25
-		ki_vy = 1  
+		kp_vx = 0.005#25
+		ki_vx = 0.00001#1 
 
-		kp_z = 2#2
-		ki_z = 0.5#2
+		kp_y = kp_x#2
+		ki_y = ki_x
+
+		kp_vy = kp_vx#25
+		ki_vy = ki_vx#1  
+
+		kp_z = 2#2#2
+		ki_z = 0.5#0.5#2
 		
-		kp_vz = 25
-		ki_vz = 15#0.5
+		kp_vz = 0.1
+		ki_vz = 0.002#15#0.5
 
 		k_e_tilde = 5
 		lambda_int = 0.00015
@@ -355,9 +361,9 @@ class Nav_control():
 				mode = 0
 
 			# Integration
-			self.a_hat = self.a_hat + dt*self.a_hat_dot
-			self.d_b_hat = self.d_b_hat + dt*self.d_b_hat_dot
-			self.f_b_hat = self.f_b_hat + dt*self.f_b_hat_dot
+			# self.a_hat = self.a_hat + dt*self.a_hat_dot
+			# self.d_b_hat = self.d_b_hat + dt*self.d_b_hat_dot
+			# self.f_b_hat = self.f_b_hat + dt*self.f_b_hat_dot
 			self.theta_hat = self.theta_hat + dt*self.theta_hat_dot
 
 			# Point to achieve
@@ -370,14 +376,20 @@ class Nav_control():
 
 				ep = x[0] - xd
 				integrator_pos = integrator_pos + dt*ep
-
-				if np.linalg.norm(ep) < 0.15:	# Cheqck if desired point is achieved
-					if self.region_idx < 3:
+				if np.linalg.norm(ep) < 0.05:	# Cheqck if desired point is achieved
+					if (self.region_idx < len(self.PoI)-1) and self.counterPoI < 100:
+						self.counterPoI += 1
+						print ('self.counterPoI ' + str(self.counterPoI ))
+					elif (self.region_idx < len(self.PoI)-1) and self.counterPoI >= 100:
+						print ('REACHED!!! POINT NUMBER ' + str(self.region_idx))
+						self.region_idx+= 1
+						self.counterPoI = 0
+						if self.region_idx == len(self.PoI)-1: 
 						#print ('REACHED!!! POINT NUMBER ' + str(self.region_idx))
-						self.region_idx+= 1			# Another point to achieve
-					if self.region_idx == 3: 
-						#print ('REACHED!!! POINT NUMBER ' + str(self.region_idx))
-						self.region_idx = 3
+							self.region_idx = 0
+						# Another point to achieve
+					else:
+						self.counterPoI = 0
 					#integrator_pos = np.zeros(3)	# Reset the integrator
 
 			###############################
@@ -488,9 +500,9 @@ class Nav_control():
 
 			beta_term_con_dot =  -grad_beta_con_dot[0]# - grad_beta_con_dot[1] - grad_beta_con_dot[2] 
 			beta_term_col_dot = 0#-grad_beta_col_dot[0] - grad_beta_col_dot[1] - grad_beta_col_dot[2] - grad_beta_col_dot[3] - grad_beta_col_dot[4] - grad_beta_col_dot[5]
-			
+
 			if mode == 1:	# If the Crazyflie is the leader
-				v_des = np.array([-kp_x*ep[0], -kp_y*ep[1], -kp_z*ep[2] - ki_z*integrator_pos[2]]) # + ki*(beta_term_col + beta_term_con) 
+				v_des = np.array([-kp_x*ep[0] - ki_x*integrator_pos[0], -kp_y*ep[1] - ki_y*integrator_pos[1], -kp_z*ep[2] - ki_z*integrator_pos[2]]) # + ki*(beta_term_col + beta_term_con) 
 				 # Calcutale the velocity error:
 				
 			 	v_des_dot = np.array([-kp_vx*v[0][0], -kp_vy*v[0][1], -kp_vz*v[0][2]]) - lambda_int*ep # + ki*(beta_term_col_dot + beta_term_con_dot) 
@@ -499,14 +511,13 @@ class Nav_control():
 				v_des = ki*(beta_term_col + beta_term_con) 
 				# Calcutale the velocity error:
 				v_des_dot = ki*(beta_term_col_dot + beta_term_con_dot) 
-
+			#v_des = np.array([10, 0, v_des[2]])
 			e_v = v[0] - v_des
 			integrator_v = integrator_v + e_v*dt
-
 			# Dissipative terms:
 			dissip_term = np.array([kp_vx*e_v[0] + ki_vx*integrator_v[0], kp_vy*e_v[1] + ki_vy*integrator_v[1], kp_vz*e_v[2] + ki_vz*integrator_v[2]])
-			rospy.loginfo("e_v " + str(e_v))
-			rospy.loginfo("ep " + str(ep))
+			# rospy.loginfo("e_v " + str(e_v))
+			# rospy.loginfo("ep " + str(ep))
 			# Calculate estimations needed:
 			if mode == 1:
 				e_tilde = ep + lambda_int*integrator_pos
@@ -517,7 +528,8 @@ class Nav_control():
 			# Calculate Y matrix:#Y = np.array( [v_des_dot[0],v_des_dot[1],v_des_dot[2]+grav])
 			Y = v_des_dot + [0, 0, grav]
 
-			#print(ep)
+			#print("v_des: ", v_des)
+
 			#print(1/2*np.linalg.norm(ep)**2)
 			#print(1/2*mass*np.linalg.norm(e_v)**2 )
 			#print('energy = ', .5**np.linalg.norm(ep)**2 + .5*mass*np.linalg.norm(e_v)**2 )
@@ -525,9 +537,15 @@ class Nav_control():
 			#gravity compensation: k_y_tet*Y*self.theta_hat np.array([0,0,mass*grav])
 
 			#print('F_inertial = ', control)
-			control = beta_term_col + k_connect*beta_term_con - k_dis*dissip_term + k_y_tet*Y*self.theta_hat - k_e_tilde*e_tilde # - np.sign(e_v)*np.linalg.norm(v[self.agent_number],1)*self.f_b_hat - np.sign(e_v)*self.d_b_hat
+			control = beta_term_col + k_connect*beta_term_con - dissip_term + Y*self.theta_hat - k_e_tilde*e_tilde # - np.sign(e_v)*np.linalg.norm(v[self.agent_number],1)*self.f_b_hat - np.sign(e_v)*self.d_b_hat
 			#control = beta_term_col + beta_term_con - dissip_term + Y*self.theta_hat - k_e_tilde*e_tilde #- np.sign(e_v)*np.linalg.norm(v[self.agent_number],1)*self.f_b_hat
 			control = - k_dis*dissip_term 
+			#rospy.loginfo("Control : " + str(control)) 
+			#rospy.loginfo("error v : " + str(e_v[0])) 
+			#rospy.loginfo("error p : " + str(ep[0])) 
+			#print("control: ", control)
+			#print("x[0]: ", x[0])
+
 			#control = beta_term_col + beta_term_con - dissip_term + Y*self.theta_hat - k_e_tilde*e_tilde
 			#control = (control/0.027)*dt**2
 			#print(control)
@@ -554,8 +572,8 @@ class Nav_control():
 			
 
 			# Calculate discrepance terms:
-			self.d_b_hat_dot = 0 #k_d_b*np.linalg.norm(e_v)
-			self.f_b_hat_dot = 0#k_f_b*np.linalg.norm(e_v,1)*np.linalg.norm(v[self.agent_number])
+			# self.d_b_hat_dot = k_d_b*np.linalg.norm(e_v)
+			# self.f_b_hat_dot = k_f_b*np.linalg.norm(e_v,1)*np.linalg.norm(v[self.agent_number])
 			self.theta_hat_dot = -k_theta*np.dot(Y,e_v)
 
 			# Publish several messages:

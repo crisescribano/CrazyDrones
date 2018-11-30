@@ -777,6 +777,7 @@ class CF_model():
         self.desired_att[1] = -twist_msg.linear.x
         self.desired_ang_vel[2] = twist_msg.angular.z
         self.desired_thrust = min(twist_msg.linear.z, 60000)
+        #rospy.loginfo("Received thrust: " + str(self.desired_thrust))
 
     ###########################
     # Callback function
@@ -876,12 +877,13 @@ class CF_model():
         self.desired_att[0]  = -(raw_pitch * cos(raw_yaw)) + (raw_roll * sin(raw_yaw))
 
         raw_thrust = self.vz_pid.update(self.desired_lin_vel[2], self.cf_state.lin_vel[2])
-        self.desired_thrust = max((self.desired_thrust * 1000 + self.cf_physical_params.BASE_THRUST), self.cf_physical_params.PWM_MIN)
+        self.desired_thrust = max((raw_thrust * 1000 + self.cf_physical_params.BASE_THRUST), self.cf_physical_params.PWM_MIN)
 
     def run_att_pid(self):
 
         self.desired_att[0] = max(min(self.cf_pid_gains.MAX_ATT, self.desired_att[0]), -self.cf_pid_gains.MAX_ATT)
         self.desired_att[1] = max(min(self.cf_pid_gains.MAX_ATT, self.desired_att[1]), -self.cf_pid_gains.MAX_ATT)
+
         #rospy.loginfo(self.desired_att)
 
         self.desired_ang_vel = np.array([self.roll_pid.update(self.desired_att[0], self.cf_state.attitude_deg[0]),
@@ -912,6 +914,7 @@ class CF_model():
         p = self.desired_rpy[1]
         y = self.desired_rpy[2]
         thrust = self.desired_thrust
+        #rospy.loginfo("Thrust: " + str(thrust))
 
         ##########################
         # Function that transform the output
@@ -976,11 +979,11 @@ class CF_model():
 
                 else:
                     self.att_pid_counter = self.att_pid_counter + 1
-
                 if(self.out_pos_counter == self.out_pos_counter_max):
                     self.out_pos_counter = 0
-                    self.run_pos_pid()
-                    self.run_lin_vel_pid()
+                    if self.mode == "POS":
+                        self.run_pos_pid()
+                        self.run_lin_vel_pid()
                     self.publishPose()
                     #self.log_state()
                 else:
