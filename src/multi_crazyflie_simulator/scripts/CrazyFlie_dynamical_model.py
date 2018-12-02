@@ -465,6 +465,7 @@ class CF_model():
     def run(self):
         tic_init = time.time()
         while(not rospy.is_shutdown()):
+            #rospy.loginfo(self.topic)
             if(self.isInit):
                 self.delta_time.append(time.time() - tic_init)
                 tic_init = time.time()

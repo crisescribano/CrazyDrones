@@ -64,5 +64,5 @@
     <param name = "mode" value = "$(arg mode)"/>
     <param name = "radius" value = "$(arg radius)"/>
   </node>
-  <node pkg="rqt_graph" type="rqt_graph" name="rqt_graph1"/>
+
 </launch>

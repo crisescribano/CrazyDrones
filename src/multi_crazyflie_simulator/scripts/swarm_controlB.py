@@ -63,8 +63,8 @@ class Nav_control():
 
 		self.con_offset = 0
 		self.col_offset = 0
-		self.beta_bound_col = 5000000
-		self.beta_bound_con = 100000000
+		self.beta_bound_col = 10000000
+		self.beta_bound_con = 10000000
 		self.coeff = np.zeros(3)
 		self.a_hat = 0
 		self.a_hat_dot = 0
@@ -75,7 +75,7 @@ class Nav_control():
 		self.theta_hat = 0
 		self.theta_hat_dot = 0
 		self.d_con = 3
-		self.r = 0.5
+		self.r = 0.2
 
 		self.rate = rospy.Rate(100) 
 		self.agent_pose = []
@@ -266,11 +266,13 @@ class Nav_control():
 		k_connect = 0 # Beta for connetivity
 
 		if self.priority == 1:
-			ki = 500#100
+			ki_con = 500#100
+			ki_col = 500#100
 			k_y_tet= 1
 			k_dis = 1
 		else:
-			ki = 500000# Velocidades
+			ki_con = 80000# Velocidades
+			ki_col = 80000# Velocidades
 			k_dis = 1 # Termino diss
 			k_y_tet = 1 # Termino Y*theta
 
@@ -406,13 +408,13 @@ class Nav_control():
 
 			for index in self.graphCon:
 				if eta_con[index] < 0:		# Real distance btw CF is more than d_con they can not see each other
-					print(self.topic + " NOT CONNECTED WITH " + str(index))
+					#print(self.topic + " NOT CONNECTED WITH " + str(index))
 					beta_con[index] = 0
 					#beta_con_dot[i] = 0
 					grad_beta_con[index],grad_beta_con_dot[index] = self.reset_grad_beta()
 
 				elif eta_con[index] < self.con_offset:	# If the distante between Crazyflie is more that 0, define betas
-					print(self.topic + " CONNECTED WITH " + str(index))
+					#print(self.topic + " CONNECTED WITH " + str(index))
 					A = self.A_con()
 					B = self.B_con()
 					self.coeff = np.dot(np.linalg.inv(A),B)
@@ -476,7 +478,7 @@ class Nav_control():
 			beta_term_con_dot = np.zeros(3)
 			beta_term_con = np.zeros(3)
 			for index in self.graphCon:
-				print("Adding betas of " + str(self.agent_number) + " of crazyflie " + str(index))
+				#print("Adding betas of " + str(self.agent_number) + " of crazyflie " + str(index))
 				beta_term_con -= grad_beta_con[index]
 				beta_term_con_dot -= grad_beta_con_dot[index]
 
@@ -484,13 +486,13 @@ class Nav_control():
 			beta_term_col = np.zeros(3)
 			for i in range(self.numberQuads):
 				if not i == self.agent_number:
-					print("Adding col betas of " + str(self.agent_number) + " of crazyflie " + str(i))
+					#print("Adding col betas of " + str(self.agent_number) + " of crazyflie " + str(i))
 					beta_term_col -= grad_beta_col[i]
 					beta_term_col_dot -= grad_beta_col_dot[i]
 
 			if self.priority == 1:	# If the Crazyflie is the leader
-				v_des = np.array([-kp_x*ep[0] - ki_x*integrator_pos[0], -kp_y*ep[1] - ki_y*integrator_pos[1], -kp_z*ep[2] - ki_z*integrator_pos[2]]) + ki*(0*beta_term_col + 0*beta_term_con) 
-			 	v_des_dot = np.array([-kp_vx*v[self.agent_number][0], -kp_vy*v[self.agent_number][1], -kp_vz*v[self.agent_number][2]]) + ki*(0*beta_term_col_dot + 0*beta_term_con_dot) #- lambda_int*ep
+				v_des = np.array([-kp_x*ep[0] - ki_x*integrator_pos[0], -kp_y*ep[1] - ki_y*integrator_pos[1], -kp_z*ep[2] - ki_z*integrator_pos[2]]) + (ki_col*beta_term_col + ki_con*beta_term_con) 
+			 	v_des_dot = np.array([-kp_vx*v[self.agent_number][0], -kp_vy*v[self.agent_number][1], -kp_vz*v[self.agent_number][2]]) + (ki_col*beta_term_col_dot + ki_con*beta_term_con_dot)  #- lambda_int*ep
 
 				e_v = v[self.agent_number] - v_des
 				integrator_v = integrator_v + e_v*dt
@@ -505,7 +507,7 @@ class Nav_control():
 				Y = v_des_dot + [0, 0, grav]
 
 				#print('F_inertial = ', control)
-				control = 0*beta_term_col + beta_term_con - dissip_term + 0*Y*self.theta_hat - k_e_tilde*e_tilde  #- np.sign(e_v)*np.linalg.norm(v[0],1)*self.f_b_hat - np.sign(e_v)*self.d_b_hat
+				control = beta_term_col + beta_term_con - dissip_term + 0*Y*self.theta_hat - k_e_tilde*e_tilde  #- np.sign(e_v)*np.linalg.norm(v[0],1)*self.f_b_hat - np.sign(e_v)*self.d_b_hat
 				#control = beta_term_col + b=eta_term_con - dissip_term + Y*self.theta_hat - k_e_tilde*e_tilde #- np.sign(e_v)*np.linalg.norm(v[self.agent_number],1)*self.f_b_hat
 				#rospy.loginfo("Control of " + self.topic + ": " + str(control) 
 										   #+ "\n v_des : " + str(v_des)
@@ -514,9 +516,9 @@ class Nav_control():
 										   #+ "\n Y*self.theta_hat : " + str(Y*self.theta_hat)) 
 
 			else:	# If the Crazyflie is the leader				
-				v_des = ki*(0*beta_term_col + beta_term_con) 
+				v_des = (ki_col*beta_term_col + ki_con*beta_term_con) 
 				# Calcutale the velocity error:
-				v_des_dot = ki*(0*beta_term_col_dot + beta_term_con_dot) 
+				v_des_dot = (ki_col*beta_term_col_dot + ki_con*beta_term_con_dot) 
 
 				e_v = v[self.agent_number] - v_des
 				integrator_v = integrator_v + e_v*dt
@@ -531,7 +533,10 @@ class Nav_control():
 				Y = v_des_dot + [0, 0, grav]
 
 				#print('F_inertial = ', control)
-				control = 0*beta_term_col + beta_term_con - dissip_term + 0*Y*self.theta_hat - k_e_tilde*e_tilde  #- np.sign(e_v)*np.linalg.norm(v[0],1)*self.f_b_hat - np.sign(e_v)*self.d_b_hat
+				control = beta_term_col + beta_term_con - dissip_term + 0*Y*self.theta_hat - k_e_tilde*e_tilde  #- np.sign(e_v)*np.linalg.norm(v[0],1)*self.f_b_hat - np.sign(e_v)*self.d_b_hat
+				#print(self.topic + " beta_term_col = " + str(beta_term_col))
+				#print(self.topic + " beta_term_con = " + str(beta_term_con))
+				#print(self.topic + " v_des = " + str(v_des))
 				#control = beta_term_col + b=eta_term_con - dissip_term + Y*self.theta_hat - k_e_tilde*e_tilde #- np.sign(e_v)*np.linalg.norm(v[self.agent_number],1)*self.f_b_hat
 				#rospy.loginfo("Control of " + self.topic + ": " + str(control) 
 										   #+ "\n v_des : " + str(v_des)
