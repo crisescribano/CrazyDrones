@@ -63,8 +63,8 @@ class Nav_control():
 
 		self.con_offset = 0
 		self.col_offset = 0
-		self.beta_bound_col = 10000000
-		self.beta_bound_con = 10000000
+		self.beta_bound_col = 4000000
+		self.beta_bound_con = 4000000
 		self.coeff = np.zeros(3)
 		self.a_hat = 0
 		self.a_hat_dot = 0
@@ -271,8 +271,8 @@ class Nav_control():
 			k_y_tet= 1
 			k_dis = 1
 		else:
-			ki_con = 80000# Velocidades
-			ki_col = 80000# Velocidades
+			ki_con = 30000# Velocidades
+			ki_col = 30000# Velocidades
 			k_dis = 1 # Termino diss
 			k_y_tet = 1 # Termino Y*theta
 
