@@ -1,7 +1,9 @@
 <?xml version="1.0"?>
 <launch>
   <arg name="quad_number" default="1" />
-  <arg name="prior" default="0" />
+  <arg name="prior" default="0" />  
+  <arg name="num_quads" default="1" />
+  <arg name="connections" default="[0]" />
   <node name="$(anon dynamical_model)" pkg="multi_crazyflie_simulator" type="CrazyFlie_dynamical_model.py" output="screen">
     <param name="topic" value="/crazyflie_$(arg quad_number)" />
     <param name="agent_number" value="$(arg quad_number)" />
@@ -12,6 +14,8 @@
   <node name="$(anon navigation_node_simB)" pkg="multi_crazyflie_simulator" type="swarm_controlB.py" output="screen">
     <param name="topic" value="/crazyflie_$(arg quad_number)" />
     <param name="agent_number" value="$(arg quad_number)" />
-    <param name="priority" value="$(arg prior)" />
+    <param name="priority" value="$(arg prior)" />  
+    <param name="number_quads" value="$(arg num_quads)" />
+    <param name="connections" value="$(arg connections)" />
   </node>
 </launch>
