@@ -37,8 +37,8 @@ class Nav_control():
 		time = rospy.get_time()
 
 		# Trayectory to follow:
-		self.trajectory = np.array([[0, 0, 0], [0, 0, 5], [4, 5, 3],[-2, 4, 2],[3, -2, 3]])
-		self.timeBetweenPoints = 10
+		self.trajectory = np.array([[0, 0, 0], [0, 0, 5], [4, 5, 3],[-2, 4, 2],[3, -2, 3],[0, 0, 0]])
+		self.timeBetweenPoints = 15
 		self.sequenceCreator()
 		#self.PoI = 1.5*np.array([[0, 0, 1], [1, 0, 1],[1, 1, 1],[0, 1, 1],
 		#					[-1, 1, 1], [-1, 0, 1],[-1, -1, 1],[0, -1, 1], 
@@ -55,7 +55,8 @@ class Nav_control():
 
 		self.con_offset = 0
 		self.col_offset = 0
-		self.beta_bound = 10**4#0.00000033**4
+		self.beta_bound_col = 10000
+		self.beta_bound_con = 100000000
 		self.coeff = np.zeros(3)
 		self.a_hat = 0
 		self.a_hat_dot = 0
@@ -217,7 +218,7 @@ class Nav_control():
 		return A
 
 	def B_con(self):
-		B = np.array([self.beta_bound, 0, 0])
+		B = np.array([self.beta_bound_con, 0, 0])
 		return B
 
 	def A_col(self):
@@ -225,7 +226,7 @@ class Nav_control():
 		return A
 
 	def B_col(self):
-		B = np.array([self.beta_bound, 0, 0])
+		B = np.array([self.beta_bound_col, 0, 0])
 		return B
 
 	def beta_con(self, eta_con, eta_con_dot):
@@ -290,18 +291,18 @@ class Nav_control():
 
 		k_e_tilde = 0.001#5
 		lambda_int = 0.0000015#0.00015
-		k_theta = .001#0.01
+		k_theta = .0001#0.01
 		k_f_b = 0
 		k_d_b = 0
 
 		k_connect = 0 # Beta for connetivity
 
 		if self.agent_number == 0:
-			ki = 1
+			ki = 100
 			k_y_tet= 1
 			k_dis = 1
 		else:
-			ki = 5 # Velocidades
+			ki = 500000# Velocidades
 			k_dis = 1 # Termino diss
 			k_y_tet = 1 # Termino Y*theta
 
@@ -372,7 +373,7 @@ class Nav_control():
 			self.theta_hat = self.theta_hat + dt*self.theta_hat_dot
 
 			# Point to achieve
-			if(self.region_idx >= self.PoI):
+			if(self.region_idx >= len(self.PoI)-1):
 				self.region_idx = 0
 			xd = self.PoI[self.region_idx]
 			self.region_idx += 1
@@ -447,18 +448,18 @@ class Nav_control():
 			con_distance_meas = 0 								# Inter agent distance where we start taking conection into account (greater than)
 			self.con_offset = self.d_con**2 - con_distance_meas**2	
 
-			for i in range(0, 3):
+			for i in range(0, 1):
 
 				if i!=2 or self.agent_number == 0 or self.agent_number == 2:
 
-					if False:#eta_con[i] < 0:		# Real distance btw CF is more than d_con they can not see each other
-						print(self.topic + "NOT CONNECTED WITH " + str(i))
+					if eta_con[i] < 0:		# Real distance btw CF is more than d_con they can not see each other
+						print(self.topic + " NOT CONNECTED WITH " + str(i))
 						beta_con[i] = 0
 						#beta_con_dot[i] = 0
 						grad_beta_con[i],grad_beta_con_dot[i] = self.reset_grad_beta()
 
-					elif eta_con[i] < self.con_offset + 10000000000000:	# If the distante between Crazyflie is more that 0, define betas
-
+					elif eta_con[i] < self.con_offset:	# If the distante between Crazyflie is more that 0, define betas
+						print(self.topic + " CONNECTED WITH " + str(i))
 						A = self.A_con()
 						B = self.B_con()
 						self.coeff = np.dot(np.linalg.inv(A),B)
@@ -467,7 +468,7 @@ class Nav_control():
 						grad_beta_con[i],grad_beta_con_dot[i] = self.grad_beta_con(beta_con[i], beta_con_dot[i], eta_con[i], eta_con_dot[i], x[i], x[i+1], v[i], v[i+1])
 						
 					else:								# If the distance between Crazyflies is less than 0:
-						beta_con[i] = self.beta_bound
+						beta_con[i] = self.beta_bound_con
 						grad_beta_con[i],grad_beta_con_dot[i] = self.reset_grad_beta()
 						#print("DISTANCIA ENTRE CF MENOR QUE CERO000000000000000000000000000000000000000")
 		
@@ -481,12 +482,13 @@ class Nav_control():
 			
 			for i in range(0, 5):
 
-				if False:#iota_col[i] <= 0:						# If iota less than 0, everything 0
+				if iota_col[i] <= 0:
+					print(self.topic + " COLLIDED WITH " + str(i))						# If iota less than 0, everything 0
 					beta_col[i] = 0
 					beta_col_dot[i] = 0
 					grad_beta_col[i],grad_beta_col_dot[i] = self.reset_grad_beta()
 				        
-				elif iota_col[i] <= self.col_offset + 10000000000:		# If iota is smaller than a value, define betas
+				elif iota_col[i] <= self.col_offset:		# If iota is smaller than a value, define betas
 
 					A = self.A_col()
 					B = self.B_col()
@@ -496,7 +498,7 @@ class Nav_control():
 					grad_beta_col[i],grad_beta_col_dot[i] = self.grad_beta_col(beta_col[i] , beta_col_dot[i], iota_col[i], iota_col_dot[i], x[i], x[i+1], v[i], v[i+1])
 					
 				else:									# If iota is bigger than a value:
-					beta_col[i] = self.beta_bound
+					beta_col[i] = self.beta_bound_col
 					grad_beta_col[i],grad_beta_col_dot[i] = self.reset_grad_beta()
 
 			########################
@@ -504,51 +506,64 @@ class Nav_control():
 			########################
 			# Vi = Ki * SUM alfa * grad_beta, as alfa is (-1, 1, 0) if i=m1, i=m2, i!=m1,m2  
 			#	respectively in the specific Crazyflie alfa = -1
-			beta_term_con = -grad_beta_con[0] - grad_beta_con[1] #- grad_beta_con[2] 
-			beta_term_col = np.zeros(3)#-grad_beta_col[0] - grad_beta_col[1]#- grad_beta_col[2] #- grad_beta_col[3]# - grad_beta_col[4] - grad_beta_col[5]
+			beta_term_con = -grad_beta_con[0]# - grad_beta_con[1] #- grad_beta_con[2] 
+			beta_term_col = -grad_beta_col[0]# - grad_beta_col[1]#- grad_beta_col[2] #- grad_beta_col[3]# - grad_beta_col[4] - grad_beta_col[5]
 
-			beta_term_con_dot =  -grad_beta_con_dot[0] - grad_beta_con_dot[1] #- grad_beta_con_dot[2] 
-			beta_term_col_dot = np.zeros(3)#-grad_beta_col_dot[0] - grad_beta_col_dot[1] #- grad_beta_col_dot[2] #- grad_beta_col_dot[3] #- grad_beta_col_dot[4] - grad_beta_col_dot[5]
+			beta_term_con_dot = -grad_beta_con_dot[0]# - grad_beta_con_dot[1] #- grad_beta_con_dot[2] 
+			beta_term_col_dot = -grad_beta_col_dot[0]# - grad_beta_col_dot[1] #- grad_beta_col_dot[2] #- grad_beta_col_dot[3] #- grad_beta_col_dot[4] - grad_beta_col_dot[5]
 
 			if mode == 1:	# If the Crazyflie is the leader
-				v_des = np.array([-kp_x*ep[0] - ki_x*integrator_pos[0], -kp_y*ep[1] - ki_y*integrator_pos[1], -kp_z*ep[2] - ki_z*integrator_pos[2]])  #+ ki*(beta_term_col + beta_term_con) 
+				v_des = np.array([-kp_x*ep[0] - ki_x*integrator_pos[0], -kp_y*ep[1] - ki_y*integrator_pos[1], -kp_z*ep[2] - ki_z*integrator_pos[2]]) + 0*ki*(beta_term_col + beta_term_con) 
+			 	v_des_dot = np.array([-kp_vx*v[0][0], -kp_vy*v[0][1], -kp_vz*v[0][2]]) + 0*ki*(beta_term_col_dot + beta_term_con_dot) #- lambda_int*ep
 
-			 	v_des_dot = np.array([-kp_vx*v[0][0], -kp_vy*v[0][1], -kp_vz*v[0][2]])# + ki*(beta_term_col_dot + beta_term_con_dot) #- lambda_int*ep
-
-			else:
-				v_des = ki*(beta_term_col + beta_term_con) 
-				# Calcutale the velocity error:
-				v_des_dot = ki*(beta_term_col_dot + beta_term_con_dot) 
-			
-			#v_des = np.array([10, 0, v_des[2]])
-			e_v = v[0] - v_des
-			integrator_v = integrator_v + e_v*dt
-			# Dissipative terms:
-			dissip_term = np.array([kp_vx*e_v[0] + ki_vx*integrator_v[0], kp_vy*e_v[1] + ki_vy*integrator_v[1], kp_vz*e_v[2] + ki_vz*integrator_v[2]])
-			# rospy.loginfo("e_v " + str(e_v))
-			# rospy.loginfo("ep " + str(ep))
-			# Calculate estimations needed:
-			if mode == 1:
+				e_v = v[0] - v_des
+				integrator_v = integrator_v + e_v*dt
+				
+				# Dissipative terms:
+				dissip_term = np.array([kp_vx*e_v[0] + ki_vx*integrator_v[0], kp_vy*e_v[1] + ki_vy*integrator_v[1], kp_vz*e_v[2] + ki_vz*integrator_v[2]])
+				
+				# Calculate estimations needed:
 				e_tilde = ep + lambda_int*integrator_pos
-			else:
+
+				# Calculate Y matrix:#Y = np.array( [v_des_dot[0],v_des_dot[1],v_des_dot[2]+grav])
+				Y = v_des_dot + [0, 0, grav]
+
+				#print('F_inertial = ', control)
+				control = 0*beta_term_col + beta_term_con - dissip_term + 0*Y*self.theta_hat - k_e_tilde*e_tilde  #- np.sign(e_v)*np.linalg.norm(v[0],1)*self.f_b_hat - np.sign(e_v)*self.d_b_hat
+				#control = beta_term_col + b=eta_term_con - dissip_term + Y*self.theta_hat - k_e_tilde*e_tilde #- np.sign(e_v)*np.linalg.norm(v[self.agent_number],1)*self.f_b_hat
+				rospy.loginfo("Control of " + self.topic + ": " + str(control) 
+										   + "\n v_des : " + str(v_des)
+										   + "\n beta_term_con : " + str(beta_term_con) 
+										   + "\n dissip_term : " + str(-dissip_term) 
+										   + "\n Y*self.theta_hat : " + str(Y*self.theta_hat)) 
+
+			else:	# If the Crazyflie is the leader				
+				v_des = ki*(0*beta_term_col + beta_term_con) 
+				# Calcutale the velocity error:
+				v_des_dot = ki*(0*beta_term_col_dot + beta_term_con_dot) 
+
+				e_v = v[0] - v_des
+				integrator_v = integrator_v + e_v*dt
+				
+				# Dissipative terms:
+				dissip_term = np.array([kp_vx*e_v[0] + ki_vx*integrator_v[0], kp_vy*e_v[1] + ki_vy*integrator_v[1], kp_vz*e_v[2] + ki_vz*integrator_v[2]])
+				
+				# Calculate estimations needed:
 				e_tilde = np.zeros(3)
 
-			# Calculate Y matrix:#Y = np.array( [v_des_dot[0],v_des_dot[1],v_des_dot[2]+grav])
-			Y = v_des_dot + [0, 0, grav]
+				# Calculate Y matrix:#Y = np.array( [v_des_dot[0],v_des_dot[1],v_des_dot[2]+grav])
+				Y = v_des_dot + [0, 0, grav]
 
-			#print("v_des: ", v_des)
+				#print('F_inertial = ', control)
+				control = 0*beta_term_col + beta_term_con - dissip_term + 0*Y*self.theta_hat - k_e_tilde*e_tilde  #- np.sign(e_v)*np.linalg.norm(v[0],1)*self.f_b_hat - np.sign(e_v)*self.d_b_hat
+				#control = beta_term_col + b=eta_term_con - dissip_term + Y*self.theta_hat - k_e_tilde*e_tilde #- np.sign(e_v)*np.linalg.norm(v[self.agent_number],1)*self.f_b_hat
+				rospy.loginfo("Control of " + self.topic + ": " + str(control) 
+										   + "\n v_des : " + str(v_des)
+										   + "\n beta_term_con : " + str(beta_term_con) 
+										   + "\n dissip_term : " + str(-dissip_term) 
+										   + "\n Y*self.theta_hat : " + str(Y*self.theta_hat)) 
 
-			#print(1/2*np.linalg.norm(ep)**2)
-			#print(1/2*mass*np.linalg.norm(e_v)**2 )
-			#print('energy = ', .5**np.linalg.norm(ep)**2 + .5*mass*np.linalg.norm(e_v)**2 )
-			# Calculate term of control:
-			#gravity compensation: k_y_tet*Y*self.theta_hat np.array([0,0,mass*grav])
-
-			#print('F_inertial = ', control)
-			control = 0*beta_term_col + 0*beta_term_con - dissip_term + 0*Y*self.theta_hat - k_e_tilde*e_tilde  #- np.sign(e_v)*np.linalg.norm(v[0],1)*self.f_b_hat - np.sign(e_v)*self.d_b_hat
-			#control = beta_term_col + b=eta_term_con - dissip_term + Y*self.theta_hat - k_e_tilde*e_tilde #- np.sign(e_v)*np.linalg.norm(v[self.agent_number],1)*self.f_b_hat
 			
-
 			#control = - k_dis*dissip_term + Y*self.theta_hat - k_e_tilde*e_tilde + beta_term_col + k_connect*beta_term_con	
 			#rospy.loginfo("Control : " + str(control)) 
 			#rospy.loginfo("error v : " + str(e_v[0])) 
