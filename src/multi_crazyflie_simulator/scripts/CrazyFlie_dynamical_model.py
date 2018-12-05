@@ -241,17 +241,6 @@ class CF_model():
 
         return rot
 
-    def rotation_matrix(self, roll, pitch, yaw):
-        return np.array([[cos(pitch)*cos(yaw),
-                             cos(pitch)*sin(yaw),
-                             -sin(pitch)],
-                            [sin(roll)*sin(pitch)*cos(yaw) - cos(roll)*sin(yaw),
-                             sin(roll)*sin(pitch)*sin(yaw) + cos(roll)*cos(yaw),
-                             sin(roll)*cos(pitch)],
-                            [cos(roll)*sin(pitch)*cos(yaw) + sin(roll)*sin(yaw),
-                             cos(roll)*sin(pitch)*sin(yaw) - sin(roll)*cos(yaw),
-                             cos(roll)*cos(pitch)]])
-
     def euler_matrix(self, roll, pitch, yaw):
         cos_roll = cos(roll)
         sin_roll = sin(roll)
@@ -280,9 +269,7 @@ class CF_model():
     # Callback function
     ###########################
     def new_position_setpoint(self, position_msg):
-        ##############!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        ### DUDA EN EL CODIGO DEL SERVER DE LO QUE ES m_X_trim
-        ######################################################
+
         self.mode="POS"
         self.desired_pos[0] = position_msg.x
         self.desired_pos[1] = position_msg.y
@@ -340,11 +327,6 @@ class CF_model():
             self.cf_state.attitude[i] = self.cf_state.attitude[i] + (new_state.attitude[i] * self.cf_physical_params.DT_CF)
             self.cf_state.lin_vel[i] = self.cf_state.lin_vel[i] + (new_state.lin_vel[i] * self.cf_physical_params.DT_CF)
             self.cf_state.ang_vel[i] = self.cf_state.ang_vel[i] + (new_state.ang_vel[i] * self.cf_physical_params.DT_CF)
-            #print(i)
-            #print("lin vel = ", new_state.position[i])
-            #print("rot vel = ", new_state.attitude[i])
-            #print("lin acc = ", new_state.lin_vel[i])
-            #print("rot acc = ", new_state.ang_vel[i])
 
         self.cf_state.ang_vel_deg = self.cf_state.ang_vel*180.0/np.pi
         self.cf_state.attitude_deg = self.cf_state.attitude*180.0/np.pi
@@ -380,9 +362,6 @@ class CF_model():
 
         self.desired_att[0] = max(min(self.cf_pid_gains.MAX_ATT, self.desired_att[0]), -self.cf_pid_gains.MAX_ATT)
         self.desired_att[1] = max(min(self.cf_pid_gains.MAX_ATT, self.desired_att[1]), -self.cf_pid_gains.MAX_ATT)
-
-        #rospy.loginfo(self.desired_att)
-
         self.desired_ang_vel = np.array([self.roll_pid.update(self.desired_att[0], self.cf_state.attitude_deg[0]),
                                          self.pitch_pid.update(-self.desired_att[1], self.cf_state.attitude_deg[1]),
                                          self.yaw_pid.update(self.desired_att[2], self.cf_state.attitude_deg[2])])
@@ -411,7 +390,6 @@ class CF_model():
         p = self.desired_rpy[1]
         y = self.desired_rpy[2]
         thrust = self.desired_thrust
-        #rospy.loginfo("Thrust: " + str(thrust))
 
         ##########################
         # Function that transform the output
@@ -484,11 +462,11 @@ class CF_model():
                         self.run_pos_pid()
                         self.run_lin_vel_pid()
                     self.publishPose()
-                    #self.log_state()
                 else:
                     self.out_pos_counter = self.out_pos_counter + 1
 
             self.time_processing.append(time.time() - tic_init)
+            
             # Wait for the cycle left time
             self.simulation_freq.sleep()
 
