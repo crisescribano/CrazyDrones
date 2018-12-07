@@ -42,7 +42,7 @@ class Forces():
 		message = Twist()
 		message.linear.x = pitch*180/np.pi
 		message.linear.y = roll*180/np.pi
-		raw_thrust = np.sign(self.desired_3d_force[2])*(np.sqrt(np.absolute(self.desired_3d_force[2])/self.cf_physical_params.CT) - 4070.3)/0.2685
+		raw_thrust = np.sign(self.desired_3d_force[2])*(np.sqrt(np.absolute(self.desired_3d_force[2])/(4*self.cf_physical_params.CT)) - 4070.3)/0.2685
 		
 		message.linear.z = max((raw_thrust + self.cf_physical_params.BASE_THRUST), self.cf_physical_params.PWM_MIN)
 		self.pub.publish(message)
