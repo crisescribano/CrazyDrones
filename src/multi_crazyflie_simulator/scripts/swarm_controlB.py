@@ -57,7 +57,7 @@ class Nav_control():
 		self.region_idx = 0
 		self.con_offset = 0
 		self.col_offset = 0
-		self.beta_bound_col = 10*000000#00
+		self.beta_bound_col = 1000000#0
 		self.beta_bound_con = self.beta_bound_col
 		self.coeff = np.zeros(3)
 		self.a_hat = 0
@@ -75,7 +75,7 @@ class Nav_control():
 		self.agent_pose = []
 		for i in range(self.numberQuads):
 			try:
-				#rospy.loginfo("Creating callback: callback_crazyflie_" + str(i))
+				rospy.loginfo("Creating callback: callback_crazyflie_" + str(i))
 				rospy.Subscriber("/crazyflie_" + str(i) + "/out_pos_odometry", nav_msgs.msg.Odometry, self.callback_crazyflie)
 				self.agent_pose.append(nav_msgs.msg.Odometry())
 									
@@ -194,23 +194,19 @@ class Nav_control():
 		return beta_col, beta_col_dot
 
 	def grad_beta_col(self, beta_col, beta_col_dot, iota_col, iota_col_dot, x, x_other, v, v_other):
-		if beta_col == 0:
-			print("betas colision son 0")
-			return np.zeros(3),np.zeros(3)
-		else:
-			preop_x = np.array([x[0]-x_other[0], x[1]-x_other[1], x[2]-x_other[2]])
-			preop_v = np.array([v[0]-v_other[0], v[1]-v_other[1], v[2]-v_other[2]])
-			grad_beta_col = -1/(beta_col)**2*(5*self.coeff[0]*iota_col**4 + 4*self.coeff[1]*iota_col**3 + 3*self.coeff[2]*iota_col**2)*(2*(preop_x))
-			term1 = 2/(beta_col)**3 * beta_col_dot * (5*self.coeff[0]*iota_col**4 + 4*self.coeff[1]*iota_col**3 + 3*self.coeff[2]*iota_col**2)*(2*(preop_x))
-			term2 = -1/(beta_col)**2 * (20*self.coeff[0]*iota_col**3 + 12*self.coeff[1]*iota_col**2 + 6*self.coeff[2]*iota_col)*iota_col_dot*(2*(preop_x))
-			term3 = -1/(beta_col)**2*(5*self.coeff[0]*iota_col**4 + 4*self.coeff[1]*iota_col**3 + 3*self.coeff[2]*iota_col**2)*(2*(preop_v))
-			grad_beta_col_dot = term1 + term2 + term3 
-			return grad_beta_col, grad_beta_col_dot
+		preop_x = preop_x = np.array([x[0]-x_other[0], x[1]-x_other[1], x[2]-x_other[2]])
+		preop_v = np.array([v[0]-v_other[0], v[1]-v_other[1], v[2]-v_other[2]])
+		grad_beta_col = -1/beta_col**2*(5*self.coeff[0]*iota_col**4 + 4*self.coeff[1]*iota_col**3 + 3*self.coeff[2]*iota_col**2)*(2*(preop_x))
+		term1 = 2/beta_col**3 * beta_col_dot * (5*self.coeff[0]*iota_col**4 + 4*self.coeff[1]*iota_col**3 + 3*self.coeff[2]*iota_col**2)*(2*(preop_x))
+		term2 = -1/beta_col**2 * (20*self.coeff[0]*iota_col**3 + 12*self.coeff[1]*iota_col**2 + 6*self.coeff[2]*iota_col)*iota_col_dot*(2*(preop_x))
+		term3 = -1/beta_col**2*(5*self.coeff[0]*iota_col**4 + 4*self.coeff[1]*iota_col**3 + 3*self.coeff[2]*iota_col**2)*(2*(preop_v))
+		grad_beta_col_dot = term1 + term2 + term3 
+		return grad_beta_col, grad_beta_col_dot
 
 	def navigation(self):
 
-		kp_x = 2# 2
-		ki_x = 0*0.1
+		kp_x = 1# 2
+		ki_x = 0#0.001
 
 		kp_vx = 0.005#25
 		ki_vx = 0.00001#1 
@@ -236,12 +232,12 @@ class Nav_control():
 		k_connect = 0 # Beta for connetivity
 
 		if self.priority == 1:
-			ki_con = 500#100
-			ki_col = 500#100
+			ki_con = 100#50
+			ki_col = 100#50
 			k_y_tet= 1
 			k_dis = 1
 		else:
-			ki_con = 55*10000# Velocidades
+			ki_con = 10000#*1000# Velocidades
 			ki_col = ki_con # Velocidades
 			k_dis = 1 # Termino diss
 			k_y_tet = 1 # Termino Y*theta
@@ -315,6 +311,9 @@ class Nav_control():
 				x[i],v[i] = self.position_and_velocity_from_odometry(self.agent_pose[i])
 			
 			# Integration
+			self.a_hat = self.a_hat + dt*self.a_hat_dot
+			self.d_b_hat = self.d_b_hat + dt*self.d_b_hat_dot
+			self.f_b_hat = self.f_b_hat + dt*self.f_b_hat_dot
 			self.theta_hat = self.theta_hat + dt*self.theta_hat_dot
 
 			# Point to achieve
@@ -406,13 +405,14 @@ class Nav_control():
 
 						beta_col[i],beta_col_dot[i] = self.beta_col(iota_col[i], iota_col_dot[i])
 						grad_beta_col[i],grad_beta_col_dot[i] = self.grad_beta_col(beta_col[i],
-																				beta_col_dot[i], 
-																				iota_col[i], 
-																				iota_col_dot[i], 
-																				x[self.agent_number], 
-																				x[i], 
-																				v[self.agent_number], 
-																				v[i])
+																				   beta_col_dot[i], 
+																				   iota_col[i], 
+																				   iota_col_dot[i], 
+																				   x[self.agent_number], 
+																				   x[i], 
+																				   v[self.agent_number], 
+																				   v[i])
+						
 					else:									# If iota is bigger than a value:
 						beta_col[i] = self.beta_bound_col
 						grad_beta_col[i],grad_beta_col_dot[i] = self.reset_grad_beta()
@@ -451,7 +451,7 @@ class Nav_control():
 
 				Y = v_des_dot + [0, 0, grav]
 
-				control = beta_term_col + beta_term_con - dissip_term - k_e_tilde*e_tilde  #- np.sign(e_v)*np.linalg.norm(v[0],1)*self.f_b_hat - np.sign(e_v)*self.d_b_hat
+				control = beta_term_col + beta_term_con - dissip_term + Y*self.theta_hat - k_e_tilde*e_tilde  #- np.sign(e_v)*np.linalg.norm(v[0],1)*self.f_b_hat - np.sign(e_v)*self.d_b_hat
 				#control = beta_term_col + b=eta_term_con - dissip_term + Y*self.theta_hat - k_e_tilde*e_tilde #- np.sign(e_v)*np.linalg.norm(v[self.agent_number],1)*self.f_b_hat
 				#rospy.loginfo("Control of " + self.topic + ": " + str(control) 
 										   #+ "\n v_des : " + str(v_des)
@@ -472,18 +472,20 @@ class Nav_control():
 
 				Y = v_des_dot + [0, 0, grav]
 
-				control = beta_term_col + beta_term_con - dissip_term #- np.sign(e_v)*np.linalg.norm(v[0],1)*self.f_b_hat - np.sign(e_v)*self.d_b_hat
-				# if self.agent_number ==2:
-				# 	print(self.topic + " beta_term_col = " + str(beta_term_col))
-				# 	print(self.topic + " beta_term_con = " + str(beta_term_con))
-				# 	print(self.topic + " v_des = " + str(v_des))
-				# 	rospy.loginfo("Control of " + self.topic + ": " + str(control) 
-				# 							   + "\n v_des : " + str(v_des)
-				# 							   #+ "\n beta_term_con : " + str(beta_term_con) 
-				# 							   + "\n dissip_term : " + str(-dissip_term))
-				# 							   #+ "\n Y*self.theta_hat : " + str(Y*self.theta_hat))
+				control = beta_term_col + beta_term_con - dissip_term + Y*self.theta_hat - k_e_tilde*e_tilde  #- np.sign(e_v)*np.linalg.norm(v[0],1)*self.f_b_hat - np.sign(e_v)*self.d_b_hat
+				#print(self.topic + " beta_term_col = " + str(beta_term_col))
+				#print(self.topic + " beta_term_con = " + str(beta_term_con))
+				#print(self.topic + " v_des = " + str(v_des))
+				#control = beta_term_col + b=eta_term_con - dissip_term + Y*self.theta_hat - k_e_tilde*e_tilde #- np.sign(e_v)*np.linalg.norm(v[self.agent_number],1)*self.f_b_hat
+				#rospy.loginfo("Control of " + self.topic + ": " + str(control) 
+										   #+ "\n v_des : " + str(v_des)
+										   #+ "\n beta_term_con : " + str(beta_term_con) 
+										   #+ "\n dissip_term : " + str(-dissip_term) 
+										   #+ "\n Y*self.theta_hat : " + str(Y*self.theta_hat)) 
 
 			# Calculate discrepance terms:
+			self.d_b_hat_dot = k_d_b*np.linalg.norm(e_v)
+			self.f_b_hat_dot = k_f_b*np.linalg.norm(e_v,1)*np.linalg.norm(v[self.agent_number])
 			self.theta_hat_dot = -k_theta*np.dot(Y,e_v)
 
 			mesage_to_pub = mav_msgs.msg.TorqueThrust()
@@ -498,4 +500,4 @@ if __name__ == '__main__':
     control = Nav_control()
     
     control.navigation()
-    rospy.spin()
+rospy.spin()
