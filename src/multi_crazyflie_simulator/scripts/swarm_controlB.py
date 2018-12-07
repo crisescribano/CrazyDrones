@@ -196,13 +196,14 @@ class Nav_control():
 	def grad_beta_col(self, beta_col, beta_col_dot, iota_col, iota_col_dot, x, x_other, v, v_other):
 		if beta_col == 0:
 			print("betas colision son 0")
+			return np.zeros(3),np.zeros(3)
 		else:
-			preop_x = preop_x = np.array([x[0]-x_other[0], x[1]-x_other[1], x[2]-x_other[2]])
+			preop_x = np.array([x[0]-x_other[0], x[1]-x_other[1], x[2]-x_other[2]])
 			preop_v = np.array([v[0]-v_other[0], v[1]-v_other[1], v[2]-v_other[2]])
-			grad_beta_col = -1/(beta_col )**2*(5*self.coeff[0]*iota_col**4 + 4*self.coeff[1]*iota_col**3 + 3*self.coeff[2]*iota_col**2)*(2*(preop_x))
-			term1 = 2/(beta_col )**3 * beta_col_dot * (5*self.coeff[0]*iota_col**4 + 4*self.coeff[1]*iota_col**3 + 3*self.coeff[2]*iota_col**2)*(2*(preop_x))
-			term2 = -1/(beta_col )**2 * (20*self.coeff[0]*iota_col**3 + 12*self.coeff[1]*iota_col**2 + 6*self.coeff[2]*iota_col)*iota_col_dot*(2*(preop_x))
-			term3 = -1/(beta_col )**2*(5*self.coeff[0]*iota_col**4 + 4*self.coeff[1]*iota_col**3 + 3*self.coeff[2]*iota_col**2)*(2*(preop_v))
+			grad_beta_col = -1/(beta_col)**2*(5*self.coeff[0]*iota_col**4 + 4*self.coeff[1]*iota_col**3 + 3*self.coeff[2]*iota_col**2)*(2*(preop_x))
+			term1 = 2/(beta_col)**3 * beta_col_dot * (5*self.coeff[0]*iota_col**4 + 4*self.coeff[1]*iota_col**3 + 3*self.coeff[2]*iota_col**2)*(2*(preop_x))
+			term2 = -1/(beta_col)**2 * (20*self.coeff[0]*iota_col**3 + 12*self.coeff[1]*iota_col**2 + 6*self.coeff[2]*iota_col)*iota_col_dot*(2*(preop_x))
+			term3 = -1/(beta_col)**2*(5*self.coeff[0]*iota_col**4 + 4*self.coeff[1]*iota_col**3 + 3*self.coeff[2]*iota_col**2)*(2*(preop_v))
 			grad_beta_col_dot = term1 + term2 + term3 
 			return grad_beta_col, grad_beta_col_dot
 
@@ -404,8 +405,14 @@ class Nav_control():
 						self.coeff = np.dot(np.linalg.inv(A),B)
 
 						beta_col[i],beta_col_dot[i] = self.beta_col(iota_col[i], iota_col_dot[i])
-						grad_beta_col[i],grad_beta_col_dot[i] = self.grad_beta_col(beta_col[i], beta_col_dot[i],iota_col[i],iota_col_dot[i], x[self.agent_number], x[i], v[self.agent_number], v[i])
-						
+						grad_beta_col[i],grad_beta_col_dot[i] = self.grad_beta_col(beta_col[i],
+																				beta_col_dot[i], 
+																				iota_col[i], 
+																				iota_col_dot[i], 
+																				x[self.agent_number], 
+																				x[i], 
+																				v[self.agent_number], 
+																				v[i])
 					else:									# If iota is bigger than a value:
 						beta_col[i] = self.beta_bound_col
 						grad_beta_col[i],grad_beta_col_dot[i] = self.reset_grad_beta()
