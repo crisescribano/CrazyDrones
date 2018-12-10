@@ -57,7 +57,7 @@ class Nav_control():
 		self.region_idx = 0
 		self.con_offset = 0
 		self.col_offset = 0
-		self.beta_bound_col = 1000000#0
+		self.beta_bound_col = 1000000000000000#0
 		self.beta_bound_con = self.beta_bound_col
 		self.coeff = np.zeros(3)
 		self.a_hat = 0
@@ -233,11 +233,11 @@ class Nav_control():
 
 		if self.priority == 1:
 			ki_con = 100#50
-			ki_col = 100#50
+			ki_col = ki_con#50
 			k_y_tet= 1
 			k_dis = 1
 		else:
-			ki_con = 10000#*1000# Velocidades
+			ki_con = 19000000000000#100000#*1000# Velocidades
 			ki_col = ki_con # Velocidades
 			k_dis = 1 # Termino diss
 			k_y_tet = 1 # Termino Y*theta
