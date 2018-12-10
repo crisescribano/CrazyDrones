@@ -43,7 +43,7 @@ class Nav_control():
 		time = rospy.get_time()
 
 		# Trayectory to follow:
-		self.trajectory = np.array([[0, 0, 0], [0, 0, 5], [4, 5, 3],[-2, 4, 2],[3, -2, 3],[-5, 1, 4]])
+		self.trajectory = np.array([[0, 0, 2], [0, 0, 5], [4, 5, 3],[-2, 4, 2],[3, -2, 3],[1, -1, 2]])
 		
 		
 		#self.PoI = 1.5*np.array([[0, 0, 1], [1, 0, 1],[1, 1, 1],[0, 1, 1],
@@ -232,12 +232,12 @@ class Nav_control():
 		k_connect = 0 # Beta for connetivity
 
 		if self.priority == 1:
-			ki_con = 100#50
+			ki_con = 1000#50
 			ki_col = ki_con#50
 			k_y_tet= 1
 			k_dis = 1
 		else:
-			ki_con = 19000000000000#100000#*1000# Velocidades
+			ki_con = 85000000000000#100000#*1000# Velocidades
 			ki_col = ki_con # Velocidades
 			k_dis = 1 # Termino diss
 			k_y_tet = 1 # Termino Y*theta
@@ -321,6 +321,7 @@ class Nav_control():
 				self.region_idx = 0
 			xd = self.PoI[self.region_idx]
 			self.region_idx += 1
+
 
 			###########################################
 			### Achieve desired point by the leader ###
