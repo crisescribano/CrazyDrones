@@ -237,7 +237,7 @@ class Nav_control():
 			k_y_tet= 1
 			k_dis = 1
 		else:
-			ki_con = 85000000000000#100000#*1000# Velocidades
+			ki_con = 86000000000000#100000#*1000# Velocidades
 			ki_col = ki_con # Velocidades
 			k_dis = 1 # Termino diss
 			k_y_tet = 1 # Termino Y*theta
