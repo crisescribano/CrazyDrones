@@ -43,8 +43,7 @@ class Nav_control():
 		time = rospy.get_time()
 
 		# Trayectory to follow:
-		self.trajectory = np.array([[0, 0, 2], [0, 0, 5], [4, 5, 3],[-2, 4, 2],[3, -2, 3],[1, -1, 2]])
-		
+		self.trajectory = np.array([[0,0,0], [0, 0, 2], [0, 0, 5], [4, 5, 3],[-2, 4, 2],[3, -2, 3],[1, -1, 2]])
 		
 		#self.PoI = 1.5*np.array([[0, 0, 1], [1, 0, 1],[1, 1, 1],[0, 1, 1],
 		#					[-1, 1, 1], [-1, 0, 1],[-1, -1, 1],[0, -1, 1], 
@@ -494,6 +493,14 @@ class Nav_control():
 			mesage_to_pub.thrust.y = control[1]
 			mesage_to_pub.thrust.z = control[2]
 			self.force_pub.publish(mesage_to_pub)
+
+
+			if self. agent_number == 0:
+				m = dissip_term + e_v
+				#f = open(os.path.join('~/data', 'dissip.txt'), 'w')
+				f = open("/home/cristinaescribano/data/diss.txt", "a")
+				f.write("%s" %m + '\n') 
+				f.close()
 
 			self.rate.sleep()
 
