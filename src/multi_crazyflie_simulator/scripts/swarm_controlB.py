@@ -497,7 +497,6 @@ class Nav_control():
 
 			if self. agent_number == 0:
 				m = dissip_term + e_v
-				#f = open(os.path.join('~/data', 'dissip.txt'), 'w')
 				f = open("/home/cristinaescribano/data/diss.txt", "a")
 				f.write("%s" %m + '\n') 
 				f.close()
