@@ -495,13 +495,13 @@ class Nav_control():
 			self.force_pub.publish(mesage_to_pub)
 
 
-			if self. agent_number == 0:
-				m = dissip_term + e_v
-				f = open("/home/cristinaescribano/data/diss.txt", "a")
-				f.write("%s" %m + '\n') 
-				f.close()
+			# if self. agent_number == 0:
+			# 	m = dissip_term + e_v
+			# 	f = open("/home/cristinaescribano/data/diss.txt", "a")
+			# 	f.write("%s" %m + '\n') 
+			# 	f.close()
 
-			self.rate.sleep()
+			# self.rate.sleep()
 
 if __name__ == '__main__':
     control = Nav_control()
