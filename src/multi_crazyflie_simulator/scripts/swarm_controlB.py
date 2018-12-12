@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import re
+import os
 import numpy as np
 from numpy import linalg 
 import rospy
@@ -23,7 +24,7 @@ class Nav_control():
 
 	def __init__(self):
 
-		rospy.init_node('navigation_node_simB') 
+		rospy.init_node('navigation_node_simB')
 			
 		self.topic = rospy.get_param("~topic")
 		self.numberQuads = rospy.get_param("~number_quads")
@@ -70,6 +71,9 @@ class Nav_control():
 		self.d_con = 3
 		self.r = 0.2
 
+		self.time_store = None
+		self.data_store = None
+
 		self.rate = rospy.Rate(100) 
 		self.agent_pose = []
 		for i in range(self.numberQuads):
@@ -82,6 +86,7 @@ class Nav_control():
 				print "callback_crazyflie_0 not found"
 
 		self.sequenceCreator()
+		rospy.on_shutdown(self.save_data)
 
 	def sequenceCreator(self):
 		self.PoI = []
@@ -495,7 +500,15 @@ class Nav_control():
 			self.force_pub.publish(mesage_to_pub)
 
 
-			# if self. agent_number == 0:
+			if self.time_store is None:
+				self.time_store = np.array([rospy.get_rostime().to_time()])
+				self.data_store = np.array([[dissip_term + e_v]])
+			else:
+				self.data_store = np.concatenate((self.data_store, np.array([[dissip_term + e_v]])), axis=1)
+				self.time_store = np.append(self.time_store, np.array([rospy.get_rostime().to_time()]))
+
+
+			# if self.agent_number == 0:
 			# 	m = dissip_term + e_v
 			# 	f = open("/home/cristinaescribano/data/diss.txt", "a")
 			# 	f.write("%s" %m + '\n') 
@@ -509,8 +522,12 @@ class Nav_control():
 
 			self.rate.sleep()
 
+	def save_data(self):
+		np.save("../CrazyDrones/src/multi_crazyflie_simulator/simulation_data" + self.topic + "_time", self.time_store)
+		np.save("../CrazyDrones/src/multi_crazyflie_simulator/simulation_data" + self.topic + "_data", self.data_store)
+
 if __name__ == '__main__':
-    control = Nav_control()
-    
-    control.navigation()
-rospy.spin()
+	control = Nav_control()
+
+	control.navigation()
+	rospy.spin()
