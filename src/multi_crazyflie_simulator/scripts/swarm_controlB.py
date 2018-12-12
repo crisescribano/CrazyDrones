@@ -501,6 +501,12 @@ class Nav_control():
 			# 	f.write("%s" %m + '\n') 
 			# 	f.close()
 
+			# if self. agent_number == 0:
+			# 	now = rospy.get_rostime()
+			# 	f = open("/home/cristinaescribano/data/timediss.txt", "a")
+			# 	f.write("%s" %now + '\n') 
+			# 	f.close()
+
 			self.rate.sleep()
 
 if __name__ == '__main__':
