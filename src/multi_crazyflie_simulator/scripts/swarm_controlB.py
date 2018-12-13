@@ -52,7 +52,7 @@ class Nav_control():
 		#self.PoI = np.array([[0, 0, 1], [0, 0, 1],[0, 0, 1],[0, 0, 1]])
 		#self.PoI = np.array([[0, 0, 1], [0, 0, 2],[0, 0,3],[0, 0, 4]])
 
-		self.timeBetweenPoints = 10
+		self.timeBetweenPoints = 15
 		self.counterPoI = 0
 		self.region_idx = 0
 		self.con_offset = 0
@@ -82,7 +82,7 @@ class Nav_control():
 		self.e_v_store = None
 		self.v_des_store = None
 		self.v_des_dot_store = None
-		
+
 		self.rate = rospy.Rate(100) 
 		self.agent_pose = []
 		for i in range(self.numberQuads):
@@ -95,7 +95,7 @@ class Nav_control():
 				print "callback_crazyflie_0 not found"
 
 		self.sequenceCreator()
-		rospy.on_shutdown(self.save_data)
+		#rospy.on_shutdown(self.save_data)
 
 	def sequenceCreator(self):
 		self.PoI = []
