@@ -535,7 +535,6 @@ class Nav_control():
 			# 	self.v_des_store = np.concatenate((self.v_des_store, np.array([[v_des]])), axis=1)
 			# 	self.v_des_dot_store = np.concatenate((self.v_des_dot_store, np.array([[v_des_dot]])), axis=1)
 
-
 			self.rate.sleep()
 
 	def save_data(self):
