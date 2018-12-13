@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import re
+import os
 import numpy as np
 from numpy import linalg 
 import rospy
@@ -23,7 +24,7 @@ class Nav_control():
 
 	def __init__(self):
 
-		rospy.init_node('navigation_node_simB') 
+		rospy.init_node('navigation_node_simB')
 			
 		self.topic = rospy.get_param("~topic")
 		self.numberQuads = rospy.get_param("~number_quads")
@@ -43,7 +44,7 @@ class Nav_control():
 		time = rospy.get_time()
 
 		# Trayectory to follow:
-		self.trajectory = np.array([[0, 0, 2], [0, 0, 5], [4, 5, 3],[-2, 4, 2],[3, -2, 3],[1, -1, 2]])
+		self.trajectory = np.array([[0, 0, 0],[0, 0, 2], [0, 0, 5], [4, 5, 3],[-2, 4, 2],[3, -2, 3],[1, -1, 2]])
 		
 		#self.PoI = 1.5*np.array([[0, 0, 1], [1, 0, 1],[1, 1, 1],[0, 1, 1],
 		#					[-1, 1, 1], [-1, 0, 1],[-1, -1, 1],[0, -1, 1], 
@@ -70,6 +71,18 @@ class Nav_control():
 		self.d_con = 3
 		self.r = 0.2
 
+		self.time_store = None
+		self.pos_store = None
+		self.beta_con_store = None
+		self.beta_col_store = None
+		self.control_store = None
+		self.dissip_term_store = None
+		self.ep_store = None
+		self.e_tilde_store = None
+		self.e_v_store = None
+		self.v_des_store = None
+		self.v_des_dot_store = None
+
 		self.rate = rospy.Rate(100) 
 		self.agent_pose = []
 		for i in range(self.numberQuads):
@@ -82,6 +95,7 @@ class Nav_control():
 				print "callback_crazyflie_0 not found"
 
 		self.sequenceCreator()
+		#rospy.on_shutdown(self.save_data)
 
 	def sequenceCreator(self):
 		self.PoI = []
@@ -317,7 +331,7 @@ class Nav_control():
 
 			# Point to achieve
 			if(self.region_idx >= len(self.PoI)-1):
-				self.region_idx = 0
+				self.region_idx = 1
 			xd = self.PoI[self.region_idx]
 			self.region_idx += 1
 
@@ -451,7 +465,7 @@ class Nav_control():
 
 				Y = v_des_dot + [0, 0, grav]
 
-				control = beta_term_col + beta_term_con - dissip_term + Y*self.theta_hat - k_e_tilde*e_tilde  #- np.sign(e_v)*np.linalg.norm(v[0],1)*self.f_b_hat - np.sign(e_v)*self.d_b_hat
+				control = beta_term_col + beta_term_con - dissip_term + 0*Y*self.theta_hat - k_e_tilde*e_tilde  #- np.sign(e_v)*np.linalg.norm(v[0],1)*self.f_b_hat - np.sign(e_v)*self.d_b_hat
 				#control = beta_term_col + b=eta_term_con - dissip_term + Y*self.theta_hat - k_e_tilde*e_tilde #- np.sign(e_v)*np.linalg.norm(v[self.agent_number],1)*self.f_b_hat
 				#rospy.loginfo("Control of " + self.topic + ": " + str(control) 
 										   #+ "\n v_des : " + str(v_des)
@@ -472,7 +486,7 @@ class Nav_control():
 
 				Y = v_des_dot + [0, 0, grav]
 
-				control = beta_term_col + beta_term_con - dissip_term + Y*self.theta_hat - k_e_tilde*e_tilde  #- np.sign(e_v)*np.linalg.norm(v[0],1)*self.f_b_hat - np.sign(e_v)*self.d_b_hat
+				control = beta_term_col + beta_term_con - dissip_term + 0*Y*self.theta_hat - k_e_tilde*e_tilde  #- np.sign(e_v)*np.linalg.norm(v[0],1)*self.f_b_hat - np.sign(e_v)*self.d_b_hat
 				#print(self.topic + " beta_term_col = " + str(beta_term_col))
 				#print(self.topic + " beta_term_con = " + str(beta_term_con))
 				#print(self.topic + " v_des = " + str(v_des))
@@ -495,22 +509,50 @@ class Nav_control():
 			self.force_pub.publish(mesage_to_pub)
 
 
-			# if self. agent_number == 0:
-			# 	m = dissip_term + e_v
-			# 	f = open("/home/cristinaescribano/data/diss.txt", "a")
-			# 	f.write("%s" %m + '\n') 
-			# 	f.close()
+			# if self.time_store is None:
+			# 	self.time_store = np.array([rospy.get_rostime().to_time()]) 		# scalar
+			# 	self.pos_store = np.array([[x[self.agent_number]]])					# 3d vector
+			# 	self.beta_con_store = np.array([[beta_term_con]])			# 3d vector
+			# 	self.beta_col_store = np.array([[beta_term_col]])			# 3d vector
+			# 	self.control_store = np.array([[control]])				# 3d vector
+			# 	self.dissip_term_store = np.array([[dissip_term]])			# 3d vector
+			# 	self.ep_store = np.array([[ep]])					# 3d vector
+			# 	self.e_tilde_store = np.array([[e_tilde]])				# 3d vector
+			# 	self.e_v_store = np.array([[e_v]])					# 3d vector
+			# 	self.v_des_store = np.array([[v_des]])				# 3d vector
+			# 	self.v_des_dot_store = np.array([[v_des_dot]])			# 3d vector
 
-			# if self. agent_number == 0:
-			# 	now = rospy.get_rostime()
-			# 	f = open("/home/cristinaescribano/data/timediss.txt", "a")
-			# 	f.write("%s" %now + '\n') 
-			# 	f.close()
+			# else: #cancatenate for arrays, append for scalars
+			# 	self.time_store = np.append(self.time_store, np.array([rospy.get_rostime().to_time()]))
+			# 	self.pos_store = np.concatenate((self.pos_store, np.array([[x[self.agent_number]]])), axis=1)
+			# 	self.beta_con_store = np.concatenate((self.beta_con_store, np.array([[beta_term_con]])), axis=1)
+			# 	self.beta_col_store = np.concatenate((self.beta_col_store, np.array([[beta_term_col]])), axis=1)
+			# 	self.control_store = np.concatenate((self.control_store, np.array([[control]])), axis=1)
+			# 	self.dissip_term_store = np.concatenate((self.dissip_term_store, np.array([[dissip_term]])), axis=1)
+			# 	self.ep_store = np.concatenate((self.ep_store, np.array([[ep]])), axis=1)
+			# 	self.e_tilde_store = np.concatenate((self.e_tilde_store, np.array([[e_tilde_store]])), axis=1)
+			# 	self.e_v_store = np.concatenate((self.e_v_store, np.array([[e_v]])), axis=1)
+			# 	self.v_des_store = np.concatenate((self.v_des_store, np.array([[v_des]])), axis=1)
+			# 	self.v_des_dot_store = np.concatenate((self.v_des_dot_store, np.array([[v_des_dot]])), axis=1)
 
+			print (algo)
 			self.rate.sleep()
 
+	def save_data(self):
+		np.save("../CrazyDrones/src/multi_crazyflie_simulator/simulation_data/try_1/time" + self.topic + "_time", self.time_store)
+		np.save("../CrazyDrones/src/multi_crazyflie_simulator/simulation_data/try_1/position" + self.topic + "_pos", self.pos_store)
+		np.save("../CrazyDrones/src/multi_crazyflie_simulator/simulation_data/try_1/beta_term_con" + self.topic + "_beta_con", self.beta_con_store)
+		np.save("../CrazyDrones/src/multi_crazyflie_simulator/simulation_data/try_1/beta_term_col" + self.topic + "_beta_col", self.beta_col_store)
+		np.save("../CrazyDrones/src/multi_crazyflie_simulator/simulation_data/try_1/control" + self.topic + "_control", self.control_store)
+		np.save("../CrazyDrones/src/multi_crazyflie_simulator/simulation_data/try_1/dissip_term" + self.topic + "_dissip_term", self.dissip_term_store)
+		np.save("../CrazyDrones/src/multi_crazyflie_simulator/simulation_data/try_1/ep" + self.topic + "_ep", self.ep_store)
+		np.save("../CrazyDrones/src/multi_crazyflie_simulator/simulation_data/try_1/e_tilde" + self.topic + "_e_tilde", self.e_tilde_store)
+		np.save("../CrazyDrones/src/multi_crazyflie_simulator/simulation_data/try_1/e_v" + self.topic + "_e_v", self.e_v_store)
+		np.save("../CrazyDrones/src/multi_crazyflie_simulator/simulation_data/try_1/v_des" + self.topic + "_v_des", self.v_des_store)
+		np.save("../CrazyDrones/src/multi_crazyflie_simulator/simulation_data/try_1/v_des_dot" + self.topic + "_v_des_dot", self.v_des_dot_store)
+
 if __name__ == '__main__':
-    control = Nav_control()
-    
-    control.navigation()
-rospy.spin()
+	control = Nav_control()
+
+	control.navigation()
+	rospy.spin()
