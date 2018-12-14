@@ -4,5 +4,5 @@ PROJECT_PKG_CONFIG_INCLUDE_DIRS = "".split(';') if "" != "" else []
 PROJECT_CATKIN_DEPENDS = "roscpp".replace(';', ' ')
 PKG_CONFIG_LIBRARIES_WITH_PREFIX = "".split(';') if "" != "" else []
 PROJECT_NAME = "crazyflie_demo"
-PROJECT_SPACE_DIR = "/home/cristina/CrazyDrones/devel"
+PROJECT_SPACE_DIR = "/home/cristinaescribano/CrazyDrones/devel"
 PROJECT_VERSION = "0.0.1"

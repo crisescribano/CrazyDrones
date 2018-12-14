@@ -331,7 +331,7 @@ class Nav_control():
 
 			# Point to achieve
 			if(self.region_idx >= len(self.PoI)-1):
-				self.region_idx = 1
+				self.region_idx = 0
 			xd = self.PoI[self.region_idx]
 			self.region_idx += 1
 
@@ -410,7 +410,7 @@ class Nav_control():
 						beta_col[i] = 0
 						beta_col_dot[i] = 0
 						grad_beta_col[i],grad_beta_col_dot[i] = self.reset_grad_beta()
-					        
+						
 					elif iota_col[i] <= self.col_offset:		# If iota is smaller than a value, define betas
 
 						A = self.A_col()
@@ -454,7 +454,7 @@ class Nav_control():
 
 			if self.priority == 1:	# If the Crazyflie is the leader
 				v_des = np.array([-kp_x*ep[0] - ki_x*integrator_pos[0], -kp_y*ep[1] - ki_y*integrator_pos[1], -kp_z*ep[2] - ki_z*integrator_pos[2]]) + (ki_col*beta_term_col + ki_con*beta_term_con) 
-			 	v_des_dot = np.array([-kp_vx*v[self.agent_number][0], -kp_vy*v[self.agent_number][1], -kp_vz*v[self.agent_number][2]]) + (ki_col*beta_term_col_dot + ki_con*beta_term_con_dot)  #- lambda_int*ep
+				v_des_dot = np.array([-kp_vx*v[self.agent_number][0], -kp_vy*v[self.agent_number][1], -kp_vz*v[self.agent_number][2]]) + (ki_col*beta_term_col_dot + ki_con*beta_term_con_dot)  #- lambda_int*ep
 
 				e_v = v[self.agent_number] - v_des
 				integrator_v = integrator_v + e_v*dt
@@ -537,18 +537,18 @@ class Nav_control():
 
 			self.rate.sleep()
 
-	def save_data(self):
-		np.save("../CrazyDrones/src/multi_crazyflie_simulator/simulation_data/try_1/time" + self.topic + "_time", self.time_store)
-		np.save("../CrazyDrones/src/multi_crazyflie_simulator/simulation_data/try_1/position" + self.topic + "_pos", self.pos_store)
-		np.save("../CrazyDrones/src/multi_crazyflie_simulator/simulation_data/try_1/beta_term_con" + self.topic + "_beta_con", self.beta_con_store)
-		np.save("../CrazyDrones/src/multi_crazyflie_simulator/simulation_data/try_1/beta_term_col" + self.topic + "_beta_col", self.beta_col_store)
-		np.save("../CrazyDrones/src/multi_crazyflie_simulator/simulation_data/try_1/control" + self.topic + "_control", self.control_store)
-		np.save("../CrazyDrones/src/multi_crazyflie_simulator/simulation_data/try_1/dissip_term" + self.topic + "_dissip_term", self.dissip_term_store)
-		np.save("../CrazyDrones/src/multi_crazyflie_simulator/simulation_data/try_1/ep" + self.topic + "_ep", self.ep_store)
-		np.save("../CrazyDrones/src/multi_crazyflie_simulator/simulation_data/try_1/e_tilde" + self.topic + "_e_tilde", self.e_tilde_store)
-		np.save("../CrazyDrones/src/multi_crazyflie_simulator/simulation_data/try_1/e_v" + self.topic + "_e_v", self.e_v_store)
-		np.save("../CrazyDrones/src/multi_crazyflie_simulator/simulation_data/try_1/v_des" + self.topic + "_v_des", self.v_des_store)
-		np.save("../CrazyDrones/src/multi_crazyflie_simulator/simulation_data/try_1/v_des_dot" + self.topic + "_v_des_dot", self.v_des_dot_store)
+	# def save_data(self):
+	# 	np.save("../CrazyDrones/src/multi_crazyflie_simulator/simulation_data/try_1/time" + self.topic + "_time", self.time_store)
+	# 	np.save("../CrazyDrones/src/multi_crazyflie_simulator/simulation_data/try_1/position" + self.topic + "_pos", self.pos_store)
+	# 	np.save("../CrazyDrones/src/multi_crazyflie_simulator/simulation_data/try_1/beta_term_con" + self.topic + "_beta_con", self.beta_con_store)
+	# 	np.save("../CrazyDrones/src/multi_crazyflie_simulator/simulation_data/try_1/beta_term_col" + self.topic + "_beta_col", self.beta_col_store)
+	# 	np.save("../CrazyDrones/src/multi_crazyflie_simulator/simulation_data/try_1/control" + self.topic + "_control", self.control_store)
+	# 	np.save("../CrazyDrones/src/multi_crazyflie_simulator/simulation_data/try_1/dissip_term" + self.topic + "_dissip_term", self.dissip_term_store)
+	# 	np.save("../CrazyDrones/src/multi_crazyflie_simulator/simulation_data/try_1/ep" + self.topic + "_ep", self.ep_store)
+	# 	np.save("../CrazyDrones/src/multi_crazyflie_simulator/simulation_data/try_1/e_tilde" + self.topic + "_e_tilde", self.e_tilde_store)
+	# 	np.save("../CrazyDrones/src/multi_crazyflie_simulator/simulation_data/try_1/e_v" + self.topic + "_e_v", self.e_v_store)
+	# 	np.save("../CrazyDrones/src/multi_crazyflie_simulator/simulation_data/try_1/v_des" + self.topic + "_v_des", self.v_des_store)
+	# 	np.save("../CrazyDrones/src/multi_crazyflie_simulator/simulation_data/try_1/v_des_dot" + self.topic + "_v_des_dot", self.v_des_dot_store)
 
 if __name__ == '__main__':
 	control = Nav_control()

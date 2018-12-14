@@ -406,9 +406,6 @@ gtest_main_LIB_DEPENDS:STATIC=general;-lpthread;general;gtest;
 //Path to a library.
 lib:FILEPATH=/opt/ros/kinetic/lib/libtf2.so
 
-//The directory containing a CMake configuration file for mav_msgs.
-mav_msgs_DIR:PATH=mav_msgs_DIR-NOTFOUND
-
 //The directory containing a CMake configuration file for message_filters.
 message_filters_DIR:PATH=/opt/ros/kinetic/share/message_filters/cmake
 
