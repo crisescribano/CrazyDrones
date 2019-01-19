@@ -4,9 +4,14 @@
   <arg name="prior" default="0" />  
   <arg name="num_quads" default="1" />
   <arg name="connections" default="[0]" />
-  <node name="$(anon dynamical_model)" pkg="multi_crazyflie_simulator" type="CrazyFlie_dynamical_model.py" output="screen">
+  <arg name="language" default="cpp"/>
+  <node name="$(anon dynamical_model)" pkg="multi_crazyflie_simulator" type="CrazyFlie_dynamical_model.py" output="screen" if="$(eval language == 'python')">
     <param name="topic" value="/crazyflie_$(arg quad_number)" />
     <param name="agent_number" value="$(arg quad_number)" />
+  </node>
+  <node name="$(anon dynamical_model)" pkg="multi_crazyflie_simulator" type="cf_node" output="screen" if="$(eval language == 'cpp')">
+    <param name="topic" value="/crazyflie_$(arg quad_number)" />
+    <param name="agent_number" value="$(arg quad_number)" type="str" />
   </node>
   <node name="$(anon force_to_att)" pkg="multi_crazyflie_simulator" type="ForcesToRollpitchyaw.py" output="screen">
     <param name="topic" value="/crazyflie_$(arg quad_number)" />

@@ -44,7 +44,7 @@ class Nav_control():
 		time = rospy.get_time()
 
 		# Trayectory to follow:
-		self.trajectory = np.array([[0, 0, 0],[0, 0, 2], [0, 0, 5], [4, 5, 3],[-2, 4, 2],[3, -2, 3],[1, -1, 2]])
+		self.trajectory = np.array([[0, 0, 0],[0, 0, 2], [0, 0, 5], [4, 5, 3],[-2, 4, 2],[3, -2, 3],[1, -1, 2], [0, 0, 0]])
 		
 		#self.PoI = 1.5*np.array([[0, 0, 1], [1, 0, 1],[1, 1, 1],[0, 1, 1],
 		#					[-1, 1, 1], [-1, 0, 1],[-1, -1, 1],[0, -1, 1], 
@@ -52,13 +52,15 @@ class Nav_control():
 		#self.PoI = np.array([[0, 0, 1], [0, 0, 1],[0, 0, 1],[0, 0, 1]])
 		#self.PoI = np.array([[0, 0, 1], [0, 0, 2],[0, 0,3],[0, 0, 4]])
 
-		self.timeBetweenPoints = 15
+		self.timeBetweenPoints = 10
 		self.counterPoI = 0
 		self.region_idx = 0
 		self.con_offset = 0
 		self.col_offset = 0
-		self.beta_bound_col = 1000000000000000#0
-		self.beta_bound_con = self.beta_bound_col
+		#self.beta_bound_col = 1000000000000000#0
+		#self.beta_bound_col = 1000000000000 # 0
+		self.beta_bound_con = 500000 # 0
+		self.beta_bound_col = 5000000000000000
 		self.coeff = np.zeros(3)
 		self.a_hat = 0
 		self.a_hat_dot = 0
@@ -245,13 +247,14 @@ class Nav_control():
 		k_connect = 0 # Beta for connetivity
 
 		if self.priority == 1:
-			ki_con = 1000#50
-			ki_col = ki_con#50
+			ki_con = 500000#50
+			ki_col = ki_con*0.0001#50
 			k_y_tet= 1
 			k_dis = 1
 		else:
-			ki_con = 86000000000000#100000#*1000# Velocidades
-			ki_col = ki_con # Velocidades
+			ki_con = 500000#100000#*1000# Velocidades
+			ki_col = ki_con*0.0001 # Velocidades
+			ki_con = ki_con
 			k_dis = 1 # Termino diss
 			k_y_tet = 1 # Termino Y*theta
 
@@ -318,7 +321,7 @@ class Nav_control():
 		ep = np.zeros(3)
 
 		while not rospy.is_shutdown():
-			
+
 			# Get the position and velocity of all the CrazyFlies
 			for i in range(self.numberQuads):
 				x[i],v[i] = self.position_and_velocity_from_odometry(self.agent_pose[i])
@@ -479,8 +482,10 @@ class Nav_control():
 
 				e_v = v[self.agent_number] - v_des
 				integrator_v = integrator_v + e_v*dt
-				
-				dissip_term = np.array([kp_vx*e_v[0] + ki_vx*integrator_v[0], kp_vy*e_v[1] + ki_vy*integrator_v[1], kp_vz*e_v[2] + ki_vz*integrator_v[2]])
+
+				ki = 10
+				kp = 1
+				dissip_term = np.array([kp*kp_vx*e_v[0] + ki*ki_vx*integrator_v[0], kp*kp_vy*e_v[1] + ki*ki_vy*integrator_v[1], kp_vz*e_v[2] + ki_vz*integrator_v[2]])
 				
 				e_tilde = np.zeros(3)
 
