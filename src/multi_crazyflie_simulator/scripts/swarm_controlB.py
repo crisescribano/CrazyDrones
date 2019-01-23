@@ -60,7 +60,7 @@ class Nav_control():
 		#self.beta_bound_col = 1000000000000000#0
 		#self.beta_bound_col = 1000000000000 # 0
 		self.beta_bound_con = 500000 # 0
-		self.beta_bound_col = 50000000000000000000000000000000000000000
+		self.beta_bound_col = 5000000000
 		self.coeff = np.zeros(3)
 		self.a_hat = 0
 		self.a_hat_dot = 0
@@ -248,12 +248,12 @@ class Nav_control():
 
 		if self.priority == 1:
 			ki_con = 300000#50
-			ki_col = ki_con*0.000#50
+			ki_col = 0.1#50
 			k_y_tet= 1
 			k_dis = 1
 		else:
 			ki_con = 300000#100000#*1000# Velocidades
-			ki_col = ki_con*0.000 # Velocidades
+			ki_col = 0.1 # Velocidades
 			ki_con = ki_con
 			k_dis = 1 # Termino diss
 			k_y_tet = 1 # Termino Y*theta
@@ -468,7 +468,7 @@ class Nav_control():
 
 				Y = v_des_dot + [0, 0, grav]
 
-				control = 0*beta_term_col + beta_term_con - dissip_term + 0*Y*self.theta_hat - k_e_tilde*e_tilde  #- np.sign(e_v)*np.linalg.norm(v[0],1)*self.f_b_hat - np.sign(e_v)*self.d_b_hat
+				control = beta_term_col + beta_term_con - dissip_term + 0*Y*self.theta_hat - k_e_tilde*e_tilde  #- np.sign(e_v)*np.linalg.norm(v[0],1)*self.f_b_hat - np.sign(e_v)*self.d_b_hat
 				#control = beta_term_col + b=eta_term_con - dissip_term + Y*self.theta_hat - k_e_tilde*e_tilde #- np.sign(e_v)*np.linalg.norm(v[self.agent_number],1)*self.f_b_hat
 				#rospy.loginfo("Control of " + self.topic + ": " + str(control) 
 										   #+ "\n v_des : " + str(v_des)
@@ -491,7 +491,7 @@ class Nav_control():
 
 				Y = v_des_dot + [0, 0, grav]
 
-				control = 0*beta_term_col + beta_term_con - dissip_term + 0*Y*self.theta_hat - k_e_tilde*e_tilde  #- np.sign(e_v)*np.linalg.norm(v[0],1)*self.f_b_hat - np.sign(e_v)*self.d_b_hat
+				control = beta_term_col + beta_term_con - dissip_term + 0*Y*self.theta_hat - k_e_tilde*e_tilde  #- np.sign(e_v)*np.linalg.norm(v[0],1)*self.f_b_hat - np.sign(e_v)*self.d_b_hat
 				#print(self.topic + " beta_term_col = " + str(beta_term_col))
 				#print(self.topic + " beta_term_con = " + str(beta_term_con))
 				#print(self.topic + " v_des = " + str(v_des))
