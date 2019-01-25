@@ -44,7 +44,7 @@ class Nav_control():
 		time = rospy.get_time()
 
 		# Trayectory to follow:
-		self.trajectory = np.array([[0, 0, 0],[0, 0, 2], [0, 0, 5], [4, 5, 3],[-2, 4, 2],[3, -2, 3],[1, -1, 2], [0, 0, 0]])
+		self.trajectory = np.array([[0, 0, 0.2],[0, 0, 2], [0, 0, 5], [4, 5, 3],[-2, 4, 2],[3, -2, 3],[1, -1, 2], [0, 0, 0]])
 		
 		#self.PoI = 1.5*np.array([[0, 0, 1], [1, 0, 1],[1, 1, 1],[0, 1, 1],
 		#					[-1, 1, 1], [-1, 0, 1],[-1, -1, 1],[0, -1, 1], 
@@ -455,9 +455,16 @@ class Nav_control():
 					beta_term_col -= grad_beta_col[i]
 					beta_term_col_dot -= grad_beta_col_dot[i]
 
+			if(x[self.agent_number][2] <= 0.2):
+				k_col_height = 0.35
+				k_con_height = 0.35
+			else:
+				k_col_height = 1.0
+				k_con_height = 1.0
+
 			if self.priority == 1:	# If the Crazyflie is the leader
-				v_des = np.array([-kp_x*ep[0] - ki_x*integrator_pos[0], -kp_y*ep[1] - ki_y*integrator_pos[1], -kp_z*ep[2] - ki_z*integrator_pos[2]]) + (ki_col*beta_term_col + ki_con*beta_term_con)
-				v_des_dot = np.array([-kp_vx*v[self.agent_number][0], -kp_vy*v[self.agent_number][1], -kp_vz*v[self.agent_number][2]]) + (ki_col*beta_term_col_dot + ki_con*beta_term_con_dot)  #- lambda_int*ep
+				v_des = np.array([-kp_x*ep[0] - ki_x*integrator_pos[0], -kp_y*ep[1] - ki_y*integrator_pos[1], -kp_z*ep[2] - ki_z*integrator_pos[2]]) + (k_col_height*ki_col*beta_term_col + k_con_height*ki_con*beta_term_con)
+				v_des_dot = np.array([-kp_vx*v[self.agent_number][0], -kp_vy*v[self.agent_number][1], -kp_vz*v[self.agent_number][2]]) + (k_col_height*ki_col*beta_term_col_dot + k_con_height*ki_con*beta_term_con_dot)  #- lambda_int*ep
 
 				e_v = v[self.agent_number] - v_des
 				integrator_v = integrator_v + e_v*dt
@@ -468,7 +475,7 @@ class Nav_control():
 
 				Y = v_des_dot + [0, 0, grav]
 
-				control = beta_term_col + beta_term_con - dissip_term + 0*Y*self.theta_hat - k_e_tilde*e_tilde  #- np.sign(e_v)*np.linalg.norm(v[0],1)*self.f_b_hat - np.sign(e_v)*self.d_b_hat
+				control = k_col_height*beta_term_col + k_con_height*beta_term_con - dissip_term + 0*Y*self.theta_hat - k_e_tilde*e_tilde  #- np.sign(e_v)*np.linalg.norm(v[0],1)*self.f_b_hat - np.sign(e_v)*self.d_b_hat
 				#control = beta_term_col + b=eta_term_con - dissip_term + Y*self.theta_hat - k_e_tilde*e_tilde #- np.sign(e_v)*np.linalg.norm(v[self.agent_number],1)*self.f_b_hat
 				#rospy.loginfo("Control of " + self.topic + ": " + str(control) 
 										   #+ "\n v_des : " + str(v_des)
@@ -477,8 +484,8 @@ class Nav_control():
 										   #+ "\n Y*self.theta_hat : " + str(Y*self.theta_hat)) 
 
 			else:				
-				v_des = (ki_col*beta_term_col + ki_con*beta_term_con)
-				v_des_dot = (ki_col*beta_term_col_dot + ki_con*beta_term_con_dot)
+				v_des = (k_col_height*ki_col*beta_term_col + k_con_height*ki_con*beta_term_con)
+				v_des_dot = (k_col_height*ki_col*beta_term_col_dot + k_con_height*ki_con*beta_term_con_dot)
 
 				e_v = v[self.agent_number] - v_des
 				integrator_v = integrator_v + e_v*dt
@@ -491,7 +498,7 @@ class Nav_control():
 
 				Y = v_des_dot + [0, 0, grav]
 
-				control = beta_term_col + beta_term_con - dissip_term + 0*Y*self.theta_hat - k_e_tilde*e_tilde  #- np.sign(e_v)*np.linalg.norm(v[0],1)*self.f_b_hat - np.sign(e_v)*self.d_b_hat
+				control = k_col_height*beta_term_col + k_con_height*beta_term_con - dissip_term + 0*Y*self.theta_hat - k_e_tilde*e_tilde  #- np.sign(e_v)*np.linalg.norm(v[0],1)*self.f_b_hat - np.sign(e_v)*self.d_b_hat
 				#print(self.topic + " beta_term_col = " + str(beta_term_col))
 				#print(self.topic + " beta_term_con = " + str(beta_term_con))
 				#print(self.topic + " v_des = " + str(v_des))
