@@ -7,7 +7,16 @@ project(multi_crazyflie_simulator)
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
-find_package(catkin REQUIRED)
+find_package(catkin REQUIRED COMPONENTS
+  crazyflie_driver
+  geometry_msgs
+  nav_msgs
+  mav_msgs
+  roscpp
+  rospy
+  std_msgs
+  rosbag
+)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -66,7 +75,7 @@ find_package(catkin REQUIRED)
 ## Generate added messages and services with any dependencies listed here
 # generate_messages(
 #   DEPENDENCIES
-#   std_msgs  # Or other packages containing msgs
+#   geometry_msgs#   nav_msgs#   std_msgs
 # )
 
 ################################################
@@ -101,7 +110,7 @@ find_package(catkin REQUIRED)
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES multi_crazyflie_simulator
-#  CATKIN_DEPENDS other_catkin_pkg
+#  CATKIN_DEPENDS crazyflie_driver geometry_msgs nav_msgs roscpp rospy std_msgs
 #  DEPENDS system_lib
 )
 
@@ -112,8 +121,8 @@ catkin_package(
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 include_directories(
-# include
-# ${catkin_INCLUDE_DIRS}
+  include
+  ${catkin_INCLUDE_DIRS}
 )
 
 ## Declare a C++ library
@@ -145,6 +154,14 @@ include_directories(
 # target_link_libraries(${PROJECT_NAME}_node
 #   ${catkin_LIBRARIES}
 # )
+
+add_executable(cf_node src/cf_node.cpp)
+target_link_libraries(cf_node ${catkin_LIBRARIES})
+add_dependencies(cf_node multi_crazyflie_simulator_generate_messages_cpp)
+
+add_executable(cf_rosbag src/cf_rosbag.cpp)
+target_link_libraries(cf_rosbag ${catkin_LIBRARIES})
+add_dependencies(cf_rosbag multi_crazyflie_simulator_generate_messages_cpp)
 
 #############
 ## Install ##

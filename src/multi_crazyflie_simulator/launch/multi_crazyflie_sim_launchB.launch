@@ -63,6 +63,10 @@
     </include>
   </group>
 
+  <node name="rosbagRecorder" pkg="multi_crazyflie_simulator" type="cf_rosbag" output="screen">
+    <param name="num_quads" value="$(arg num_quads)" />
+  </node>
+
   <!-- run rviz -->
   <!-- run rviz -->
   <param name="robot_description" command="$(find xacro)/xacro.py $(find crazyflie_description)/urdf/crazyflie2.urdf.xacro" />
