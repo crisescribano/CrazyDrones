@@ -2,670 +2,81 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1e314ceb-a8d5-4af3-9ea8-d85e9183f39c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../../../build/CMakeCache.txt" afterPath="$PROJECT_DIR$/../../../build/CMakeCache.txt" />
-      <change beforePath="$PROJECT_DIR$/../../../build/CMakeFiles/3.5.1/CMakeSystem.cmake" afterPath="$PROJECT_DIR$/../../../build/CMakeFiles/3.5.1/CMakeSystem.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/CMakeFiles/CMakeDirectoryInformation.cmake" afterPath="$PROJECT_DIR$/../../../build/CMakeFiles/CMakeDirectoryInformation.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/CMakeFiles/CMakeError.log" afterPath="$PROJECT_DIR$/../../../build/CMakeFiles/CMakeError.log" />
-      <change beforePath="$PROJECT_DIR$/../../../build/CMakeFiles/CMakeOutput.log" afterPath="$PROJECT_DIR$/../../../build/CMakeFiles/CMakeOutput.log" />
-      <change beforePath="$PROJECT_DIR$/../../../build/CMakeFiles/CMakeRuleHashes.txt" afterPath="$PROJECT_DIR$/../../../build/CMakeFiles/CMakeRuleHashes.txt" />
-      <change beforePath="$PROJECT_DIR$/../../../build/CMakeFiles/Makefile.cmake" afterPath="$PROJECT_DIR$/../../../build/CMakeFiles/Makefile.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/CMakeFiles/Makefile2" afterPath="$PROJECT_DIR$/../../../build/CMakeFiles/Makefile2" />
-      <change beforePath="$PROJECT_DIR$/../../../build/CMakeFiles/TargetDirectories.txt" afterPath="$PROJECT_DIR$/../../../build/CMakeFiles/TargetDirectories.txt" />
-      <change beforePath="$PROJECT_DIR$/../../../build/CMakeFiles/clean_test_results.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/CMakeFiles/clean_test_results.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/CMakeFiles/download_extra_data.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/CMakeFiles/download_extra_data.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/CMakeFiles/doxygen.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/CMakeFiles/doxygen.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/CMakeFiles/progress.marks" afterPath="$PROJECT_DIR$/../../../build/CMakeFiles/progress.marks" />
-      <change beforePath="$PROJECT_DIR$/../../../build/CMakeFiles/run_tests.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/CMakeFiles/run_tests.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/CMakeFiles/tests.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/CMakeFiles/tests.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/CTestTestfile.cmake" afterPath="$PROJECT_DIR$/../../../build/CTestTestfile.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/Makefile" afterPath="$PROJECT_DIR$/../../../build/Makefile" />
-      <change beforePath="$PROJECT_DIR$/../../../build/catkin/catkin_generated/version/package.cmake" afterPath="$PROJECT_DIR$/../../../build/catkin/catkin_generated/version/package.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/catkin_generated/generate_cached_setup.py" afterPath="$PROJECT_DIR$/../../../build/catkin_generated/generate_cached_setup.py" />
-      <change beforePath="$PROJECT_DIR$/../../../build/catkin_generated/installspace/.rosinstall" afterPath="$PROJECT_DIR$/../../../build/catkin_generated/installspace/.rosinstall" />
-      <change beforePath="$PROJECT_DIR$/../../../build/catkin_generated/installspace/_setup_util.py" afterPath="$PROJECT_DIR$/../../../build/catkin_generated/installspace/_setup_util.py" />
-      <change beforePath="$PROJECT_DIR$/../../../build/catkin_generated/installspace/setup.sh" afterPath="$PROJECT_DIR$/../../../build/catkin_generated/installspace/setup.sh" />
-      <change beforePath="$PROJECT_DIR$/../../../build/catkin_generated/order_packages.cmake" afterPath="$PROJECT_DIR$/../../../build/catkin_generated/order_packages.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/catkin_generated/order_packages.py" afterPath="$PROJECT_DIR$/../../../build/catkin_generated/order_packages.py" />
-      <change beforePath="$PROJECT_DIR$/../../../build/catkin_generated/setup_cached.sh" afterPath="$PROJECT_DIR$/../../../build/catkin_generated/setup_cached.sh" />
-      <change beforePath="$PROJECT_DIR$/../../../build/catkin_generated/stamps/Project/_setup_util.py.stamp" afterPath="$PROJECT_DIR$/../../../build/catkin_generated/stamps/Project/_setup_util.py.stamp" />
-      <change beforePath="$PROJECT_DIR$/../../../build/catkin_generated/stamps/Project/package.xml.stamp" afterPath="$PROJECT_DIR$/../../../build/catkin_generated/stamps/Project/package.xml.stamp" />
-      <change beforePath="$PROJECT_DIR$/../../../build/catkin_make.cache" afterPath="$PROJECT_DIR$/../../../build/catkin_make.cache" />
-      <change beforePath="$PROJECT_DIR$/../../../build/cmake_install.cmake" afterPath="$PROJECT_DIR$/../../../build/cmake_install.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie/CMakeFiles/CMakeDirectoryInformation.cmake" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie/CMakeFiles/CMakeDirectoryInformation.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie/CMakeFiles/_catkin_empty_exported_target.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie/CMakeFiles/_catkin_empty_exported_target.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie/CMakeFiles/_catkin_empty_exported_target.dir/depend.internal" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie/CMakeFiles/_catkin_empty_exported_target.dir/depend.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie/CTestTestfile.cmake" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie/CTestTestfile.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie/Makefile" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie/Makefile" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie/cmake_install.cmake" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie/cmake_install.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/CMakeDirectoryInformation.cmake" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/CMakeDirectoryInformation.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/actionlib_generate_messages_cpp.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/actionlib_generate_messages_cpp.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/actionlib_generate_messages_cpp.dir/depend.internal" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/actionlib_generate_messages_cpp.dir/depend.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/actionlib_generate_messages_eus.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/actionlib_generate_messages_eus.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/actionlib_generate_messages_eus.dir/depend.internal" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/actionlib_generate_messages_eus.dir/depend.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/actionlib_generate_messages_lisp.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/actionlib_generate_messages_lisp.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/actionlib_generate_messages_lisp.dir/depend.internal" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/actionlib_generate_messages_lisp.dir/depend.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/actionlib_generate_messages_nodejs.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/actionlib_generate_messages_nodejs.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/actionlib_generate_messages_nodejs.dir/depend.internal" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/actionlib_generate_messages_nodejs.dir/depend.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/actionlib_generate_messages_py.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/actionlib_generate_messages_py.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/actionlib_generate_messages_py.dir/depend.internal" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/actionlib_generate_messages_py.dir/depend.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/depend.internal" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/depend.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/depend.internal" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/actionlib_msgs_generate_messages_eus.dir/depend.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/depend.internal" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/depend.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/depend.internal" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/actionlib_msgs_generate_messages_nodejs.dir/depend.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/actionlib_msgs_generate_messages_py.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/actionlib_msgs_generate_messages_py.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/actionlib_msgs_generate_messages_py.dir/depend.internal" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/actionlib_msgs_generate_messages_py.dir/depend.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/crazyflie_controller.dir/CXX.includecache" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/crazyflie_controller.dir/CXX.includecache" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/crazyflie_controller.dir/DependInfo.cmake" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/crazyflie_controller.dir/DependInfo.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/crazyflie_controller.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/crazyflie_controller.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/crazyflie_controller.dir/cmake_clean.cmake" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/crazyflie_controller.dir/cmake_clean.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/crazyflie_controller.dir/depend.internal" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/crazyflie_controller.dir/depend.internal" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/crazyflie_controller.dir/depend.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/crazyflie_controller.dir/depend.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/crazyflie_controller.dir/link.txt" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/crazyflie_controller.dir/link.txt" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/crazyflie_controller.dir/progress.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/crazyflie_controller.dir/progress.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/crazyflie_controller.dir/src/controller.cpp.o" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/crazyflie_controller.dir/src/controller.cpp.o" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/geometry_msgs_generate_messages_cpp.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/geometry_msgs_generate_messages_eus.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/geometry_msgs_generate_messages_eus.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/geometry_msgs_generate_messages_lisp.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/geometry_msgs_generate_messages_nodejs.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/geometry_msgs_generate_messages_py.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/geometry_msgs_generate_messages_py.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/depend.internal" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/sensor_msgs_generate_messages_cpp.dir/depend.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/sensor_msgs_generate_messages_eus.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/sensor_msgs_generate_messages_eus.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/sensor_msgs_generate_messages_eus.dir/depend.internal" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/sensor_msgs_generate_messages_eus.dir/depend.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/depend.internal" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/sensor_msgs_generate_messages_lisp.dir/depend.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/depend.internal" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/sensor_msgs_generate_messages_nodejs.dir/depend.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/sensor_msgs_generate_messages_py.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/sensor_msgs_generate_messages_py.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/sensor_msgs_generate_messages_py.dir/depend.internal" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/sensor_msgs_generate_messages_py.dir/depend.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/tf2_msgs_generate_messages_cpp.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/tf2_msgs_generate_messages_cpp.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/tf2_msgs_generate_messages_cpp.dir/depend.internal" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/tf2_msgs_generate_messages_cpp.dir/depend.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/tf2_msgs_generate_messages_eus.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/tf2_msgs_generate_messages_eus.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/tf2_msgs_generate_messages_eus.dir/depend.internal" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/tf2_msgs_generate_messages_eus.dir/depend.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/tf2_msgs_generate_messages_lisp.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/tf2_msgs_generate_messages_lisp.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/tf2_msgs_generate_messages_lisp.dir/depend.internal" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/tf2_msgs_generate_messages_lisp.dir/depend.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/depend.internal" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/tf2_msgs_generate_messages_nodejs.dir/depend.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/tf2_msgs_generate_messages_py.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/tf2_msgs_generate_messages_py.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/tf2_msgs_generate_messages_py.dir/depend.internal" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/tf2_msgs_generate_messages_py.dir/depend.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/tf_generate_messages_cpp.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/tf_generate_messages_cpp.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/tf_generate_messages_cpp.dir/depend.internal" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/tf_generate_messages_cpp.dir/depend.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/tf_generate_messages_eus.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/tf_generate_messages_eus.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/tf_generate_messages_eus.dir/depend.internal" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/tf_generate_messages_eus.dir/depend.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/tf_generate_messages_lisp.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/tf_generate_messages_lisp.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/tf_generate_messages_lisp.dir/depend.internal" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/tf_generate_messages_lisp.dir/depend.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/tf_generate_messages_nodejs.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/tf_generate_messages_nodejs.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/tf_generate_messages_nodejs.dir/depend.internal" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/tf_generate_messages_nodejs.dir/depend.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/tf_generate_messages_py.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/tf_generate_messages_py.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/tf_generate_messages_py.dir/depend.internal" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/tf_generate_messages_py.dir/depend.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CTestTestfile.cmake" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CTestTestfile.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/Makefile" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/Makefile" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/catkin_generated/installspace/crazyflie_controller.pc" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/catkin_generated/installspace/crazyflie_controller.pc" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/catkin_generated/installspace/crazyflie_controllerConfig.cmake" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/catkin_generated/installspace/crazyflie_controllerConfig.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/catkin_generated/pkg.develspace.context.pc.py" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/catkin_generated/pkg.develspace.context.pc.py" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/catkin_generated/pkg.installspace.context.pc.py" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/catkin_generated/pkg.installspace.context.pc.py" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/cmake_install.cmake" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/cmake_install.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_cpp/CMakeFiles/CMakeDirectoryInformation.cmake" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_cpp/CMakeFiles/CMakeDirectoryInformation.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_cpp/CMakeFiles/crazyflie_cpp.dir/CXX.includecache" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_cpp/CMakeFiles/crazyflie_cpp.dir/CXX.includecache" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_cpp/CMakeFiles/crazyflie_cpp.dir/DependInfo.cmake" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_cpp/CMakeFiles/crazyflie_cpp.dir/DependInfo.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_cpp/CMakeFiles/crazyflie_cpp.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_cpp/CMakeFiles/crazyflie_cpp.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_cpp/CMakeFiles/crazyflie_cpp.dir/cmake_clean.cmake" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_cpp/CMakeFiles/crazyflie_cpp.dir/cmake_clean.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_cpp/CMakeFiles/crazyflie_cpp.dir/depend.internal" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_cpp/CMakeFiles/crazyflie_cpp.dir/depend.internal" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_cpp/CMakeFiles/crazyflie_cpp.dir/depend.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_cpp/CMakeFiles/crazyflie_cpp.dir/depend.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_cpp/CMakeFiles/crazyflie_cpp.dir/flags.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_cpp/CMakeFiles/crazyflie_cpp.dir/flags.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_cpp/CMakeFiles/crazyflie_cpp.dir/link.txt" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_cpp/CMakeFiles/crazyflie_cpp.dir/link.txt" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_cpp/CMakeFiles/crazyflie_cpp.dir/progress.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_cpp/CMakeFiles/crazyflie_cpp.dir/progress.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_cpp/CMakeFiles/progress.marks" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_cpp/CMakeFiles/progress.marks" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_cpp/CTestTestfile.cmake" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_cpp/CTestTestfile.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_cpp/Makefile" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_cpp/Makefile" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_cpp/catkin_generated/installspace/crazyflie_cpp.pc" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_cpp/catkin_generated/installspace/crazyflie_cpp.pc" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_cpp/catkin_generated/installspace/crazyflie_cppConfig.cmake" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_cpp/catkin_generated/installspace/crazyflie_cppConfig.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_cpp/catkin_generated/pkg.develspace.context.pc.py" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_cpp/catkin_generated/pkg.develspace.context.pc.py" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_cpp/catkin_generated/pkg.installspace.context.pc.py" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_cpp/catkin_generated/pkg.installspace.context.pc.py" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_cpp/cmake_install.cmake" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_cpp/cmake_install.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CMakeFiles/CMakeDirectoryInformation.cmake" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CMakeFiles/CMakeDirectoryInformation.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CMakeFiles/progress.marks" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CMakeFiles/progress.marks" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CMakeFiles/quadrotor_teleop.dir/CXX.includecache" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CMakeFiles/quadrotor_teleop.dir/CXX.includecache" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CMakeFiles/quadrotor_teleop.dir/DependInfo.cmake" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CMakeFiles/quadrotor_teleop.dir/DependInfo.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CMakeFiles/quadrotor_teleop.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CMakeFiles/quadrotor_teleop.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CMakeFiles/quadrotor_teleop.dir/cmake_clean.cmake" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CMakeFiles/quadrotor_teleop.dir/cmake_clean.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CMakeFiles/quadrotor_teleop.dir/depend.internal" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CMakeFiles/quadrotor_teleop.dir/depend.internal" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CMakeFiles/quadrotor_teleop.dir/depend.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CMakeFiles/quadrotor_teleop.dir/depend.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CMakeFiles/quadrotor_teleop.dir/link.txt" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CMakeFiles/quadrotor_teleop.dir/link.txt" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CMakeFiles/quadrotor_teleop.dir/progress.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CMakeFiles/quadrotor_teleop.dir/progress.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CMakeFiles/roscpp_generate_messages_cpp.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CMakeFiles/roscpp_generate_messages_cpp.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CMakeFiles/roscpp_generate_messages_cpp.dir/depend.internal" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CMakeFiles/roscpp_generate_messages_cpp.dir/depend.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CMakeFiles/roscpp_generate_messages_eus.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CMakeFiles/roscpp_generate_messages_eus.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CMakeFiles/roscpp_generate_messages_eus.dir/depend.internal" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CMakeFiles/roscpp_generate_messages_eus.dir/depend.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CMakeFiles/roscpp_generate_messages_lisp.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CMakeFiles/roscpp_generate_messages_lisp.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CMakeFiles/roscpp_generate_messages_lisp.dir/depend.internal" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CMakeFiles/roscpp_generate_messages_lisp.dir/depend.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CMakeFiles/roscpp_generate_messages_nodejs.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CMakeFiles/roscpp_generate_messages_nodejs.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CMakeFiles/roscpp_generate_messages_nodejs.dir/depend.internal" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CMakeFiles/roscpp_generate_messages_nodejs.dir/depend.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CMakeFiles/roscpp_generate_messages_py.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CMakeFiles/roscpp_generate_messages_py.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CMakeFiles/roscpp_generate_messages_py.dir/depend.internal" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CMakeFiles/roscpp_generate_messages_py.dir/depend.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/depend.internal" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CMakeFiles/rosgraph_msgs_generate_messages_cpp.dir/depend.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/depend.internal" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CMakeFiles/rosgraph_msgs_generate_messages_eus.dir/depend.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/depend.internal" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CMakeFiles/rosgraph_msgs_generate_messages_lisp.dir/depend.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/depend.internal" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CMakeFiles/rosgraph_msgs_generate_messages_nodejs.dir/depend.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/depend.internal" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/depend.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CMakeFiles/std_msgs_generate_messages_cpp.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CMakeFiles/std_msgs_generate_messages_cpp.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CMakeFiles/std_msgs_generate_messages_eus.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CMakeFiles/std_msgs_generate_messages_eus.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CMakeFiles/std_msgs_generate_messages_lisp.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CMakeFiles/std_msgs_generate_messages_lisp.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CMakeFiles/std_msgs_generate_messages_nodejs.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CMakeFiles/std_msgs_generate_messages_nodejs.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CMakeFiles/std_msgs_generate_messages_py.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CMakeFiles/std_msgs_generate_messages_py.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CTestTestfile.cmake" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CTestTestfile.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/Makefile" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/Makefile" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/catkin_generated/installspace/crazyflie_demo.pc" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/catkin_generated/installspace/crazyflie_demo.pc" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/catkin_generated/installspace/crazyflie_demoConfig.cmake" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/catkin_generated/installspace/crazyflie_demoConfig.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/catkin_generated/pkg.develspace.context.pc.py" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/catkin_generated/pkg.develspace.context.pc.py" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/catkin_generated/pkg.installspace.context.pc.py" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/catkin_generated/pkg.installspace.context.pc.py" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/cmake_install.cmake" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/cmake_install.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_description/CMakeFiles/CMakeDirectoryInformation.cmake" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_description/CMakeFiles/CMakeDirectoryInformation.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_description/CTestTestfile.cmake" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_description/CTestTestfile.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_description/Makefile" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_description/Makefile" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_description/catkin_generated/installspace/crazyflie_description.pc" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_description/catkin_generated/installspace/crazyflie_description.pc" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_description/catkin_generated/installspace/crazyflie_descriptionConfig.cmake" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_description/catkin_generated/installspace/crazyflie_descriptionConfig.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_description/catkin_generated/pkg.develspace.context.pc.py" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_description/catkin_generated/pkg.develspace.context.pc.py" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_description/catkin_generated/pkg.installspace.context.pc.py" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_description/catkin_generated/pkg.installspace.context.pc.py" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_description/cmake_install.cmake" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_description/cmake_install.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/CMakeDirectoryInformation.cmake" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/CMakeDirectoryInformation.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/_crazyflie_driver_generate_messages_check_deps_AddCrazyflie.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/_crazyflie_driver_generate_messages_check_deps_AddCrazyflie.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/_crazyflie_driver_generate_messages_check_deps_FullState.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/_crazyflie_driver_generate_messages_check_deps_FullState.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/_crazyflie_driver_generate_messages_check_deps_GenericLogData.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/_crazyflie_driver_generate_messages_check_deps_GenericLogData.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/_crazyflie_driver_generate_messages_check_deps_GoTo.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/_crazyflie_driver_generate_messages_check_deps_GoTo.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/_crazyflie_driver_generate_messages_check_deps_Hover.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/_crazyflie_driver_generate_messages_check_deps_Hover.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/_crazyflie_driver_generate_messages_check_deps_Land.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/_crazyflie_driver_generate_messages_check_deps_Land.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/_crazyflie_driver_generate_messages_check_deps_LogBlock.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/_crazyflie_driver_generate_messages_check_deps_LogBlock.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/_crazyflie_driver_generate_messages_check_deps_Position.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/_crazyflie_driver_generate_messages_check_deps_Position.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/_crazyflie_driver_generate_messages_check_deps_RemoveCrazyflie.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/_crazyflie_driver_generate_messages_check_deps_RemoveCrazyflie.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/_crazyflie_driver_generate_messages_check_deps_SetGroupMask.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/_crazyflie_driver_generate_messages_check_deps_SetGroupMask.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/_crazyflie_driver_generate_messages_check_deps_StartTrajectory.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/_crazyflie_driver_generate_messages_check_deps_StartTrajectory.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/_crazyflie_driver_generate_messages_check_deps_Stop.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/_crazyflie_driver_generate_messages_check_deps_Stop.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/_crazyflie_driver_generate_messages_check_deps_Takeoff.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/_crazyflie_driver_generate_messages_check_deps_Takeoff.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/_crazyflie_driver_generate_messages_check_deps_TrajectoryPolynomialPiece.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/_crazyflie_driver_generate_messages_check_deps_TrajectoryPolynomialPiece.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/_crazyflie_driver_generate_messages_check_deps_UpdateParams.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/_crazyflie_driver_generate_messages_check_deps_UpdateParams.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/_crazyflie_driver_generate_messages_check_deps_UploadTrajectory.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/_crazyflie_driver_generate_messages_check_deps_UploadTrajectory.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/_crazyflie_driver_generate_messages_check_deps_crtpPacket.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/_crazyflie_driver_generate_messages_check_deps_crtpPacket.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/_crazyflie_driver_generate_messages_check_deps_sendPacket.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/_crazyflie_driver_generate_messages_check_deps_sendPacket.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_add.dir/CXX.includecache" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_add.dir/CXX.includecache" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_add.dir/DependInfo.cmake" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_add.dir/DependInfo.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_add.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_add.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_add.dir/cmake_clean.cmake" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_add.dir/cmake_clean.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_add.dir/depend.internal" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_add.dir/depend.internal" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_add.dir/depend.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_add.dir/depend.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_add.dir/flags.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_add.dir/flags.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_add.dir/link.txt" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_add.dir/link.txt" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_add.dir/progress.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_add.dir/progress.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_add.dir/src/crazyflie_add.cpp.o" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_add.dir/src/crazyflie_add.cpp.o" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_driver_gencpp.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_driver_gencpp.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_driver_generate_messages.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_driver_generate_messages.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_driver_generate_messages_cpp.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_driver_generate_messages_cpp.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_driver_generate_messages_cpp.dir/cmake_clean.cmake" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_driver_generate_messages_cpp.dir/cmake_clean.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_driver_generate_messages_cpp.dir/progress.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_driver_generate_messages_cpp.dir/progress.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_driver_generate_messages_eus.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_driver_generate_messages_eus.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_driver_generate_messages_eus.dir/cmake_clean.cmake" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_driver_generate_messages_eus.dir/cmake_clean.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_driver_generate_messages_eus.dir/progress.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_driver_generate_messages_eus.dir/progress.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_driver_generate_messages_lisp.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_driver_generate_messages_lisp.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_driver_generate_messages_lisp.dir/cmake_clean.cmake" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_driver_generate_messages_lisp.dir/cmake_clean.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_driver_generate_messages_lisp.dir/progress.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_driver_generate_messages_lisp.dir/progress.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_driver_generate_messages_nodejs.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_driver_generate_messages_nodejs.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_driver_generate_messages_nodejs.dir/cmake_clean.cmake" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_driver_generate_messages_nodejs.dir/cmake_clean.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_driver_generate_messages_nodejs.dir/progress.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_driver_generate_messages_nodejs.dir/progress.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_driver_generate_messages_py.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_driver_generate_messages_py.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_driver_generate_messages_py.dir/cmake_clean.cmake" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_driver_generate_messages_py.dir/cmake_clean.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_driver_generate_messages_py.dir/progress.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_driver_generate_messages_py.dir/progress.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_driver_geneus.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_driver_geneus.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_driver_genlisp.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_driver_genlisp.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_driver_gennodejs.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_driver_gennodejs.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_driver_genpy.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_driver_genpy.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_server.dir/CXX.includecache" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_server.dir/CXX.includecache" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_server.dir/DependInfo.cmake" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_server.dir/DependInfo.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_server.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_server.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_server.dir/cmake_clean.cmake" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_server.dir/cmake_clean.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_server.dir/depend.internal" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_server.dir/depend.internal" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_server.dir/depend.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_server.dir/depend.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_server.dir/flags.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_server.dir/flags.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_server.dir/link.txt" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_server.dir/link.txt" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_server.dir/progress.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_server.dir/progress.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_server.dir/src/crazyflie_server.cpp.o" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_server.dir/src/crazyflie_server.cpp.o" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/progress.marks" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/progress.marks" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CTestTestfile.cmake" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CTestTestfile.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/Makefile" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/Makefile" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/catkin_generated/crazyflie_driver-msg-extras.cmake.develspace.in" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/catkin_generated/crazyflie_driver-msg-extras.cmake.develspace.in" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/catkin_generated/installspace/crazyflie_driver.pc" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/catkin_generated/installspace/crazyflie_driver.pc" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/catkin_generated/installspace/crazyflie_driverConfig.cmake" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/catkin_generated/installspace/crazyflie_driverConfig.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/catkin_generated/pkg.develspace.context.pc.py" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/catkin_generated/pkg.develspace.context.pc.py" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/catkin_generated/pkg.installspace.context.pc.py" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/catkin_generated/pkg.installspace.context.pc.py" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/cmake/crazyflie_driver-genmsg-context.py" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/cmake/crazyflie_driver-genmsg-context.py" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/cmake/crazyflie_driver-genmsg.cmake" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/cmake/crazyflie_driver-genmsg.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/cmake_install.cmake" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/cmake_install.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/CMakeDirectoryInformation.cmake" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/CMakeDirectoryInformation.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/battery.dir/CXX.includecache" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/battery.dir/CXX.includecache" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/battery.dir/DependInfo.cmake" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/battery.dir/DependInfo.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/battery.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/battery.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/battery.dir/cmake_clean.cmake" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/battery.dir/cmake_clean.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/battery.dir/depend.internal" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/battery.dir/depend.internal" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/battery.dir/depend.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/battery.dir/depend.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/battery.dir/flags.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/battery.dir/flags.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/battery.dir/link.txt" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/battery.dir/link.txt" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/console.dir/CXX.includecache" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/console.dir/CXX.includecache" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/console.dir/DependInfo.cmake" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/console.dir/DependInfo.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/console.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/console.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/console.dir/cmake_clean.cmake" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/console.dir/cmake_clean.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/console.dir/depend.internal" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/console.dir/depend.internal" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/console.dir/depend.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/console.dir/depend.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/console.dir/flags.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/console.dir/flags.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/console.dir/link.txt" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/console.dir/link.txt" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/console.dir/progress.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/console.dir/progress.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/flash.dir/CXX.includecache" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/flash.dir/CXX.includecache" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/flash.dir/DependInfo.cmake" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/flash.dir/DependInfo.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/flash.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/flash.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/flash.dir/cmake_clean.cmake" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/flash.dir/cmake_clean.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/flash.dir/depend.internal" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/flash.dir/depend.internal" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/flash.dir/depend.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/flash.dir/depend.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/flash.dir/flags.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/flash.dir/flags.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/flash.dir/link.txt" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/flash.dir/link.txt" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/flash.dir/progress.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/flash.dir/progress.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/listLogVariables.dir/CXX.includecache" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/listLogVariables.dir/CXX.includecache" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/listLogVariables.dir/DependInfo.cmake" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/listLogVariables.dir/DependInfo.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/listLogVariables.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/listLogVariables.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/listLogVariables.dir/cmake_clean.cmake" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/listLogVariables.dir/cmake_clean.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/listLogVariables.dir/depend.internal" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/listLogVariables.dir/depend.internal" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/listLogVariables.dir/depend.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/listLogVariables.dir/depend.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/listLogVariables.dir/flags.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/listLogVariables.dir/flags.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/listLogVariables.dir/link.txt" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/listLogVariables.dir/link.txt" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/listLogVariables.dir/progress.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/listLogVariables.dir/progress.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/listMemories.dir/CXX.includecache" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/listMemories.dir/CXX.includecache" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/listMemories.dir/DependInfo.cmake" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/listMemories.dir/DependInfo.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/listMemories.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/listMemories.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/listMemories.dir/cmake_clean.cmake" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/listMemories.dir/cmake_clean.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/listMemories.dir/depend.internal" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/listMemories.dir/depend.internal" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/listMemories.dir/depend.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/listMemories.dir/depend.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/listMemories.dir/flags.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/listMemories.dir/flags.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/listMemories.dir/link.txt" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/listMemories.dir/link.txt" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/listMemories.dir/progress.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/listMemories.dir/progress.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/listParams.dir/CXX.includecache" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/listParams.dir/CXX.includecache" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/listParams.dir/DependInfo.cmake" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/listParams.dir/DependInfo.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/listParams.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/listParams.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/listParams.dir/cmake_clean.cmake" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/listParams.dir/cmake_clean.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/listParams.dir/depend.internal" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/listParams.dir/depend.internal" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/listParams.dir/depend.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/listParams.dir/depend.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/listParams.dir/flags.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/listParams.dir/flags.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/listParams.dir/link.txt" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/listParams.dir/link.txt" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/listParams.dir/progress.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/listParams.dir/progress.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/progress.marks" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/progress.marks" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/reboot.dir/CXX.includecache" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/reboot.dir/CXX.includecache" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/reboot.dir/DependInfo.cmake" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/reboot.dir/DependInfo.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/reboot.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/reboot.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/reboot.dir/cmake_clean.cmake" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/reboot.dir/cmake_clean.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/reboot.dir/depend.internal" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/reboot.dir/depend.internal" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/reboot.dir/depend.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/reboot.dir/depend.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/reboot.dir/flags.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/reboot.dir/flags.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/reboot.dir/link.txt" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/reboot.dir/link.txt" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/reboot.dir/progress.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/reboot.dir/progress.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/scan.dir/CXX.includecache" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/scan.dir/CXX.includecache" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/scan.dir/DependInfo.cmake" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/scan.dir/DependInfo.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/scan.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/scan.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/scan.dir/cmake_clean.cmake" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/scan.dir/cmake_clean.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/scan.dir/depend.internal" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/scan.dir/depend.internal" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/scan.dir/depend.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/scan.dir/depend.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/scan.dir/flags.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/scan.dir/flags.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/scan.dir/link.txt" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/scan.dir/link.txt" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/scan.dir/progress.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/scan.dir/progress.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/version.dir/CXX.includecache" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/version.dir/CXX.includecache" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/version.dir/DependInfo.cmake" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/version.dir/DependInfo.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/version.dir/build.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/version.dir/build.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/version.dir/cmake_clean.cmake" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/version.dir/cmake_clean.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/version.dir/depend.internal" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/version.dir/depend.internal" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/version.dir/depend.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/version.dir/depend.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/version.dir/flags.make" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/version.dir/flags.make" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/version.dir/link.txt" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/version.dir/link.txt" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CTestTestfile.cmake" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CTestTestfile.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/Makefile" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/Makefile" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/catkin_generated/installspace/crazyflie_tools.pc" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/catkin_generated/installspace/crazyflie_tools.pc" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/catkin_generated/installspace/crazyflie_toolsConfig.cmake" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/catkin_generated/installspace/crazyflie_toolsConfig.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/catkin_generated/ordered_paths.cmake" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/catkin_generated/ordered_paths.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/catkin_generated/pkg.develspace.context.pc.py" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/catkin_generated/pkg.develspace.context.pc.py" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/catkin_generated/pkg.installspace.context.pc.py" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/catkin_generated/pkg.installspace.context.pc.py" />
-      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/cmake_install.cmake" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/cmake_install.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/gtest/CMakeFiles/CMakeDirectoryInformation.cmake" afterPath="$PROJECT_DIR$/../../../build/gtest/CMakeFiles/CMakeDirectoryInformation.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/gtest/CMakeFiles/gmock.dir/DependInfo.cmake" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/gtest/CMakeFiles/gmock.dir/build.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/gtest/CMakeFiles/gmock.dir/cmake_clean.cmake" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/gtest/CMakeFiles/gmock.dir/depend.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/gtest/CMakeFiles/gmock.dir/flags.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/gtest/CMakeFiles/gmock.dir/link.txt" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/gtest/CMakeFiles/gmock.dir/progress.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/gtest/CMakeFiles/gmock_main.dir/DependInfo.cmake" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/gtest/CMakeFiles/gmock_main.dir/build.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/gtest/CMakeFiles/gmock_main.dir/cmake_clean.cmake" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/gtest/CMakeFiles/gmock_main.dir/depend.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/gtest/CMakeFiles/gmock_main.dir/flags.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/gtest/CMakeFiles/gmock_main.dir/link.txt" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/gtest/CMakeFiles/gmock_main.dir/progress.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/gtest/CTestTestfile.cmake" afterPath="$PROJECT_DIR$/../../../build/gtest/CTestTestfile.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/gtest/Makefile" afterPath="$PROJECT_DIR$/../../../build/gtest/Makefile" />
-      <change beforePath="$PROJECT_DIR$/../../../build/gtest/cmake_install.cmake" afterPath="$PROJECT_DIR$/../../../build/gtest/cmake_install.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/gtest/gtest/CMakeFiles/CMakeDirectoryInformation.cmake" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/gtest/gtest/CMakeFiles/gtest.dir/DependInfo.cmake" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/gtest/gtest/CMakeFiles/gtest.dir/build.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/gtest/gtest/CMakeFiles/gtest.dir/cmake_clean.cmake" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/gtest/gtest/CMakeFiles/gtest.dir/depend.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/gtest/gtest/CMakeFiles/gtest.dir/flags.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/gtest/gtest/CMakeFiles/gtest.dir/link.txt" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/gtest/gtest/CMakeFiles/gtest.dir/progress.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/gtest/gtest/CMakeFiles/gtest_main.dir/DependInfo.cmake" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/gtest/gtest/CMakeFiles/gtest_main.dir/build.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/gtest/gtest/CMakeFiles/gtest_main.dir/cmake_clean.cmake" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/gtest/gtest/CMakeFiles/gtest_main.dir/depend.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/gtest/gtest/CMakeFiles/gtest_main.dir/flags.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/gtest/gtest/CMakeFiles/gtest_main.dir/link.txt" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/gtest/gtest/CMakeFiles/gtest_main.dir/progress.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/gtest/gtest/CMakeFiles/progress.marks" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/gtest/gtest/CTestTestfile.cmake" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/gtest/gtest/Makefile" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/gtest/gtest/cmake_install.cmake" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/multi_crazyflie_simulator/CMakeFiles/CMakeDirectoryInformation.cmake" afterPath="$PROJECT_DIR$/../../../build/multi_crazyflie_simulator/CMakeFiles/CMakeDirectoryInformation.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/multi_crazyflie_simulator/CMakeFiles/progress.marks" afterPath="$PROJECT_DIR$/../../../build/multi_crazyflie_simulator/CMakeFiles/progress.marks" />
-      <change beforePath="$PROJECT_DIR$/../../../build/multi_crazyflie_simulator/CTestTestfile.cmake" afterPath="$PROJECT_DIR$/../../../build/multi_crazyflie_simulator/CTestTestfile.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/multi_crazyflie_simulator/Makefile" afterPath="$PROJECT_DIR$/../../../build/multi_crazyflie_simulator/Makefile" />
-      <change beforePath="$PROJECT_DIR$/../../../build/multi_crazyflie_simulator/catkin_generated/installspace/multi_crazyflie_simulator.pc" afterPath="$PROJECT_DIR$/../../../build/multi_crazyflie_simulator/catkin_generated/installspace/multi_crazyflie_simulator.pc" />
-      <change beforePath="$PROJECT_DIR$/../../../build/multi_crazyflie_simulator/catkin_generated/installspace/multi_crazyflie_simulatorConfig.cmake" afterPath="$PROJECT_DIR$/../../../build/multi_crazyflie_simulator/catkin_generated/installspace/multi_crazyflie_simulatorConfig.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/multi_crazyflie_simulator/catkin_generated/package.cmake" afterPath="$PROJECT_DIR$/../../../build/multi_crazyflie_simulator/catkin_generated/package.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/multi_crazyflie_simulator/catkin_generated/pkg.develspace.context.pc.py" afterPath="$PROJECT_DIR$/../../../build/multi_crazyflie_simulator/catkin_generated/pkg.develspace.context.pc.py" />
-      <change beforePath="$PROJECT_DIR$/../../../build/multi_crazyflie_simulator/catkin_generated/pkg.installspace.context.pc.py" afterPath="$PROJECT_DIR$/../../../build/multi_crazyflie_simulator/catkin_generated/pkg.installspace.context.pc.py" />
-      <change beforePath="$PROJECT_DIR$/../../../build/multi_crazyflie_simulator/catkin_generated/stamps/multi_crazyflie_simulator/package.xml.stamp" afterPath="$PROJECT_DIR$/../../../build/multi_crazyflie_simulator/catkin_generated/stamps/multi_crazyflie_simulator/package.xml.stamp" />
-      <change beforePath="$PROJECT_DIR$/../../../build/multi_crazyflie_simulator/cmake_install.cmake" afterPath="$PROJECT_DIR$/../../../build/multi_crazyflie_simulator/cmake_install.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/CMakeDirectoryInformation.cmake" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/_qualisys_generate_messages_check_deps_Marker.dir/DependInfo.cmake" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/_qualisys_generate_messages_check_deps_Marker.dir/build.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/_qualisys_generate_messages_check_deps_Marker.dir/cmake_clean.cmake" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/_qualisys_generate_messages_check_deps_Marker.dir/depend.internal" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/_qualisys_generate_messages_check_deps_Marker.dir/depend.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/_qualisys_generate_messages_check_deps_Marker.dir/progress.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/_qualisys_generate_messages_check_deps_Markers.dir/DependInfo.cmake" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/_qualisys_generate_messages_check_deps_Markers.dir/build.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/_qualisys_generate_messages_check_deps_Markers.dir/cmake_clean.cmake" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/_qualisys_generate_messages_check_deps_Markers.dir/depend.internal" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/_qualisys_generate_messages_check_deps_Markers.dir/depend.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/_qualisys_generate_messages_check_deps_Markers.dir/progress.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/_qualisys_generate_messages_check_deps_Subject.dir/DependInfo.cmake" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/_qualisys_generate_messages_check_deps_Subject.dir/build.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/_qualisys_generate_messages_check_deps_Subject.dir/cmake_clean.cmake" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/_qualisys_generate_messages_check_deps_Subject.dir/depend.internal" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/_qualisys_generate_messages_check_deps_Subject.dir/depend.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/_qualisys_generate_messages_check_deps_Subject.dir/progress.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/progress.marks" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_driver.dir/CXX.includecache" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_driver.dir/DependInfo.cmake" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_driver.dir/build.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_driver.dir/cmake_clean.cmake" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_driver.dir/depend.internal" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_driver.dir/depend.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_driver.dir/flags.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_driver.dir/include/qualisys/NBC_Markup.cpp.o" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_driver.dir/include/qualisys/Network.cpp.o" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_driver.dir/include/qualisys/RTPacket.cpp.o" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_driver.dir/include/qualisys/RTProtocol.cpp.o" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_driver.dir/link.txt" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_driver.dir/progress.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_driver.dir/src/QualisysDriver.cpp.o" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_gencpp.dir/DependInfo.cmake" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_gencpp.dir/build.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_gencpp.dir/cmake_clean.cmake" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_gencpp.dir/progress.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_generate_messages.dir/DependInfo.cmake" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_generate_messages.dir/build.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_generate_messages.dir/cmake_clean.cmake" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_generate_messages.dir/depend.internal" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_generate_messages.dir/depend.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_generate_messages.dir/progress.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_generate_messages_cpp.dir/DependInfo.cmake" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_generate_messages_cpp.dir/build.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_generate_messages_cpp.dir/cmake_clean.cmake" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_generate_messages_cpp.dir/depend.internal" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_generate_messages_cpp.dir/depend.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_generate_messages_cpp.dir/progress.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_generate_messages_eus.dir/DependInfo.cmake" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_generate_messages_eus.dir/build.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_generate_messages_eus.dir/cmake_clean.cmake" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_generate_messages_eus.dir/depend.internal" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_generate_messages_eus.dir/depend.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_generate_messages_eus.dir/progress.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_generate_messages_lisp.dir/DependInfo.cmake" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_generate_messages_lisp.dir/build.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_generate_messages_lisp.dir/cmake_clean.cmake" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_generate_messages_lisp.dir/depend.internal" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_generate_messages_lisp.dir/depend.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_generate_messages_lisp.dir/progress.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_generate_messages_nodejs.dir/DependInfo.cmake" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_generate_messages_nodejs.dir/build.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_generate_messages_nodejs.dir/cmake_clean.cmake" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_generate_messages_nodejs.dir/depend.internal" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_generate_messages_nodejs.dir/depend.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_generate_messages_nodejs.dir/progress.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_generate_messages_py.dir/DependInfo.cmake" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_generate_messages_py.dir/build.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_generate_messages_py.dir/cmake_clean.cmake" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_generate_messages_py.dir/depend.internal" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_generate_messages_py.dir/depend.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_generate_messages_py.dir/progress.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_geneus.dir/DependInfo.cmake" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_geneus.dir/build.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_geneus.dir/cmake_clean.cmake" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_geneus.dir/progress.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_genlisp.dir/DependInfo.cmake" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_genlisp.dir/build.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_genlisp.dir/cmake_clean.cmake" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_genlisp.dir/progress.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_gennodejs.dir/DependInfo.cmake" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_gennodejs.dir/build.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_gennodejs.dir/cmake_clean.cmake" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_gennodejs.dir/progress.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_genpy.dir/DependInfo.cmake" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_genpy.dir/build.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_genpy.dir/cmake_clean.cmake" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_genpy.dir/progress.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_node.dir/CXX.includecache" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_node.dir/DependInfo.cmake" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_node.dir/build.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_node.dir/cmake_clean.cmake" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_node.dir/depend.internal" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_node.dir/depend.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_node.dir/flags.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_node.dir/link.txt" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_node.dir/progress.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_node.dir/src/qualisys.cpp.o" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_odom.dir/CXX.includecache" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_odom.dir/DependInfo.cmake" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_odom.dir/build.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_odom.dir/cmake_clean.cmake" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_odom.dir/depend.internal" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_odom.dir/depend.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_odom.dir/flags.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_odom.dir/link.txt" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_odom.dir/progress.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_odom.dir/src/KalmanFilter.cpp.o" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_odom.dir/src/QualisysOdom.cpp.o" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_odom_node.dir/CXX.includecache" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_odom_node.dir/DependInfo.cmake" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_odom_node.dir/build.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_odom_node.dir/cmake_clean.cmake" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_odom_node.dir/depend.internal" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_odom_node.dir/depend.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_odom_node.dir/flags.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_odom_node.dir/link.txt" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_odom_node.dir/progress.make" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_odom_node.dir/src/qualisys_odom.cpp.o" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CTestTestfile.cmake" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/Makefile" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/catkin_generated/installspace/qualisys-msg-extras.cmake" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/catkin_generated/installspace/qualisys-msg-paths.cmake" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/catkin_generated/installspace/qualisys.pc" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/catkin_generated/installspace/qualisysConfig-version.cmake" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/catkin_generated/installspace/qualisysConfig.cmake" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/catkin_generated/ordered_paths.cmake" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/catkin_generated/package.cmake" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/catkin_generated/qualisys-msg-extras.cmake.develspace.in" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/catkin_generated/qualisys-msg-extras.cmake.installspace.in" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/catkin_generated/stamps/qualisys/package.xml.stamp" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/catkin_generated/stamps/qualisys/pkg-genmsg.cmake.em.stamp" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/catkin_generated/stamps/qualisys/pkg.pc.em.stamp" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/cmake/qualisys-genmsg.cmake" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/cmake_install.cmake" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../build/ros_crazy/CMakeFiles/CMakeDirectoryInformation.cmake" afterPath="$PROJECT_DIR$/../../../build/ros_crazy/CMakeFiles/CMakeDirectoryInformation.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/ros_crazy/CTestTestfile.cmake" afterPath="$PROJECT_DIR$/../../../build/ros_crazy/CTestTestfile.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/ros_crazy/Makefile" afterPath="$PROJECT_DIR$/../../../build/ros_crazy/Makefile" />
-      <change beforePath="$PROJECT_DIR$/../../../build/ros_crazy/catkin_generated/installspace/ros_crazy.pc" afterPath="$PROJECT_DIR$/../../../build/ros_crazy/catkin_generated/installspace/ros_crazy.pc" />
-      <change beforePath="$PROJECT_DIR$/../../../build/ros_crazy/catkin_generated/installspace/ros_crazyConfig.cmake" afterPath="$PROJECT_DIR$/../../../build/ros_crazy/catkin_generated/installspace/ros_crazyConfig.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../build/ros_crazy/catkin_generated/pkg.develspace.context.pc.py" afterPath="$PROJECT_DIR$/../../../build/ros_crazy/catkin_generated/pkg.develspace.context.pc.py" />
-      <change beforePath="$PROJECT_DIR$/../../../build/ros_crazy/catkin_generated/pkg.installspace.context.pc.py" afterPath="$PROJECT_DIR$/../../../build/ros_crazy/catkin_generated/pkg.installspace.context.pc.py" />
-      <change beforePath="$PROJECT_DIR$/../../../build/ros_crazy/cmake_install.cmake" afterPath="$PROJECT_DIR$/../../../build/ros_crazy/cmake_install.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/.catkin" afterPath="$PROJECT_DIR$/../../../devel/.catkin" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/.rosinstall" afterPath="$PROJECT_DIR$/../../../devel/.rosinstall" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/_setup_util.py" afterPath="$PROJECT_DIR$/../../../devel/_setup_util.py" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/include/crazyflie_driver/AddCrazyflieRequest.h" afterPath="$PROJECT_DIR$/../../../devel/include/crazyflie_driver/AddCrazyflieRequest.h" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/include/crazyflie_driver/AddCrazyflieResponse.h" afterPath="$PROJECT_DIR$/../../../devel/include/crazyflie_driver/AddCrazyflieResponse.h" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/include/crazyflie_driver/FullState.h" afterPath="$PROJECT_DIR$/../../../devel/include/crazyflie_driver/FullState.h" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/include/crazyflie_driver/GenericLogData.h" afterPath="$PROJECT_DIR$/../../../devel/include/crazyflie_driver/GenericLogData.h" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/include/crazyflie_driver/GoToRequest.h" afterPath="$PROJECT_DIR$/../../../devel/include/crazyflie_driver/GoToRequest.h" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/include/crazyflie_driver/GoToResponse.h" afterPath="$PROJECT_DIR$/../../../devel/include/crazyflie_driver/GoToResponse.h" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/include/crazyflie_driver/Hover.h" afterPath="$PROJECT_DIR$/../../../devel/include/crazyflie_driver/Hover.h" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/include/crazyflie_driver/LandRequest.h" afterPath="$PROJECT_DIR$/../../../devel/include/crazyflie_driver/LandRequest.h" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/include/crazyflie_driver/LandResponse.h" afterPath="$PROJECT_DIR$/../../../devel/include/crazyflie_driver/LandResponse.h" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/include/crazyflie_driver/LogBlock.h" afterPath="$PROJECT_DIR$/../../../devel/include/crazyflie_driver/LogBlock.h" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/include/crazyflie_driver/Position.h" afterPath="$PROJECT_DIR$/../../../devel/include/crazyflie_driver/Position.h" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/include/crazyflie_driver/RemoveCrazyflieRequest.h" afterPath="$PROJECT_DIR$/../../../devel/include/crazyflie_driver/RemoveCrazyflieRequest.h" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/include/crazyflie_driver/RemoveCrazyflieResponse.h" afterPath="$PROJECT_DIR$/../../../devel/include/crazyflie_driver/RemoveCrazyflieResponse.h" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/include/crazyflie_driver/SetGroupMaskRequest.h" afterPath="$PROJECT_DIR$/../../../devel/include/crazyflie_driver/SetGroupMaskRequest.h" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/include/crazyflie_driver/SetGroupMaskResponse.h" afterPath="$PROJECT_DIR$/../../../devel/include/crazyflie_driver/SetGroupMaskResponse.h" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/include/crazyflie_driver/StartTrajectoryRequest.h" afterPath="$PROJECT_DIR$/../../../devel/include/crazyflie_driver/StartTrajectoryRequest.h" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/include/crazyflie_driver/StartTrajectoryResponse.h" afterPath="$PROJECT_DIR$/../../../devel/include/crazyflie_driver/StartTrajectoryResponse.h" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/include/crazyflie_driver/StopRequest.h" afterPath="$PROJECT_DIR$/../../../devel/include/crazyflie_driver/StopRequest.h" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/include/crazyflie_driver/StopResponse.h" afterPath="$PROJECT_DIR$/../../../devel/include/crazyflie_driver/StopResponse.h" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/include/crazyflie_driver/TakeoffRequest.h" afterPath="$PROJECT_DIR$/../../../devel/include/crazyflie_driver/TakeoffRequest.h" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/include/crazyflie_driver/TakeoffResponse.h" afterPath="$PROJECT_DIR$/../../../devel/include/crazyflie_driver/TakeoffResponse.h" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/include/crazyflie_driver/TrajectoryPolynomialPiece.h" afterPath="$PROJECT_DIR$/../../../devel/include/crazyflie_driver/TrajectoryPolynomialPiece.h" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/include/crazyflie_driver/UpdateParamsRequest.h" afterPath="$PROJECT_DIR$/../../../devel/include/crazyflie_driver/UpdateParamsRequest.h" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/include/crazyflie_driver/UpdateParamsResponse.h" afterPath="$PROJECT_DIR$/../../../devel/include/crazyflie_driver/UpdateParamsResponse.h" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/include/crazyflie_driver/UploadTrajectoryRequest.h" afterPath="$PROJECT_DIR$/../../../devel/include/crazyflie_driver/UploadTrajectoryRequest.h" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/include/crazyflie_driver/UploadTrajectoryResponse.h" afterPath="$PROJECT_DIR$/../../../devel/include/crazyflie_driver/UploadTrajectoryResponse.h" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/include/crazyflie_driver/crtpPacket.h" afterPath="$PROJECT_DIR$/../../../devel/include/crazyflie_driver/crtpPacket.h" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/include/crazyflie_driver/sendPacketRequest.h" afterPath="$PROJECT_DIR$/../../../devel/include/crazyflie_driver/sendPacketRequest.h" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/include/crazyflie_driver/sendPacketResponse.h" afterPath="$PROJECT_DIR$/../../../devel/include/crazyflie_driver/sendPacketResponse.h" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/include/qualisys/Marker.h" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/include/qualisys/Markers.h" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/include/qualisys/Subject.h" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/lib/crazyflie_controller/crazyflie_controller" afterPath="$PROJECT_DIR$/../../../devel/lib/crazyflie_controller/crazyflie_controller" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/lib/crazyflie_driver/crazyflie_add" afterPath="$PROJECT_DIR$/../../../devel/lib/crazyflie_driver/crazyflie_add" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/lib/crazyflie_driver/crazyflie_server" afterPath="$PROJECT_DIR$/../../../devel/lib/crazyflie_driver/crazyflie_server" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/lib/crazyflie_tools/battery" afterPath="$PROJECT_DIR$/../../../devel/lib/crazyflie_tools/battery" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/lib/crazyflie_tools/console" afterPath="$PROJECT_DIR$/../../../devel/lib/crazyflie_tools/console" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/lib/crazyflie_tools/flash" afterPath="$PROJECT_DIR$/../../../devel/lib/crazyflie_tools/flash" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/lib/crazyflie_tools/listLogVariables" afterPath="$PROJECT_DIR$/../../../devel/lib/crazyflie_tools/listLogVariables" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/lib/crazyflie_tools/listMemories" afterPath="$PROJECT_DIR$/../../../devel/lib/crazyflie_tools/listMemories" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/lib/crazyflie_tools/listParams" afterPath="$PROJECT_DIR$/../../../devel/lib/crazyflie_tools/listParams" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/lib/crazyflie_tools/reboot" afterPath="$PROJECT_DIR$/../../../devel/lib/crazyflie_tools/reboot" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/lib/crazyflie_tools/scan" afterPath="$PROJECT_DIR$/../../../devel/lib/crazyflie_tools/scan" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/lib/crazyflie_tools/version" afterPath="$PROJECT_DIR$/../../../devel/lib/crazyflie_tools/version" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/lib/libqualisys_driver.so" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/lib/libqualisys_odom.so" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/lib/pkgconfig/crazyflie_controller.pc" afterPath="$PROJECT_DIR$/../../../devel/lib/pkgconfig/crazyflie_controller.pc" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/lib/pkgconfig/crazyflie_cpp.pc" afterPath="$PROJECT_DIR$/../../../devel/lib/pkgconfig/crazyflie_cpp.pc" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/lib/pkgconfig/crazyflie_demo.pc" afterPath="$PROJECT_DIR$/../../../devel/lib/pkgconfig/crazyflie_demo.pc" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/lib/pkgconfig/crazyflie_description.pc" afterPath="$PROJECT_DIR$/../../../devel/lib/pkgconfig/crazyflie_description.pc" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/lib/pkgconfig/crazyflie_driver.pc" afterPath="$PROJECT_DIR$/../../../devel/lib/pkgconfig/crazyflie_driver.pc" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/lib/pkgconfig/crazyflie_tools.pc" afterPath="$PROJECT_DIR$/../../../devel/lib/pkgconfig/crazyflie_tools.pc" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/lib/pkgconfig/multi_crazyflie_simulator.pc" afterPath="$PROJECT_DIR$/../../../devel/lib/pkgconfig/multi_crazyflie_simulator.pc" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/lib/pkgconfig/qualisys.pc" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/lib/pkgconfig/ros_crazy.pc" afterPath="$PROJECT_DIR$/../../../devel/lib/pkgconfig/ros_crazy.pc" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/lib/qualisys/qualisys_node" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/lib/qualisys/qualisys_odom_node" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/setup.sh" afterPath="$PROJECT_DIR$/../../../devel/setup.sh" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/share/common-lisp/ros/qualisys/msg/Marker.lisp" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/share/common-lisp/ros/qualisys/msg/Markers.lisp" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/share/common-lisp/ros/qualisys/msg/Subject.lisp" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/share/common-lisp/ros/qualisys/msg/_package.lisp" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/share/common-lisp/ros/qualisys/msg/_package_Marker.lisp" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/share/common-lisp/ros/qualisys/msg/_package_Markers.lisp" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/share/common-lisp/ros/qualisys/msg/_package_Subject.lisp" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/share/common-lisp/ros/qualisys/msg/qualisys-msg.asd" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/share/crazyflie_controller/cmake/crazyflie_controllerConfig.cmake" afterPath="$PROJECT_DIR$/../../../devel/share/crazyflie_controller/cmake/crazyflie_controllerConfig.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/share/crazyflie_cpp/cmake/crazyflie_cppConfig.cmake" afterPath="$PROJECT_DIR$/../../../devel/share/crazyflie_cpp/cmake/crazyflie_cppConfig.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/share/crazyflie_demo/cmake/crazyflie_demoConfig.cmake" afterPath="$PROJECT_DIR$/../../../devel/share/crazyflie_demo/cmake/crazyflie_demoConfig.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/share/crazyflie_description/cmake/crazyflie_descriptionConfig.cmake" afterPath="$PROJECT_DIR$/../../../devel/share/crazyflie_description/cmake/crazyflie_descriptionConfig.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/share/crazyflie_driver/cmake/crazyflie_driver-msg-extras.cmake" afterPath="$PROJECT_DIR$/../../../devel/share/crazyflie_driver/cmake/crazyflie_driver-msg-extras.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/share/crazyflie_driver/cmake/crazyflie_driver-msg-paths.cmake" afterPath="$PROJECT_DIR$/../../../devel/share/crazyflie_driver/cmake/crazyflie_driver-msg-paths.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/share/crazyflie_driver/cmake/crazyflie_driverConfig.cmake" afterPath="$PROJECT_DIR$/../../../devel/share/crazyflie_driver/cmake/crazyflie_driverConfig.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/share/crazyflie_tools/cmake/crazyflie_toolsConfig.cmake" afterPath="$PROJECT_DIR$/../../../devel/share/crazyflie_tools/cmake/crazyflie_toolsConfig.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/share/gennodejs/ros/crazyflie_driver/msg/_index.js" afterPath="$PROJECT_DIR$/../../../devel/share/gennodejs/ros/crazyflie_driver/msg/_index.js" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/share/gennodejs/ros/crazyflie_driver/srv/_index.js" afterPath="$PROJECT_DIR$/../../../devel/share/gennodejs/ros/crazyflie_driver/srv/_index.js" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/share/gennodejs/ros/qualisys/_index.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/share/gennodejs/ros/qualisys/msg/Marker.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/share/gennodejs/ros/qualisys/msg/Markers.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/share/gennodejs/ros/qualisys/msg/Subject.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/share/gennodejs/ros/qualisys/msg/_index.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/share/multi_crazyflie_simulator/cmake/multi_crazyflie_simulatorConfig.cmake" afterPath="$PROJECT_DIR$/../../../devel/share/multi_crazyflie_simulator/cmake/multi_crazyflie_simulatorConfig.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/share/qualisys/cmake/qualisys-msg-extras.cmake" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/share/qualisys/cmake/qualisys-msg-paths.cmake" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/share/qualisys/cmake/qualisysConfig-version.cmake" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/share/qualisys/cmake/qualisysConfig.cmake" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/share/ros_crazy/cmake/ros_crazyConfig.cmake" afterPath="$PROJECT_DIR$/../../../devel/share/ros_crazy/cmake/ros_crazyConfig.cmake" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/share/roseus/ros/crazyflie_driver/manifest.l" afterPath="$PROJECT_DIR$/../../../devel/share/roseus/ros/crazyflie_driver/manifest.l" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/share/roseus/ros/qualisys/manifest.l" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/share/roseus/ros/qualisys/msg/Marker.l" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/share/roseus/ros/qualisys/msg/Markers.l" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../../../devel/share/roseus/ros/qualisys/msg/Subject.l" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/../CMakeLists.txt" afterPath="$PROJECT_DIR$/../CMakeLists.txt" />
-      <change beforePath="$PROJECT_DIR$/../package.xml" afterPath="$PROJECT_DIR$/../package.xml" />
+      <change beforePath="$PROJECT_DIR$/../../../build/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../../build/CMakeCache.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../build/CMakeFiles/Makefile.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../../../build/CMakeFiles/Makefile.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../build/CMakeFiles/Makefile2" beforeDir="false" afterPath="$PROJECT_DIR$/../../../build/CMakeFiles/Makefile2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../build/CMakeFiles/TargetDirectories.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../../build/CMakeFiles/TargetDirectories.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../build/CTestTestfile.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../../../build/CTestTestfile.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../build/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/../../../build/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../build/catkin_generated/generate_cached_setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../../build/catkin_generated/generate_cached_setup.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../build/catkin_generated/installspace/_setup_util.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../../build/catkin_generated/installspace/_setup_util.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../build/catkin_generated/order_packages.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../../../build/catkin_generated/order_packages.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../build/catkin_generated/order_packages.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../../build/catkin_generated/order_packages.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../build/catkin_generated/stamps/Project/_setup_util.py.stamp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../build/catkin_generated/stamps/Project/_setup_util.py.stamp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../build/cmake_install.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../../../build/cmake_install.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/crazyflie_controller.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/crazyflie_controller.dir/progress.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/progress.marks" beforeDir="false" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/CMakeFiles/progress.marks" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/catkin_generated/installspace/crazyflie_controllerConfig.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_controller/catkin_generated/installspace/crazyflie_controllerConfig.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_cpp/CMakeFiles/crazyflie_cpp.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_cpp/CMakeFiles/crazyflie_cpp.dir/progress.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_cpp/CMakeFiles/progress.marks" beforeDir="false" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_cpp/CMakeFiles/progress.marks" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_cpp/catkin_generated/installspace/crazyflie_cppConfig.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_cpp/catkin_generated/installspace/crazyflie_cppConfig.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CMakeFiles/quadrotor_teleop.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/CMakeFiles/quadrotor_teleop.dir/progress.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/catkin_generated/installspace/crazyflie_demoConfig.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_demo/catkin_generated/installspace/crazyflie_demoConfig.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_description/catkin_generated/installspace/crazyflie_descriptionConfig.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_description/catkin_generated/installspace/crazyflie_descriptionConfig.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_add.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_add.dir/progress.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_driver_generate_messages_cpp.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_driver_generate_messages_cpp.dir/progress.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_driver_generate_messages_eus.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_driver_generate_messages_eus.dir/progress.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_driver_generate_messages_lisp.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_driver_generate_messages_lisp.dir/progress.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_driver_generate_messages_nodejs.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_driver_generate_messages_nodejs.dir/progress.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_driver_generate_messages_py.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_driver_generate_messages_py.dir/progress.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_server.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/crazyflie_server.dir/progress.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/progress.marks" beforeDir="false" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/CMakeFiles/progress.marks" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/catkin_generated/installspace/crazyflie_driverConfig.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_driver/catkin_generated/installspace/crazyflie_driverConfig.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/console.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/console.dir/progress.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/flash.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/flash.dir/progress.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/listLogVariables.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/listLogVariables.dir/progress.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/listMemories.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/listMemories.dir/progress.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/listParams.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/listParams.dir/progress.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/progress.marks" beforeDir="false" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/progress.marks" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/reboot.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/CMakeFiles/reboot.dir/progress.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/catkin_generated/installspace/crazyflie_toolsConfig.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../../../build/crazyflie_ros/crazyflie_tools/catkin_generated/installspace/crazyflie_toolsConfig.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../build/gtest/CMakeFiles/gmock.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/../../../build/gtest/CMakeFiles/gmock.dir/progress.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../build/gtest/CMakeFiles/gmock_main.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/../../../build/gtest/CMakeFiles/gmock_main.dir/progress.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../build/gtest/gtest/CMakeFiles/gtest.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/../../../build/gtest/gtest/CMakeFiles/gtest.dir/progress.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../build/gtest/gtest/CMakeFiles/gtest_main.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/../../../build/gtest/gtest/CMakeFiles/gtest_main.dir/progress.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../build/multi_crazyflie_simulator/CMakeFiles/progress.marks" beforeDir="false" afterPath="$PROJECT_DIR$/../../../build/multi_crazyflie_simulator/CMakeFiles/progress.marks" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../build/multi_crazyflie_simulator/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/../../../build/multi_crazyflie_simulator/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../build/multi_crazyflie_simulator/catkin_generated/installspace/multi_crazyflie_simulatorConfig.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../../../build/multi_crazyflie_simulator/catkin_generated/installspace/multi_crazyflie_simulatorConfig.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../build/multi_crazyflie_simulator/catkin_generated/package.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../../../build/multi_crazyflie_simulator/catkin_generated/package.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../build/multi_crazyflie_simulator/catkin_generated/stamps/multi_crazyflie_simulator/package.xml.stamp" beforeDir="false" afterPath="$PROJECT_DIR$/../../../build/multi_crazyflie_simulator/catkin_generated/stamps/multi_crazyflie_simulator/package.xml.stamp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_driver.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_driver.dir/progress.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_generate_messages_cpp.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_generate_messages_cpp.dir/progress.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_generate_messages_eus.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_generate_messages_eus.dir/progress.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_generate_messages_lisp.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_generate_messages_lisp.dir/progress.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_generate_messages_nodejs.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_generate_messages_nodejs.dir/progress.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_generate_messages_py.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_generate_messages_py.dir/progress.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_odom.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/../../../build/qualisys/CMakeFiles/qualisys_odom.dir/progress.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../build/qualisys/catkin_generated/installspace/qualisysConfig.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../../../build/qualisys/catkin_generated/installspace/qualisysConfig.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../build/ros_crazy/catkin_generated/installspace/ros_crazyConfig.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../../../build/ros_crazy/catkin_generated/installspace/ros_crazyConfig.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../devel/_setup_util.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../../devel/_setup_util.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../devel/share/crazyflie_controller/cmake/crazyflie_controllerConfig.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../../../devel/share/crazyflie_controller/cmake/crazyflie_controllerConfig.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../devel/share/crazyflie_cpp/cmake/crazyflie_cppConfig.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../../../devel/share/crazyflie_cpp/cmake/crazyflie_cppConfig.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../devel/share/crazyflie_demo/cmake/crazyflie_demoConfig.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../../../devel/share/crazyflie_demo/cmake/crazyflie_demoConfig.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../devel/share/crazyflie_description/cmake/crazyflie_descriptionConfig.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../../../devel/share/crazyflie_description/cmake/crazyflie_descriptionConfig.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../devel/share/crazyflie_driver/cmake/crazyflie_driverConfig.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../../../devel/share/crazyflie_driver/cmake/crazyflie_driverConfig.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../devel/share/crazyflie_tools/cmake/crazyflie_toolsConfig.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../../../devel/share/crazyflie_tools/cmake/crazyflie_toolsConfig.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../devel/share/multi_crazyflie_simulator/cmake/multi_crazyflie_simulatorConfig.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../../../devel/share/multi_crazyflie_simulator/cmake/multi_crazyflie_simulatorConfig.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../devel/share/qualisys/cmake/qualisysConfig.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../../../devel/share/qualisys/cmake/qualisysConfig.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../devel/share/ros_crazy/cmake/ros_crazyConfig.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../../../devel/share/ros_crazy/cmake/ros_crazyConfig.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../launch/multi_crazyflie_sim_launchB.launch" beforeDir="false" afterPath="$PROJECT_DIR$/../launch/multi_crazyflie_sim_launchB.launch" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/scripts.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/scripts.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/swarm_controlB.py" beforeDir="false" afterPath="$PROJECT_DIR$/swarm_controlB.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../qualisys" beforeDir="false" afterPath="$PROJECT_DIR$/../../qualisys" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../ros_crazy/scripts/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../ros_crazy/scripts/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
-    <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -700,24 +111,41 @@
         </counts>
       </usages-collector>
     </session>
+    <session id="526872153">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.open.time.0" value="1" />
+          <entry key="project.opened" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="py" value="379" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="Python" value="379" />
+        </counts>
+      </usages-collector>
+    </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="CrazyFlie_dynamical_model.py" pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CrazyFlie_dynamical_model.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2964">
-              <caret line="285" column="30" lean-forward="false" selection-start-line="285" selection-start-column="30" selection-end-line="285" selection-end-column="30" />
-              <folding />
+            <state relative-caret-position="4095">
+              <caret line="285" column="30" selection-start-line="285" selection-start-column="30" selection-end-line="285" selection-end-column="30" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="swarm_controlB.py" pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/swarm_controlB.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="206">
-              <caret line="56" column="27" lean-forward="true" selection-start-line="56" selection-start-column="27" selection-end-line="56" selection-end-column="27" />
+            <state relative-caret-position="135">
+              <caret line="54" column="35" selection-start-line="54" selection-start-column="35" selection-end-line="54" selection-end-column="35" />
               <folding>
                 <element signature="e#23#32#0" expanded="true" />
               </folding>
@@ -725,11 +153,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ForcesToRollpitchyaw.py" pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ForcesToRollpitchyaw.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="762">
-              <caret line="48" column="0" lean-forward="true" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
+            <state relative-caret-position="645">
+              <caret line="48" selection-start-line="48" selection-end-line="48" />
               <folding>
                 <element signature="e#23#41#0" expanded="true" />
               </folding>
@@ -737,11 +165,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="initPose.py" pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/initPose.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="792">
-              <caret line="49" column="34" lean-forward="false" selection-start-line="49" selection-start-column="34" selection-end-line="49" selection-end-column="34" />
+            <state relative-caret-position="660">
+              <caret line="49" column="34" selection-start-line="49" selection-start-column="34" selection-end-line="49" selection-end-column="34" />
               <folding>
                 <element signature="e#23#41#0" expanded="true" />
               </folding>
@@ -749,11 +177,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PidControl.py" pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/PidControl.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2484">
-              <caret line="144" column="55" lean-forward="false" selection-start-line="144" selection-start-column="55" selection-end-line="144" selection-end-column="55" />
+            <state relative-caret-position="2070">
+              <caret line="144" column="55" selection-start-line="144" selection-start-column="55" selection-end-line="144" selection-end-column="55" />
               <folding>
                 <element signature="e#23#41#0" expanded="true" />
               </folding>
@@ -761,31 +189,29 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="cf_pid_params.py" pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/cf_pid_params.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="648">
-              <caret line="36" column="23" lean-forward="false" selection-start-line="36" selection-start-column="23" selection-end-line="36" selection-end-column="23" />
-              <folding />
+            <state relative-caret-position="540">
+              <caret line="36" column="23" selection-start-line="36" selection-start-column="23" selection-end-line="36" selection-end-column="23" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pid.py" pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pid.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="864">
-              <caret line="48" column="11" lean-forward="false" selection-start-line="48" selection-start-column="11" selection-end-line="48" selection-end-column="11" />
-              <folding />
+            <state relative-caret-position="720">
+              <caret line="48" column="11" selection-start-line="48" selection-start-column="11" selection-end-line="48" selection-end-column="11" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="cf_physical_parameters.py" pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/cf_physical_parameters.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="612">
-              <caret line="35" column="33" lean-forward="false" selection-start-line="35" selection-start-column="33" selection-end-line="35" selection-end-column="33" />
+            <state relative-caret-position="510">
+              <caret line="35" column="33" selection-start-line="35" selection-start-column="33" selection-end-line="35" selection-end-column="33" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -846,10 +272,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="65" />
-    <option name="y" value="24" />
-    <option name="width" value="1301" />
-    <option name="height" value="744" />
+    <option name="x" value="529" />
+    <option name="y" value="36" />
+    <option name="width" value="1056" />
+    <option name="height" value="978" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -870,7 +296,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Python" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -883,9 +309,6 @@
         </RuleState>
       </list>
     </option>
-  </component>
-  <component name="ShelveChangesManager" show_recycled="false">
-    <option name="remove_strategy" value="false" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -901,26 +324,26 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="65" y="24" width="1303" height="780" extended-state="6" />
+    <frame x="65" y="-4" width="1615" height="1054" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32882884" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.25" />
+      <window_info id="Structure" order="1" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32882884" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Terminal" order="8" />
+      <window_info anchor="bottom" id="Python Console" order="9" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -934,233 +357,15 @@
           <line>2</line>
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="3" />
     </breakpoint-manager>
-    <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/cf_physical_parameters.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="35" column="33" lean-forward="false" selection-start-line="35" selection-start-column="33" selection-end-line="35" selection-end-column="33" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CrazyFlie_dynamical_model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/PidControl.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2592">
-          <caret line="144" column="55" lean-forward="false" selection-start-line="144" selection-start-column="55" selection-end-line="144" selection-end-column="55" />
-          <folding>
-            <element signature="e#23#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Crazyflie.py" />
-    <entry file="file://$PROJECT_DIR$/timeSync.py" />
-    <entry file="file://$PROJECT_DIR$/cf_pid_params.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1080">
-          <caret line="60" column="0" lean-forward="false" selection-start-line="60" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Pid_pos_linvel.py" />
-    <entry file="file://$PROJECT_DIR$/send_mocap_external_positioning.py" />
-    <entry file="file://$PROJECT_DIR$/pid.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="954">
-          <caret line="53" column="10" lean-forward="true" selection-start-line="53" selection-start-column="10" selection-end-line="53" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cf_physical_parameters.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="828">
-          <caret line="47" column="0" lean-forward="false" selection-start-line="47" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CrazyFlie_dynamical_model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="684">
-          <caret line="47" column="27" lean-forward="true" selection-start-line="47" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/PidControl.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2484">
-          <caret line="144" column="55" lean-forward="false" selection-start-line="144" selection-start-column="55" selection-end-line="144" selection-end-column="55" />
-          <folding>
-            <element signature="e#23#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Crazyflie.py" />
-    <entry file="file://$PROJECT_DIR$/cf_pid_params.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="22" column="0" lean-forward="true" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/timeSync.py" />
-    <entry file="file://$PROJECT_DIR$/Pid_pos_linvel.py" />
-    <entry file="file://$PROJECT_DIR$/send_mocap_external_positioning.py" />
-    <entry file="file://$PROJECT_DIR$/pid.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="21" lean-forward="false" selection-start-line="0" selection-start-column="21" selection-end-line="0" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cf_physical_parameters.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1278">
-          <caret line="72" column="93" lean-forward="false" selection-start-line="6" selection-start-column="0" selection-end-line="72" selection-end-column="93" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main.py" />
-    <entry file="file://$PROJECT_DIR$/send_pos_setpoints.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="12" column="12" lean-forward="false" selection-start-line="12" selection-start-column="12" selection-end-line="12" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Pid_pos_linvel.py" />
-    <entry file="file://$PROJECT_DIR$/send_mocap_external_positioning.py" />
-    <entry file="file://$PROJECT_DIR$/pid.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="20" column="44" lean-forward="true" selection-start-line="20" selection-start-column="44" selection-end-line="20" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cf_pid_params.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="486">
-          <caret line="27" column="28" lean-forward="false" selection-start-line="27" selection-start-column="28" selection-end-line="27" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cf_physical_parameters.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="666">
-          <caret line="38" column="29" lean-forward="false" selection-start-line="38" selection-start-column="29" selection-end-line="38" selection-end-column="29" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CrazyFlie_dynamical_model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5562">
-          <caret line="318" column="0" lean-forward="true" selection-start-line="318" selection-start-column="0" selection-end-line="318" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/send_pos_setpoints.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cf_pid_params.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="8" lean-forward="false" selection-start-line="0" selection-start-column="8" selection-end-line="0" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pid.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="8" column="39" lean-forward="false" selection-start-line="8" selection-start-column="39" selection-end-line="8" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cf_physical_parameters.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="900">
-          <caret line="51" column="71" lean-forward="false" selection-start-line="51" selection-start-column="71" selection-end-line="51" selection-end-column="71" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CrazyFlie_dynamical_model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3402">
-          <caret line="189" column="26" lean-forward="false" selection-start-line="189" selection-start-column="26" selection-end-line="189" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/send_pos_setpoints.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cf_physical_parameters.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="19" lean-forward="false" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="19" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CrazyFlie_dynamical_model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="11" column="35" lean-forward="true" selection-start-line="11" selection-start-column="35" selection-end-line="11" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/step.py" />
     <entry file="file://$PROJECT_DIR$/dy_model_cmd_vel.py" />
     <entry file="file://$PROJECT_DIR$/send_pos_setpoints.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
-          <caret line="12" column="12" lean-forward="false" selection-start-line="12" selection-start-column="12" selection-end-line="12" selection-end-column="12" />
+          <caret line="12" column="12" selection-start-line="12" selection-start-column="12" selection-end-line="12" selection-end-column="12" />
         </state>
       </provider>
     </entry>
@@ -1168,75 +373,72 @@
     <entry file="file://$PROJECT_DIR$/timeSync.py" />
     <entry file="file://$PROJECT_DIR$/main.py" />
     <entry file="file://$PROJECT_DIR$/Pid_pos_linvel.py" />
-    <entry file="file://$PROJECT_DIR$/PidControl.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2484">
-          <caret line="144" column="55" lean-forward="false" selection-start-line="144" selection-start-column="55" selection-end-line="144" selection-end-column="55" />
-          <folding>
-            <element signature="e#23#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pid.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="864">
-          <caret line="48" column="11" lean-forward="false" selection-start-line="48" selection-start-column="11" selection-end-line="48" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/initPose.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="792">
-          <caret line="49" column="34" lean-forward="false" selection-start-line="49" selection-start-column="34" selection-end-line="49" selection-end-column="34" />
-          <folding>
-            <element signature="e#23#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cf_physical_parameters.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="35" column="33" lean-forward="false" selection-start-line="35" selection-start-column="33" selection-end-line="35" selection-end-column="33" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Crazyflie.py" />
-    <entry file="file://$PROJECT_DIR$/cf_pid_params.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="648">
-          <caret line="36" column="23" lean-forward="false" selection-start-line="36" selection-start-column="23" selection-end-line="36" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CrazyFlie_dynamical_model.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2964">
-          <caret line="285" column="30" lean-forward="false" selection-start-line="285" selection-start-column="30" selection-end-line="285" selection-end-column="30" />
-          <folding />
+        <state relative-caret-position="4095">
+          <caret line="285" column="30" selection-start-line="285" selection-start-column="30" selection-end-line="285" selection-end-column="30" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ForcesToRollpitchyaw.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="762">
-          <caret line="48" column="0" lean-forward="true" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
+        <state relative-caret-position="645">
+          <caret line="48" selection-start-line="48" selection-end-line="48" />
           <folding>
             <element signature="e#23#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/initPose.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="660">
+          <caret line="49" column="34" selection-start-line="49" selection-start-column="34" selection-end-line="49" selection-end-column="34" />
+          <folding>
+            <element signature="e#23#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PidControl.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2070">
+          <caret line="144" column="55" selection-start-line="144" selection-start-column="55" selection-end-line="144" selection-end-column="55" />
+          <folding>
+            <element signature="e#23#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cf_pid_params.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="36" column="23" selection-start-line="36" selection-start-column="23" selection-end-line="36" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pid.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="720">
+          <caret line="48" column="11" selection-start-line="48" selection-start-column="11" selection-end-line="48" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cf_physical_parameters.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="35" column="33" selection-start-line="35" selection-start-column="33" selection-end-line="35" selection-end-column="33" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/swarm_controlB.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="206">
-          <caret line="56" column="27" lean-forward="true" selection-start-line="56" selection-start-column="27" selection-end-line="56" selection-end-column="27" />
+        <state relative-caret-position="135">
+          <caret line="54" column="35" selection-start-line="54" selection-start-column="35" selection-end-line="54" selection-end-column="35" />
           <folding>
             <element signature="e#23#32#0" expanded="true" />
           </folding>

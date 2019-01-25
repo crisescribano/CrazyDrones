@@ -52,14 +52,14 @@ class Nav_control():
 		#self.PoI = np.array([[0, 0, 1], [0, 0, 1],[0, 0, 1],[0, 0, 1]])
 		#self.PoI = np.array([[0, 0, 1], [0, 0, 2],[0, 0,3],[0, 0, 4]])
 
-		self.timeBetweenPoints = 10
+		self.timeBetweenPoints = 15
 		self.counterPoI = 0
 		self.region_idx = 0
 		self.con_offset = 0
 		self.col_offset = 0
 		#self.beta_bound_col = 1000000000000000#0
 		#self.beta_bound_col = 1000000000000 # 0
-		self.beta_bound_con = 500000 # 0
+		self.beta_bound_con = 500000# 0
 		self.beta_bound_col = 5000000000
 		self.coeff = np.zeros(3)
 		self.a_hat = 0
@@ -107,7 +107,7 @@ class Nav_control():
 			for j in range(int(numberPoints)):
 				self.PoI.append(np.array([((self.trajectory[i+1, 0] - self.trajectory[i,0])/numberPoints)*j, 
 									 ((self.trajectory[i+1, 1] - self.trajectory[i,1])/numberPoints)*j,
-				 					 ((self.trajectory[i+1, 2] - self.trajectory[i,2])/numberPoints)*j]) + self.trajectory[i])
+									 ((self.trajectory[i+1, 2] - self.trajectory[i,2])/numberPoints)*j]) + self.trajectory[i])
 
 	def rot_x(self, beta):
 		cos_b = np.cos(beta)
@@ -245,15 +245,15 @@ class Nav_control():
 		k_d_b = 0
 
 		k_connect = 0 # Beta for connetivity
-
+		k_hor = 0.9
 		if self.priority == 1:
 			ki_con = 300000#50
-			ki_col = 0.1#50
+			ki_col = 100000#50
 			k_y_tet= 1
 			k_dis = 1
 		else:
 			ki_con = 300000#100000#*1000# Velocidades
-			ki_col = 0.1 # Velocidades
+			ki_col = 100000# Velocidades
 			ki_con = ki_con
 			k_dis = 1 # Termino diss
 			k_y_tet = 1 # Termino Y*theta
@@ -321,7 +321,6 @@ class Nav_control():
 		ep = np.zeros(3)
 
 		while not rospy.is_shutdown():
-
 			# Get the position and velocity of all the CrazyFlies
 			for i in range(self.numberQuads):
 				x[i],v[i] = self.position_and_velocity_from_odometry(self.agent_pose[i])
@@ -409,7 +408,7 @@ class Nav_control():
 			for i in range(self.numberQuads):
 				if not i == self.agent_number:
 					if iota_col[i] <= 0:
-						#print(self.topic + " COLLIDED WITH " + str(i))						# If iota less than 0, everything 0
+						rospy.loginfo(self.topic + " COLLIDED WITH " + str(i) + " with distance: " + str(np.linalg.norm(x[i] - x[self.agent_number])))						# If iota less than 0, everything 0
 						beta_col[i] = 0
 						beta_col_dot[i] = 0
 						grad_beta_col[i],grad_beta_col_dot[i] = self.reset_grad_beta()
@@ -430,7 +429,8 @@ class Nav_control():
 																				   v[self.agent_number], 
 																				   v[i])
 						
-					else:									# If iota is bigger than a value:
+					else:
+						#rospy.loginfo(self.topic + " IOTA BIG: COLLIDED WITH " + str(i))
 						beta_col[i] = self.beta_bound_col
 						grad_beta_col[i],grad_beta_col_dot[i] = self.reset_grad_beta()
 
@@ -456,13 +456,13 @@ class Nav_control():
 					beta_term_col_dot -= grad_beta_col_dot[i]
 
 			if self.priority == 1:	# If the Crazyflie is the leader
-				v_des = np.array([-kp_x*ep[0] - ki_x*integrator_pos[0], -kp_y*ep[1] - ki_y*integrator_pos[1], -kp_z*ep[2] - ki_z*integrator_pos[2]]) + (ki_col*beta_term_col + ki_con*beta_term_con) 
+				v_des = np.array([-kp_x*ep[0] - ki_x*integrator_pos[0], -kp_y*ep[1] - ki_y*integrator_pos[1], -kp_z*ep[2] - ki_z*integrator_pos[2]]) + (ki_col*beta_term_col + ki_con*beta_term_con)
 				v_des_dot = np.array([-kp_vx*v[self.agent_number][0], -kp_vy*v[self.agent_number][1], -kp_vz*v[self.agent_number][2]]) + (ki_col*beta_term_col_dot + ki_con*beta_term_con_dot)  #- lambda_int*ep
 
 				e_v = v[self.agent_number] - v_des
 				integrator_v = integrator_v + e_v*dt
 				
-				dissip_term = np.array([kp_vx*e_v[0] + ki_vx*integrator_v[0], kp_vy*e_v[1] + ki_vy*integrator_v[1], kp_vz*e_v[2] + ki_vz*integrator_v[2]])
+				dissip_term = np.array([k_hor*(kp_vx*e_v[0] + ki_vx*integrator_v[0]), k_hor*(kp_vy*e_v[1] + ki_vy*integrator_v[1]), kp_vz*e_v[2] + ki_vz*integrator_v[2]])
 				
 				e_tilde = ep + lambda_int*integrator_pos
 
@@ -477,15 +477,15 @@ class Nav_control():
 										   #+ "\n Y*self.theta_hat : " + str(Y*self.theta_hat)) 
 
 			else:				
-				v_des = (ki_col*beta_term_col + ki_con*beta_term_con) 
-				v_des_dot = (ki_col*beta_term_col_dot + ki_con*beta_term_con_dot) 
+				v_des = (ki_col*beta_term_col + ki_con*beta_term_con)
+				v_des_dot = (ki_col*beta_term_col_dot + ki_con*beta_term_con_dot)
 
 				e_v = v[self.agent_number] - v_des
 				integrator_v = integrator_v + e_v*dt
 
 				ki = 10
 				kp = 1
-				dissip_term = np.array([kp*kp_vx*e_v[0] + ki*ki_vx*integrator_v[0], kp*kp_vy*e_v[1] + ki*ki_vy*integrator_v[1], kp_vz*e_v[2] + ki_vz*integrator_v[2]])
+				dissip_term = np.array([k_hor*(kp*kp_vx*e_v[0] + ki*ki_vx*integrator_v[0]), k_hor*(kp*kp_vy*e_v[1] + ki*ki_vy*integrator_v[1]), kp_vz*e_v[2] + ki_vz*integrator_v[2]])
 				
 				e_tilde = np.zeros(3)
 
