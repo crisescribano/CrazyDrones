@@ -305,6 +305,7 @@ void CF_model::publishPose(){
 	pub_pos.publish(msgPose);
 
     msgPoseOdom.header.frame_id = agent_number;
+	msgPoseOdom.header.stamp = ros::Time::now();
     msgPoseOdom.pose.pose.position.x = cf_state.position.x();
     msgPoseOdom.pose.pose.position.y = cf_state.position.y();
     msgPoseOdom.pose.pose.position.z = cf_state.position.z();

@@ -4,6 +4,7 @@
   <arg name="mode" default="RANDOM" />
   <arg name="radius" default="2" />
   <arg name="language" default="cpp" />
+  <arg name="data2save" default="none" />
   <group ns="crazyflie_swarm">
     <include file="$(find multi_crazyflie_simulator)/launch/launch_single_cfB.launch" if="$(eval arg('num_quads') - 1 >= 0)">
        <arg name="quad_number" value="0"/>
@@ -63,8 +64,8 @@
     </include>
   </group>
 
-  <node name="rosbagRecorder" pkg="multi_crazyflie_simulator" type="cf_rosbag" output="screen">
-    <param name="num_quads" value="$(arg num_quads)" />
+  <node name="rosbagRecorder" pkg="multi_crazyflie_simulator" type="cf_rosbag" output="screen" if="$(eval data2save != 'none')">
+    <param name="data2save" value="$(arg data2save)" />
   </node>
 
   <!-- run rviz -->

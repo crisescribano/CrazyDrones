@@ -18,6 +18,8 @@ import tf.transformations
 import rosbag
 from crazyflie_driver.msg import Position
 
+
+dataStore = True
 #import yaw_controller.yaw_controller as yaw_controller
 
 class Nav_control():
@@ -40,6 +42,10 @@ class Nav_control():
 		print "Crazyflie " + str(self.agent_number) + " is connected to : " + str(self.graphCon)
 
 		self.force_pub = rospy.Publisher(self.topic + "/forces_input", mav_msgs.msg.TorqueThrust, queue_size = 100)
+		if dataStore:
+			self.beta_pub = rospy.Publisher(self.topic + "/betas_input", PoseStamped, queue_size = 100)
+			if self.priority:
+				self.traj_pub = rospy.Publisher("/trajectory", PoseStamped, queue_size = 100)
 
 		time = rospy.get_time()
 
@@ -320,6 +326,9 @@ class Nav_control():
 		# Error
 		ep = np.zeros(3)
 
+		if dataStore:
+			counterTraj = 0
+
 		while not rospy.is_shutdown():
 			# Get the position and velocity of all the CrazyFlies
 			for i in range(self.numberQuads):
@@ -343,6 +352,16 @@ class Nav_control():
 			###########################################
 
 			if self.priority == 1:
+				if dataStore:
+					if counterTraj < 10:
+						counterTraj = counterTraj + 1
+					if counterTraj == 10:
+						msg_traj = PoseStamped()
+						msg_traj.pose.position.x = xd[0]
+						msg_traj.pose.position.y = xd[1]
+						msg_traj.pose.position.z = xd[2]
+						msg_traj.header.stamp = rospy.Time.now()
+						self.traj_pub.publish(msg_traj)
 
 				ep = x[self.agent_number] - xd
 				integrator_pos = integrator_pos + dt*ep
@@ -518,7 +537,23 @@ class Nav_control():
 			mesage_to_pub.thrust.x = control[0]
 			mesage_to_pub.thrust.y = control[1]
 			mesage_to_pub.thrust.z = control[2]
+
+			if dataStore:
+				mesage_to_pub.header.frame_id = str(self.agent_number)
+				mesage_to_pub.header.stamp = rospy.Time.now()
 			self.force_pub.publish(mesage_to_pub)
+
+			if dataStore:
+				mesage_beta = PoseStamped()
+				mesage_beta.pose.position.x = k_col_height * beta_term_con[0]
+				mesage_beta.pose.position.y = k_col_height * beta_term_con[1]
+				mesage_beta.pose.position.z = k_col_height * beta_term_con[2]
+				mesage_beta.pose.orientation.x = k_col_height*beta_term_col[0]
+				mesage_beta.pose.orientation.y = k_col_height*beta_term_col[1]
+				mesage_beta.pose.orientation.z = k_col_height*beta_term_col[2]
+				mesage_beta.header.frame_id = str(self.agent_number)
+				mesage_beta.header.stamp = rospy.Time.now()
+				self.beta_pub.publish(mesage_beta)
 
 
 			# if self.time_store is None:
