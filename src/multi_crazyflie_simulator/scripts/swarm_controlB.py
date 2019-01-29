@@ -50,7 +50,12 @@ class Nav_control():
 		time = rospy.get_time()
 
 		# Trayectory to follow:
-		self.trajectory = np.array([[0, 0, 0.2],[0, 0, 2], [0, 0, 5], [4, 5, 3],[-2, 4, 2],[3, -2, 3],[1, -1, 2], [0, 0, 0]])
+		#1:
+		self.trajectory = np.array([[0, 0, 0.2],[0, 0, 2], [0, 0, 5], [4, 5, 3],[-2, 4, 2],[3, -2, 3],[1, -1, 2], [0, 0, 0.4]])
+		#2:
+		#self.trajectory = np.array([[0, 0, 0.2],[0, 0, 2], [-3, -3, 2], [-1, 4, 4],[4, -2, 1],[3, 3, 3],[1, 1, 1], [0, 0, 0.4]])
+		#3:
+		#self.trajectory = np.array([[0, 0, 0.2],[0, 0, 2], [-6, -6, 2], [-6, 6, 4],[6, 6, 6],[6, -6, 2],[1, -1, 1], [0, 0, 0.4]])
 		
 		#self.PoI = 1.5*np.array([[0, 0, 1], [1, 0, 1],[1, 1, 1],[0, 1, 1],
 		#					[-1, 1, 1], [-1, 0, 1],[-1, -1, 1],[0, -1, 1], 
@@ -58,7 +63,7 @@ class Nav_control():
 		#self.PoI = np.array([[0, 0, 1], [0, 0, 1],[0, 0, 1],[0, 0, 1]])
 		#self.PoI = np.array([[0, 0, 1], [0, 0, 2],[0, 0,3],[0, 0, 4]])
 
-		self.timeBetweenPoints = 15
+		self.timeBetweenPoints = 6
 		self.counterPoI = 0
 		self.region_idx = 0
 		self.con_offset = 0

@@ -25,7 +25,7 @@ void receivedForce(const mav_msgs::TorqueThrust::ConstPtr& msg){
 }
 
 void receivedBeta(const geometry_msgs::PoseStamped::ConstPtr& msg){
-    bag.write("betas_crazyflie_" + msg->header.frame_id, msg->header.stamp, msg);
+	bag.write("betas_crazyflie_" + msg->header.frame_id, msg->header.stamp, msg);
 }
 
 void receivedTrajectory(const geometry_msgs::PoseStamped::ConstPtr& msg){
@@ -68,7 +68,9 @@ int main(int argc, char **argv)
   n.getParam("num_quads", numQuadcopter);  
   n.getParam("data2save", data2save);
 
-  bag.open("../CrazyDrones/rosbagData/data_" + currentTime + ".bag", rosbag::bagmode::Write);
+  std::cout << numQuadcopter << " = NUM QUADS \n";
+
+  bag.open("../CrazyDrones/rosbagData/data_" + currentTime + "_" + data2save + ".bag", rosbag::bagmode::Write);
  
   std::list<ros::Subscriber> subscribersList;
   /**
